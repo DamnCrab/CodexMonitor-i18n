@@ -89,6 +89,22 @@ export const SETTINGS_SECTION_LABELS: Record<CodexSection, string> = {
   features: "Features",
 };
 
+export const SECTION_I18N_KEYS: Record<CodexSection, string> = {
+  projects: "settings.nav.projects",
+  environments: "settings.nav.environments",
+  display: "settings.nav.display",
+  about: "settings.nav.about",
+  composer: "settings.nav.composer",
+  dictation: "settings.nav.dictation",
+  shortcuts: "settings.nav.shortcuts",
+  "open-apps": "settings.nav.openApps",
+  git: "settings.nav.git",
+  server: "settings.nav.server",
+  agents: "settings.nav.agents",
+  codex: "settings.nav.codex",
+  features: "settings.nav.features",
+};
+
 export const SHORTCUT_DRAFT_KEY_BY_SETTING: Record<
   ShortcutSettingKey,
   ShortcutDraftKey

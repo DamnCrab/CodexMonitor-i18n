@@ -161,6 +161,7 @@ const baseSettings: AppSettings = {
   ],
   selectedOpenAppId: "vscode",
   globalWorktreesFolder: null,
+  language: null,
 };
 
 const createDoctorResult = () => ({
@@ -1695,7 +1696,7 @@ describe("SettingsView mobile layout", () => {
       await waitFor(() => {
         expect(
           within(rendered.container).getByRole("button", {
-            name: "Back to settings sections",
+            name: "Sections",
           }),
         ).toBeTruthy();
         expect(
@@ -1707,7 +1708,7 @@ describe("SettingsView mobile layout", () => {
 
       fireEvent.click(
         within(rendered.container).getByRole("button", {
-          name: "Back to settings sections",
+          name: "Sections",
         }),
       );
 

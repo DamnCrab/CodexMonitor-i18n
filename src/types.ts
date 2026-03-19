@@ -308,6 +308,7 @@ export type AppSettings = {
   globalWorktreesFolder: string | null;
   openAppTargets: OpenAppTarget[];
   selectedOpenAppId: string;
+  language: string | null;
 };
 
 export type CodexFeatureStage =

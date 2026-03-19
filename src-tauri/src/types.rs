@@ -648,6 +648,8 @@ pub(crate) struct AppSettings {
     pub(crate) open_app_targets: Vec<OpenAppTarget>,
     #[serde(default = "default_selected_open_app_id", rename = "selectedOpenAppId")]
     pub(crate) selected_open_app_id: String,
+    #[serde(default, rename = "language")]
+    pub(crate) language: Option<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
@@ -1199,6 +1201,7 @@ impl Default for AppSettings {
             global_worktrees_folder: None,
             open_app_targets: default_open_app_targets(),
             selected_open_app_id: default_selected_open_app_id(),
+            language: None,
         }
     }
 }
@@ -1366,6 +1369,7 @@ mod tests {
         assert_eq!(settings.selected_open_app_id, expected_open_id);
         assert_eq!(settings.open_app_targets.len(), 6);
         assert_eq!(settings.open_app_targets[0].id, "vscode");
+        assert!(settings.language.is_none());
     }
 
     #[test]
