@@ -2,9 +2,13 @@ import { vi } from "vitest";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import en from "@/locales/en/common.json";
+import zh from "@/locales/zh/common.json";
 
 void i18n.use(initReactI18next).init({
-  resources: { en: { common: en } },
+  resources: {
+    en: { common: en },
+    zh: { common: zh },
+  },
   lng: "en",
   fallbackLng: "en",
   defaultNS: "common",

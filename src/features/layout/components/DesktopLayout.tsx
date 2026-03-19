@@ -1,4 +1,5 @@
 import { useEffect, useRef, type MouseEvent, type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { MainTopbar } from "../../app/components/MainTopbar";
 
 type CenterMode = "chat" | "diff";
@@ -106,6 +107,7 @@ export function DesktopLayout({
   onPlanPanelResizeStart,
   onChatDiffSplitPositionResizeStart,
 }: DesktopLayoutProps) {
+  const { t } = useTranslation();
   const diffLayerRef = useRef<HTMLDivElement | null>(null);
   const chatLayerRef = useRef<HTMLDivElement | null>(null);
   const diffLayerActive = isActiveLayer(centerMode, "diff");
@@ -144,7 +146,7 @@ export function DesktopLayout({
         className="sidebar-resizer"
         role="separator"
         aria-orientation="vertical"
-        aria-label="Resize sidebar"
+        aria-label={t("layout.resizeSidebar")}
         onMouseDown={onSidebarResizeStart}
       />
 
@@ -171,12 +173,12 @@ export function DesktopLayout({
                     {messagesNode}
                   </div>
                   <div
-                    className="content-split-resizer"
-                    role="separator"
-                    aria-orientation="vertical"
-                    aria-label="Resize chat/diff split"
-                    onMouseDown={onChatDiffSplitPositionResizeStart}
-                  />
+                     className="content-split-resizer"
+                     role="separator"
+                     aria-orientation="vertical"
+                     aria-label={t("layout.resizeChatDiffSplit")}
+                     onMouseDown={onChatDiffSplitPositionResizeStart}
+                   />
                   <div
                     className={layerClassName({
                       splitChatDiffView,
@@ -220,19 +222,19 @@ export function DesktopLayout({
               className="right-panel-resizer"
               role="separator"
               aria-orientation="vertical"
-              aria-label="Resize right panel"
+              aria-label={t("layout.resizeRightPanel")}
               onMouseDown={onRightPanelResizeStart}
             />
             <div className={`right-panel ${hasActivePlan ? "" : "plan-collapsed"}`}>
               <div className="right-panel-drag-strip" />
               <div className="right-panel-top">{gitDiffPanelNode}</div>
               <div
-                className="right-panel-divider"
-                role="separator"
-                aria-orientation="horizontal"
-                aria-label="Resize plan panel"
-                onMouseDown={onPlanPanelResizeStart}
-              />
+                 className="right-panel-divider"
+                 role="separator"
+                 aria-orientation="horizontal"
+                 aria-label={t("layout.resizePlanPanel")}
+                 onMouseDown={onPlanPanelResizeStart}
+               />
               <div className="right-panel-bottom">{planPanelNode}</div>
             </div>
 
