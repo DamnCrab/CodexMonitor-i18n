@@ -693,7 +693,15 @@
     "addingProject": "正在添加项目...",
     "dropProjectHere": "将项目拖到这里",
     "newThreadInProject": "在项目中创建新对话",
-    "noProjectsMatchSearch": "没有项目匹配你的搜索。"
+    "noProjectsMatchSearch": "没有项目匹配你的搜索。",
+    "pinned": "已置顶",
+    "allThreads": "全部对话",
+    "newAgent": "新代理",
+    "newWorktreeAgent": "新 worktree 代理",
+    "newCloneAgent": "新克隆代理",
+    "cloneAgents": "克隆代理",
+    "addWorkspaceToStart": "先添加一个工作区以开始。",
+    "noThreadsYet": "还没有对话。"
   },
   "filePreview": {
     "linesSelection": "第 {{start}}-{{end}} 行",
@@ -836,6 +844,17 @@
     "copyFileName": "复制文件名",
     "copyFilePath": "复制文件路径",
     "noCommits": "没有提交",
-    "noUpstreamConfigured": "未配置上游分支"
+    "noUpstreamConfigured": "未配置上游分支",
+    "panel": "Git 面板",
+    "panelView": "Git 面板视图",
+    "diff": "差异",
+    "agentEdits": "代理编辑",
+    "log": "日志",
+    "issues": "Issues",
+    "prs": "PRs",
+    "noAgentEditsYet": "这个线程里还没有代理编辑。",
+    "oneEdit": "1 处编辑",
+    "editCount": "{{count}} 处编辑",
+    "pullCount": "拉取 {{count}} 个提交"
   }
 }

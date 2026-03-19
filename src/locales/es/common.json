@@ -693,7 +693,15 @@
     "addingProject": "Adding Project...",
     "dropProjectHere": "Drop Project Here",
     "newThreadInProject": "New thread in project",
-    "noProjectsMatchSearch": "No projects match your search."
+    "noProjectsMatchSearch": "No projects match your search.",
+    "pinned": "Pinned",
+    "allThreads": "All threads",
+    "newAgent": "New agent",
+    "newWorktreeAgent": "New worktree agent",
+    "newCloneAgent": "New clone agent",
+    "cloneAgents": "Clone agents",
+    "addWorkspaceToStart": "Add a workspace to start.",
+    "noThreadsYet": "No threads yet."
   },
   "filePreview": {
     "linesSelection": "Lines {{start}}-{{end}}",
@@ -836,6 +844,17 @@
     "copyFileName": "Copy file name",
     "copyFilePath": "Copy file path",
     "noCommits": "No commits",
-    "noUpstreamConfigured": "No upstream configured"
+    "noUpstreamConfigured": "No upstream configured",
+    "panel": "Git panel",
+    "panelView": "Git panel view",
+    "diff": "Diff",
+    "agentEdits": "Agent edits",
+    "log": "Log",
+    "issues": "Issues",
+    "prs": "PRs",
+    "noAgentEditsYet": "No agent edits in this thread yet.",
+    "oneEdit": "1 edit",
+    "editCount": "{{count}} edits",
+    "pullCount": "Pull {{count}} commit"
   }
 }

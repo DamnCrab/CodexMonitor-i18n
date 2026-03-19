@@ -862,7 +862,7 @@ export const Sidebar = memo(function Sidebar({
           {pinnedThreadRows.length > 0 && (
             <div className="pinned-section">
               <div className="workspace-group-header">
-                <div className="workspace-group-label">Pinned</div>
+                <div className="workspace-group-label">{t("sidebar.pinned")}</div>
               </div>
               <PinnedThreadList
                 rows={pinnedThreadRows}
@@ -883,7 +883,7 @@ export const Sidebar = memo(function Sidebar({
             ? groupedWorkspacesForRender.length > 0 && (
                 <div className="workspace-group">
                   <div className="workspace-group-header workspace-group-header-all-threads">
-                    <div className="workspace-group-label">All threads</div>
+                    <div className="workspace-group-label">{t("sidebar.allThreads")}</div>
                     <button
                       className="ghost all-threads-add"
                       onClick={handleAllThreadsAddMenuToggle}
@@ -1034,7 +1034,7 @@ export const Sidebar = memo(function Sidebar({
                                   }}
                                   icon={<Plus aria-hidden />}
                                 >
-                                  New agent
+                                  {t("sidebar.newAgent")}
                                 </PopoverMenuItem>
                                 <PopoverMenuItem
                                   className="workspace-add-option"
@@ -1045,7 +1045,7 @@ export const Sidebar = memo(function Sidebar({
                                   }}
                                   icon={<GitBranch aria-hidden />}
                                 >
-                                  New worktree agent
+                                  {t("sidebar.newWorktreeAgent")}
                                 </PopoverMenuItem>
                                 <PopoverMenuItem
                                   className="workspace-add-option"
@@ -1056,7 +1056,7 @@ export const Sidebar = memo(function Sidebar({
                                   }}
                                   icon={<Copy aria-hidden />}
                                 >
-                                  New clone agent
+                                  {t("sidebar.newCloneAgent")}
                                 </PopoverMenuItem>
                               </PopoverSurface>,
                               document.body,
@@ -1077,7 +1077,7 @@ export const Sidebar = memo(function Sidebar({
                               }}
                             >
                               <span className={`thread-status ${draftStatusClass}`} aria-hidden />
-                              <span className="thread-name">New Agent</span>
+                              <span className="thread-name">{t("sidebar.newAgent")}</span>
                             </div>
                           )}
                           {visibleClones.length > 0 && (
@@ -1107,7 +1107,7 @@ export const Sidebar = memo(function Sidebar({
                               onShowWorktreeMenu={showCloneMenu}
                               onToggleExpanded={handleToggleExpanded}
                               onLoadOlderThreads={onLoadOlderThreads}
-                              sectionLabel="Clone agents"
+                              sectionLabel={t("sidebar.cloneAgents")}
                               sectionIcon={
                                 <Copy className="worktree-header-icon" aria-hidden />
                               }
@@ -1176,14 +1176,14 @@ export const Sidebar = memo(function Sidebar({
             <div className="empty">
               {isSearchActive
                 ? t("sidebar.noProjectsMatchSearch")
-                : "Add a workspace to start."}
+                : t("sidebar.addWorkspaceToStart")}
             </div>
           )}
           {isThreadsOnlyMode &&
             groupedWorkspacesForRender.length > 0 &&
             flatThreadRows.length === 0 &&
             pinnedThreadRows.length === 0 && (
-              <div className="empty">No threads yet.</div>
+              <div className="empty">{t("sidebar.noThreadsYet")}</div>
             )}
         </div>
       </div>

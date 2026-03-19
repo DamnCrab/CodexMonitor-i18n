@@ -238,7 +238,7 @@ export function GitPerFileModeContent({
   }, []);
 
   if (groups.length === 0) {
-    return <div className="diff-empty">No agent edits in this thread yet.</div>;
+    return <div className="diff-empty">{t("gitPanel.noAgentEditsYet")}</div>;
   }
 
   return (
@@ -260,8 +260,10 @@ export function GitPerFileModeContent({
                 {fileName || group.path}
               </span>
               <span className="per-file-group-count">
-                {group.edits.length} edit{group.edits.length === 1 ? "" : "s"}
-              </span>
+                {group.edits.length === 1
+                  ? t("gitPanel.oneEdit")
+                  : t("gitPanel.editCount", { count: group.edits.length })}
+                </span>
             </button>
             {isExpanded && (
               <div className="per-file-edit-list">
@@ -588,7 +590,7 @@ export function GitDiffModeContent({
                                 className="push-button-secondary"
                                 onClick={() => void onPull?.()}
                                 disabled={!onPull || pullLoading || syncLoading}
-                                title={`Pull ${commitsBehind} commit${commitsBehind > 1 ? "s" : ""}`}
+                                title={t("gitPanel.pullCount", { count: commitsBehind })}
                             >
                                 {pullLoading ? (
                                     <span className="commit-button-spinner" aria-hidden />
