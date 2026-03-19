@@ -1,6 +1,6 @@
 {
   "language": {
-    "label": "Language",
+    "label": "언어",
     "en": "English",
     "zh": "中文",
     "ar": "العربية",
@@ -12,7 +12,7 @@
     "ko": "한국어",
     "pt": "Português",
     "ru": "Русский",
-    "systemDefault": "Follow system"
+    "systemDefault": "시스템 설정 따르기"
   },
   "layout": {
     "windowControls": "Window controls",

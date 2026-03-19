@@ -518,6 +518,25 @@ describe("SettingsView Display", () => {
     });
   });
 
+  it("shows mainstream language options and persists the selected language", async () => {
+    const onUpdateAppSettings = vi.fn().mockResolvedValue(undefined);
+    renderDisplaySection({ onUpdateAppSettings });
+
+    const select = screen.getByLabelText("Language");
+    expect(within(select).getByRole("option", { name: "العربية" })).toBeTruthy();
+    expect(within(select).getByRole("option", { name: "Español" })).toBeTruthy();
+    expect(within(select).getByRole("option", { name: "日本語" })).toBeTruthy();
+    expect(within(select).getByRole("option", { name: "Русский" })).toBeTruthy();
+
+    fireEvent.change(select, { target: { value: "ja" } });
+
+    await waitFor(() => {
+      expect(onUpdateAppSettings).toHaveBeenCalledWith(
+        expect.objectContaining({ language: "ja" }),
+      );
+    });
+  });
+
   it("toggles remaining limits display", async () => {
     const onUpdateAppSettings = vi.fn().mockResolvedValue(undefined);
     renderDisplaySection({ onUpdateAppSettings });

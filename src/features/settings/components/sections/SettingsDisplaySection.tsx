@@ -194,7 +194,7 @@ export function SettingsDisplaySection({
           <option value="">{t("language.systemDefault")}</option>
           {SUPPORTED_LANGUAGES.map((lang) => (
             <option key={lang.code} value={lang.code}>
-              {lang.label}
+              {t(`language.${lang.code}`, { defaultValue: lang.label })}
             </option>
           ))}
         </select>
