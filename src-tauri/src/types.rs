@@ -648,6 +648,8 @@ pub(crate) struct AppSettings {
     pub(crate) open_app_targets: Vec<OpenAppTarget>,
     #[serde(default = "default_selected_open_app_id", rename = "selectedOpenAppId")]
     pub(crate) selected_open_app_id: String,
+    #[serde(default, rename = "language")]
+    pub(crate) language: Option<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]

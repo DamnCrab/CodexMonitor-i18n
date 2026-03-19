@@ -1,4 +1,16 @@
 import { vi } from "vitest";
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import en from "@/locales/en/common.json";
+
+void i18n.use(initReactI18next).init({
+  resources: { en: { common: en } },
+  lng: "en",
+  fallbackLng: "en",
+  defaultNS: "common",
+  ns: ["common"],
+  interpolation: { escapeValue: false },
+});
 
 if (!("IS_REACT_ACT_ENVIRONMENT" in globalThis)) {
   Object.defineProperty(globalThis, "IS_REACT_ACT_ENVIRONMENT", {
