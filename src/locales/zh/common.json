@@ -6,6 +6,9 @@
     "systemDefault": "跟随系统"
   },
   "settings": {
+    "title": "设置",
+    "closeLabel": "关闭设置",
+    "backToSections": "分类",
     "nav": {
       "projects": "项目",
       "environments": "环境",

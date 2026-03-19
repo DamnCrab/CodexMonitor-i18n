@@ -6,6 +6,9 @@
     "systemDefault": "Follow system"
   },
   "settings": {
+    "title": "Settings",
+    "closeLabel": "Close settings",
+    "backToSections": "Sections",
     "nav": {
       "projects": "Projects",
       "environments": "Environments",
