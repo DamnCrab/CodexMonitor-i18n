@@ -38,8 +38,29 @@ describe("i18n translation files", () => {
     }
   });
 
-  it.each(SUPPORTED_LANGUAGES)('registers a "common" bundle for %s', ({ code }) => {
+  it.each([
+    ["en", en],
+    ["zh", zh],
+  ] as const)("defines a label for every supported language in %s", (code, locale) => {
+    const languageSection = locale.language as Record<string, string>;
+    for (const languageCode of SUPPORTED_LANGUAGES) {
+      expect(
+        languageSection[languageCode],
+        `${code} should define language.${languageCode}`,
+      ).toBeTruthy();
+    }
+  });
+
+  it.each(SUPPORTED_LANGUAGES)('registers a "common" bundle for %s', (code) => {
     expect(i18n.hasResourceBundle(code, "common")).toBe(true);
     expect(i18n.getResource(code, "common", "language.label")).toBeTruthy();
   });
+
+  it.each(["ar", "de", "es", "fr", "hi", "ja", "ko", "pt", "ru"] as const)(
+    "reuses the English bundle for %s",
+    (code) => {
+      expect(i18n.getResource(code, "common", "language.en")).toBe("English");
+      expect(i18n.getResource(code, "common", "language.systemDefault")).toBe("Follow system");
+    },
+  );
 });

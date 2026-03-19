@@ -11,6 +11,7 @@ import {
 import i18n from "i18next";
 import type { ComponentProps } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { SUPPORTED_LANGUAGES } from "@/i18n";
 import type { AppSettings, WorkspaceInfo } from "@/types";
 import {
   connectWorkspace,
@@ -523,10 +524,9 @@ describe("SettingsView Display", () => {
     renderDisplaySection({ onUpdateAppSettings });
 
     const select = screen.getByLabelText("Language");
-    expect(within(select).getByRole("option", { name: "العربية" })).toBeTruthy();
-    expect(within(select).getByRole("option", { name: "Español" })).toBeTruthy();
-    expect(within(select).getByRole("option", { name: "日本語" })).toBeTruthy();
-    expect(within(select).getByRole("option", { name: "Русский" })).toBeTruthy();
+    for (const code of SUPPORTED_LANGUAGES) {
+      within(select).getByRole("option", { name: i18n.t(`language.${code}`) });
+    }
 
     fireEvent.change(select, { target: { value: "ja" } });
 
