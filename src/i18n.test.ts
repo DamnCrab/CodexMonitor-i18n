@@ -1,7 +1,12 @@
 import { describe, expect, it } from "vitest";
 import i18n, { SUPPORTED_LANGUAGES } from "@/i18n";
-import en from "@/locales/en/common.json";
-import zh from "@/locales/zh/common.json";
+import { localeMessages } from "@/locales";
+
+const en = localeMessages.en;
+const localeEntries = Object.entries(localeMessages) as Array<
+  [keyof typeof localeMessages, (typeof localeMessages)[keyof typeof localeMessages]]
+>;
+const interpolationPattern = /\{\{\s*[^}]+\s*\}\}/g;
 
 function collectKeys(obj: Record<string, unknown>, prefix = ""): string[] {
   const keys: string[] = [];
@@ -16,32 +21,42 @@ function collectKeys(obj: Record<string, unknown>, prefix = ""): string[] {
   return keys;
 }
 
+function getNestedValue(locale: Record<string, unknown>, key: string): unknown {
+  return key.split(".").reduce<unknown>((value, part) => {
+    return (value as Record<string, unknown>)[part];
+  }, locale);
+}
+
 describe("i18n translation files", () => {
   const enKeys = collectKeys(en).sort();
 
-  it("English and Chinese have the same keys", () => {
-    expect(collectKeys(zh).sort()).toEqual(enKeys);
+  it.each(localeEntries)("%s has the same keys as English", (_, locale) => {
+    expect(collectKeys(locale).sort()).toEqual(enKeys);
   });
 
-  it.each([
-    ["en", en],
-    ["zh", zh],
-  ] as const)("no empty translation values in %s", (code, locale) => {
+  it.each(localeEntries)(
+    "preserves interpolation placeholders in %s",
+    (code, locale) => {
+      for (const key of enKeys) {
+        const baseValue = String(getNestedValue(en, key) ?? "");
+        const localeValue = String(getNestedValue(locale, key) ?? "");
+        expect(
+          localeValue.match(interpolationPattern) ?? [],
+          `${code} key "${key}" should preserve interpolation placeholders`,
+        ).toEqual(baseValue.match(interpolationPattern) ?? []);
+      }
+    },
+  );
+
+  it.each(localeEntries)("no empty translation values in %s", (code, locale) => {
     const localeKeys = collectKeys(locale);
     for (const key of localeKeys) {
-      const parts = key.split(".");
-      let value: unknown = locale;
-      for (const part of parts) {
-        value = (value as Record<string, unknown>)[part];
-      }
+      const value = getNestedValue(locale, key);
       expect(value, `${code} key "${key}" should not be empty`).toBeTruthy();
     }
   });
 
-  it.each([
-    ["en", en],
-    ["zh", zh],
-  ] as const)("defines a label for every supported language in %s", (code, locale) => {
+  it.each(localeEntries)("defines a label for every supported language in %s", (code, locale) => {
     const languageSection = locale.language as Record<string, string>;
     for (const languageCode of SUPPORTED_LANGUAGES) {
       expect(
@@ -56,11 +71,12 @@ describe("i18n translation files", () => {
     expect(i18n.getResource(code, "common", "language.label")).toBeTruthy();
   });
 
-  it.each(["ar", "de", "es", "fr", "hi", "ja", "ko", "pt", "ru"] as const)(
-    "reuses the English bundle for %s",
+  it.each(SUPPORTED_LANGUAGES.filter((code) => code !== "en"))(
+    "registers a dedicated translated system default label for %s",
     (code) => {
-      expect(i18n.getResource(code, "common", "language.en")).toBe("English");
-      expect(i18n.getResource(code, "common", "language.systemDefault")).toBe("Follow system");
+      expect(i18n.getResource(code, "common", "language.systemDefault")).toBe(
+        localeMessages[code].language.systemDefault,
+      );
     },
   );
 });

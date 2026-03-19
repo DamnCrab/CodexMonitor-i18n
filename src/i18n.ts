@@ -2,8 +2,7 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 
-import en from "@/locales/en/common.json";
-import zh from "@/locales/zh/common.json";
+import { localeMessages } from "@/locales";
 
 export const SUPPORTED_LANGUAGES = [
   "ar",
@@ -26,17 +25,17 @@ void i18n
   .use(initReactI18next)
   .init({
     resources: {
-      ar: { common: en },
-      de: { common: en },
-      en: { common: en },
-      es: { common: en },
-      fr: { common: en },
-      hi: { common: en },
-      ja: { common: en },
-      ko: { common: en },
-      pt: { common: en },
-      ru: { common: en },
-      zh: { common: zh },
+      ar: { common: localeMessages.ar },
+      de: { common: localeMessages.de },
+      en: { common: localeMessages.en },
+      es: { common: localeMessages.es },
+      fr: { common: localeMessages.fr },
+      hi: { common: localeMessages.hi },
+      ja: { common: localeMessages.ja },
+      ko: { common: localeMessages.ko },
+      pt: { common: localeMessages.pt },
+      ru: { common: localeMessages.ru },
+      zh: { common: localeMessages.zh },
     },
     fallbackLng: "en",
     defaultNS: "common",
