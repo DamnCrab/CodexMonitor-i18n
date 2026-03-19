@@ -8,8 +8,9 @@ import {
   waitFor,
   within,
 } from "@testing-library/react";
+import i18n from "i18next";
 import type { ComponentProps } from "react";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import type { AppSettings, WorkspaceInfo } from "@/types";
 import {
   connectWorkspace,
@@ -65,6 +66,10 @@ getAgentsSettingsMock.mockResolvedValue({
   maxThreads: 6,
   maxDepth: 1,
   agents: [],
+});
+
+afterEach(() => {
+  void i18n.changeLanguage("en");
 });
 
 const baseSettings: AppSettings = {
@@ -490,6 +495,15 @@ const renderEnvironmentsSection = (
 };
 
 describe("SettingsView Display", () => {
+  it("renders translated Chinese settings copy", async () => {
+    renderDisplaySection();
+    await i18n.changeLanguage("zh");
+
+    expect(screen.getAllByText("显示与声音").length).toBeGreaterThan(0);
+    expect(screen.getByText("语言")).toBeTruthy();
+    expect(screen.getByText("根据您的偏好调整视觉效果和音频提醒。")).toBeTruthy();
+  });
+
   it("updates the theme selection", async () => {
     const onUpdateAppSettings = vi.fn().mockResolvedValue(undefined);
     renderDisplaySection({ onUpdateAppSettings });
