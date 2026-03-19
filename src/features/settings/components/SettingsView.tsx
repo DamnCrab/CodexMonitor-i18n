@@ -16,23 +16,8 @@ import { useSettingsViewOrchestration } from "@settings/hooks/useSettingsViewOrc
 import { ModalShell } from "@/features/design-system/components/modal/ModalShell";
 import { SettingsNav } from "./SettingsNav";
 import type { CodexSection } from "./settingsTypes";
+import { SECTION_I18N_KEYS } from "./settingsViewConstants";
 import { SettingsSectionContainers } from "./sections/SettingsSectionContainers";
-
-const SECTION_NAV_KEYS: Record<CodexSection, string> = {
-  projects: "settings.nav.projects",
-  environments: "settings.nav.environments",
-  display: "settings.nav.display",
-  about: "settings.nav.about",
-  composer: "settings.nav.composer",
-  dictation: "settings.nav.dictation",
-  shortcuts: "settings.nav.shortcuts",
-  "open-apps": "settings.nav.openApps",
-  git: "settings.nav.git",
-  server: "settings.nav.server",
-  agents: "settings.nav.agents",
-  codex: "settings.nav.codex",
-  features: "settings.nav.features",
-};
 
 export type SettingsViewProps = {
   workspaceGroups: WorkspaceGroup[];
@@ -157,7 +142,7 @@ export function SettingsView({
   useSettingsViewCloseShortcuts(onClose);
 
   const { t } = useTranslation();
-  const activeSectionLabel = t(SECTION_NAV_KEYS[activeSection]);
+  const activeSectionLabel = t(SECTION_I18N_KEYS[activeSection]);
   const settingsBodyClassName = `settings-body${
     useMobileMasterDetail ? " settings-body-mobile-master-detail" : ""
   }${useMobileMasterDetail && showMobileDetail ? " is-detail-visible" : ""}`;

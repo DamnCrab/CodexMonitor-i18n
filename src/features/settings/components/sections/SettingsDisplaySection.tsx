@@ -180,7 +180,11 @@ export function SettingsDisplaySection({
           value={appSettings.language ?? ""}
           onChange={(event) => {
             const nextLang = event.target.value || null;
-            void i18n.changeLanguage(nextLang ?? navigator.language.split("-")[0]);
+            if (nextLang) {
+              void i18n.changeLanguage(nextLang);
+            } else {
+              void i18n.changeLanguage(undefined);
+            }
             void onUpdateAppSettings({
               ...appSettings,
               language: nextLang,
