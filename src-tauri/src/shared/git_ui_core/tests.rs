@@ -391,6 +391,63 @@ fn get_git_diffs_omits_global_ignored_paths() {
 }
 
 #[test]
+fn get_git_diffs_marks_large_text_files_as_too_large() {
+    let (root, repo) = create_temp_repo();
+    let large_path = root.join("dist").join("bundle.js");
+    fs::create_dir_all(large_path.parent().expect("parent")).expect("create dist dir");
+    fs::write(&large_path, "const version = 1;\n").expect("write initial bundle");
+
+    let mut index = repo.index().expect("repo index");
+    index
+        .add_path(Path::new("dist/bundle.js"))
+        .expect("add bundle");
+    let tree_id = index.write_tree().expect("write tree");
+    let tree = repo.find_tree(tree_id).expect("find tree");
+    let sig = git2::Signature::now("Test", "test@example.com").expect("signature");
+    repo.commit(Some("HEAD"), &sig, &sig, "init", &tree, &[])
+        .expect("commit");
+
+    let large_content = format!("{}\n", "x".repeat(300 * 1024));
+    fs::write(&large_path, large_content).expect("overwrite bundle with large output");
+
+    let workspace = WorkspaceEntry {
+        id: "w1".to_string(),
+        name: "w1".to_string(),
+        path: root.to_string_lossy().to_string(),
+        kind: WorkspaceKind::Main,
+        parent_id: None,
+        worktree: None,
+        settings: WorkspaceSettings::default(),
+    };
+    let mut entries = HashMap::new();
+    entries.insert("w1".to_string(), workspace);
+    let workspaces = Mutex::new(entries);
+    let app_settings = Mutex::new(AppSettings::default());
+
+    let runtime = Runtime::new().expect("create tokio runtime");
+    let diffs = runtime
+        .block_on(diff::get_git_diffs_inner(
+            &workspaces,
+            &app_settings,
+            "w1".to_string(),
+        ))
+        .expect("get git diffs");
+
+    let large_diff = diffs
+        .iter()
+        .find(|diff| diff.path == "dist/bundle.js")
+        .expect("bundle diff");
+
+    assert!(
+        large_diff.is_diff_too_large,
+        "large text outputs should be marked as too large for safe rendering"
+    );
+    assert!(large_diff.diff.is_empty(), "large text diff content should be omitted");
+    assert!(large_diff.old_lines.is_none(), "large diff should not carry old lines");
+    assert!(large_diff.new_lines.is_none(), "large diff should not carry new lines");
+}
+
+#[test]
 fn check_ignore_with_git_respects_negated_rule_for_specific_file() {
     let (root, repo) = create_temp_repo();
 
