@@ -197,6 +197,7 @@ export function GitPerFileModeContent({
   selectedPath,
   onSelectFile,
 }: GitPerFileModeContentProps) {
+  const { t } = useTranslation();
   const [collapsedPaths, setCollapsedPaths] = useState<Set<string>>(new Set());
 
   useEffect(() => {
