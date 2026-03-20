@@ -777,6 +777,77 @@
     "addGeneralPrompt": "Add general prompt",
     "noGeneralPromptsYet": "No general prompts yet"
   },
+  "workspaceHome": {
+    "recentRuns": "최근 실행",
+    "startRunToTrackInstances": "실행을 시작하면 해당 인스턴스가 여기에 추적되어 표시됩니다.",
+    "localMode": "로컬",
+    "worktreeMode": "워크트리",
+    "instanceSingular": "인스턴스",
+    "instancePlural": "인스턴스",
+    "failed": "실패",
+    "partial": "부분 실패",
+    "moreCount": "+{{count}}개 더",
+    "noInstancesStarted": "시작된 인스턴스가 없습니다.",
+    "instancesPreparing": "인스턴스를 준비 중입니다...",
+    "recentThreads": "최근 스레드",
+    "threadsFromSidebarAppearHere": "사이드바의 스레드가 여기에 표시됩니다.",
+    "agentsActivity": "에이전트 활동",
+    "threadSingular": "스레드",
+    "threadPlural": "스레드",
+    "showingFirstPartOfLargeFile": "큰 파일의 앞부분만 표시하고 있습니다.",
+    "agentInstructionsPlaceholder": "에이전트를 위한 워크스페이스 지침 추가…",
+    "loading": "로딩 중…",
+    "saving": "저장 중…",
+    "notFound": "찾을 수 없음",
+    "truncated": "잘림",
+    "loadAgentFileError": "AGENTS.md를 불러올 수 없습니다",
+    "saveAgentFileError": "AGENTS.md를 저장할 수 없습니다",
+    "threadStatus": {
+      "running": "실행 중",
+      "reviewing": "검토 중",
+      "idle": "유휴"
+    }
+  },
+  "uiText": {
+    "fileEditor": {
+      "refresh": "새로고침",
+      "save": "저장",
+      "create": "만들기",
+      "refreshFile": "{{title}} 새로고침",
+      "saveFile": "{{title}} 저장",
+      "createFile": "{{title}} 만들기"
+    },
+    "codexFiles": {
+      "loadGlobalAgentsError": "전역 AGENTS.md를 불러올 수 없습니다",
+      "saveGlobalAgentsError": "전역 AGENTS.md를 저장할 수 없습니다",
+      "loadGlobalConfigError": "전역 config.toml을 불러올 수 없습니다",
+      "saveGlobalConfigError": "전역 config.toml을 저장할 수 없습니다"
+    },
+    "sidebarMenus": {
+      "rename": "이름 바꾸기",
+      "syncFromServer": "서버에서 동기화",
+      "archive": "보관",
+      "copyId": "ID 복사",
+      "pin": "고정",
+      "unpin": "고정 해제",
+      "reloadThreads": "스레드 다시 불러오기",
+      "delete": "삭제",
+      "showInFileManager": "{{fileManager}}에서 보기",
+      "deleteWorktree": "워크트리 삭제",
+      "deleteClone": "클론 삭제",
+      "couldntShowWorktreeInFileManager": "{{fileManager}}에서 워크트리를 표시할 수 없습니다",
+      "couldntShowCloneInFileManager": "{{fileManager}}에서 클론을 표시할 수 없습니다"
+    },
+    "appHeader": {
+      "searchOrCreateBranch": "브랜치 검색 또는 생성",
+      "searchBranches": "브랜치 검색",
+      "refreshCurrentThreadFromServer": "서버에서 현재 스레드 새로고침"
+    },
+    "toasts": {
+      "dismiss": "닫기",
+      "dismissError": "오류 닫기"
+    }
+  },
   "gitPanel": {
     "enterCommitMessage": "Enter a commit message",
     "noChangesToCommit": "No changes to commit",

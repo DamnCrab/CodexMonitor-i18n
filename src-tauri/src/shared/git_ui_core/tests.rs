@@ -115,6 +115,33 @@ fn validate_normalized_repo_name_accepts_non_empty_normalized_slug() {
 }
 
 #[test]
+fn parse_git_branch_listing_reads_branch_names_and_timestamps() {
+    let branches = commands::parse_git_branch_listing(
+        "feature/b\t100\nmain\t250\nstale\t0\ninvalid\tnope\n",
+    );
+
+    assert_eq!(branches[0].name, "main");
+    assert_eq!(branches[0].last_commit, 250);
+    assert_eq!(branches[1].name, "feature/b");
+    assert_eq!(branches[1].last_commit, 100);
+    assert_eq!(branches[3].name, "invalid");
+    assert_eq!(branches[3].last_commit, 0);
+}
+
+#[test]
+fn detects_repository_owner_errors_from_git_and_libgit2_messages() {
+    assert!(commands::is_repository_owner_error(
+        "repository path 'F:/repo' is not owned by current user; class=Config (7); code=Owner (-36)"
+    ));
+    assert!(commands::is_repository_owner_error(
+        "fatal: detected dubious ownership in repository at '/tmp/repo'"
+    ));
+    assert!(!commands::is_repository_owner_error(
+        "fatal: not a git repository (or any of the parent directories): .git"
+    ));
+}
+
+#[test]
 fn get_git_status_omits_global_ignored_paths() {
     let (root, repo) = create_temp_repo();
     fs::write(root.join("tracked.txt"), "tracked\n").expect("write tracked file");

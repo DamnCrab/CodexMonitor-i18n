@@ -777,6 +777,77 @@
     "addGeneralPrompt": "Add general prompt",
     "noGeneralPromptsYet": "No general prompts yet"
   },
+  "workspaceHome": {
+    "recentRuns": "Execuções recentes",
+    "startRunToTrackInstances": "Inicie uma execução para ver suas instâncias rastreadas aqui.",
+    "localMode": "Local",
+    "worktreeMode": "Worktree",
+    "instanceSingular": "instância",
+    "instancePlural": "instâncias",
+    "failed": "Falhou",
+    "partial": "Parcial",
+    "moreCount": "+{{count}} mais",
+    "noInstancesStarted": "Nenhuma instância foi iniciada.",
+    "instancesPreparing": "As instâncias estão sendo preparadas...",
+    "recentThreads": "Threads recentes",
+    "threadsFromSidebarAppearHere": "Os threads da barra lateral aparecerão aqui.",
+    "agentsActivity": "Atividade dos agentes",
+    "threadSingular": "thread",
+    "threadPlural": "threads",
+    "showingFirstPartOfLargeFile": "Mostrando a primeira parte de um arquivo grande.",
+    "agentInstructionsPlaceholder": "Adicione instruções do espaço de trabalho para o agente…",
+    "loading": "Carregando…",
+    "saving": "Salvando…",
+    "notFound": "Não encontrado",
+    "truncated": "Truncado",
+    "loadAgentFileError": "Não foi possível carregar AGENTS.md",
+    "saveAgentFileError": "Não foi possível salvar AGENTS.md",
+    "threadStatus": {
+      "running": "Em execução",
+      "reviewing": "Em revisão",
+      "idle": "Ocioso"
+    }
+  },
+  "uiText": {
+    "fileEditor": {
+      "refresh": "Atualizar",
+      "save": "Salvar",
+      "create": "Criar",
+      "refreshFile": "Atualizar {{title}}",
+      "saveFile": "Salvar {{title}}",
+      "createFile": "Criar {{title}}"
+    },
+    "codexFiles": {
+      "loadGlobalAgentsError": "Não foi possível carregar o AGENTS.md global",
+      "saveGlobalAgentsError": "Não foi possível salvar o AGENTS.md global",
+      "loadGlobalConfigError": "Não foi possível carregar o config.toml global",
+      "saveGlobalConfigError": "Não foi possível salvar o config.toml global"
+    },
+    "sidebarMenus": {
+      "rename": "Renomear",
+      "syncFromServer": "Sincronizar do servidor",
+      "archive": "Arquivar",
+      "copyId": "Copiar ID",
+      "pin": "Fixar",
+      "unpin": "Desafixar",
+      "reloadThreads": "Recarregar threads",
+      "delete": "Excluir",
+      "showInFileManager": "Mostrar em {{fileManager}}",
+      "deleteWorktree": "Excluir worktree",
+      "deleteClone": "Excluir clone",
+      "couldntShowWorktreeInFileManager": "Não foi possível mostrar o worktree em {{fileManager}}",
+      "couldntShowCloneInFileManager": "Não foi possível mostrar o clone em {{fileManager}}"
+    },
+    "appHeader": {
+      "searchOrCreateBranch": "Pesquisar ou criar branch",
+      "searchBranches": "Pesquisar branches",
+      "refreshCurrentThreadFromServer": "Atualizar o thread atual do servidor"
+    },
+    "toasts": {
+      "dismiss": "Fechar",
+      "dismissError": "Fechar erro"
+    }
+  },
   "gitPanel": {
     "enterCommitMessage": "Enter a commit message",
     "noChangesToCommit": "No changes to commit",

@@ -777,6 +777,77 @@
     "addGeneralPrompt": "Add general prompt",
     "noGeneralPromptsYet": "No general prompts yet"
   },
+  "workspaceHome": {
+    "recentRuns": "عمليات التشغيل الأخيرة",
+    "startRunToTrackInstances": "ابدأ تشغيلًا لتتبع نسخه هنا.",
+    "localMode": "محلي",
+    "worktreeMode": "شجرة العمل",
+    "instanceSingular": "نسخة",
+    "instancePlural": "نسخ",
+    "failed": "فشل",
+    "partial": "جزئي",
+    "moreCount": "+{{count}} المزيد",
+    "noInstancesStarted": "لم يتم بدء أي نسخ.",
+    "instancesPreparing": "جارٍ تجهيز النسخ...",
+    "recentThreads": "السلاسل الأخيرة",
+    "threadsFromSidebarAppearHere": "ستظهر هنا السلاسل من الشريط الجانبي.",
+    "agentsActivity": "نشاط الوكلاء",
+    "threadSingular": "سلسلة",
+    "threadPlural": "سلاسل",
+    "showingFirstPartOfLargeFile": "يتم عرض الجزء الأول من ملف كبير.",
+    "agentInstructionsPlaceholder": "أضف تعليمات مساحة العمل للوكيل…",
+    "loading": "جارٍ التحميل…",
+    "saving": "جارٍ الحفظ…",
+    "notFound": "غير موجود",
+    "truncated": "مقتطع",
+    "loadAgentFileError": "تعذر تحميل AGENTS.md",
+    "saveAgentFileError": "تعذر حفظ AGENTS.md",
+    "threadStatus": {
+      "running": "قيد التشغيل",
+      "reviewing": "قيد المراجعة",
+      "idle": "خامل"
+    }
+  },
+  "uiText": {
+    "fileEditor": {
+      "refresh": "تحديث",
+      "save": "حفظ",
+      "create": "إنشاء",
+      "refreshFile": "تحديث {{title}}",
+      "saveFile": "حفظ {{title}}",
+      "createFile": "إنشاء {{title}}"
+    },
+    "codexFiles": {
+      "loadGlobalAgentsError": "تعذر تحميل AGENTS.md العام",
+      "saveGlobalAgentsError": "تعذر حفظ AGENTS.md العام",
+      "loadGlobalConfigError": "تعذر تحميل config.toml العام",
+      "saveGlobalConfigError": "تعذر حفظ config.toml العام"
+    },
+    "sidebarMenus": {
+      "rename": "إعادة تسمية",
+      "syncFromServer": "مزامنة من الخادم",
+      "archive": "أرشفة",
+      "copyId": "نسخ المعرّف",
+      "pin": "تثبيت",
+      "unpin": "إلغاء التثبيت",
+      "reloadThreads": "إعادة تحميل السلاسل",
+      "delete": "حذف",
+      "showInFileManager": "إظهار في {{fileManager}}",
+      "deleteWorktree": "حذف شجرة العمل",
+      "deleteClone": "حذف النسخة المستنسخة",
+      "couldntShowWorktreeInFileManager": "تعذر إظهار شجرة العمل في {{fileManager}}",
+      "couldntShowCloneInFileManager": "تعذر إظهار النسخة المستنسخة في {{fileManager}}"
+    },
+    "appHeader": {
+      "searchOrCreateBranch": "ابحث عن فرع أو أنشئه",
+      "searchBranches": "ابحث في الفروع",
+      "refreshCurrentThreadFromServer": "حدّث السلسلة الحالية من الخادم"
+    },
+    "toasts": {
+      "dismiss": "إغلاق",
+      "dismissError": "إغلاق الخطأ"
+    }
+  },
   "gitPanel": {
     "enterCommitMessage": "Enter a commit message",
     "noChangesToCommit": "No changes to commit",

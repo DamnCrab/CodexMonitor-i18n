@@ -777,6 +777,77 @@
     "addGeneralPrompt": "Add general prompt",
     "noGeneralPromptsYet": "No general prompts yet"
   },
+  "workspaceHome": {
+    "recentRuns": "हाल की रनें",
+    "startRunToTrackInstances": "उसकी इंस्टेंस यहाँ ट्रैक करने के लिए एक रन शुरू करें।",
+    "localMode": "लोकल",
+    "worktreeMode": "वर्कट्री",
+    "instanceSingular": "इंस्टेंस",
+    "instancePlural": "इंस्टेंस",
+    "failed": "विफल",
+    "partial": "आंशिक",
+    "moreCount": "+{{count}} और",
+    "noInstancesStarted": "कोई इंस्टेंस शुरू नहीं किया गया।",
+    "instancesPreparing": "इंस्टेंस तैयार हो रहे हैं...",
+    "recentThreads": "हाल के थ्रेड",
+    "threadsFromSidebarAppearHere": "साइडबार के थ्रेड यहाँ दिखाई देंगे।",
+    "agentsActivity": "एजेंट गतिविधि",
+    "threadSingular": "थ्रेड",
+    "threadPlural": "थ्रेड",
+    "showingFirstPartOfLargeFile": "बड़ी फ़ाइल का पहला भाग दिखाया जा रहा है।",
+    "agentInstructionsPlaceholder": "एजेंट के लिए वर्कस्पेस निर्देश जोड़ें…",
+    "loading": "लोड हो रहा है…",
+    "saving": "सहेजा जा रहा है…",
+    "notFound": "नहीं मिला",
+    "truncated": "संक्षिप्त",
+    "loadAgentFileError": "AGENTS.md लोड नहीं किया जा सका",
+    "saveAgentFileError": "AGENTS.md सहेजा नहीं जा सका",
+    "threadStatus": {
+      "running": "चल रहा है",
+      "reviewing": "समीक्षा में",
+      "idle": "निष्क्रिय"
+    }
+  },
+  "uiText": {
+    "fileEditor": {
+      "refresh": "रीफ़्रेश",
+      "save": "सहेजें",
+      "create": "बनाएँ",
+      "refreshFile": "{{title}} रीफ़्रेश करें",
+      "saveFile": "{{title}} सहेजें",
+      "createFile": "{{title}} बनाएँ"
+    },
+    "codexFiles": {
+      "loadGlobalAgentsError": "वैश्विक AGENTS.md लोड नहीं किया जा सका",
+      "saveGlobalAgentsError": "वैश्विक AGENTS.md सहेजा नहीं जा सका",
+      "loadGlobalConfigError": "वैश्विक config.toml लोड नहीं किया जा सका",
+      "saveGlobalConfigError": "वैश्विक config.toml सहेजा नहीं जा सका"
+    },
+    "sidebarMenus": {
+      "rename": "नाम बदलें",
+      "syncFromServer": "सर्वर से सिंक करें",
+      "archive": "संग्रहित करें",
+      "copyId": "ID कॉपी करें",
+      "pin": "पिन करें",
+      "unpin": "अनपिन करें",
+      "reloadThreads": "थ्रेड फिर से लोड करें",
+      "delete": "हटाएँ",
+      "showInFileManager": "{{fileManager}} में दिखाएँ",
+      "deleteWorktree": "वर्कट्री हटाएँ",
+      "deleteClone": "क्लोन हटाएँ",
+      "couldntShowWorktreeInFileManager": "{{fileManager}} में वर्कट्री नहीं दिखाई जा सकी",
+      "couldntShowCloneInFileManager": "{{fileManager}} में क्लोन नहीं दिखाया जा सका"
+    },
+    "appHeader": {
+      "searchOrCreateBranch": "ब्रांच खोजें या बनाएँ",
+      "searchBranches": "ब्रांच खोजें",
+      "refreshCurrentThreadFromServer": "सर्वर से वर्तमान थ्रेड रीफ़्रेश करें"
+    },
+    "toasts": {
+      "dismiss": "बंद करें",
+      "dismissError": "त्रुटि बंद करें"
+    }
+  },
   "gitPanel": {
     "enterCommitMessage": "Enter a commit message",
     "noChangesToCommit": "No changes to commit",

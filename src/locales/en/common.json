@@ -777,6 +777,77 @@
     "addGeneralPrompt": "Add general prompt",
     "noGeneralPromptsYet": "No general prompts yet"
   },
+  "workspaceHome": {
+    "recentRuns": "Recent runs",
+    "startRunToTrackInstances": "Start a run to see its instances tracked here.",
+    "localMode": "Local",
+    "worktreeMode": "Worktree",
+    "instanceSingular": "instance",
+    "instancePlural": "instances",
+    "failed": "Failed",
+    "partial": "Partial",
+    "moreCount": "+{{count}} more",
+    "noInstancesStarted": "No instances were started.",
+    "instancesPreparing": "Instances are preparing...",
+    "recentThreads": "Recent threads",
+    "threadsFromSidebarAppearHere": "Threads from the sidebar will appear here.",
+    "agentsActivity": "Agents activity",
+    "threadSingular": "thread",
+    "threadPlural": "threads",
+    "showingFirstPartOfLargeFile": "Showing the first part of a large file.",
+    "agentInstructionsPlaceholder": "Add workspace instructions for the agent…",
+    "loading": "Loading…",
+    "saving": "Saving…",
+    "notFound": "Not found",
+    "truncated": "Truncated",
+    "loadAgentFileError": "Couldn’t load AGENTS.md",
+    "saveAgentFileError": "Couldn’t save AGENTS.md",
+    "threadStatus": {
+      "running": "Running",
+      "reviewing": "Reviewing",
+      "idle": "Idle"
+    }
+  },
+  "uiText": {
+    "fileEditor": {
+      "refresh": "Refresh",
+      "save": "Save",
+      "create": "Create",
+      "refreshFile": "Refresh {{title}}",
+      "saveFile": "Save {{title}}",
+      "createFile": "Create {{title}}"
+    },
+    "codexFiles": {
+      "loadGlobalAgentsError": "Couldn’t load global AGENTS.md",
+      "saveGlobalAgentsError": "Couldn’t save global AGENTS.md",
+      "loadGlobalConfigError": "Couldn’t load global config.toml",
+      "saveGlobalConfigError": "Couldn’t save global config.toml"
+    },
+    "sidebarMenus": {
+      "rename": "Rename",
+      "syncFromServer": "Sync from server",
+      "archive": "Archive",
+      "copyId": "Copy ID",
+      "pin": "Pin",
+      "unpin": "Unpin",
+      "reloadThreads": "Reload threads",
+      "delete": "Delete",
+      "showInFileManager": "Show in {{fileManager}}",
+      "deleteWorktree": "Delete worktree",
+      "deleteClone": "Delete clone",
+      "couldntShowWorktreeInFileManager": "Couldn’t show worktree in {{fileManager}}",
+      "couldntShowCloneInFileManager": "Couldn’t show clone in {{fileManager}}"
+    },
+    "appHeader": {
+      "searchOrCreateBranch": "Search or create branch",
+      "searchBranches": "Search branches",
+      "refreshCurrentThreadFromServer": "Refresh current thread from server"
+    },
+    "toasts": {
+      "dismiss": "Dismiss",
+      "dismissError": "Dismiss error"
+    }
+  },
   "gitPanel": {
     "enterCommitMessage": "Enter a commit message",
     "noChangesToCommit": "No changes to commit",

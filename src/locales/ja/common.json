@@ -777,6 +777,77 @@
     "addGeneralPrompt": "Add general prompt",
     "noGeneralPromptsYet": "No general prompts yet"
   },
+  "workspaceHome": {
+    "recentRuns": "最近の実行",
+    "startRunToTrackInstances": "実行を開始すると、そのインスタンスがここに表示されます。",
+    "localMode": "ローカル",
+    "worktreeMode": "ワークツリー",
+    "instanceSingular": "インスタンス",
+    "instancePlural": "インスタンス",
+    "failed": "失敗",
+    "partial": "一部失敗",
+    "moreCount": "+{{count}} 件",
+    "noInstancesStarted": "インスタンスは開始されませんでした。",
+    "instancesPreparing": "インスタンスを準備中...",
+    "recentThreads": "最近のスレッド",
+    "threadsFromSidebarAppearHere": "サイドバーのスレッドがここに表示されます。",
+    "agentsActivity": "エージェントのアクティビティ",
+    "threadSingular": "スレッド",
+    "threadPlural": "スレッド",
+    "showingFirstPartOfLargeFile": "大きなファイルの先頭部分を表示しています。",
+    "agentInstructionsPlaceholder": "エージェント用のワークスペース指示を追加…",
+    "loading": "読み込み中…",
+    "saving": "保存中…",
+    "notFound": "見つかりません",
+    "truncated": "切り詰め済み",
+    "loadAgentFileError": "AGENTS.md を読み込めませんでした",
+    "saveAgentFileError": "AGENTS.md を保存できませんでした",
+    "threadStatus": {
+      "running": "実行中",
+      "reviewing": "レビュー中",
+      "idle": "待機中"
+    }
+  },
+  "uiText": {
+    "fileEditor": {
+      "refresh": "更新",
+      "save": "保存",
+      "create": "作成",
+      "refreshFile": "{{title}} を更新",
+      "saveFile": "{{title}} を保存",
+      "createFile": "{{title}} を作成"
+    },
+    "codexFiles": {
+      "loadGlobalAgentsError": "グローバル AGENTS.md を読み込めませんでした",
+      "saveGlobalAgentsError": "グローバル AGENTS.md を保存できませんでした",
+      "loadGlobalConfigError": "グローバル config.toml を読み込めませんでした",
+      "saveGlobalConfigError": "グローバル config.toml を保存できませんでした"
+    },
+    "sidebarMenus": {
+      "rename": "名前を変更",
+      "syncFromServer": "サーバーから同期",
+      "archive": "アーカイブ",
+      "copyId": "ID をコピー",
+      "pin": "ピン留め",
+      "unpin": "ピン留め解除",
+      "reloadThreads": "スレッドを再読み込み",
+      "delete": "削除",
+      "showInFileManager": "{{fileManager}} で表示",
+      "deleteWorktree": "ワークツリーを削除",
+      "deleteClone": "クローンを削除",
+      "couldntShowWorktreeInFileManager": "ワークツリーを {{fileManager}} で表示できませんでした",
+      "couldntShowCloneInFileManager": "クローンを {{fileManager}} で表示できませんでした"
+    },
+    "appHeader": {
+      "searchOrCreateBranch": "ブランチを検索または作成",
+      "searchBranches": "ブランチを検索",
+      "refreshCurrentThreadFromServer": "サーバーから現在のスレッドを更新"
+    },
+    "toasts": {
+      "dismiss": "閉じる",
+      "dismissError": "エラーを閉じる"
+    }
+  },
   "gitPanel": {
     "enterCommitMessage": "Enter a commit message",
     "noChangesToCommit": "No changes to commit",

@@ -777,6 +777,77 @@
     "addGeneralPrompt": "Add general prompt",
     "noGeneralPromptsYet": "No general prompts yet"
   },
+  "workspaceHome": {
+    "recentRuns": "Ejecuciones recientes",
+    "startRunToTrackInstances": "Inicia una ejecución para ver sus instancias rastreadas aquí.",
+    "localMode": "Local",
+    "worktreeMode": "Worktree",
+    "instanceSingular": "instancia",
+    "instancePlural": "instancias",
+    "failed": "Falló",
+    "partial": "Parcial",
+    "moreCount": "+{{count}} más",
+    "noInstancesStarted": "No se inició ninguna instancia.",
+    "instancesPreparing": "Se están preparando las instancias...",
+    "recentThreads": "Hilos recientes",
+    "threadsFromSidebarAppearHere": "Los hilos de la barra lateral aparecerán aquí.",
+    "agentsActivity": "Actividad de agentes",
+    "threadSingular": "hilo",
+    "threadPlural": "hilos",
+    "showingFirstPartOfLargeFile": "Mostrando la primera parte de un archivo grande.",
+    "agentInstructionsPlaceholder": "Añade instrucciones del espacio de trabajo para el agente…",
+    "loading": "Cargando…",
+    "saving": "Guardando…",
+    "notFound": "No encontrado",
+    "truncated": "Truncado",
+    "loadAgentFileError": "No se pudo cargar AGENTS.md",
+    "saveAgentFileError": "No se pudo guardar AGENTS.md",
+    "threadStatus": {
+      "running": "En ejecución",
+      "reviewing": "En revisión",
+      "idle": "Inactivo"
+    }
+  },
+  "uiText": {
+    "fileEditor": {
+      "refresh": "Actualizar",
+      "save": "Guardar",
+      "create": "Crear",
+      "refreshFile": "Actualizar {{title}}",
+      "saveFile": "Guardar {{title}}",
+      "createFile": "Crear {{title}}"
+    },
+    "codexFiles": {
+      "loadGlobalAgentsError": "No se pudo cargar el AGENTS.md global",
+      "saveGlobalAgentsError": "No se pudo guardar el AGENTS.md global",
+      "loadGlobalConfigError": "No se pudo cargar el config.toml global",
+      "saveGlobalConfigError": "No se pudo guardar el config.toml global"
+    },
+    "sidebarMenus": {
+      "rename": "Renombrar",
+      "syncFromServer": "Sincronizar desde el servidor",
+      "archive": "Archivar",
+      "copyId": "Copiar ID",
+      "pin": "Fijar",
+      "unpin": "Desfijar",
+      "reloadThreads": "Recargar hilos",
+      "delete": "Eliminar",
+      "showInFileManager": "Mostrar en {{fileManager}}",
+      "deleteWorktree": "Eliminar worktree",
+      "deleteClone": "Eliminar clon",
+      "couldntShowWorktreeInFileManager": "No se pudo mostrar el worktree en {{fileManager}}",
+      "couldntShowCloneInFileManager": "No se pudo mostrar el clon en {{fileManager}}"
+    },
+    "appHeader": {
+      "searchOrCreateBranch": "Buscar o crear rama",
+      "searchBranches": "Buscar ramas",
+      "refreshCurrentThreadFromServer": "Actualizar el hilo actual desde el servidor"
+    },
+    "toasts": {
+      "dismiss": "Cerrar",
+      "dismissError": "Cerrar error"
+    }
+  },
   "gitPanel": {
     "enterCommitMessage": "Enter a commit message",
     "noChangesToCommit": "No changes to commit",

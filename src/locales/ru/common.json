@@ -777,6 +777,77 @@
     "addGeneralPrompt": "Add general prompt",
     "noGeneralPromptsYet": "No general prompts yet"
   },
+  "workspaceHome": {
+    "recentRuns": "Недавние запуски",
+    "startRunToTrackInstances": "Запустите задачу, чтобы её экземпляры отображались здесь.",
+    "localMode": "Локально",
+    "worktreeMode": "Рабочее дерево",
+    "instanceSingular": "экземпляр",
+    "instancePlural": "экземпляров",
+    "failed": "Сбой",
+    "partial": "Частично",
+    "moreCount": "+еще {{count}}",
+    "noInstancesStarted": "Не было запущено ни одного экземпляра.",
+    "instancesPreparing": "Экземпляры подготавливаются...",
+    "recentThreads": "Недавние треды",
+    "threadsFromSidebarAppearHere": "Здесь появятся треды из боковой панели.",
+    "agentsActivity": "Активность агентов",
+    "threadSingular": "тред",
+    "threadPlural": "тредов",
+    "showingFirstPartOfLargeFile": "Показывается первая часть большого файла.",
+    "agentInstructionsPlaceholder": "Добавьте инструкции рабочего пространства для агента…",
+    "loading": "Загрузка…",
+    "saving": "Сохранение…",
+    "notFound": "Не найдено",
+    "truncated": "Обрезано",
+    "loadAgentFileError": "Не удалось загрузить AGENTS.md",
+    "saveAgentFileError": "Не удалось сохранить AGENTS.md",
+    "threadStatus": {
+      "running": "Выполняется",
+      "reviewing": "Проверяется",
+      "idle": "Ожидание"
+    }
+  },
+  "uiText": {
+    "fileEditor": {
+      "refresh": "Обновить",
+      "save": "Сохранить",
+      "create": "Создать",
+      "refreshFile": "Обновить {{title}}",
+      "saveFile": "Сохранить {{title}}",
+      "createFile": "Создать {{title}}"
+    },
+    "codexFiles": {
+      "loadGlobalAgentsError": "Не удалось загрузить глобальный AGENTS.md",
+      "saveGlobalAgentsError": "Не удалось сохранить глобальный AGENTS.md",
+      "loadGlobalConfigError": "Не удалось загрузить глобальный config.toml",
+      "saveGlobalConfigError": "Не удалось сохранить глобальный config.toml"
+    },
+    "sidebarMenus": {
+      "rename": "Переименовать",
+      "syncFromServer": "Синхронизировать с сервера",
+      "archive": "Архивировать",
+      "copyId": "Копировать ID",
+      "pin": "Закрепить",
+      "unpin": "Открепить",
+      "reloadThreads": "Перезагрузить треды",
+      "delete": "Удалить",
+      "showInFileManager": "Показать в {{fileManager}}",
+      "deleteWorktree": "Удалить рабочее дерево",
+      "deleteClone": "Удалить клон",
+      "couldntShowWorktreeInFileManager": "Не удалось показать рабочее дерево в {{fileManager}}",
+      "couldntShowCloneInFileManager": "Не удалось показать клон в {{fileManager}}"
+    },
+    "appHeader": {
+      "searchOrCreateBranch": "Найти или создать ветку",
+      "searchBranches": "Искать ветки",
+      "refreshCurrentThreadFromServer": "Обновить текущий тред с сервера"
+    },
+    "toasts": {
+      "dismiss": "Закрыть",
+      "dismissError": "Закрыть ошибку"
+    }
+  },
   "gitPanel": {
     "enterCommitMessage": "Enter a commit message",
     "noChangesToCommit": "No changes to commit",

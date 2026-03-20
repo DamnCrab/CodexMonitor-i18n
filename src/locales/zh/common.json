@@ -777,6 +777,77 @@
     "addGeneralPrompt": "添加通用提示词",
     "noGeneralPromptsYet": "还没有通用提示词"
   },
+  "workspaceHome": {
+    "recentRuns": "最近运行",
+    "startRunToTrackInstances": "开始一次运行后，这里会跟踪显示其实例。",
+    "localMode": "本地",
+    "worktreeMode": "工作树",
+    "instanceSingular": "个实例",
+    "instancePlural": "个实例",
+    "failed": "失败",
+    "partial": "部分失败",
+    "moreCount": "+{{count}} 条更多",
+    "noInstancesStarted": "没有启动任何实例。",
+    "instancesPreparing": "实例正在准备中...",
+    "recentThreads": "最近线程",
+    "threadsFromSidebarAppearHere": "侧边栏中的线程会显示在这里。",
+    "agentsActivity": "智能体活动",
+    "threadSingular": "个线程",
+    "threadPlural": "个线程",
+    "showingFirstPartOfLargeFile": "正在显示大文件的前半部分。",
+    "agentInstructionsPlaceholder": "为代理添加工作区说明…",
+    "loading": "加载中…",
+    "saving": "保存中…",
+    "notFound": "未找到",
+    "truncated": "已截断",
+    "loadAgentFileError": "无法加载 AGENTS.md",
+    "saveAgentFileError": "无法保存 AGENTS.md",
+    "threadStatus": {
+      "running": "运行中",
+      "reviewing": "审阅中",
+      "idle": "空闲"
+    }
+  },
+  "uiText": {
+    "fileEditor": {
+      "refresh": "刷新",
+      "save": "保存",
+      "create": "创建",
+      "refreshFile": "刷新 {{title}}",
+      "saveFile": "保存 {{title}}",
+      "createFile": "创建 {{title}}"
+    },
+    "codexFiles": {
+      "loadGlobalAgentsError": "无法加载全局 AGENTS.md",
+      "saveGlobalAgentsError": "无法保存全局 AGENTS.md",
+      "loadGlobalConfigError": "无法加载全局 config.toml",
+      "saveGlobalConfigError": "无法保存全局 config.toml"
+    },
+    "sidebarMenus": {
+      "rename": "重命名",
+      "syncFromServer": "从服务器同步",
+      "archive": "归档",
+      "copyId": "复制 ID",
+      "pin": "固定",
+      "unpin": "取消固定",
+      "reloadThreads": "重新加载线程",
+      "delete": "删除",
+      "showInFileManager": "在 {{fileManager}} 中显示",
+      "deleteWorktree": "删除工作树",
+      "deleteClone": "删除克隆",
+      "couldntShowWorktreeInFileManager": "无法在 {{fileManager}} 中显示工作树",
+      "couldntShowCloneInFileManager": "无法在 {{fileManager}} 中显示克隆"
+    },
+    "appHeader": {
+      "searchOrCreateBranch": "搜索或创建分支",
+      "searchBranches": "搜索分支",
+      "refreshCurrentThreadFromServer": "从服务器刷新当前线程"
+    },
+    "toasts": {
+      "dismiss": "关闭",
+      "dismissError": "关闭错误"
+    }
+  },
   "gitPanel": {
     "enterCommitMessage": "请输入提交信息",
     "noChangesToCommit": "没有可提交的更改",
