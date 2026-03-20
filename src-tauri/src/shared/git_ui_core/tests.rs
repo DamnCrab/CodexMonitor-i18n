@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 use std::fs;
 use std::path::{Path, PathBuf};
+use std::sync::{Mutex as StdMutex, OnceLock};
 
 use git2::Repository;
 use serde_json::Value;
@@ -17,6 +18,11 @@ fn create_temp_repo() -> (PathBuf, Repository) {
     fs::create_dir_all(&root).expect("create temp repo root");
     let repo = Repository::init(&root).expect("init repo");
     (root, repo)
+}
+
+fn git_cli_env_lock() -> &'static StdMutex<()> {
+    static LOCK: OnceLock<StdMutex<()>> = OnceLock::new();
+    LOCK.get_or_init(|| StdMutex::new(()))
 }
 
 #[test]
@@ -116,9 +122,8 @@ fn validate_normalized_repo_name_accepts_non_empty_normalized_slug() {
 
 #[test]
 fn parse_git_branch_listing_reads_branch_names_and_timestamps() {
-    let branches = commands::parse_git_branch_listing(
-        "feature/b\t100\nmain\t250\nstale\t0\ninvalid\tnope\n",
-    );
+    let branches =
+        commands::parse_git_branch_listing("feature/b\t100\nmain\t250\nstale\t0\ninvalid\tnope\n");
 
     assert_eq!(branches[0].name, "main");
     assert_eq!(branches[0].last_commit, 250);
@@ -155,6 +160,122 @@ fn detects_repository_missing_errors_from_git_and_libgit2_messages() {
     assert!(!commands::is_repository_missing_error(
         "repository path 'F:/repo' is not owned by current user; class=Config (7); code=Owner (-36)"
     ));
+}
+
+#[test]
+fn list_git_branches_supports_cli_first_repo_access_mode() {
+    let _guard = git_cli_env_lock().lock().expect("env lock");
+    let (root, repo) = create_temp_repo();
+    fs::write(root.join("tracked.txt"), "tracked\n").expect("write tracked file");
+    let mut index = repo.index().expect("repo index");
+    index.add_path(Path::new("tracked.txt")).expect("add path");
+    let tree_id = index.write_tree().expect("write tree");
+    let tree = repo.find_tree(tree_id).expect("find tree");
+    let sig = git2::Signature::now("Test", "test@example.com").expect("signature");
+    repo.commit(Some("HEAD"), &sig, &sig, "init", &tree, &[])
+        .expect("commit");
+    let default_branch = repo
+        .head()
+        .expect("head")
+        .shorthand()
+        .expect("branch name")
+        .to_string();
+
+    let head_commit = repo
+        .head()
+        .expect("head")
+        .peel_to_commit()
+        .expect("head commit");
+    repo.branch("feature/cli", &head_commit, false)
+        .expect("create branch");
+
+    let workspace = WorkspaceEntry {
+        id: "w1".to_string(),
+        name: "w1".to_string(),
+        path: root.to_string_lossy().to_string(),
+        kind: WorkspaceKind::Main,
+        parent_id: None,
+        worktree: None,
+        settings: WorkspaceSettings::default(),
+    };
+    let mut entries = HashMap::new();
+    entries.insert("w1".to_string(), workspace);
+    let workspaces = Mutex::new(entries);
+
+    unsafe {
+        std::env::set_var("CODEX_MONITOR_FORCE_SAFE_GIT_CLI", "1");
+    }
+
+    let runtime = Runtime::new().expect("create tokio runtime");
+    let result = runtime
+        .block_on(commands::list_git_branches_inner(
+            &workspaces,
+            "w1".to_string(),
+        ))
+        .expect("list branches");
+
+    unsafe {
+        std::env::remove_var("CODEX_MONITOR_FORCE_SAFE_GIT_CLI");
+    }
+
+    let branches = result
+        .get("branches")
+        .and_then(Value::as_array)
+        .expect("branches array");
+    let names: Vec<&str> = branches
+        .iter()
+        .filter_map(|entry| entry.get("name").and_then(Value::as_str))
+        .collect();
+    assert!(names.iter().any(|name| *name == default_branch.as_str()));
+    assert!(names.contains(&"feature/cli"));
+}
+
+#[test]
+fn get_git_log_supports_cli_first_repo_access_mode() {
+    let _guard = git_cli_env_lock().lock().expect("env lock");
+    let (root, repo) = create_temp_repo();
+    fs::write(root.join("tracked.txt"), "tracked\n").expect("write tracked file");
+    let mut index = repo.index().expect("repo index");
+    index.add_path(Path::new("tracked.txt")).expect("add path");
+    let tree_id = index.write_tree().expect("write tree");
+    let tree = repo.find_tree(tree_id).expect("find tree");
+    let sig = git2::Signature::now("Test", "test@example.com").expect("signature");
+    repo.commit(Some("HEAD"), &sig, &sig, "init", &tree, &[])
+        .expect("commit");
+
+    let workspace = WorkspaceEntry {
+        id: "w1".to_string(),
+        name: "w1".to_string(),
+        path: root.to_string_lossy().to_string(),
+        kind: WorkspaceKind::Main,
+        parent_id: None,
+        worktree: None,
+        settings: WorkspaceSettings::default(),
+    };
+    let mut entries = HashMap::new();
+    entries.insert("w1".to_string(), workspace);
+    let workspaces = Mutex::new(entries);
+
+    unsafe {
+        std::env::set_var("CODEX_MONITOR_FORCE_SAFE_GIT_CLI", "1");
+    }
+
+    let runtime = Runtime::new().expect("create tokio runtime");
+    let result = runtime
+        .block_on(super::log::get_git_log_inner(
+            &workspaces,
+            "w1".to_string(),
+            Some(10),
+        ))
+        .expect("git log");
+
+    unsafe {
+        std::env::remove_var("CODEX_MONITOR_FORCE_SAFE_GIT_CLI");
+    }
+
+    assert_eq!(result.total, 1);
+    assert_eq!(result.entries.len(), 1);
+    assert_eq!(result.entries[0].summary, "init");
 }
 
 #[test]
