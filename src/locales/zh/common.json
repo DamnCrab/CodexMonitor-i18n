@@ -841,11 +841,54 @@
     "appHeader": {
       "searchOrCreateBranch": "搜索或创建分支",
       "searchBranches": "搜索分支",
-      "refreshCurrentThreadFromServer": "从服务器刷新当前线程"
+      "refreshCurrentThreadFromServer": "从服务器刷新当前线程",
+      "terminal": "终端",
+      "createBranch": "创建分支“{{name}}”",
+      "runLaunchScript": "运行启动脚本",
+      "setLaunchScript": "设置启动脚本",
+      "launchScript": "启动脚本",
+      "launchScriptPlaceholder": "例如 npm run dev",
+      "newLaunchScript": "新建启动脚本",
+      "optionalLabel": "可选标签",
+      "saving": "保存中...",
+      "new": "新建"
     },
     "toasts": {
       "dismiss": "关闭",
       "dismissError": "关闭错误"
+    },
+    "sidebar": {
+      "account": "账户",
+      "cancelAccountSwitch": "取消账户切换",
+      "settings": "设置",
+      "openSettings": "打开设置",
+      "debugLog": "调试日志",
+      "openDebugLog": "打开调试日志"
+    },
+    "composerInput": {
+      "addImage": "添加图片",
+      "moreActions": "更多操作",
+      "collapseInput": "收起输入框",
+      "expandInput": "展开输入框",
+      "reviewInProgressPlaceholder": "审查进行中。完成后将重新启用聊天。",
+      "askCodexPlaceholder": "让 Codex 执行某项操作...",
+      "dismiss": "关闭",
+      "stop": "停止",
+      "openDictationSettings": "打开听写设置",
+      "cancelTranscription": "取消转写",
+      "stopDictation": "停止听写",
+      "startDictation": "开始听写",
+      "dictationDisabledOpenSettings": "听写已禁用。打开设置"
+    },
+    "composerBar": {
+      "contextFreeEmpty": "上下文空余 --",
+      "contextFreePercent": "上下文空余 {{value}}%"
+    },
+    "terminal": {
+      "resizePanel": "调整终端面板大小",
+      "tabs": "终端标签页",
+      "newTerminal": "新建终端",
+      "closeTerminal": "关闭 {{title}}"
     }
   },
   "gitPanel": {

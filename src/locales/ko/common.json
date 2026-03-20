@@ -841,11 +841,54 @@
     "appHeader": {
       "searchOrCreateBranch": "브랜치 검색 또는 생성",
       "searchBranches": "브랜치 검색",
-      "refreshCurrentThreadFromServer": "서버에서 현재 스레드 새로고침"
+      "refreshCurrentThreadFromServer": "서버에서 현재 스레드 새로고침",
+      "terminal": "터미널",
+      "createBranch": "브랜치 “{{name}}” 만들기",
+      "runLaunchScript": "실행 스크립트 실행",
+      "setLaunchScript": "실행 스크립트 설정",
+      "launchScript": "실행 스크립트",
+      "launchScriptPlaceholder": "예: npm run dev",
+      "newLaunchScript": "새 실행 스크립트",
+      "optionalLabel": "선택적 레이블",
+      "saving": "저장 중...",
+      "new": "새로 만들기"
     },
     "toasts": {
       "dismiss": "닫기",
       "dismissError": "오류 닫기"
+    },
+    "sidebar": {
+      "account": "계정",
+      "cancelAccountSwitch": "계정 전환 취소",
+      "settings": "설정",
+      "openSettings": "설정 열기",
+      "debugLog": "디버그 로그",
+      "openDebugLog": "디버그 로그 열기"
+    },
+    "composerInput": {
+      "addImage": "이미지 추가",
+      "moreActions": "더 많은 작업",
+      "collapseInput": "입력 접기",
+      "expandInput": "입력 펼치기",
+      "reviewInProgressPlaceholder": "검토가 진행 중입니다. 완료되면 채팅이 다시 활성화됩니다.",
+      "askCodexPlaceholder": "Codex에게 할 일을 요청하세요...",
+      "dismiss": "닫기",
+      "stop": "중지",
+      "openDictationSettings": "받아쓰기 설정 열기",
+      "cancelTranscription": "전사 취소",
+      "stopDictation": "받아쓰기 중지",
+      "startDictation": "받아쓰기 시작",
+      "dictationDisabledOpenSettings": "받아쓰기가 비활성화되어 있습니다. 설정 열기"
+    },
+    "composerBar": {
+      "contextFreeEmpty": "여유 컨텍스트 --",
+      "contextFreePercent": "여유 컨텍스트 {{value}}%"
+    },
+    "terminal": {
+      "resizePanel": "터미널 패널 크기 조절",
+      "tabs": "터미널 탭",
+      "newTerminal": "새 터미널",
+      "closeTerminal": "{{title}} 닫기"
     }
   },
   "gitPanel": {

@@ -841,11 +841,54 @@
     "appHeader": {
       "searchOrCreateBranch": "ブランチを検索または作成",
       "searchBranches": "ブランチを検索",
-      "refreshCurrentThreadFromServer": "サーバーから現在のスレッドを更新"
+      "refreshCurrentThreadFromServer": "サーバーから現在のスレッドを更新",
+      "terminal": "ターミナル",
+      "createBranch": "ブランチ「{{name}}」を作成",
+      "runLaunchScript": "起動スクリプトを実行",
+      "setLaunchScript": "起動スクリプトを設定",
+      "launchScript": "起動スクリプト",
+      "launchScriptPlaceholder": "例: npm run dev",
+      "newLaunchScript": "新しい起動スクリプト",
+      "optionalLabel": "任意のラベル",
+      "saving": "保存中...",
+      "new": "新規"
     },
     "toasts": {
       "dismiss": "閉じる",
       "dismissError": "エラーを閉じる"
+    },
+    "sidebar": {
+      "account": "アカウント",
+      "cancelAccountSwitch": "アカウント切り替えをキャンセル",
+      "settings": "設定",
+      "openSettings": "設定を開く",
+      "debugLog": "デバッグログ",
+      "openDebugLog": "デバッグログを開く"
+    },
+    "composerInput": {
+      "addImage": "画像を追加",
+      "moreActions": "その他の操作",
+      "collapseInput": "入力欄を折りたたむ",
+      "expandInput": "入力欄を展開",
+      "reviewInProgressPlaceholder": "レビュー進行中です。完了するとチャットが再び有効になります。",
+      "askCodexPlaceholder": "Codex に何をしてほしいか入力...",
+      "dismiss": "閉じる",
+      "stop": "停止",
+      "openDictationSettings": "音声入力の設定を開く",
+      "cancelTranscription": "文字起こしをキャンセル",
+      "stopDictation": "音声入力を停止",
+      "startDictation": "音声入力を開始",
+      "dictationDisabledOpenSettings": "音声入力は無効です。設定を開く"
+    },
+    "composerBar": {
+      "contextFreeEmpty": "空きコンテキスト --",
+      "contextFreePercent": "空きコンテキスト {{value}}%"
+    },
+    "terminal": {
+      "resizePanel": "ターミナルパネルのサイズを変更",
+      "tabs": "ターミナルタブ",
+      "newTerminal": "新しいターミナル",
+      "closeTerminal": "{{title}} を閉じる"
     }
   },
   "gitPanel": {

@@ -841,11 +841,54 @@
     "appHeader": {
       "searchOrCreateBranch": "Buscar o crear rama",
       "searchBranches": "Buscar ramas",
-      "refreshCurrentThreadFromServer": "Actualizar el hilo actual desde el servidor"
+      "refreshCurrentThreadFromServer": "Actualizar el hilo actual desde el servidor",
+      "terminal": "Terminal",
+      "createBranch": "Crear rama «{{name}}»",
+      "runLaunchScript": "Ejecutar script de inicio",
+      "setLaunchScript": "Configurar script de inicio",
+      "launchScript": "Script de inicio",
+      "launchScriptPlaceholder": "p. ej. npm run dev",
+      "newLaunchScript": "Nuevo script de inicio",
+      "optionalLabel": "Etiqueta opcional",
+      "saving": "Guardando...",
+      "new": "Nuevo"
     },
     "toasts": {
       "dismiss": "Cerrar",
       "dismissError": "Cerrar error"
+    },
+    "sidebar": {
+      "account": "Cuenta",
+      "cancelAccountSwitch": "Cancelar cambio de cuenta",
+      "settings": "Configuración",
+      "openSettings": "Abrir configuración",
+      "debugLog": "Registro de depuración",
+      "openDebugLog": "Abrir registro de depuración"
+    },
+    "composerInput": {
+      "addImage": "Agregar imagen",
+      "moreActions": "Más acciones",
+      "collapseInput": "Contraer entrada",
+      "expandInput": "Expandir entrada",
+      "reviewInProgressPlaceholder": "Revisión en curso. El chat se volverá a habilitar cuando termine.",
+      "askCodexPlaceholder": "Pídele a Codex que haga algo...",
+      "dismiss": "Cerrar",
+      "stop": "Detener",
+      "openDictationSettings": "Abrir ajustes de dictado",
+      "cancelTranscription": "Cancelar transcripción",
+      "stopDictation": "Detener dictado",
+      "startDictation": "Iniciar dictado",
+      "dictationDisabledOpenSettings": "El dictado está desactivado. Abrir ajustes"
+    },
+    "composerBar": {
+      "contextFreeEmpty": "Contexto libre --",
+      "contextFreePercent": "Contexto libre {{value}}%"
+    },
+    "terminal": {
+      "resizePanel": "Redimensionar panel del terminal",
+      "tabs": "Pestañas del terminal",
+      "newTerminal": "Nuevo terminal",
+      "closeTerminal": "Cerrar {{title}}"
     }
   },
   "gitPanel": {

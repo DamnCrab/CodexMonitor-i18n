@@ -142,6 +142,22 @@ fn detects_repository_owner_errors_from_git_and_libgit2_messages() {
 }
 
 #[test]
+fn detects_repository_missing_errors_from_git_and_libgit2_messages() {
+    assert!(commands::is_repository_missing_error(
+        "could not find repository at 'F:\\CODE\\daily'; class=Repository (6); code=NotFound (-3)"
+    ));
+    assert!(commands::is_repository_missing_error(
+        "fatal: not a git repository (or any of the parent directories): .git"
+    ));
+    assert!(commands::is_repository_missing_error(
+        "fatal: cannot change to 'F:/CODE/missing': No such file or directory"
+    ));
+    assert!(!commands::is_repository_missing_error(
+        "repository path 'F:/repo' is not owned by current user; class=Config (7); code=Owner (-36)"
+    ));
+}
+
+#[test]
 fn get_git_status_omits_global_ignored_paths() {
     let (root, repo) = create_temp_repo();
     fs::write(root.join("tracked.txt"), "tracked\n").expect("write tracked file");

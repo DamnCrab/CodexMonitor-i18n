@@ -841,11 +841,54 @@
     "appHeader": {
       "searchOrCreateBranch": "Branch suchen oder erstellen",
       "searchBranches": "Branches suchen",
-      "refreshCurrentThreadFromServer": "Aktuellen Thread vom Server aktualisieren"
+      "refreshCurrentThreadFromServer": "Aktuellen Thread vom Server aktualisieren",
+      "terminal": "Terminal",
+      "createBranch": "Branch „{{name}}“ erstellen",
+      "runLaunchScript": "Startskript ausführen",
+      "setLaunchScript": "Startskript festlegen",
+      "launchScript": "Startskript",
+      "launchScriptPlaceholder": "z. B. npm run dev",
+      "newLaunchScript": "Neues Startskript",
+      "optionalLabel": "Optionales Label",
+      "saving": "Wird gespeichert...",
+      "new": "Neu"
     },
     "toasts": {
       "dismiss": "Schließen",
       "dismissError": "Fehler schließen"
+    },
+    "sidebar": {
+      "account": "Konto",
+      "cancelAccountSwitch": "Kontowechsel abbrechen",
+      "settings": "Einstellungen",
+      "openSettings": "Einstellungen öffnen",
+      "debugLog": "Debug-Protokoll",
+      "openDebugLog": "Debug-Protokoll öffnen"
+    },
+    "composerInput": {
+      "addImage": "Bild hinzufügen",
+      "moreActions": "Weitere Aktionen",
+      "collapseInput": "Eingabe einklappen",
+      "expandInput": "Eingabe ausklappen",
+      "reviewInProgressPlaceholder": "Überprüfung läuft. Der Chat wird nach Abschluss wieder aktiviert.",
+      "askCodexPlaceholder": "Codex anweisen, etwas zu tun...",
+      "dismiss": "Schließen",
+      "stop": "Stopp",
+      "openDictationSettings": "Diktiereinstellungen öffnen",
+      "cancelTranscription": "Transkription abbrechen",
+      "stopDictation": "Diktieren beenden",
+      "startDictation": "Diktieren starten",
+      "dictationDisabledOpenSettings": "Diktat ist deaktiviert. Einstellungen öffnen"
+    },
+    "composerBar": {
+      "contextFreeEmpty": "Freier Kontext --",
+      "contextFreePercent": "Freier Kontext {{value}}%"
+    },
+    "terminal": {
+      "resizePanel": "Terminalbereich in der Größe ändern",
+      "tabs": "Terminal-Tabs",
+      "newTerminal": "Neues Terminal",
+      "closeTerminal": "{{title}} schließen"
     }
   },
   "gitPanel": {

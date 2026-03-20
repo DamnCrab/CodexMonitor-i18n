@@ -841,11 +841,54 @@
     "appHeader": {
       "searchOrCreateBranch": "Search or create branch",
       "searchBranches": "Search branches",
-      "refreshCurrentThreadFromServer": "Refresh current thread from server"
+      "refreshCurrentThreadFromServer": "Refresh current thread from server",
+      "terminal": "Terminal",
+      "createBranch": "Create branch “{{name}}”",
+      "runLaunchScript": "Run launch script",
+      "setLaunchScript": "Set launch script",
+      "launchScript": "Launch script",
+      "launchScriptPlaceholder": "e.g. npm run dev",
+      "newLaunchScript": "New launch script",
+      "optionalLabel": "Optional label",
+      "saving": "Saving...",
+      "new": "New"
     },
     "toasts": {
       "dismiss": "Dismiss",
       "dismissError": "Dismiss error"
+    },
+    "sidebar": {
+      "account": "Account",
+      "cancelAccountSwitch": "Cancel account switch",
+      "settings": "Settings",
+      "openSettings": "Open settings",
+      "debugLog": "Debug log",
+      "openDebugLog": "Open debug log"
+    },
+    "composerInput": {
+      "addImage": "Add image",
+      "moreActions": "More actions",
+      "collapseInput": "Collapse input",
+      "expandInput": "Expand input",
+      "reviewInProgressPlaceholder": "Review in progress. Chat will re-enable when it completes.",
+      "askCodexPlaceholder": "Ask Codex to do something...",
+      "dismiss": "Dismiss",
+      "stop": "Stop",
+      "openDictationSettings": "Open dictation settings",
+      "cancelTranscription": "Cancel transcription",
+      "stopDictation": "Stop dictation",
+      "startDictation": "Start dictation",
+      "dictationDisabledOpenSettings": "Dictation disabled. Open settings"
+    },
+    "composerBar": {
+      "contextFreeEmpty": "Context free --",
+      "contextFreePercent": "Context free {{value}}%"
+    },
+    "terminal": {
+      "resizePanel": "Resize terminal panel",
+      "tabs": "Terminal tabs",
+      "newTerminal": "New terminal",
+      "closeTerminal": "Close {{title}}"
     }
   },
   "gitPanel": {

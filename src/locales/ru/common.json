@@ -841,11 +841,54 @@
     "appHeader": {
       "searchOrCreateBranch": "Найти или создать ветку",
       "searchBranches": "Искать ветки",
-      "refreshCurrentThreadFromServer": "Обновить текущий тред с сервера"
+      "refreshCurrentThreadFromServer": "Обновить текущий тред с сервера",
+      "terminal": "Терминал",
+      "createBranch": "Создать ветку «{{name}}»",
+      "runLaunchScript": "Запустить скрипт запуска",
+      "setLaunchScript": "Настроить скрипт запуска",
+      "launchScript": "Скрипт запуска",
+      "launchScriptPlaceholder": "например npm run dev",
+      "newLaunchScript": "Новый скрипт запуска",
+      "optionalLabel": "Необязательная метка",
+      "saving": "Сохранение...",
+      "new": "Новый"
     },
     "toasts": {
       "dismiss": "Закрыть",
       "dismissError": "Закрыть ошибку"
+    },
+    "sidebar": {
+      "account": "Аккаунт",
+      "cancelAccountSwitch": "Отменить смену аккаунта",
+      "settings": "Настройки",
+      "openSettings": "Открыть настройки",
+      "debugLog": "Журнал отладки",
+      "openDebugLog": "Открыть журнал отладки"
+    },
+    "composerInput": {
+      "addImage": "Добавить изображение",
+      "moreActions": "Больше действий",
+      "collapseInput": "Свернуть поле ввода",
+      "expandInput": "Развернуть поле ввода",
+      "reviewInProgressPlaceholder": "Идёт проверка. Чат снова станет доступен после её завершения.",
+      "askCodexPlaceholder": "Попросить Codex что-нибудь сделать...",
+      "dismiss": "Закрыть",
+      "stop": "Остановить",
+      "openDictationSettings": "Открыть настройки диктовки",
+      "cancelTranscription": "Отменить расшифровку",
+      "stopDictation": "Остановить диктовку",
+      "startDictation": "Начать диктовку",
+      "dictationDisabledOpenSettings": "Диктовка отключена. Откройте настройки"
+    },
+    "composerBar": {
+      "contextFreeEmpty": "Свободный контекст --",
+      "contextFreePercent": "Свободный контекст {{value}}%"
+    },
+    "terminal": {
+      "resizePanel": "Изменить размер панели терминала",
+      "tabs": "Вкладки терминала",
+      "newTerminal": "Новый терминал",
+      "closeTerminal": "Закрыть {{title}}"
     }
   },
   "gitPanel": {

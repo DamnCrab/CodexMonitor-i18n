@@ -841,11 +841,54 @@
     "appHeader": {
       "searchOrCreateBranch": "ब्रांच खोजें या बनाएँ",
       "searchBranches": "ब्रांच खोजें",
-      "refreshCurrentThreadFromServer": "सर्वर से वर्तमान थ्रेड रीफ़्रेश करें"
+      "refreshCurrentThreadFromServer": "सर्वर से वर्तमान थ्रेड रीफ़्रेश करें",
+      "terminal": "टर्मिनल",
+      "createBranch": "शाखा “{{name}}” बनाएँ",
+      "runLaunchScript": "लॉन्च स्क्रिप्ट चलाएँ",
+      "setLaunchScript": "लॉन्च स्क्रिप्ट सेट करें",
+      "launchScript": "लॉन्च स्क्रिप्ट",
+      "launchScriptPlaceholder": "जैसे npm run dev",
+      "newLaunchScript": "नई लॉन्च स्क्रिप्ट",
+      "optionalLabel": "वैकल्पिक लेबल",
+      "saving": "सहेजा जा रहा है...",
+      "new": "नया"
     },
     "toasts": {
       "dismiss": "बंद करें",
       "dismissError": "त्रुटि बंद करें"
+    },
+    "sidebar": {
+      "account": "खाता",
+      "cancelAccountSwitch": "खाता बदलना रद्द करें",
+      "settings": "सेटिंग्स",
+      "openSettings": "सेटिंग्स खोलें",
+      "debugLog": "डिबग लॉग",
+      "openDebugLog": "डिबग लॉग खोलें"
+    },
+    "composerInput": {
+      "addImage": "छवि जोड़ें",
+      "moreActions": "और कार्रवाइयाँ",
+      "collapseInput": "इनपुट समेटें",
+      "expandInput": "इनपुट फैलाएँ",
+      "reviewInProgressPlaceholder": "समीक्षा जारी है। पूरा होने पर चैट फिर से सक्षम होगी।",
+      "askCodexPlaceholder": "Codex से कुछ करने को कहें...",
+      "dismiss": "बंद करें",
+      "stop": "रोकें",
+      "openDictationSettings": "डिक्टेशन सेटिंग्स खोलें",
+      "cancelTranscription": "ट्रांसक्रिप्शन रद्द करें",
+      "stopDictation": "डिक्टेशन रोकें",
+      "startDictation": "डिक्टेशन शुरू करें",
+      "dictationDisabledOpenSettings": "डिक्टेशन अक्षम है। सेटिंग्स खोलें"
+    },
+    "composerBar": {
+      "contextFreeEmpty": "मुक्त संदर्भ --",
+      "contextFreePercent": "मुक्त संदर्भ {{value}}%"
+    },
+    "terminal": {
+      "resizePanel": "टर्मिनल पैनल का आकार बदलें",
+      "tabs": "टर्मिनल टैब",
+      "newTerminal": "नया टर्मिनल",
+      "closeTerminal": "{{title}} बंद करें"
     }
   },
   "gitPanel": {

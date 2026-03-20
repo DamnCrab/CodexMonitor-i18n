@@ -841,11 +841,54 @@
     "appHeader": {
       "searchOrCreateBranch": "ابحث عن فرع أو أنشئه",
       "searchBranches": "ابحث في الفروع",
-      "refreshCurrentThreadFromServer": "حدّث السلسلة الحالية من الخادم"
+      "refreshCurrentThreadFromServer": "حدّث السلسلة الحالية من الخادم",
+      "terminal": "الطرفية",
+      "createBranch": "إنشاء الفرع «{{name}}»",
+      "runLaunchScript": "تشغيل نص الإطلاق",
+      "setLaunchScript": "تعيين نص الإطلاق",
+      "launchScript": "نص الإطلاق",
+      "launchScriptPlaceholder": "مثل npm run dev",
+      "newLaunchScript": "نص إطلاق جديد",
+      "optionalLabel": "تسمية اختيارية",
+      "saving": "جارٍ الحفظ...",
+      "new": "جديد"
     },
     "toasts": {
       "dismiss": "إغلاق",
       "dismissError": "إغلاق الخطأ"
+    },
+    "sidebar": {
+      "account": "الحساب",
+      "cancelAccountSwitch": "إلغاء تبديل الحساب",
+      "settings": "الإعدادات",
+      "openSettings": "فتح الإعدادات",
+      "debugLog": "سجل التصحيح",
+      "openDebugLog": "فتح سجل التصحيح"
+    },
+    "composerInput": {
+      "addImage": "إضافة صورة",
+      "moreActions": "مزيد من الإجراءات",
+      "collapseInput": "طي حقل الإدخال",
+      "expandInput": "توسيع حقل الإدخال",
+      "reviewInProgressPlaceholder": "المراجعة قيد التقدم. ستتم إعادة تفعيل الدردشة عند اكتمالها.",
+      "askCodexPlaceholder": "اطلب من Codex أن يفعل شيئًا...",
+      "dismiss": "إغلاق",
+      "stop": "إيقاف",
+      "openDictationSettings": "فتح إعدادات الإملاء",
+      "cancelTranscription": "إلغاء النسخ",
+      "stopDictation": "إيقاف الإملاء",
+      "startDictation": "بدء الإملاء",
+      "dictationDisabledOpenSettings": "الإملاء معطل. افتح الإعدادات"
+    },
+    "composerBar": {
+      "contextFreeEmpty": "سياق حر --",
+      "contextFreePercent": "سياق حر {{value}}%"
+    },
+    "terminal": {
+      "resizePanel": "تغيير حجم لوحة الطرفية",
+      "tabs": "علامات تبويب الطرفية",
+      "newTerminal": "طرفية جديدة",
+      "closeTerminal": "إغلاق {{title}}"
     }
   },
   "gitPanel": {

@@ -11,9 +11,16 @@ use crate::git_utils::{
 };
 use crate::shared::process_core::tokio_command;
 use crate::types::{BranchInfo, WorkspaceEntry};
-use crate::utils::{git_env_path, normalize_git_path, resolve_git_binary};
+use crate::utils::{
+    git_env_path, normalize_git_path, normalize_windows_namespace_path, resolve_git_binary,
+};
 
 use super::context::workspace_entry_for_id;
+
+fn normalized_repo_root_for_git(repo_root: &Path) -> String {
+    let sanitized = normalize_windows_namespace_path(repo_root.to_string_lossy().as_ref());
+    normalize_git_path(&sanitized)
+}
 
 async fn run_git_command(repo_root: &Path, args: &[&str]) -> Result<(), String> {
     let git_bin = resolve_git_binary().map_err(|e| format!("Failed to run git: {e}"))?;
@@ -43,10 +50,7 @@ async fn run_git_command(repo_root: &Path, args: &[&str]) -> Result<(), String> 
 }
 
 fn safe_directory_arg(repo_root: &Path) -> String {
-    format!(
-        "safe.directory={}",
-        normalize_git_path(repo_root.to_string_lossy().as_ref())
-    )
+    format!("safe.directory={}", normalized_repo_root_for_git(repo_root))
 }
 
 async fn run_git_command_with_safe_directory(repo_root: &Path, args: &[&str]) -> Result<(), String> {
@@ -151,13 +155,45 @@ pub(super) fn is_repository_owner_error(detail: &str) -> bool {
         || lower.contains("code=owner")
 }
 
+pub(super) fn is_repository_missing_error(detail: &str) -> bool {
+    let lower = detail.to_ascii_lowercase();
+    lower.contains("could not find repository")
+        || lower.contains("not a git repository")
+        || lower.contains("repository not found")
+        || lower.contains("code=notfound")
+        || lower.contains("cannot change to")
+        || lower.contains("no such file or directory")
+}
+
+fn should_retry_repository_command(detail: &str) -> bool {
+    is_repository_owner_error(detail) || is_repository_missing_error(detail)
+}
+
 fn format_repository_owner_error(repo_root: &Path, detail: &str) -> String {
     format!(
         "Git could not access repository {} because it is owned by a different user. Add it as a safe directory with `git config --global --add safe.directory \"{}\"`, or update the folder owner. Original error: {}",
         repo_root.display(),
-        normalize_git_path(repo_root.to_string_lossy().as_ref()),
+        normalized_repo_root_for_git(repo_root),
         detail
     )
+}
+
+fn format_repository_missing_error(repo_root: &Path, detail: &str) -> String {
+    format!(
+        "Git repository not found at {}. Verify the workspace path still exists and points to a Git repository. Original error: {}",
+        repo_root.display(),
+        detail
+    )
+}
+
+fn normalize_repository_command_error(repo_root: &Path, detail: &str) -> String {
+    if is_repository_owner_error(detail) {
+        return format_repository_owner_error(repo_root, detail);
+    }
+    if is_repository_missing_error(detail) {
+        return format_repository_missing_error(repo_root, detail);
+    }
+    detail.to_string()
 }
 
 pub(super) fn parse_git_branch_listing(stdout: &str) -> Vec<BranchInfo> {
@@ -868,18 +904,12 @@ pub(super) async fn list_git_branches_inner(
         }
         Err(error) => {
             let detail = error.to_string();
-            if !is_repository_owner_error(&detail) {
+            if !should_retry_repository_command(&detail) {
                 return Err(detail);
             }
             list_git_branches_with_safe_directory(&repo_root)
                 .await
-                .map_err(|fallback_error| {
-                    if is_repository_owner_error(&fallback_error) {
-                        format_repository_owner_error(&repo_root, &fallback_error)
-                    } else {
-                        fallback_error
-                    }
-                })?
+                .map_err(|fallback_error| normalize_repository_command_error(&repo_root, &fallback_error))?
         }
     };
     branches.sort_by(|a, b| b.last_commit.cmp(&a.last_commit));
@@ -897,18 +927,12 @@ pub(super) async fn checkout_git_branch_inner(
         Ok(repo) => checkout_branch(&repo, &name).map_err(|e| e.to_string()),
         Err(error) => {
             let detail = error.to_string();
-            if !is_repository_owner_error(&detail) {
+            if !should_retry_repository_command(&detail) {
                 return Err(detail);
             }
             run_git_command_with_safe_directory(&repo_root, &["checkout", &name])
                 .await
-                .map_err(|fallback_error| {
-                    if is_repository_owner_error(&fallback_error) {
-                        format_repository_owner_error(&repo_root, &fallback_error)
-                    } else {
-                        fallback_error
-                    }
-                })
+                .map_err(|fallback_error| normalize_repository_command_error(&repo_root, &fallback_error))
         }
     }
 }
@@ -930,18 +954,12 @@ pub(super) async fn create_git_branch_inner(
         }
         Err(error) => {
             let detail = error.to_string();
-            if !is_repository_owner_error(&detail) {
+            if !should_retry_repository_command(&detail) {
                 return Err(detail);
             }
             run_git_command_with_safe_directory(&repo_root, &["checkout", "-b", &name])
                 .await
-                .map_err(|fallback_error| {
-                    if is_repository_owner_error(&fallback_error) {
-                        format_repository_owner_error(&repo_root, &fallback_error)
-                    } else {
-                        fallback_error
-                    }
-                })
+                .map_err(|fallback_error| normalize_repository_command_error(&repo_root, &fallback_error))
         }
     }
 }

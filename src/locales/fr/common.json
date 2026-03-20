@@ -841,11 +841,54 @@
     "appHeader": {
       "searchOrCreateBranch": "Rechercher ou créer une branche",
       "searchBranches": "Rechercher des branches",
-      "refreshCurrentThreadFromServer": "Actualiser le fil actuel depuis le serveur"
+      "refreshCurrentThreadFromServer": "Actualiser le fil actuel depuis le serveur",
+      "terminal": "Terminal",
+      "createBranch": "Créer la branche «{{name}}»",
+      "runLaunchScript": "Exécuter le script de lancement",
+      "setLaunchScript": "Définir le script de lancement",
+      "launchScript": "Script de lancement",
+      "launchScriptPlaceholder": "ex. npm run dev",
+      "newLaunchScript": "Nouveau script de lancement",
+      "optionalLabel": "Libellé facultatif",
+      "saving": "Enregistrement...",
+      "new": "Nouveau"
     },
     "toasts": {
       "dismiss": "Fermer",
       "dismissError": "Fermer l’erreur"
+    },
+    "sidebar": {
+      "account": "Compte",
+      "cancelAccountSwitch": "Annuler le changement de compte",
+      "settings": "Paramètres",
+      "openSettings": "Ouvrir les paramètres",
+      "debugLog": "Journal de débogage",
+      "openDebugLog": "Ouvrir le journal de débogage"
+    },
+    "composerInput": {
+      "addImage": "Ajouter une image",
+      "moreActions": "Plus d’actions",
+      "collapseInput": "Réduire la saisie",
+      "expandInput": "Développer la saisie",
+      "reviewInProgressPlaceholder": "Revue en cours. Le chat sera réactivé une fois terminée.",
+      "askCodexPlaceholder": "Demander à Codex de faire quelque chose...",
+      "dismiss": "Fermer",
+      "stop": "Arrêter",
+      "openDictationSettings": "Ouvrir les paramètres de dictée",
+      "cancelTranscription": "Annuler la transcription",
+      "stopDictation": "Arrêter la dictée",
+      "startDictation": "Démarrer la dictée",
+      "dictationDisabledOpenSettings": "La dictée est désactivée. Ouvrir les paramètres"
+    },
+    "composerBar": {
+      "contextFreeEmpty": "Contexte libre --",
+      "contextFreePercent": "Contexte libre {{value}}%"
+    },
+    "terminal": {
+      "resizePanel": "Redimensionner le panneau du terminal",
+      "tabs": "Onglets du terminal",
+      "newTerminal": "Nouveau terminal",
+      "closeTerminal": "Fermer {{title}}"
     }
   },
   "gitPanel": {
