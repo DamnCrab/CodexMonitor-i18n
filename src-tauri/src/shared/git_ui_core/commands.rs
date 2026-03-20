@@ -43,7 +43,10 @@ async fn run_git_command(repo_root: &Path, args: &[&str]) -> Result<(), String> 
 }
 
 fn safe_directory_arg(repo_root: &Path) -> String {
-    format!("safe.directory={}", normalize_git_path(repo_root))
+    format!(
+        "safe.directory={}",
+        normalize_git_path(repo_root.to_string_lossy().as_ref())
+    )
 }
 
 async fn run_git_command_with_safe_directory(repo_root: &Path, args: &[&str]) -> Result<(), String> {
@@ -152,7 +155,7 @@ fn format_repository_owner_error(repo_root: &Path, detail: &str) -> String {
     format!(
         "Git could not access repository {} because it is owned by a different user. Add it as a safe directory with `git config --global --add safe.directory \"{}\"`, or update the folder owner. Original error: {}",
         repo_root.display(),
-        normalize_git_path(repo_root),
+        normalize_git_path(repo_root.to_string_lossy().as_ref()),
         detail
     )
 }
