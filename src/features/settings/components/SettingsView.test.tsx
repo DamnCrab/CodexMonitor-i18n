@@ -11,6 +11,7 @@ import {
 import i18n from "i18next";
 import type { ComponentProps } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { SUPPORTED_LANGUAGES } from "@/i18n";
 import type { AppSettings, WorkspaceInfo } from "@/types";
 import {
   connectWorkspace,
@@ -514,6 +515,24 @@ describe("SettingsView Display", () => {
     await waitFor(() => {
       expect(onUpdateAppSettings).toHaveBeenCalledWith(
         expect.objectContaining({ theme: "dark" }),
+      );
+    });
+  });
+
+  it("shows mainstream language options and persists the selected language", async () => {
+    const onUpdateAppSettings = vi.fn().mockResolvedValue(undefined);
+    renderDisplaySection({ onUpdateAppSettings });
+
+    const select = screen.getByLabelText("Language");
+    for (const code of SUPPORTED_LANGUAGES) {
+      within(select).getByRole("option", { name: i18n.t(`language.${code}`) });
+    }
+
+    fireEvent.change(select, { target: { value: "ja" } });
+
+    await waitFor(() => {
+      expect(onUpdateAppSettings).toHaveBeenCalledWith(
+        expect.objectContaining({ language: "ja" }),
       );
     });
   });
