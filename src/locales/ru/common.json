@@ -312,11 +312,15 @@
       "save": "Сохранить",
       "saving": "Сохранение...",
       "worktreesFolder": "Папка worktree",
-      "worktreesFolderHelp": "Пользовательское расположение для worktree. Оставьте пустым, чтобы использовать расположение по умолчанию.",
+      "worktreesFolderHelp": "Custom location for this project's worktrees. Leave empty to use the global root or the built-in default.",
       "worktreesFolderPlaceholder": "/path/to/worktrees",
       "selectWorktreesFolder": "Выбрать папку worktree",
       "openFolderPickerFailed": "Не удалось открыть выбор папки",
-      "browse": "Обзор"
+      "browse": "Обзор",
+      "globalWorktreesRoot": "Global worktrees root",
+      "globalWorktreesRootHelp": "Default location for new worktrees when a project does not override it. Each project gets its own subfolder under this root.",
+      "globalWorktreesRootPlaceholder": "/path/to/worktrees-root",
+      "selectGlobalWorktreesRoot": "Select global worktrees root"
     },
     "openApps": {
       "title": "Открывать в",
@@ -688,20 +692,28 @@
     "toggleSearch": "Toggle search",
     "closeSearch": "Close search",
     "searchThreads": "Search threads",
-    "searchProjects": "Search projects",
+    "searchProjects": "Search conversations",
     "clearSearch": "Clear search",
     "addingProject": "Adding Project...",
     "dropProjectHere": "Drop Project Here",
     "newThreadInProject": "New thread in project",
-    "noProjectsMatchSearch": "No projects match your search.",
-    "pinned": "Pinned",
-    "allThreads": "All threads",
+    "noProjectsMatchSearch": "No conversations match your search.",
+    "pinned": "Pinned conversations",
+    "allThreads": "Recent conversations",
     "newAgent": "New agent",
     "newWorktreeAgent": "New worktree agent",
     "newCloneAgent": "New clone agent",
     "cloneAgents": "Clone agents",
     "addWorkspaceToStart": "Add a workspace to start.",
-    "noThreadsYet": "No threads yet."
+    "noThreadsYet": "No conversations yet.",
+    "now": "Now",
+    "earlierToday": "Earlier today",
+    "yesterday": "Yesterday",
+    "thisWeek": "This week",
+    "older": "Older",
+    "oneConversation": "1 conversation",
+    "conversationCount": "{{count}} conversations",
+    "updatedTime": "Updated {{time}}"
   },
   "filePreview": {
     "linesSelection": "Lines {{start}}-{{end}}",
@@ -969,6 +981,8 @@
     "noAgentEditsYet": "No agent edits in this thread yet.",
     "oneEdit": "1 edit",
     "editCount": "{{count}} edits",
-    "pullCount": "Pull {{count}} commit"
+    "pullCount": "Pull {{count}} commit",
+    "branch": "Branch",
+    "repositoryRoot": "Repository root"
   }
 }

@@ -312,11 +312,15 @@
       "save": "保存",
       "saving": "保存中...",
       "worktreesFolder": "Worktree 目录",
-      "worktreesFolderHelp": "自定义 worktree 存放位置。留空则使用默认位置。",
+      "worktreesFolderHelp": "此项目的 worktree 自定义存放位置。留空时将使用全局根目录或内置默认位置。",
       "worktreesFolderPlaceholder": "/path/to/worktrees",
       "selectWorktreesFolder": "选择 worktree 目录",
       "openFolderPickerFailed": "打开文件夹选择器失败",
-      "browse": "浏览"
+      "browse": "浏览",
+      "globalWorktreesRoot": "全局 worktree 根目录",
+      "globalWorktreesRootHelp": "当项目未单独覆盖时，新 worktree 的默认存放位置。每个项目都会在该根目录下拥有自己的子目录。",
+      "globalWorktreesRootPlaceholder": "/path/to/worktrees-root",
+      "selectGlobalWorktreesRoot": "选择全局 worktree 根目录"
     },
     "openApps": {
       "title": "打开方式",
@@ -688,20 +692,28 @@
     "toggleSearch": "切换搜索",
     "closeSearch": "关闭搜索",
     "searchThreads": "搜索对话",
-    "searchProjects": "搜索项目",
+    "searchProjects": "搜索对话",
     "clearSearch": "清空搜索",
     "addingProject": "正在添加项目...",
     "dropProjectHere": "将项目拖到这里",
     "newThreadInProject": "在项目中创建新对话",
-    "noProjectsMatchSearch": "没有项目匹配你的搜索。",
-    "pinned": "已置顶",
-    "allThreads": "全部对话",
+    "noProjectsMatchSearch": "没有对话匹配你的搜索。",
+    "pinned": "已固定对话",
+    "allThreads": "最近对话",
     "newAgent": "新代理",
     "newWorktreeAgent": "新 worktree 代理",
     "newCloneAgent": "新克隆代理",
     "cloneAgents": "克隆代理",
     "addWorkspaceToStart": "先添加一个工作区以开始。",
-    "noThreadsYet": "还没有对话。"
+    "noThreadsYet": "还没有对话。",
+    "now": "刚刚",
+    "earlierToday": "今天较早",
+    "yesterday": "昨天",
+    "thisWeek": "本周",
+    "older": "更早",
+    "oneConversation": "1 个对话",
+    "conversationCount": "{{count}} 个对话",
+    "updatedTime": "更新于 {{time}}"
   },
   "filePreview": {
     "linesSelection": "第 {{start}}-{{end}} 行",
@@ -969,6 +981,8 @@
     "noAgentEditsYet": "这个线程里还没有代理编辑。",
     "oneEdit": "1 处编辑",
     "editCount": "{{count}} 处编辑",
-    "pullCount": "拉取 {{count}} 个提交"
+    "pullCount": "拉取 {{count}} 个提交",
+    "branch": "分支",
+    "repositoryRoot": "仓库根目录"
   }
 }

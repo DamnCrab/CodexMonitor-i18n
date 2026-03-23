@@ -46,6 +46,13 @@ export function ComposerMetaBar({
   contextUsage = null,
 }: ComposerMetaBarProps) {
   const { t } = useTranslation();
+  const selectedModel =
+    models.find((model) => model.id === selectedModelId) ?? null;
+  const selectedModelLabel =
+    selectedModel?.displayName || selectedModel?.model || "No models";
+  const modelSelectStyle = {
+    "--composer-model-select-width": `${Math.max(selectedModelLabel.length + 2, 8)}ch`,
+  } as CSSProperties;
   const contextWindow = contextUsage?.modelContextWindow ?? null;
   const lastTokens = contextUsage?.last.totalTokens ?? 0;
   const totalTokens = contextUsage?.total.totalTokens ?? 0;
@@ -173,6 +180,7 @@ export function ComposerMetaBar({
             value={selectedModelId ?? ""}
             onChange={(event) => onSelectModel(event.target.value)}
             disabled={disabled}
+            style={modelSelectStyle}
           >
             {models.length === 0 && <option value="">No models</option>}
             {models.map((model) => (
