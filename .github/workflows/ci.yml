@@ -112,18 +112,12 @@ jobs:
           - name: macOS
             os: macos-latest
             build_command: npm run tauri -- build --debug --no-bundle
-            artifact_name: tauri-debug-macos
-            artifact_path: src-tauri/target/debug/codex-monitor
           - name: Linux
             os: ubuntu-latest
             build_command: npm run tauri -- build --debug --no-bundle
-            artifact_name: tauri-debug-linux
-            artifact_path: src-tauri/target/debug/codex-monitor
           - name: Windows
             os: windows-latest
             build_command: npm run tauri -- build --debug --no-bundle --config src-tauri/tauri.windows.conf.json
-            artifact_name: tauri-debug-windows
-            artifact_path: src-tauri/target/debug/codex-monitor.exe
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -171,9 +165,3 @@ jobs:
         run: npm run doctor:win
       - name: Tauri debug build
         run: ${{ matrix.platform.build_command }}
-      - name: Upload Tauri debug artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.platform.artifact_name }}
-          path: ${{ matrix.platform.artifact_path }}
-          if-no-files-found: error

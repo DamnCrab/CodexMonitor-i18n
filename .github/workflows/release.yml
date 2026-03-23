@@ -15,11 +15,6 @@ jobs:
       CODESIGN_IDENTITY: ${{ vars.CODESIGN_IDENTITY }}
       NOTARY_PROFILE_NAME: ${{ vars.NOTARY_PROFILE_NAME }}
       APPLE_TEAM_ID: ${{ vars.APPLE_TEAM_ID }}
-      APPLE_CERTIFICATE_P12: ${{ secrets.APPLE_CERTIFICATE_P12 }}
-      APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
-      APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
-      APPLE_API_ISSUER_ID: ${{ secrets.APPLE_API_ISSUER_ID }}
-      APPLE_API_PRIVATE_KEY_B64: ${{ secrets.APPLE_API_PRIVATE_KEY_B64 }}
       TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
       TAURI_SIGNING_PRIVATE_KEY_B64: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_B64 }}
     steps:
@@ -49,48 +44,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Prepare Tauri signing key
-        id: tauri_signing_key
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p "$HOME/.tauri"
-          python - <<'PY'
-          import base64
-          import os
-          from pathlib import Path
-
-          value = os.environ.get("TAURI_SIGNING_PRIVATE_KEY_B64", "").strip()
-          output_path = Path(os.environ["GITHUB_OUTPUT"])
-          key_path = Path.home() / ".tauri" / "codexmonitor.key"
-
-          def looks_like_minisign_secret(payload: bytes) -> bool:
-              text = payload.decode("utf-8", errors="ignore")
-              return text.startswith("untrusted comment:") and "secret key" in text.lower()
-
-          key_bytes = b""
-          if value:
-              raw_bytes = value.encode("utf-8")
-              if looks_like_minisign_secret(raw_bytes):
-                  key_bytes = raw_bytes
-              else:
-                  try:
-                      decoded = base64.b64decode(value, validate=True)
-                  except Exception:
-                      decoded = b""
-                  if looks_like_minisign_secret(decoded):
-                      key_bytes = decoded
-
-          with output_path.open("a", encoding="utf-8") as fh:
-              if key_bytes:
-                  key_path.write_bytes(key_bytes)
-                  fh.write("available=true\n")
-              else:
-                  fh.write("available=false\n")
-          PY
-
       - name: Import signing certificate
-        if: ${{ env.APPLE_CERTIFICATE_P12 != '' && env.APPLE_CERTIFICATE_PASSWORD != '' }}
+        env:
+          APPLE_CERTIFICATE_P12: ${{ secrets.APPLE_CERTIFICATE_P12 }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
         run: |
           set -euo pipefail
           KEYCHAIN=build.keychain
@@ -107,7 +64,10 @@ jobs:
           security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "" "$KEYCHAIN"
 
       - name: Configure notarytool credentials
-        if: ${{ env.NOTARY_PROFILE_NAME != '' && env.APPLE_API_KEY_ID != '' && env.APPLE_API_ISSUER_ID != '' && env.APPLE_API_PRIVATE_KEY_B64 != '' }}
+        env:
+          APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
+          APPLE_API_ISSUER_ID: ${{ secrets.APPLE_API_ISSUER_ID }}
+          APPLE_API_PRIVATE_KEY_B64: ${{ secrets.APPLE_API_PRIVATE_KEY_B64 }}
         run: |
           set -euo pipefail
           mkdir -p private_keys
@@ -117,26 +77,18 @@ jobs:
             --issuer "$APPLE_API_ISSUER_ID" \
             --key "private_keys/AuthKey.p8"
 
+      - name: Write Tauri signing key
+        run: |
+          set -euo pipefail
+          mkdir -p "$HOME/.tauri"
+          echo "$TAURI_SIGNING_PRIVATE_KEY_B64" | base64 --decode > "$HOME/.tauri/codexmonitor.key"
+
       - name: Build app bundle
         run: |
           set -euo pipefail
-          if [ "${{ steps.tauri_signing_key.outputs.available }}" = "true" ]; then
-            export TAURI_SIGNING_PRIVATE_KEY
-            TAURI_SIGNING_PRIVATE_KEY="$(cat "$HOME/.tauri/codexmonitor.key")"
-            npm run tauri -- build --bundles app
-          else
-            OVERRIDE_CONFIG="$RUNNER_TEMP/tauri.release.override.json"
-            python - <<'PY'
-            import json
-            import os
-            from pathlib import Path
-
-            Path(os.environ["RUNNER_TEMP"], "tauri.release.override.json").write_text(
-                json.dumps({"bundle": {"createUpdaterArtifacts": False}})
-            )
-            PY
-            npm run tauri -- build --bundles app --config "$OVERRIDE_CONFIG"
-          fi
+          export TAURI_SIGNING_PRIVATE_KEY
+          TAURI_SIGNING_PRIVATE_KEY="$(cat "$HOME/.tauri/codexmonitor.key")"
+          npm run tauri -- build --bundles app
 
       - name: Build daemon binaries
         run: |
@@ -145,14 +97,12 @@ jobs:
           cargo build --release --bin codex_monitor_daemon --bin codex_monitor_daemonctl
 
       - name: Bundle OpenSSL and re-sign
-        if: ${{ env.APPLE_CERTIFICATE_P12 != '' && env.APPLE_CERTIFICATE_PASSWORD != '' && env.CODESIGN_IDENTITY != '' }}
         run: |
           set -euo pipefail
           CODESIGN_IDENTITY="$CODESIGN_IDENTITY" \
             scripts/macos-fix-openssl.sh
 
       - name: Notarize and staple
-        if: ${{ env.NOTARY_PROFILE_NAME != '' && env.APPLE_API_KEY_ID != '' && env.APPLE_API_ISSUER_ID != '' && env.APPLE_API_PRIVATE_KEY_B64 != '' }}
         run: |
           set -euo pipefail
           ditto -c -k --keepParent \
@@ -196,18 +146,15 @@ jobs:
             "src-tauri/target/release/bundle/macos/Codex Monitor.app.tar.gz" \
             -C src-tauri/target/release/bundle/macos "Codex Monitor.app"
 
+          npm run tauri signer sign -- \
+            -f "$HOME/.tauri/codexmonitor.key" \
+            -p "$TAURI_SIGNING_PRIVATE_KEY_PASSWORD" \
+            "src-tauri/target/release/bundle/macos/Codex Monitor.app.tar.gz"
+
           cp "src-tauri/target/release/bundle/macos/Codex Monitor.app.tar.gz" \
             release-artifacts/CodexMonitor.app.tar.gz
-
-          if [ "${{ steps.tauri_signing_key.outputs.available }}" = "true" ]; then
-            npm run tauri signer sign -- \
-              -f "$HOME/.tauri/codexmonitor.key" \
-              -p "$TAURI_SIGNING_PRIVATE_KEY_PASSWORD" \
-              "src-tauri/target/release/bundle/macos/Codex Monitor.app.tar.gz"
-
-            cp "src-tauri/target/release/bundle/macos/Codex Monitor.app.tar.gz.sig" \
-              release-artifacts/CodexMonitor.app.tar.gz.sig
-          fi
+          cp "src-tauri/target/release/bundle/macos/Codex Monitor.app.tar.gz.sig" \
+            release-artifacts/CodexMonitor.app.tar.gz.sig
 
       - name: Upload macOS artifacts
         uses: actions/upload-artifact@v4
@@ -218,7 +165,6 @@ jobs:
             release-artifacts/CodexMonitor_*_aarch64.dmg
             release-artifacts/CodexMonitor.app.tar.gz
             release-artifacts/CodexMonitor.app.tar.gz.sig
-          if-no-files-found: ignore
 
   build_linux:
     name: linux bundles (${{ matrix.arch }})
@@ -260,65 +206,18 @@ jobs:
       - name: install frontend dependencies
         run: npm ci
 
-      - name: Prepare Tauri signing key
-        id: tauri_signing_key
+      - name: Write Tauri signing key
         run: |
           set -euo pipefail
           mkdir -p "$HOME/.tauri"
-          python - <<'PY'
-          import base64
-          import os
-          from pathlib import Path
-
-          value = os.environ.get("TAURI_SIGNING_PRIVATE_KEY_B64", "").strip()
-          output_path = Path(os.environ["GITHUB_OUTPUT"])
-          key_path = Path.home() / ".tauri" / "codexmonitor.key"
-
-          def looks_like_minisign_secret(payload: bytes) -> bool:
-              text = payload.decode("utf-8", errors="ignore")
-              return text.startswith("untrusted comment:") and "secret key" in text.lower()
-
-          key_bytes = b""
-          if value:
-              raw_bytes = value.encode("utf-8")
-              if looks_like_minisign_secret(raw_bytes):
-                  key_bytes = raw_bytes
-              else:
-                  try:
-                      decoded = base64.b64decode(value, validate=True)
-                  except Exception:
-                      decoded = b""
-                  if looks_like_minisign_secret(decoded):
-                      key_bytes = decoded
-
-          with output_path.open("a", encoding="utf-8") as fh:
-              if key_bytes:
-                  key_path.write_bytes(key_bytes)
-                  fh.write("available=true\n")
-              else:
-                  fh.write("available=false\n")
-          PY
+          echo "$TAURI_SIGNING_PRIVATE_KEY_B64" | base64 --decode > "$HOME/.tauri/codexmonitor.key"
 
       - name: build AppImage and RPM
         run: |
           set -euo pipefail
-          if [ "${{ steps.tauri_signing_key.outputs.available }}" = "true" ]; then
-            export TAURI_SIGNING_PRIVATE_KEY
-            TAURI_SIGNING_PRIVATE_KEY="$(cat "$HOME/.tauri/codexmonitor.key")"
-            npm run tauri -- build --bundles appimage,rpm
-          else
-            OVERRIDE_CONFIG="$RUNNER_TEMP/tauri.release.override.json"
-            python - <<'PY'
-            import json
-            import os
-            from pathlib import Path
-
-            Path(os.environ["RUNNER_TEMP"], "tauri.release.override.json").write_text(
-                json.dumps({"bundle": {"createUpdaterArtifacts": False}})
-            )
-            PY
-            npm run tauri -- build --bundles appimage,rpm --config "$OVERRIDE_CONFIG"
-          fi
+          export TAURI_SIGNING_PRIVATE_KEY
+          TAURI_SIGNING_PRIVATE_KEY="$(cat "$HOME/.tauri/codexmonitor.key")"
+          npm run tauri -- build --bundles appimage,rpm
 
       - name: Validate Linux bundle outputs
         run: |
@@ -376,9 +275,8 @@ jobs:
       - name: install frontend dependencies
         run: npm ci
 
-      - name: Prepare Tauri signing key
+      - name: Write Tauri signing key
         shell: bash
-        id: tauri_signing_key
         run: |
           set -euo pipefail
           python - <<'PY'
@@ -386,59 +284,20 @@ jobs:
           import os
           from pathlib import Path
 
-          value = os.environ.get("TAURI_SIGNING_PRIVATE_KEY_B64", "").strip()
+          raw = base64.b64decode(os.environ["TAURI_SIGNING_PRIVATE_KEY_B64"])
           home = Path.home()
           target = home / ".tauri"
           target.mkdir(parents=True, exist_ok=True)
-          key_path = target / "codexmonitor.key"
-
-          def looks_like_minisign_secret(payload: bytes) -> bool:
-              text = payload.decode("utf-8", errors="ignore")
-              return text.startswith("untrusted comment:") and "secret key" in text.lower()
-
-          key_bytes = b""
-          if value:
-              raw_bytes = value.encode("utf-8")
-              if looks_like_minisign_secret(raw_bytes):
-                  key_bytes = raw_bytes
-              else:
-                  try:
-                      decoded = base64.b64decode(value, validate=True)
-                  except Exception:
-                      decoded = b""
-                  if looks_like_minisign_secret(decoded):
-                      key_bytes = decoded
-
-          with Path(os.environ["GITHUB_OUTPUT"]).open("a", encoding="utf-8") as fh:
-              if key_bytes:
-                  key_path.write_bytes(key_bytes)
-                  fh.write("available=true\n")
-              else:
-                  fh.write("available=false\n")
+          (target / "codexmonitor.key").write_bytes(raw)
           PY
 
       - name: build windows bundles
         shell: bash
         run: |
           set -euo pipefail
-          if [ "${{ steps.tauri_signing_key.outputs.available }}" = "true" ]; then
-            export TAURI_SIGNING_PRIVATE_KEY
-            TAURI_SIGNING_PRIVATE_KEY="$(cat "$HOME/.tauri/codexmonitor.key")"
-            npm run tauri:build:win
-          else
-            npm run doctor:win
-            OVERRIDE_CONFIG="$RUNNER_TEMP/tauri.release.override.json"
-            python - <<'PY'
-            import json
-            import os
-            from pathlib import Path
-
-            Path(os.environ["RUNNER_TEMP"], "tauri.release.override.json").write_text(
-                json.dumps({"bundle": {"createUpdaterArtifacts": False}})
-            )
-            PY
-            npm run tauri -- build --config src-tauri/tauri.windows.conf.json --config "$OVERRIDE_CONFIG"
-          fi
+          export TAURI_SIGNING_PRIVATE_KEY
+          TAURI_SIGNING_PRIVATE_KEY="$(cat "$HOME/.tauri/codexmonitor.key")"
+          npm run tauri:build:win
 
       - name: Upload Windows artifacts
         uses: actions/upload-artifact@v4
@@ -515,18 +374,7 @@ jobs:
             rpm -qp --requires "$rpm_file"
           done
 
-      - name: Detect signed updater artifacts
-        id: signed_artifacts
-        run: |
-          set -euo pipefail
-          if find release-artifacts -type f -name '*.sig' -print -quit | grep -q .; then
-            echo "available=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "available=false" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Build latest.json
-        if: ${{ steps.signed_artifacts.outputs.available == 'true' }}
         run: |
           set -euo pipefail
           VERSION=$(python3 - <<'PY'
@@ -673,7 +521,6 @@ jobs:
           PY
 
       - name: Validate latest.json artifact references
-        if: ${{ steps.signed_artifacts.outputs.available == 'true' }}
         run: |
           set -euo pipefail
           python3 - <<'PY'
@@ -703,7 +550,6 @@ jobs:
           PY
 
       - name: Create GitHub release
-        if: ${{ steps.signed_artifacts.outputs.available == 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -753,7 +599,6 @@ jobs:
             release-artifacts/latest.json
 
       - name: Bump version and open PR
-        if: ${{ steps.signed_artifacts.outputs.available == 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -854,9 +699,3 @@ jobs:
             --body "Post-release version bump to ${NEXT_VERSION}." \
             --base main \
             --head "chore/bump-version-${NEXT_VERSION}"
-
-      - name: Skip release publication when signing secrets are unavailable
-        if: ${{ steps.signed_artifacts.outputs.available != 'true' }}
-        run: |
-          echo "Updater signing secrets are not configured for this environment."
-          echo "Built artifacts were validated, but latest.json generation and release publication were skipped."
