@@ -12,11 +12,15 @@ type SettingsEnvironmentsSectionProps = {
   environmentDraftScript: string;
   environmentSavedScript: string | null;
   environmentDirty: boolean;
+  globalWorktreesFolderDraft: string;
+  globalWorktreesFolderSaved: string | null;
+  globalWorktreesFolderDirty: boolean;
   worktreesFolderDraft: string;
   worktreesFolderSaved: string | null;
   worktreesFolderDirty: boolean;
   onSetEnvironmentWorkspaceId: Dispatch<SetStateAction<string | null>>;
   onSetEnvironmentDraftScript: Dispatch<SetStateAction<string>>;
+  onSetGlobalWorktreesFolderDraft: Dispatch<SetStateAction<string>>;
   onSetWorktreesFolderDraft: Dispatch<SetStateAction<string>>;
   onSaveEnvironmentSetup: () => Promise<void>;
 };
@@ -29,23 +33,101 @@ export function SettingsEnvironmentsSection({
   environmentDraftScript,
   environmentSavedScript,
   environmentDirty,
+  globalWorktreesFolderDraft,
+  globalWorktreesFolderSaved: _globalWorktreesFolderSaved,
+  globalWorktreesFolderDirty,
   worktreesFolderDraft,
   worktreesFolderSaved: _worktreesFolderSaved,
   worktreesFolderDirty,
   onSetEnvironmentWorkspaceId,
   onSetEnvironmentDraftScript,
+  onSetGlobalWorktreesFolderDraft,
   onSetWorktreesFolderDraft,
   onSaveEnvironmentSetup,
 }: SettingsEnvironmentsSectionProps) {
   const { t } = useTranslation();
-  const hasAnyChanges = environmentDirty || worktreesFolderDirty;
+  const hasAnyChanges =
+    environmentDirty || globalWorktreesFolderDirty || worktreesFolderDirty;
+  const hasProjects = mainWorkspaces.length > 0;
 
   return (
     <SettingsSection
       title={t("settings.environments.title")}
       subtitle={t("settings.environments.subtitle")}
     >
-      {mainWorkspaces.length === 0 ? (
+      <div className="settings-field">
+        <label className="settings-field-label" htmlFor="settings-global-worktrees-folder">
+          {t("settings.environments.globalWorktreesRoot")}
+        </label>
+        <div className="settings-help">
+          {t("settings.environments.globalWorktreesRootHelp")}
+        </div>
+        <div className="settings-field-row">
+          <input
+            id="settings-global-worktrees-folder"
+            type="text"
+            className="settings-input"
+            value={globalWorktreesFolderDraft}
+            onChange={(event) => onSetGlobalWorktreesFolderDraft(event.target.value)}
+            placeholder={t("settings.environments.globalWorktreesRootPlaceholder")}
+            disabled={environmentSaving}
+          />
+          <button
+            type="button"
+            className="ghost settings-button-compact"
+            onClick={async () => {
+              try {
+                const { open } = await import("@tauri-apps/plugin-dialog");
+                const selected = await open({
+                  directory: true,
+                  multiple: false,
+                  title: t("settings.environments.selectGlobalWorktreesRoot"),
+                });
+                if (selected && typeof selected === "string") {
+                  onSetGlobalWorktreesFolderDraft(selected);
+                }
+              } catch (error) {
+                pushErrorToast({
+                  title: t("settings.environments.openFolderPickerFailed"),
+                  message: error instanceof Error ? error.message : String(error),
+                });
+              }
+            }}
+            disabled={environmentSaving}
+          >
+            {t("settings.environments.browse")}
+          </button>
+        </div>
+        {!hasProjects ? (
+          <div className="settings-field-actions">
+            <button
+              type="button"
+              className="ghost settings-button-compact"
+              onClick={() => onSetGlobalWorktreesFolderDraft(_globalWorktreesFolderSaved ?? "")}
+              disabled={environmentSaving || !globalWorktreesFolderDirty}
+            >
+              {t("settings.environments.reset")}
+            </button>
+            <button
+              type="button"
+              className="primary settings-button-compact"
+              onClick={() => {
+                void onSaveEnvironmentSetup();
+              }}
+              disabled={environmentSaving || !globalWorktreesFolderDirty}
+            >
+              {environmentSaving
+                ? t("settings.environments.saving")
+                : t("settings.environments.save")}
+            </button>
+          </div>
+        ) : null}
+        {!hasProjects && environmentError ? (
+          <div className="settings-agents-error">{environmentError}</div>
+        ) : null}
+      </div>
+
+      {!hasProjects ? (
         <div className="settings-empty">{t("settings.environments.noProjectsYet")}</div>
       ) : (
         <>
