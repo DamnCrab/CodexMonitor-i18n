@@ -172,7 +172,6 @@ export function GitRootCurrentPath({
         <div className="git-root-current">
             <div className="git-root-current-main">
                 <span className="git-root-label">{t("gitPanel.repositoryRoot")}</span>
-                <span className="git-root-label">{t("gitPanel.repositoryRoot")}</span>
                 <span className="git-root-path" title={gitRoot ?? ""}>
                     {gitRoot}
                 </span>

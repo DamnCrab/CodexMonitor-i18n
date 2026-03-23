@@ -984,7 +984,6 @@ export const Sidebar = memo(function Sidebar({
             <div className="pinned-section">
               <div className="sidebar-section-header">
                 <div className="sidebar-section-title">{t("sidebar.pinned")}</div>
-                <div className="sidebar-section-title">{t("sidebar.pinned")}</div>
                 <div className="sidebar-section-count">{pinnedRootCount}</div>
               </div>
               <PinnedThreadList
@@ -1239,7 +1238,6 @@ export const Sidebar = memo(function Sidebar({
                               <span className={`thread-status ${draftStatusClass}`} aria-hidden />
                               <div className="thread-content">
                                 <div className="thread-headline">
-                                  <span className="thread-name">{t("sidebar.newAgent")}</span>
                                   <span className="thread-name">{t("sidebar.newAgent")}</span>
                                 </div>
                               </div>
