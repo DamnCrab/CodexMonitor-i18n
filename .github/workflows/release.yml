@@ -126,15 +126,7 @@ jobs:
             npm run tauri -- build --bundles app
           else
             OVERRIDE_CONFIG="$RUNNER_TEMP/tauri.release.override.json"
-            python - <<'PY'
-            import json
-            import os
-            from pathlib import Path
-
-            Path(os.environ["RUNNER_TEMP"], "tauri.release.override.json").write_text(
-                json.dumps({"bundle": {"createUpdaterArtifacts": False}})
-            )
-            PY
+            python -c 'import json, os; from pathlib import Path; Path(os.environ["RUNNER_TEMP"], "tauri.release.override.json").write_text(json.dumps({"bundle": {"createUpdaterArtifacts": False}}))'
             npm run tauri -- build --bundles app --config "$OVERRIDE_CONFIG"
           fi
 
@@ -308,15 +300,7 @@ jobs:
             npm run tauri -- build --bundles appimage,rpm
           else
             OVERRIDE_CONFIG="$RUNNER_TEMP/tauri.release.override.json"
-            python - <<'PY'
-            import json
-            import os
-            from pathlib import Path
-
-            Path(os.environ["RUNNER_TEMP"], "tauri.release.override.json").write_text(
-                json.dumps({"bundle": {"createUpdaterArtifacts": False}})
-            )
-            PY
+            python -c 'import json, os; from pathlib import Path; Path(os.environ["RUNNER_TEMP"], "tauri.release.override.json").write_text(json.dumps({"bundle": {"createUpdaterArtifacts": False}}))'
             npm run tauri -- build --bundles appimage,rpm --config "$OVERRIDE_CONFIG"
           fi
 
@@ -428,15 +412,7 @@ jobs:
           else
             npm run doctor:win
             OVERRIDE_CONFIG="$RUNNER_TEMP/tauri.release.override.json"
-            python - <<'PY'
-            import json
-            import os
-            from pathlib import Path
-
-            Path(os.environ["RUNNER_TEMP"], "tauri.release.override.json").write_text(
-                json.dumps({"bundle": {"createUpdaterArtifacts": False}})
-            )
-            PY
+            python -c 'import json, os; from pathlib import Path; Path(os.environ["RUNNER_TEMP"], "tauri.release.override.json").write_text(json.dumps({"bundle": {"createUpdaterArtifacts": False}}))'
             npm run tauri -- build --config src-tauri/tauri.windows.conf.json --config "$OVERRIDE_CONFIG"
           fi
 
