@@ -1,13 +1,21 @@
 import { vi } from "vitest";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import en from "@/locales/en/common.json";
-import zh from "@/locales/zh/common.json";
+import { localeMessages } from "@/locales";
 
 void i18n.use(initReactI18next).init({
   resources: {
-    en: { common: en },
-    zh: { common: zh },
+    ar: { common: localeMessages.ar },
+    de: { common: localeMessages.de },
+    en: { common: localeMessages.en },
+    es: { common: localeMessages.es },
+    fr: { common: localeMessages.fr },
+    hi: { common: localeMessages.hi },
+    ja: { common: localeMessages.ja },
+    ko: { common: localeMessages.ko },
+    pt: { common: localeMessages.pt },
+    ru: { common: localeMessages.ru },
+    zh: { common: localeMessages.zh },
   },
   lng: "en",
   fallbackLng: "en",

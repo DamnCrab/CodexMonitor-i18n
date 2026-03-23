@@ -148,6 +148,10 @@ export function SettingsCodexSection({
   onSaveGlobalConfig,
 }: SettingsCodexSectionProps) {
   const { t } = useTranslation();
+  const globalAgentsActionLabel =
+    globalAgentsSaveLabel === "Create" ? t("uiText.fileEditor.create") : t("uiText.fileEditor.save");
+  const globalConfigActionLabel =
+    globalConfigSaveLabel === "Create" ? t("uiText.fileEditor.create") : t("uiText.fileEditor.save");
   const latestModelSlug = defaultModels[0]?.model ?? null;
   const savedModelSlug = useMemo(
     () => coerceSavedModelSlug(appSettings.lastComposerModelId, defaultModels),
@@ -540,7 +544,17 @@ export function SettingsCodexSection({
         disabled={globalAgentsLoading}
         refreshDisabled={globalAgentsRefreshDisabled}
         saveDisabled={globalAgentsSaveDisabled}
-        saveLabel={globalAgentsSaveLabel}
+        refreshLabel={t("uiText.fileEditor.refresh")}
+        saveLabel={globalAgentsActionLabel}
+        refreshAriaLabel={t("uiText.fileEditor.refreshFile", {
+          title: t("settings.codex.globalAgents"),
+        })}
+        saveAriaLabel={t(
+          globalAgentsSaveLabel === "Create"
+            ? "uiText.fileEditor.createFile"
+            : "uiText.fileEditor.saveFile",
+          { title: t("settings.codex.globalAgents") },
+        )}
         onChange={onSetGlobalAgentsContent}
         onRefresh={onRefreshGlobalAgents}
         onSave={onSaveGlobalAgents}
@@ -571,7 +585,17 @@ export function SettingsCodexSection({
         disabled={globalConfigLoading}
         refreshDisabled={globalConfigRefreshDisabled}
         saveDisabled={globalConfigSaveDisabled}
-        saveLabel={globalConfigSaveLabel}
+        refreshLabel={t("uiText.fileEditor.refresh")}
+        saveLabel={globalConfigActionLabel}
+        refreshAriaLabel={t("uiText.fileEditor.refreshFile", {
+          title: t("settings.codex.globalConfig"),
+        })}
+        saveAriaLabel={t(
+          globalConfigSaveLabel === "Create"
+            ? "uiText.fileEditor.createFile"
+            : "uiText.fileEditor.saveFile",
+          { title: t("settings.codex.globalConfig") },
+        )}
         onChange={onSetGlobalConfigContent}
         onRefresh={onRefreshGlobalConfig}
         onSave={onSaveGlobalConfig}

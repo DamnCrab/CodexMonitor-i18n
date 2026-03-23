@@ -10,6 +10,7 @@ import type {
 import { createPortal } from "react-dom";
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import type { MouseEvent, RefObject } from "react";
+import { useTranslation } from "react-i18next";
 import { FolderOpen } from "lucide-react";
 import Copy from "lucide-react/dist/esm/icons/copy";
 import GitBranch from "lucide-react/dist/esm/icons/git-branch";
@@ -177,6 +178,7 @@ export const Sidebar = memo(function Sidebar({
   onWorkspaceDragLeave,
   onWorkspaceDrop,
 }: SidebarProps) {
+  const { t } = useTranslation();
   const [expandedWorkspaces, setExpandedWorkspaces] = useState(
     new Set<string>(),
   );
@@ -814,8 +816,8 @@ export const Sidebar = memo(function Sidebar({
             className="sidebar-search-input"
             value={searchQuery}
             onChange={(event) => setSearchQuery(event.target.value)}
-            placeholder="Search projects"
-            aria-label="Search projects"
+            placeholder={t("sidebar.searchProjects")}
+            aria-label={t("sidebar.searchProjects")}
             data-tauri-drag-region="false"
             autoFocus
           />
@@ -825,7 +827,7 @@ export const Sidebar = memo(function Sidebar({
             type="button"
             className="sidebar-search-clear"
             onClick={() => setSearchQuery("")}
-            aria-label="Clear search"
+            aria-label={t("sidebar.clearSearch")}
             data-tauri-drag-region="false"
           >
             <X size={12} aria-hidden />
@@ -840,10 +842,10 @@ export const Sidebar = memo(function Sidebar({
       >
         <div
           className={`workspace-drop-overlay-text${
-            workspaceDropText === "Adding Project..." ? " is-busy" : ""
+            workspaceDropText === t("sidebar.addingProject") ? " is-busy" : ""
           }`}
         >
-          {workspaceDropText === "Drop Project Here" && (
+          {workspaceDropText === t("sidebar.dropProjectHere") && (
             <FolderOpen className="workspace-drop-overlay-icon" aria-hidden />
           )}
           {workspaceDropText}
@@ -860,7 +862,7 @@ export const Sidebar = memo(function Sidebar({
           {pinnedThreadRows.length > 0 && (
             <div className="pinned-section">
               <div className="workspace-group-header">
-                <div className="workspace-group-label">Pinned</div>
+                <div className="workspace-group-label">{t("sidebar.pinned")}</div>
               </div>
               <PinnedThreadList
                 rows={pinnedThreadRows}
@@ -881,13 +883,13 @@ export const Sidebar = memo(function Sidebar({
             ? groupedWorkspacesForRender.length > 0 && (
                 <div className="workspace-group">
                   <div className="workspace-group-header workspace-group-header-all-threads">
-                    <div className="workspace-group-label">All threads</div>
+                    <div className="workspace-group-label">{t("sidebar.allThreads")}</div>
                     <button
                       className="ghost all-threads-add"
                       onClick={handleAllThreadsAddMenuToggle}
                       data-tauri-drag-region="false"
-                      aria-label="New thread in project"
-                      title="New thread in project"
+                      aria-label={t("sidebar.newThreadInProject")}
+                      title={t("sidebar.newThreadInProject")}
                       aria-expanded={allThreadsAddMenuOpen}
                       disabled={projectOptionsForNewThread.length === 0}
                     >
@@ -1032,7 +1034,7 @@ export const Sidebar = memo(function Sidebar({
                                   }}
                                   icon={<Plus aria-hidden />}
                                 >
-                                  New agent
+                                  {t("sidebar.newAgent")}
                                 </PopoverMenuItem>
                                 <PopoverMenuItem
                                   className="workspace-add-option"
@@ -1043,7 +1045,7 @@ export const Sidebar = memo(function Sidebar({
                                   }}
                                   icon={<GitBranch aria-hidden />}
                                 >
-                                  New worktree agent
+                                  {t("sidebar.newWorktreeAgent")}
                                 </PopoverMenuItem>
                                 <PopoverMenuItem
                                   className="workspace-add-option"
@@ -1054,7 +1056,7 @@ export const Sidebar = memo(function Sidebar({
                                   }}
                                   icon={<Copy aria-hidden />}
                                 >
-                                  New clone agent
+                                  {t("sidebar.newCloneAgent")}
                                 </PopoverMenuItem>
                               </PopoverSurface>,
                               document.body,
@@ -1075,7 +1077,7 @@ export const Sidebar = memo(function Sidebar({
                               }}
                             >
                               <span className={`thread-status ${draftStatusClass}`} aria-hidden />
-                              <span className="thread-name">New Agent</span>
+                              <span className="thread-name">{t("sidebar.newAgent")}</span>
                             </div>
                           )}
                           {visibleClones.length > 0 && (
@@ -1105,7 +1107,7 @@ export const Sidebar = memo(function Sidebar({
                               onShowWorktreeMenu={showCloneMenu}
                               onToggleExpanded={handleToggleExpanded}
                               onLoadOlderThreads={onLoadOlderThreads}
-                              sectionLabel="Clone agents"
+                              sectionLabel={t("sidebar.cloneAgents")}
                               sectionIcon={
                                 <Copy className="worktree-header-icon" aria-hidden />
                               }
@@ -1173,15 +1175,15 @@ export const Sidebar = memo(function Sidebar({
           {!groupedWorkspacesForRender.length && (
             <div className="empty">
               {isSearchActive
-                ? "No projects match your search."
-                : "Add a workspace to start."}
+                ? t("sidebar.noProjectsMatchSearch")
+                : t("sidebar.addWorkspaceToStart")}
             </div>
           )}
           {isThreadsOnlyMode &&
             groupedWorkspacesForRender.length > 0 &&
             flatThreadRows.length === 0 &&
             pinnedThreadRows.length === 0 && (
-              <div className="empty">No threads yet.</div>
+              <div className="empty">{t("sidebar.noThreadsYet")}</div>
             )}
         </div>
       </div>

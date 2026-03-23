@@ -23,6 +23,7 @@ import ScrollText from "lucide-react/dist/esm/icons/scroll-text";
 import Wrench from "lucide-react/dist/esm/icons/wrench";
 import FileText from "lucide-react/dist/esm/icons/file-text";
 import Plug from "lucide-react/dist/esm/icons/plug";
+import { useTranslation } from "react-i18next";
 import { useComposerImageDrop } from "../hooks/useComposerImageDrop";
 import {
   PopoverMenuItem,
@@ -192,6 +193,7 @@ export function ComposerInput({
   onReviewPromptUpdateCustomInstructions,
   onReviewPromptConfirmCustom,
 }: ComposerInputProps) {
+  const { t } = useTranslation();
   const suggestionListRef = useRef<HTMLDivElement | null>(null);
   const suggestionRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const mobileActionsRef = useRef<HTMLDivElement | null>(null);
@@ -346,19 +348,19 @@ export function ComposerInput({
         ? !onCancelDictation
         : !dictationEnabled || !onToggleDictation));
   const micAriaLabel = allowOpenDictationSettings
-    ? "Open dictation settings"
+    ? t("uiText.composerInput.openDictationSettings")
     : isDictationProcessing
-      ? "Cancel transcription"
+      ? t("uiText.composerInput.cancelTranscription")
       : isDictating
-        ? "Stop dictation"
-        : "Start dictation";
+        ? t("uiText.composerInput.stopDictation")
+        : t("uiText.composerInput.startDictation");
   const micTitle = allowOpenDictationSettings
-    ? "Dictation disabled. Open settings"
+    ? t("uiText.composerInput.dictationDisabledOpenSettings")
     : isDictationProcessing
-      ? "Cancel transcription"
+      ? t("uiText.composerInput.cancelTranscription")
       : isDictating
-        ? "Stop dictation"
-        : "Start dictation";
+        ? t("uiText.composerInput.stopDictation")
+        : t("uiText.composerInput.startDictation");
   const handleMicClick = useCallback(() => {
     if (isDictationProcessing) {
       if (disabled || !onCancelDictation) {
@@ -451,8 +453,8 @@ export function ComposerInput({
             className="composer-attach"
             onClick={onAddAttachment}
             disabled={disabled || !onAddAttachment}
-            aria-label="Add image"
-            title="Add image"
+            aria-label={t("uiText.composerInput.addImage")}
+            title={t("uiText.composerInput.addImage")}
           >
             <ImagePlus size={14} aria-hidden />
           </button>
@@ -467,8 +469,8 @@ export function ComposerInput({
               disabled={disabled}
               aria-expanded={mobileActionsOpen}
               aria-haspopup="menu"
-              aria-label="More actions"
-              title="More actions"
+              aria-label={t("uiText.composerInput.moreActions")}
+              title={t("uiText.composerInput.moreActions")}
             >
               <Plus size={14} aria-hidden />
             </button>
@@ -479,7 +481,7 @@ export function ComposerInput({
                   disabled={disabled || !onAddAttachment}
                   icon={<ImagePlus size={14} />}
                 >
-                  Add image
+                  {t("uiText.composerInput.addImage")}
                 </PopoverMenuItem>
                 {onToggleExpand && (
                   <PopoverMenuItem
@@ -493,7 +495,9 @@ export function ComposerInput({
                       )
                     }
                   >
-                    {isExpanded ? "Collapse input" : "Expand input"}
+                    {isExpanded
+                      ? t("uiText.composerInput.collapseInput")
+                      : t("uiText.composerInput.expandInput")}
                   </PopoverMenuItem>
                 )}
                 {(onToggleDictation || onOpenDictationSettings || onCancelDictation) && (
@@ -520,8 +524,8 @@ export function ComposerInput({
             ref={textareaRef}
             placeholder={
               disabled
-                ? "Review in progress. Chat will re-enable when it completes."
-                : "Ask Codex to do something..."
+                ? t("uiText.composerInput.reviewInProgressPlaceholder")
+                : t("uiText.composerInput.askCodexPlaceholder")
             }
             value={text}
             onChange={handleTextareaChange}
@@ -550,7 +554,7 @@ export function ComposerInput({
               className="ghost composer-dictation-error-dismiss"
               onClick={onDismissDictationError}
             >
-              Dismiss
+              {t("uiText.composerInput.dismiss")}
             </button>
           </div>
         )}
@@ -563,7 +567,7 @@ export function ComposerInput({
                 className="ghost composer-dictation-error-dismiss"
                 onClick={onDismissDictationHint}
               >
-                Dismiss
+                {t("uiText.composerInput.dismiss")}
               </button>
             )}
           </div>
@@ -698,8 +702,16 @@ export function ComposerInput({
           }`}
           onClick={onToggleExpand}
           disabled={disabled}
-          aria-label={isExpanded ? "Collapse input" : "Expand input"}
-          title={isExpanded ? "Collapse input" : "Expand input"}
+          aria-label={
+            isExpanded
+              ? t("uiText.composerInput.collapseInput")
+              : t("uiText.composerInput.expandInput")
+          }
+          title={
+            isExpanded
+              ? t("uiText.composerInput.collapseInput")
+              : t("uiText.composerInput.expandInput")
+          }
         >
           {isExpanded ? <ChevronDown aria-hidden /> : <ChevronUp aria-hidden />}
         </button>
@@ -729,8 +741,8 @@ export function ComposerInput({
         }`}
         onClick={handleActionClick}
         disabled={(disabled && !canStop) || isDictationBusy || (!canStop && !canSend)}
-        aria-label={canStop ? "Stop" : sendLabel}
-        title={canStop ? "Stop" : sendLabel}
+        aria-label={canStop ? t("uiText.composerInput.stop") : sendLabel}
+        title={canStop ? t("uiText.composerInput.stop") : sendLabel}
       >
         {canStop ? (
           <>

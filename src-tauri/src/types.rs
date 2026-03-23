@@ -20,6 +20,8 @@ pub(crate) struct GitFileDiff {
     pub(crate) is_binary: bool,
     #[serde(default, rename = "isImage")]
     pub(crate) is_image: bool,
+    #[serde(default, rename = "isDiffTooLarge")]
+    pub(crate) is_diff_too_large: bool,
     #[serde(rename = "oldImageData")]
     pub(crate) old_image_data: Option<String>,
     #[serde(rename = "newImageData")]
@@ -43,6 +45,8 @@ pub(crate) struct GitCommitDiff {
     pub(crate) is_binary: bool,
     #[serde(default, rename = "isImage")]
     pub(crate) is_image: bool,
+    #[serde(default, rename = "isDiffTooLarge")]
+    pub(crate) is_diff_too_large: bool,
     #[serde(rename = "oldImageData")]
     pub(crate) old_image_data: Option<String>,
     #[serde(rename = "newImageData")]

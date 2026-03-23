@@ -438,6 +438,7 @@ export type GitFileDiff = {
   newLines?: string[];
   isBinary?: boolean;
   isImage?: boolean;
+  isDiffTooLarge?: boolean;
   oldImageData?: string | null;
   newImageData?: string | null;
   oldImageMime?: string | null;
@@ -452,6 +453,7 @@ export type GitCommitDiff = {
   newLines?: string[];
   isBinary?: boolean;
   isImage?: boolean;
+  isDiffTooLarge?: boolean;
   oldImageData?: string | null;
   newImageData?: string | null;
   oldImageMime?: string | null;
