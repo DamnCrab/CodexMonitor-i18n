@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import { BrainCog, SlidersHorizontal, Zap } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import type { AccessMode, ServiceTier, ThreadTokenUsage } from "../../../types";
 import type { CodexArgsOption } from "../../threads/utils/codexArgsProfiles";
 
@@ -44,6 +45,7 @@ export function ComposerMetaBar({
   onSelectCodexArgsOverride,
   contextUsage = null,
 }: ComposerMetaBarProps) {
+  const { t } = useTranslation();
   const selectedModel =
     models.find((model) => model.id === selectedModelId) ?? null;
   const selectedModelLabel =
@@ -277,13 +279,17 @@ export function ComposerMetaBar({
           className="composer-context-ring"
           data-tooltip={
             contextFreePercent === null
-              ? "Context free --"
-              : `Context free ${Math.round(contextFreePercent)}%`
+              ? t("uiText.composerBar.contextFreeEmpty")
+              : t("uiText.composerBar.contextFreePercent", {
+                  value: Math.round(contextFreePercent),
+                })
           }
           aria-label={
             contextFreePercent === null
-              ? "Context free --"
-              : `Context free ${Math.round(contextFreePercent)}%`
+              ? t("uiText.composerBar.contextFreeEmpty")
+              : t("uiText.composerBar.contextFreePercent", {
+                  value: Math.round(contextFreePercent),
+                })
           }
           style={
             {

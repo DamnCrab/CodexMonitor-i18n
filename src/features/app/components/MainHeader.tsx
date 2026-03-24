@@ -3,6 +3,7 @@ import Check from "lucide-react/dist/esm/icons/check";
 import Copy from "lucide-react/dist/esm/icons/copy";
 import Terminal from "lucide-react/dist/esm/icons/terminal";
 import { revealItemInDir } from "@tauri-apps/plugin-opener";
+import { useTranslation } from "react-i18next";
 import type { BranchInfo, OpenAppTarget, WorkspaceInfo } from "../../../types";
 import type { ReactNode } from "react";
 import { revealInFileManagerLabel } from "../../../utils/platformPaths";
@@ -107,6 +108,7 @@ export function MainHeader({
   launchScriptsState,
   worktreeRename,
 }: MainHeaderProps) {
+  const { t } = useTranslation();
   const [branchQuery, setBranchQuery] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [copyFeedback, setCopyFeedback] = useState(false);
@@ -398,14 +400,14 @@ export function MainHeader({
                             }
                           }
                         }}
-                        placeholder="Search or create branch"
+                        placeholder={t("uiText.appHeader.searchOrCreateBranch")}
                         className="branch-input"
                         autoCorrect="off"
                         autoCapitalize="none"
                         spellCheck={false}
                         autoFocus
                         data-tauri-drag-region="false"
-                        aria-label="Search branches"
+                        aria-label={t("uiText.appHeader.searchBranches")}
                       />
                       <button
                         type="button"
@@ -432,7 +434,7 @@ export function MainHeader({
                         }}
                         data-tauri-drag-region="false"
                       >
-                        Create
+                        {t("prompts.create")}
                       </button>
                     </div>
                     {branchValidationMessage && (
@@ -440,7 +442,7 @@ export function MainHeader({
                     )}
                     {canCreate && !branchValidationMessage && (
                       <div className="branch-create-hint">
-                        Create branch “{trimmedQuery}”
+                        {t("uiText.appHeader.createBranch", { name: trimmedQuery })}
                       </div>
                     )}
                   </div>
@@ -545,9 +547,9 @@ export function MainHeader({
             className={`ghost main-header-action ds-tooltip-trigger${isTerminalOpen ? " is-active" : ""}`}
             onClick={onToggleTerminal}
             data-tauri-drag-region="false"
-            aria-label="Toggle terminal panel"
-            title="Terminal"
-            data-tooltip="Terminal"
+            aria-label={t("settings.shortcuts.toggleTerminalPanel")}
+            title={t("uiText.appHeader.terminal")}
+            data-tooltip={t("uiText.appHeader.terminal")}
             data-tooltip-placement="bottom"
           >
             <Terminal size={14} aria-hidden />
