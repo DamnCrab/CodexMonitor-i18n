@@ -17,7 +17,15 @@ jobs:
       APPLE_TEAM_ID: ${{ vars.APPLE_TEAM_ID }}
       TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
       TAURI_SIGNING_PRIVATE_KEY_B64: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_B64 }}
-      HAS_MACOS_SIGNING: ${{ vars.CODESIGN_IDENTITY != '' && vars.NOTARY_PROFILE_NAME != '' && vars.APPLE_TEAM_ID != '' && secrets.APPLE_CERTIFICATE_P12 != '' && secrets.APPLE_CERTIFICATE_PASSWORD != '' && secrets.APPLE_API_KEY_ID != '' && secrets.APPLE_API_ISSUER_ID != '' && secrets.APPLE_API_PRIVATE_KEY_B64 != '' }}
+      HAS_MACOS_SIGNING: >-
+        ${{ vars.CODESIGN_IDENTITY != '' &&
+            vars.NOTARY_PROFILE_NAME != '' &&
+            vars.APPLE_TEAM_ID != '' &&
+            secrets.APPLE_CERTIFICATE_P12 != '' &&
+            secrets.APPLE_CERTIFICATE_PASSWORD != '' &&
+            secrets.APPLE_API_KEY_ID != '' &&
+            secrets.APPLE_API_ISSUER_ID != '' &&
+            secrets.APPLE_API_PRIVATE_KEY_B64 != '' }}
       HAS_TAURI_UPDATER_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_B64 != '' && secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD != '' }}
     steps:
       - name: Checkout
@@ -483,22 +491,27 @@ jobs:
           Path("release-artifacts/release-notes.md").write_text(notes + "\n")
           PY
 
-          python3 - <<PY
+          export VERSION SIGNATURE
+          python3 - <<'PY'
           import json
+          import os
           from datetime import datetime, timezone
           from pathlib import Path
           from urllib.parse import quote
 
           notes = Path("release-artifacts/release-notes.md").read_text().strip()
           artifacts_dir = Path("release-artifacts")
+          repository = os.environ["GITHUB_REPOSITORY"]
+          version = os.environ["VERSION"]
+          signature = os.environ["SIGNATURE"]
 
           def release_url(filename):
-            return f"https://github.com/${GITHUB_REPOSITORY}/releases/download/v${VERSION}/{quote(filename)}"
+            return f"https://github.com/{repository}/releases/download/v{version}/{quote(filename)}"
 
           platforms = {
             "darwin-aarch64": {
               "url": release_url("CodexMonitor.app.tar.gz"),
-              "signature": "${SIGNATURE}",
+              "signature": signature,
             }
           }
 
@@ -560,7 +573,7 @@ jobs:
           }
 
           payload = {
-            "version": "${VERSION}",
+            "version": version,
             "notes": notes,
             "pub_date": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
             "platforms": platforms,
