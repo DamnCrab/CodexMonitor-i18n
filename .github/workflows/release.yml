@@ -17,6 +17,8 @@ jobs:
       APPLE_TEAM_ID: ${{ vars.APPLE_TEAM_ID }}
       TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
       TAURI_SIGNING_PRIVATE_KEY_B64: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_B64 }}
+      HAS_MACOS_SIGNING: ${{ vars.CODESIGN_IDENTITY != '' && vars.NOTARY_PROFILE_NAME != '' && vars.APPLE_TEAM_ID != '' && secrets.APPLE_CERTIFICATE_P12 != '' && secrets.APPLE_CERTIFICATE_PASSWORD != '' && secrets.APPLE_API_KEY_ID != '' && secrets.APPLE_API_ISSUER_ID != '' && secrets.APPLE_API_PRIVATE_KEY_B64 != '' }}
+      HAS_TAURI_UPDATER_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_B64 != '' && secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD != '' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -45,6 +47,7 @@ jobs:
         run: npm ci
 
       - name: Import signing certificate
+        if: env.HAS_MACOS_SIGNING == 'true'
         env:
           APPLE_CERTIFICATE_P12: ${{ secrets.APPLE_CERTIFICATE_P12 }}
           APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
@@ -64,6 +67,7 @@ jobs:
           security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "" "$KEYCHAIN"
 
       - name: Configure notarytool credentials
+        if: env.HAS_MACOS_SIGNING == 'true'
         env:
           APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
           APPLE_API_ISSUER_ID: ${{ secrets.APPLE_API_ISSUER_ID }}
@@ -78,6 +82,7 @@ jobs:
             --key "private_keys/AuthKey.p8"
 
       - name: Write Tauri signing key
+        if: env.HAS_TAURI_UPDATER_KEY == 'true'
         run: |
           set -euo pipefail
           mkdir -p "$HOME/.tauri"
@@ -86,9 +91,20 @@ jobs:
       - name: Build app bundle
         run: |
           set -euo pipefail
-          export TAURI_SIGNING_PRIVATE_KEY
-          TAURI_SIGNING_PRIVATE_KEY="$(cat "$HOME/.tauri/codexmonitor.key")"
-          npm run tauri -- build --bundles app
+          if [ "$HAS_TAURI_UPDATER_KEY" = "true" ]; then
+            export TAURI_SIGNING_PRIVATE_KEY
+            TAURI_SIGNING_PRIVATE_KEY="$(cat "$HOME/.tauri/codexmonitor.key")"
+            npm run tauri -- build --bundles app
+          else
+            cat <<'JSON' > /tmp/tauri.release.no-updater.json
+            {
+              "bundle": {
+                "createUpdaterArtifacts": false
+              }
+            }
+            JSON
+            npm run tauri -- build --bundles app --config /tmp/tauri.release.no-updater.json
+          fi
 
       - name: Build daemon binaries
         run: |
@@ -97,12 +113,14 @@ jobs:
           cargo build --release --bin codex_monitor_daemon --bin codex_monitor_daemonctl
 
       - name: Bundle OpenSSL and re-sign
+        if: env.HAS_MACOS_SIGNING == 'true'
         run: |
           set -euo pipefail
           CODESIGN_IDENTITY="$CODESIGN_IDENTITY" \
             scripts/macos-fix-openssl.sh
 
       - name: Notarize and staple
+        if: env.HAS_MACOS_SIGNING == 'true'
         run: |
           set -euo pipefail
           ditto -c -k --keepParent \
@@ -146,15 +164,17 @@ jobs:
             "src-tauri/target/release/bundle/macos/Codex Monitor.app.tar.gz" \
             -C src-tauri/target/release/bundle/macos "Codex Monitor.app"
 
-          npm run tauri signer sign -- \
-            -f "$HOME/.tauri/codexmonitor.key" \
-            -p "$TAURI_SIGNING_PRIVATE_KEY_PASSWORD" \
-            "src-tauri/target/release/bundle/macos/Codex Monitor.app.tar.gz"
-
           cp "src-tauri/target/release/bundle/macos/Codex Monitor.app.tar.gz" \
             release-artifacts/CodexMonitor.app.tar.gz
-          cp "src-tauri/target/release/bundle/macos/Codex Monitor.app.tar.gz.sig" \
-            release-artifacts/CodexMonitor.app.tar.gz.sig
+          if [ "$HAS_TAURI_UPDATER_KEY" = "true" ]; then
+            npm run tauri signer sign -- \
+              -f "$HOME/.tauri/codexmonitor.key" \
+              -p "$TAURI_SIGNING_PRIVATE_KEY_PASSWORD" \
+              "src-tauri/target/release/bundle/macos/Codex Monitor.app.tar.gz"
+
+            cp "src-tauri/target/release/bundle/macos/Codex Monitor.app.tar.gz.sig" \
+              release-artifacts/CodexMonitor.app.tar.gz.sig
+          fi
 
       - name: Upload macOS artifacts
         uses: actions/upload-artifact@v4
@@ -173,6 +193,7 @@ jobs:
     env:
       TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
       TAURI_SIGNING_PRIVATE_KEY_B64: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_B64 }}
+      HAS_TAURI_UPDATER_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_B64 != '' && secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD != '' }}
     strategy:
       fail-fast: false
       matrix:
@@ -207,6 +228,7 @@ jobs:
         run: npm ci
 
       - name: Write Tauri signing key
+        if: env.HAS_TAURI_UPDATER_KEY == 'true'
         run: |
           set -euo pipefail
           mkdir -p "$HOME/.tauri"
@@ -215,9 +237,20 @@ jobs:
       - name: build AppImage and RPM
         run: |
           set -euo pipefail
-          export TAURI_SIGNING_PRIVATE_KEY
-          TAURI_SIGNING_PRIVATE_KEY="$(cat "$HOME/.tauri/codexmonitor.key")"
-          npm run tauri -- build --bundles appimage,rpm
+          if [ "$HAS_TAURI_UPDATER_KEY" = "true" ]; then
+            export TAURI_SIGNING_PRIVATE_KEY
+            TAURI_SIGNING_PRIVATE_KEY="$(cat "$HOME/.tauri/codexmonitor.key")"
+            npm run tauri -- build --bundles appimage,rpm
+          else
+            cat <<'JSON' > /tmp/tauri.release.no-updater.json
+            {
+              "bundle": {
+                "createUpdaterArtifacts": false
+              }
+            }
+            JSON
+            npm run tauri -- build --bundles appimage,rpm --config /tmp/tauri.release.no-updater.json
+          fi
 
       - name: Validate Linux bundle outputs
         run: |
@@ -247,6 +280,7 @@ jobs:
     env:
       TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
       TAURI_SIGNING_PRIVATE_KEY_B64: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_B64 }}
+      HAS_TAURI_UPDATER_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_B64 != '' && secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD != '' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -276,6 +310,7 @@ jobs:
         run: npm ci
 
       - name: Write Tauri signing key
+        if: env.HAS_TAURI_UPDATER_KEY == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -295,9 +330,20 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          export TAURI_SIGNING_PRIVATE_KEY
-          TAURI_SIGNING_PRIVATE_KEY="$(cat "$HOME/.tauri/codexmonitor.key")"
-          npm run tauri:build:win
+          if [ "$HAS_TAURI_UPDATER_KEY" = "true" ]; then
+            export TAURI_SIGNING_PRIVATE_KEY
+            TAURI_SIGNING_PRIVATE_KEY="$(cat "$HOME/.tauri/codexmonitor.key")"
+            npm run tauri:build:win
+          else
+            cat <<'JSON' > /tmp/tauri.release.no-updater.json
+            {
+              "bundle": {
+                "createUpdaterArtifacts": false
+              }
+            }
+            JSON
+            npm run tauri:build:win -- --bundles msi,nsis --config /tmp/tauri.release.no-updater.json
+          fi
 
       - name: Upload Windows artifacts
         uses: actions/upload-artifact@v4
@@ -310,6 +356,8 @@ jobs:
   release:
     runs-on: ubuntu-latest
     environment: release
+    env:
+      HAS_TAURI_UPDATER_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_B64 != '' && secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD != '' }}
     needs:
       - build_macos
       - build_linux
@@ -375,6 +423,7 @@ jobs:
           done
 
       - name: Build latest.json
+        if: env.HAS_TAURI_UPDATER_KEY == 'true'
         run: |
           set -euo pipefail
           VERSION=$(python3 - <<'PY'
@@ -444,7 +493,7 @@ jobs:
           artifacts_dir = Path("release-artifacts")
 
           def release_url(filename):
-            return f"https://github.com/Dimillian/CodexMonitor/releases/download/v${VERSION}/{quote(filename)}"
+            return f"https://github.com/${GITHUB_REPOSITORY}/releases/download/v${VERSION}/{quote(filename)}"
 
           platforms = {
             "darwin-aarch64": {
@@ -521,6 +570,7 @@ jobs:
           PY
 
       - name: Validate latest.json artifact references
+        if: env.HAS_TAURI_UPDATER_KEY == 'true'
         run: |
           set -euo pipefail
           python3 - <<'PY'
@@ -584,19 +634,27 @@ jobs:
             exit 1
           fi
 
+          release_files=(
+            release-artifacts/CodexMonitor.zip
+            release-artifacts/CodexMonitor_*_aarch64.dmg
+            release-artifacts/CodexMonitor.app.tar.gz
+            "${appimages[@]}"
+            "${rpms[@]}"
+            "${windows_exes[@]}"
+            "${windows_msis[@]}"
+          )
+          if [ -f release-artifacts/CodexMonitor.app.tar.gz.sig ]; then
+            release_files+=(release-artifacts/CodexMonitor.app.tar.gz.sig)
+          fi
+          if [ -f release-artifacts/latest.json ]; then
+            release_files+=(release-artifacts/latest.json)
+          fi
+
           gh release create "v${VERSION}" \
             --title "v${VERSION}" \
             --notes-file release-artifacts/release-notes.md \
             --target "$GITHUB_SHA" \
-            release-artifacts/CodexMonitor.zip \
-            release-artifacts/CodexMonitor_*_aarch64.dmg \
-            release-artifacts/CodexMonitor.app.tar.gz \
-            release-artifacts/CodexMonitor.app.tar.gz.sig \
-            "${appimages[@]}" \
-            "${rpms[@]}" \
-            "${windows_exes[@]}" \
-            "${windows_msis[@]}" \
-            release-artifacts/latest.json
+            "${release_files[@]}"
 
       - name: Bump version and open PR
         env:
