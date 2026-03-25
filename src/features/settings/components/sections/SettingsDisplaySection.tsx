@@ -1,7 +1,7 @@
 import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
 import { useTranslation } from "react-i18next";
 import type { AppSettings } from "@/types";
-import { SUPPORTED_LANGUAGES } from "@/i18n";
+import { resetToDetectedLanguage, SUPPORTED_LANGUAGES } from "@/i18n";
 import {
   CODE_FONT_SIZE_MAX,
   CODE_FONT_SIZE_MIN,
@@ -183,7 +183,7 @@ export function SettingsDisplaySection({
             if (nextLang) {
               void i18n.changeLanguage(nextLang);
             } else {
-              void i18n.changeLanguage(undefined);
+              void resetToDetectedLanguage();
             }
             void onUpdateAppSettings({
               ...appSettings,

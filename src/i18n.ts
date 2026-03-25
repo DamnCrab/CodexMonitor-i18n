@@ -19,6 +19,15 @@ export const SUPPORTED_LANGUAGES = [
 ] as const;
 
 export type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number];
+const LANGUAGE_CACHE_KEY = "i18nextLng";
+
+export async function resetToDetectedLanguage(): Promise<void> {
+  try {
+    await i18n.changeLanguage(undefined);
+  } finally {
+    globalThis.localStorage?.removeItem(LANGUAGE_CACHE_KEY);
+  }
+}
 
 void i18n
   .use(LanguageDetector)
@@ -45,7 +54,7 @@ void i18n
     },
     detection: {
       order: ["localStorage", "navigator"],
-      lookupLocalStorage: "i18nextLng",
+      lookupLocalStorage: LANGUAGE_CACHE_KEY,
       caches: ["localStorage"],
     },
   });
@@ -57,6 +66,7 @@ void i18n
  */
 export function applyLanguageFromSettings(lang: string | null): void {
   if (!lang) {
+    void resetToDetectedLanguage();
     return;
   }
   const supported = SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage);
