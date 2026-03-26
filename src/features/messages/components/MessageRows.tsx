@@ -89,7 +89,6 @@ type ToolRowProps = MarkdownFileLinkProps & {
   item: Extract<ConversationItem, { kind: "tool" }>;
   isExpanded: boolean;
   onToggle: (id: string) => void;
-  onRequestAutoScroll?: () => void;
 };
 
 type ExploreRowProps = {
@@ -556,6 +555,12 @@ export const ReasoningRow = memo(function ReasoningRow({
 }: ReasoningRowProps) {
   const { summaryTitle, bodyText, hasBody } = parsed;
   const reasoningTone: StatusTone = hasBody ? "completed" : "processing";
+  const collapsedPreview = useMemo(() => {
+    if (!bodyText) {
+      return "";
+    }
+    return bodyText.replace(/\s+/g, " ").trim();
+  }, [bodyText]);
   return (
     <div className="tool-inline reasoning-inline">
       <button
@@ -579,18 +584,21 @@ export const ReasoningRow = memo(function ReasoningRow({
           />
           <span className="tool-inline-value">{summaryTitle}</span>
         </button>
-        {hasBody && (
+        {hasBody && isExpanded && (
           <Markdown
             value={bodyText}
-            className={`reasoning-inline-detail markdown ${
-              isExpanded ? "" : "tool-inline-clamp"
-            }`}
+            className="reasoning-inline-detail markdown"
             showFilePath={showMessageFilePath}
             workspacePath={workspacePath}
             onOpenFileLink={onOpenFileLink}
             onOpenFileLinkMenu={onOpenFileLinkMenu}
             onOpenThreadLink={onOpenThreadLink}
           />
+        )}
+        {hasBody && !isExpanded && (
+          <div className="reasoning-inline-preview tool-inline-clamp">
+            {collapsedPreview}
+          </div>
         )}
       </div>
     </div>
@@ -745,7 +753,6 @@ export const ToolRow = memo(function ToolRow({
   onOpenFileLink,
   onOpenFileLinkMenu,
   onOpenThreadLink,
-  onRequestAutoScroll,
 }: ToolRowProps) {
   const { t } = useTranslation();
   const isFileChange = item.toolType === "fileChange";
@@ -777,37 +784,12 @@ export const ToolRow = memo(function ToolRow({
   const shouldFadeCommand =
     isCommand && !isExpanded && (summaryValue?.length ?? 0) > 80;
   const showToolOutput = isExpanded && (!isFileChange || !hasChanges);
-  const normalizedStatus = (item.status ?? "").toLowerCase();
-  const isCommandRunning = isCommand && /in[_\s-]*progress|running|started/.test(normalizedStatus);
-  const commandDurationMs =
-    typeof item.durationMs === "number" ? item.durationMs : null;
-  const isLongRunning = commandDurationMs !== null && commandDurationMs >= 1200;
-  const [showLiveOutput, setShowLiveOutput] = useState(false);
   const [isExportingPlan, setIsExportingPlan] = useState(false);
-
-  useEffect(() => {
-    if (!isCommandRunning) {
-      setShowLiveOutput(false);
-      return;
-    }
-    const timeoutId = window.setTimeout(() => {
-      setShowLiveOutput(true);
-    }, 600);
-    return () => {
-      window.clearTimeout(timeoutId);
-    };
-  }, [isCommandRunning]);
 
   const showCommandOutput =
     isCommand &&
     summary.output &&
-    (isExpanded || (isCommandRunning && showLiveOutput) || isLongRunning);
-
-  useEffect(() => {
-    if (showCommandOutput && isCommandRunning && showLiveOutput) {
-      onRequestAutoScroll?.();
-    }
-  }, [isCommandRunning, onRequestAutoScroll, showCommandOutput, showLiveOutput]);
+    isExpanded;
 
   const handlePlanExport = useCallback(
     async (event: MouseEvent<HTMLButtonElement>) => {

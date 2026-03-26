@@ -28,6 +28,30 @@
 
 * {
   box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: var(--cm-scrollbar-thumb) var(--cm-scrollbar-track);
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--cm-scrollbar-track);
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--cm-scrollbar-thumb);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--cm-scrollbar-thumb-hover);
+  background-clip: padding-box;
 }
 
 html,
@@ -80,6 +104,9 @@ body {
   --cm-border-contrast: color-mix(in srgb, var(--border-subtle) 100%, transparent);
   --cm-border-accent: color-mix(in srgb, var(--border-accent) 36%, transparent);
   --cm-border-accent-strong: color-mix(in srgb, var(--border-accent) 46%, transparent);
+  --cm-scrollbar-thumb: color-mix(in srgb, var(--text-muted) 44%, transparent);
+  --cm-scrollbar-thumb-hover: color-mix(in srgb, var(--text-strong) 32%, transparent);
+  --cm-scrollbar-track: color-mix(in srgb, var(--surface-card) 22%, transparent);
   transition: grid-template-columns 220ms ease;
   font-family: var(--ui-font-family);
 }

@@ -27,6 +27,11 @@
   gap: 14px;
 }
 
+.messages-inner > * {
+  content-visibility: auto;
+  contain-intrinsic-size: 120px;
+}
+
 .messages-empty {
   padding: 20px 22px;
   border-radius: 18px;
@@ -877,7 +882,6 @@
   overflow-y: auto;
   overflow-x: hidden;
   gap: 2px;
-  scrollbar-width: thin;
   -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 18px);
   mask-image: linear-gradient(180deg, transparent 0%, #000 18px);
 }
@@ -1009,6 +1013,13 @@
   font-size: 12px;
   line-height: 1.55;
   color: var(--text-muted);
+}
+
+.reasoning-inline-preview {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-muted);
+  white-space: pre-wrap;
 }
 
 @media (max-width: 720px) {
