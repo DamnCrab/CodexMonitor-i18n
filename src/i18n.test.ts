@@ -7,6 +7,36 @@ const localeEntries = Object.entries(localeMessages) as Array<
   [keyof typeof localeMessages, (typeof localeMessages)[keyof typeof localeMessages]]
 >;
 const interpolationPattern = /\{\{\s*[^}]+\s*\}\}/g;
+const highVisibilityPrefixes = [
+  "layout.",
+  "home.",
+  "planReady.",
+  "sidebar.",
+  "tabBar.",
+  "workspaceHome.",
+];
+const acceptableSharedHighVisibilityKeys = new Set([
+  "layout.gitTab",
+  "home.title",
+  "home.tokens",
+  "home.topModelTitle",
+  "home.units.tokens",
+  "home.usageCards.totalCaption",
+  "home.usageCards.peakDayTokensCaption",
+  "home.usageCards.totalDurationCaption",
+  "home.chartTooltip.tokens",
+  "home.account.plan",
+  "sidebar.conversationCount",
+  "sidebar.oneConversation",
+  "sidebar.session",
+  "sidebar.worktrees",
+  "tabBar.codex",
+  "tabBar.git",
+  "workspaceHome.instancePlural",
+  "workspaceHome.instanceSingular",
+  "workspaceHome.localMode",
+  "workspaceHome.worktreeMode",
+]);
 
 function collectKeys(obj: Record<string, unknown>, prefix = ""): string[] {
   const keys: string[] = [];
@@ -77,6 +107,26 @@ describe("i18n translation files", () => {
       expect(i18n.getResource(code, "common", "language.systemDefault")).toBe(
         localeMessages[code].language.systemDefault,
       );
+    },
+  );
+
+  it.each(localeEntries.filter(([code]) => code !== "en"))(
+    "translates high-visibility navigation/home copy in %s",
+    (code, locale) => {
+      for (const key of enKeys) {
+        if (!highVisibilityPrefixes.some((prefix) => key.startsWith(prefix))) {
+          continue;
+        }
+        if (acceptableSharedHighVisibilityKeys.has(key)) {
+          continue;
+        }
+        const baseValue = String(getNestedValue(en, key) ?? "");
+        const localeValue = String(getNestedValue(locale, key) ?? "");
+        expect(
+          localeValue,
+          `${code} key "${key}" should not still match English in high-visibility UI copy`,
+        ).not.toBe(baseValue);
+      }
     },
   );
 });
