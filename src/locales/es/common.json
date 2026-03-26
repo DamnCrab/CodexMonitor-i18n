@@ -1015,51 +1015,51 @@
     }
   },
   "messages": {
-    "working": "Working…",
-    "newMessageFetchIn": "New message will be fetched in {{count}} seconds",
-    "doneIn": "Done in {{duration}}",
+    "working": "Trabajando…",
+    "newMessageFetchIn": "Se obtendrá un mensaje nuevo en {{count}} segundos",
+    "doneIn": "Listo en {{duration}}",
     "review": {
-      "started": "Review started",
-      "completed": "Review completed",
-      "badge": "Review"
+      "started": "Revisión iniciada",
+      "completed": "Revisión completada",
+      "badge": "Revisión"
     },
     "diffStatus": {
-      "added": "Added",
-      "removed": "Removed",
-      "modified": "Modified",
-      "renamed": "Renamed"
+      "added": "Añadido",
+      "removed": "Eliminado",
+      "modified": "Modificado",
+      "renamed": "Renombrado"
     },
     "userInput": {
-      "toggleDetails": "Toggle answered input details",
-      "answeredLabel": "answered",
-      "moreCount": "+{{count}} more"
+      "toggleDetails": "Alternar detalles de la entrada respondida",
+      "answeredLabel": "respondido",
+      "moreCount": "+{{count}} más"
     },
     "tool": {
-      "toggleDetails": "Toggle tool details",
-      "fileEdited": "file edited",
-      "filesEdited": "files edited",
-      "changes": "changes",
-      "cwdPrefix": "cwd",
-      "exporting": "Exporting...",
-      "exportMd": "Export .md",
-      "planExportFailed": "Plan export failed",
-      "unableToExportPlan": "Unable to export plan."
+      "toggleDetails": "Alternar detalles de la herramienta",
+      "fileEdited": "archivo editado",
+      "filesEdited": "archivos editados",
+      "changes": "cambios",
+      "cwdPrefix": "directorio de trabajo",
+      "exporting": "Exportando...",
+      "exportMd": "Exportar .md",
+      "planExportFailed": "Error al exportar el plan",
+      "unableToExportPlan": "No se pudo exportar el plan."
     },
     "explore": {
-      "exploring": "Exploring",
-      "explored": "Explored"
+      "exploring": "Explorando",
+      "explored": "Explorado"
     }
   },
   "requestUserInput": {
-    "groupLabel": "User input requested",
-    "title": "Input requested",
-    "queuePosition": "Request {{current}} of {{total}}",
-    "typeAnswerOptional": "Type your answer (optional)",
-    "addNotesOptional": "Add notes (optional)",
-    "noQuestionsProvided": "No questions provided.",
-    "noAnswerProvided": "No answer provided",
-    "question": "Question {{count}}",
-    "submit": "Submit"
+    "groupLabel": "Se solicitó entrada del usuario",
+    "title": "Entrada solicitada",
+    "queuePosition": "Solicitud {{current}} de {{total}}",
+    "typeAnswerOptional": "Escribe tu respuesta (opcional)",
+    "addNotesOptional": "Agregar notas (opcional)",
+    "noQuestionsProvided": "No se proporcionaron preguntas.",
+    "noAnswerProvided": "No se proporcionó respuesta",
+    "question": "Pregunta {{count}}",
+    "submit": "Enviar"
   },
   "threadTranscript": {
     "inputAnswered": "Entrada respondida:"

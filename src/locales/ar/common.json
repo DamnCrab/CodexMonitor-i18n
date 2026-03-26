@@ -1015,51 +1015,51 @@
     }
   },
   "messages": {
-    "working": "Working…",
-    "newMessageFetchIn": "New message will be fetched in {{count}} seconds",
-    "doneIn": "Done in {{duration}}",
+    "working": "جارٍ العمل…",
+    "newMessageFetchIn": "سيتم جلب رسالة جديدة خلال {{count}} ثانية",
+    "doneIn": "تم الإنجاز خلال {{duration}}",
     "review": {
-      "started": "Review started",
-      "completed": "Review completed",
-      "badge": "Review"
+      "started": "بدأت المراجعة",
+      "completed": "اكتملت المراجعة",
+      "badge": "مراجعة"
     },
     "diffStatus": {
-      "added": "Added",
-      "removed": "Removed",
-      "modified": "Modified",
-      "renamed": "Renamed"
+      "added": "تمت الإضافة",
+      "removed": "تمت الإزالة",
+      "modified": "تم التعديل",
+      "renamed": "تمت إعادة التسمية"
     },
     "userInput": {
-      "toggleDetails": "Toggle answered input details",
-      "answeredLabel": "answered",
-      "moreCount": "+{{count}} more"
+      "toggleDetails": "تبديل تفاصيل الإدخال المُجاب عليه",
+      "answeredLabel": "تمت الإجابة",
+      "moreCount": "+{{count}} أخرى"
     },
     "tool": {
-      "toggleDetails": "Toggle tool details",
-      "fileEdited": "file edited",
-      "filesEdited": "files edited",
-      "changes": "changes",
-      "cwdPrefix": "cwd",
-      "exporting": "Exporting...",
-      "exportMd": "Export .md",
-      "planExportFailed": "Plan export failed",
-      "unableToExportPlan": "Unable to export plan."
+      "toggleDetails": "تبديل تفاصيل الأداة",
+      "fileEdited": "تم تعديل ملف",
+      "filesEdited": "تم تعديل ملفات",
+      "changes": "تغييرات",
+      "cwdPrefix": "دليل العمل",
+      "exporting": "جارٍ التصدير...",
+      "exportMd": "تصدير .md",
+      "planExportFailed": "فشل تصدير الخطة",
+      "unableToExportPlan": "تعذر تصدير الخطة."
     },
     "explore": {
-      "exploring": "Exploring",
-      "explored": "Explored"
+      "exploring": "جارٍ الاستكشاف",
+      "explored": "تم الاستكشاف"
     }
   },
   "requestUserInput": {
-    "groupLabel": "User input requested",
-    "title": "Input requested",
-    "queuePosition": "Request {{current}} of {{total}}",
-    "typeAnswerOptional": "Type your answer (optional)",
-    "addNotesOptional": "Add notes (optional)",
-    "noQuestionsProvided": "No questions provided.",
-    "noAnswerProvided": "No answer provided",
-    "question": "Question {{count}}",
-    "submit": "Submit"
+    "groupLabel": "تم طلب إدخال من المستخدم",
+    "title": "تم طلب إدخال",
+    "queuePosition": "الطلب {{current}} من {{total}}",
+    "typeAnswerOptional": "اكتب إجابتك (اختياري)",
+    "addNotesOptional": "أضف ملاحظات (اختياري)",
+    "noQuestionsProvided": "لم يتم تقديم أسئلة.",
+    "noAnswerProvided": "لم يتم تقديم إجابة",
+    "question": "السؤال {{count}}",
+    "submit": "إرسال"
   },
   "threadTranscript": {
     "inputAnswered": "تمت الإجابة على الإدخال:"

@@ -1015,51 +1015,51 @@
     }
   },
   "messages": {
-    "working": "Working…",
-    "newMessageFetchIn": "New message will be fetched in {{count}} seconds",
-    "doneIn": "Done in {{duration}}",
+    "working": "作業中…",
+    "newMessageFetchIn": "新しいメッセージは {{count}} 秒後に取得されます",
+    "doneIn": "{{duration}} で完了",
     "review": {
-      "started": "Review started",
-      "completed": "Review completed",
-      "badge": "Review"
+      "started": "レビュー開始",
+      "completed": "レビュー完了",
+      "badge": "レビュー"
     },
     "diffStatus": {
-      "added": "Added",
-      "removed": "Removed",
-      "modified": "Modified",
-      "renamed": "Renamed"
+      "added": "追加",
+      "removed": "削除",
+      "modified": "変更",
+      "renamed": "名前変更"
     },
     "userInput": {
-      "toggleDetails": "Toggle answered input details",
-      "answeredLabel": "answered",
-      "moreCount": "+{{count}} more"
+      "toggleDetails": "回答済み入力の詳細を切り替え",
+      "answeredLabel": "回答済み",
+      "moreCount": "+{{count}} 件"
     },
     "tool": {
-      "toggleDetails": "Toggle tool details",
-      "fileEdited": "file edited",
-      "filesEdited": "files edited",
-      "changes": "changes",
-      "cwdPrefix": "cwd",
-      "exporting": "Exporting...",
-      "exportMd": "Export .md",
-      "planExportFailed": "Plan export failed",
-      "unableToExportPlan": "Unable to export plan."
+      "toggleDetails": "ツール詳細を切り替え",
+      "fileEdited": "ファイルを編集",
+      "filesEdited": "ファイルを編集",
+      "changes": "変更",
+      "cwdPrefix": "作業ディレクトリ",
+      "exporting": "エクスポート中...",
+      "exportMd": ".md をエクスポート",
+      "planExportFailed": "プランのエクスポートに失敗しました",
+      "unableToExportPlan": "プランをエクスポートできませんでした。"
     },
     "explore": {
-      "exploring": "Exploring",
-      "explored": "Explored"
+      "exploring": "調査中",
+      "explored": "調査済み"
     }
   },
   "requestUserInput": {
-    "groupLabel": "User input requested",
-    "title": "Input requested",
-    "queuePosition": "Request {{current}} of {{total}}",
-    "typeAnswerOptional": "Type your answer (optional)",
-    "addNotesOptional": "Add notes (optional)",
-    "noQuestionsProvided": "No questions provided.",
-    "noAnswerProvided": "No answer provided",
-    "question": "Question {{count}}",
-    "submit": "Submit"
+    "groupLabel": "ユーザー入力を要求",
+    "title": "入力を要求",
+    "queuePosition": "リクエスト {{current}} / {{total}}",
+    "typeAnswerOptional": "回答を入力（任意）",
+    "addNotesOptional": "メモを追加（任意）",
+    "noQuestionsProvided": "質問がありません。",
+    "noAnswerProvided": "回答なし",
+    "question": "質問 {{count}}",
+    "submit": "送信"
   },
   "threadTranscript": {
     "inputAnswered": "回答済みの入力:"

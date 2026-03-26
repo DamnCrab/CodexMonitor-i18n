@@ -1015,46 +1015,46 @@
     }
   },
   "messages": {
-    "working": "处理中…",
-    "newMessageFetchIn": "{{count}} 秒后将拉取新消息",
-    "doneIn": "{{duration}} 完成",
+    "working": "正在处理…",
+    "newMessageFetchIn": "将在 {{count}} 秒后获取新消息",
+    "doneIn": "于 {{duration}} 完成",
     "review": {
       "started": "审查已开始",
       "completed": "审查已完成",
       "badge": "审查"
     },
     "diffStatus": {
-      "added": "已新增",
-      "removed": "已删除",
+      "added": "已添加",
+      "removed": "已移除",
       "modified": "已修改",
       "renamed": "已重命名"
     },
     "userInput": {
       "toggleDetails": "切换已回答输入详情",
       "answeredLabel": "已回答",
-      "moreCount": "+{{count}} 更多"
+      "moreCount": "+{{count}} 条更多"
     },
     "tool": {
       "toggleDetails": "切换工具详情",
       "fileEdited": "已编辑文件",
       "filesEdited": "已编辑文件",
-      "changes": "变更",
-      "cwdPrefix": "目录",
-      "exporting": "导出中...",
+      "changes": "更改",
+      "cwdPrefix": "工作目录",
+      "exporting": "正在导出...",
       "exportMd": "导出 .md",
       "planExportFailed": "导出计划失败",
       "unableToExportPlan": "无法导出计划。"
     },
     "explore": {
-      "exploring": "探索中",
+      "exploring": "正在探索",
       "explored": "已探索"
     }
   },
   "requestUserInput": {
-    "groupLabel": "请求用户输入",
-    "title": "需要输入",
+    "groupLabel": "已请求用户输入",
+    "title": "已请求输入",
     "queuePosition": "请求 {{current}} / {{total}}",
-    "typeAnswerOptional": "输入你的答案（可选）",
+    "typeAnswerOptional": "输入你的回答（可选）",
     "addNotesOptional": "添加备注（可选）",
     "noQuestionsProvided": "未提供问题。",
     "noAnswerProvided": "未提供答案",

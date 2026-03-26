@@ -1015,51 +1015,51 @@
     }
   },
   "messages": {
-    "working": "Working…",
-    "newMessageFetchIn": "New message will be fetched in {{count}} seconds",
-    "doneIn": "Done in {{duration}}",
+    "working": "작업 중…",
+    "newMessageFetchIn": "새 메시지를 {{count}}초 후에 가져옵니다",
+    "doneIn": "{{duration}} 만에 완료",
     "review": {
-      "started": "Review started",
-      "completed": "Review completed",
-      "badge": "Review"
+      "started": "검토 시작",
+      "completed": "검토 완료",
+      "badge": "검토"
     },
     "diffStatus": {
-      "added": "Added",
-      "removed": "Removed",
-      "modified": "Modified",
-      "renamed": "Renamed"
+      "added": "추가됨",
+      "removed": "제거됨",
+      "modified": "수정됨",
+      "renamed": "이름 변경됨"
     },
     "userInput": {
-      "toggleDetails": "Toggle answered input details",
-      "answeredLabel": "answered",
-      "moreCount": "+{{count}} more"
+      "toggleDetails": "답변된 입력 세부 정보 전환",
+      "answeredLabel": "답변됨",
+      "moreCount": "+{{count}}개 더"
     },
     "tool": {
-      "toggleDetails": "Toggle tool details",
-      "fileEdited": "file edited",
-      "filesEdited": "files edited",
-      "changes": "changes",
-      "cwdPrefix": "cwd",
-      "exporting": "Exporting...",
-      "exportMd": "Export .md",
-      "planExportFailed": "Plan export failed",
-      "unableToExportPlan": "Unable to export plan."
+      "toggleDetails": "도구 세부 정보 전환",
+      "fileEdited": "파일 편집됨",
+      "filesEdited": "파일들 편집됨",
+      "changes": "변경 사항",
+      "cwdPrefix": "작업 디렉터리",
+      "exporting": "내보내는 중...",
+      "exportMd": ".md 내보내기",
+      "planExportFailed": "계획 내보내기 실패",
+      "unableToExportPlan": "계획을 내보낼 수 없습니다."
     },
     "explore": {
-      "exploring": "Exploring",
-      "explored": "Explored"
+      "exploring": "탐색 중",
+      "explored": "탐색됨"
     }
   },
   "requestUserInput": {
-    "groupLabel": "User input requested",
-    "title": "Input requested",
-    "queuePosition": "Request {{current}} of {{total}}",
-    "typeAnswerOptional": "Type your answer (optional)",
-    "addNotesOptional": "Add notes (optional)",
-    "noQuestionsProvided": "No questions provided.",
-    "noAnswerProvided": "No answer provided",
-    "question": "Question {{count}}",
-    "submit": "Submit"
+    "groupLabel": "사용자 입력 요청됨",
+    "title": "입력 요청됨",
+    "queuePosition": "요청 {{current}} / {{total}}",
+    "typeAnswerOptional": "답변 입력 (선택 사항)",
+    "addNotesOptional": "메모 추가 (선택 사항)",
+    "noQuestionsProvided": "제공된 질문이 없습니다.",
+    "noAnswerProvided": "제공된 답변 없음",
+    "question": "질문 {{count}}",
+    "submit": "제출"
   },
   "threadTranscript": {
     "inputAnswered": "응답한 입력:"

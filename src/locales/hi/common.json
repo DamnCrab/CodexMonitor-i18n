@@ -1015,51 +1015,51 @@
     }
   },
   "messages": {
-    "working": "Working…",
-    "newMessageFetchIn": "New message will be fetched in {{count}} seconds",
-    "doneIn": "Done in {{duration}}",
+    "working": "काम हो रहा है…",
+    "newMessageFetchIn": "नया संदेश {{count}} सेकंड में प्राप्त किया जाएगा",
+    "doneIn": "{{duration}} में पूरा हुआ",
     "review": {
-      "started": "Review started",
-      "completed": "Review completed",
-      "badge": "Review"
+      "started": "समीक्षा शुरू हुई",
+      "completed": "समीक्षा पूरी हुई",
+      "badge": "समीक्षा"
     },
     "diffStatus": {
-      "added": "Added",
-      "removed": "Removed",
-      "modified": "Modified",
-      "renamed": "Renamed"
+      "added": "जोड़ा गया",
+      "removed": "हटाया गया",
+      "modified": "संशोधित",
+      "renamed": "नाम बदला गया"
     },
     "userInput": {
-      "toggleDetails": "Toggle answered input details",
-      "answeredLabel": "answered",
-      "moreCount": "+{{count}} more"
+      "toggleDetails": "उत्तर दिए गए इनपुट का विवरण टॉगल करें",
+      "answeredLabel": "उत्तर दिया गया",
+      "moreCount": "+{{count}} और"
     },
     "tool": {
-      "toggleDetails": "Toggle tool details",
-      "fileEdited": "file edited",
-      "filesEdited": "files edited",
-      "changes": "changes",
-      "cwdPrefix": "cwd",
-      "exporting": "Exporting...",
-      "exportMd": "Export .md",
-      "planExportFailed": "Plan export failed",
-      "unableToExportPlan": "Unable to export plan."
+      "toggleDetails": "टूल विवरण टॉगल करें",
+      "fileEdited": "फ़ाइल संपादित की गई",
+      "filesEdited": "फ़ाइलें संपादित की गईं",
+      "changes": "परिवर्तन",
+      "cwdPrefix": "कार्य निर्देशिका",
+      "exporting": "निर्यात किया जा रहा है...",
+      "exportMd": ".md निर्यात करें",
+      "planExportFailed": "योजना निर्यात विफल",
+      "unableToExportPlan": "योजना निर्यात नहीं की जा सकी।"
     },
     "explore": {
-      "exploring": "Exploring",
-      "explored": "Explored"
+      "exploring": "एक्सप्लोर किया जा रहा है",
+      "explored": "एक्सप्लोर किया गया"
     }
   },
   "requestUserInput": {
-    "groupLabel": "User input requested",
-    "title": "Input requested",
-    "queuePosition": "Request {{current}} of {{total}}",
-    "typeAnswerOptional": "Type your answer (optional)",
-    "addNotesOptional": "Add notes (optional)",
-    "noQuestionsProvided": "No questions provided.",
-    "noAnswerProvided": "No answer provided",
-    "question": "Question {{count}}",
-    "submit": "Submit"
+    "groupLabel": "उपयोगकर्ता इनपुट अनुरोधित",
+    "title": "इनपुट अनुरोधित",
+    "queuePosition": "अनुरोध {{current}} / {{total}}",
+    "typeAnswerOptional": "अपना उत्तर लिखें (वैकल्पिक)",
+    "addNotesOptional": "नोट्स जोड़ें (वैकल्पिक)",
+    "noQuestionsProvided": "कोई प्रश्न नहीं दिया गया।",
+    "noAnswerProvided": "कोई उत्तर नहीं दिया गया",
+    "question": "प्रश्न {{count}}",
+    "submit": "सबमिट करें"
   },
   "threadTranscript": {
     "inputAnswered": "उत्तर दिया गया इनपुट:"

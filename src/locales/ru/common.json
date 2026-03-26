@@ -1015,51 +1015,51 @@
     }
   },
   "messages": {
-    "working": "Working…",
-    "newMessageFetchIn": "New message will be fetched in {{count}} seconds",
-    "doneIn": "Done in {{duration}}",
+    "working": "Выполняется…",
+    "newMessageFetchIn": "Новое сообщение будет получено через {{count}} секунд",
+    "doneIn": "Готово за {{duration}}",
     "review": {
-      "started": "Review started",
-      "completed": "Review completed",
-      "badge": "Review"
+      "started": "Ревью начато",
+      "completed": "Ревью завершено",
+      "badge": "Ревью"
     },
     "diffStatus": {
-      "added": "Added",
-      "removed": "Removed",
-      "modified": "Modified",
-      "renamed": "Renamed"
+      "added": "Добавлено",
+      "removed": "Удалено",
+      "modified": "Изменено",
+      "renamed": "Переименовано"
     },
     "userInput": {
-      "toggleDetails": "Toggle answered input details",
-      "answeredLabel": "answered",
-      "moreCount": "+{{count}} more"
+      "toggleDetails": "Переключить детали отвеченного ввода",
+      "answeredLabel": "отвечено",
+      "moreCount": "+{{count}} ещё"
     },
     "tool": {
-      "toggleDetails": "Toggle tool details",
-      "fileEdited": "file edited",
-      "filesEdited": "files edited",
-      "changes": "changes",
-      "cwdPrefix": "cwd",
-      "exporting": "Exporting...",
-      "exportMd": "Export .md",
-      "planExportFailed": "Plan export failed",
-      "unableToExportPlan": "Unable to export plan."
+      "toggleDetails": "Переключить детали инструмента",
+      "fileEdited": "файл изменён",
+      "filesEdited": "файлы изменены",
+      "changes": "изменения",
+      "cwdPrefix": "рабочий каталог",
+      "exporting": "Экспорт...",
+      "exportMd": "Экспорт .md",
+      "planExportFailed": "Не удалось экспортировать план",
+      "unableToExportPlan": "Не удалось экспортировать план."
     },
     "explore": {
-      "exploring": "Exploring",
-      "explored": "Explored"
+      "exploring": "Исследование...",
+      "explored": "Исследовано"
     }
   },
   "requestUserInput": {
-    "groupLabel": "User input requested",
-    "title": "Input requested",
-    "queuePosition": "Request {{current}} of {{total}}",
-    "typeAnswerOptional": "Type your answer (optional)",
-    "addNotesOptional": "Add notes (optional)",
-    "noQuestionsProvided": "No questions provided.",
-    "noAnswerProvided": "No answer provided",
-    "question": "Question {{count}}",
-    "submit": "Submit"
+    "groupLabel": "Запрошен ввод пользователя",
+    "title": "Запрошен ввод",
+    "queuePosition": "Запрос {{current}} из {{total}}",
+    "typeAnswerOptional": "Введите ответ (необязательно)",
+    "addNotesOptional": "Добавить заметки (необязательно)",
+    "noQuestionsProvided": "Вопросы не предоставлены.",
+    "noAnswerProvided": "Ответ не предоставлен",
+    "question": "Вопрос {{count}}",
+    "submit": "Отправить"
   },
   "threadTranscript": {
     "inputAnswered": "Ввод с ответом:"
