@@ -559,7 +559,11 @@ export const ReasoningRow = memo(function ReasoningRow({
     if (!bodyText) {
       return "";
     }
-    return bodyText.replace(/\s+/g, " ").trim();
+    const previewSlice = bodyText.slice(0, 320);
+    const normalizedPreview = previewSlice.replace(/\s+/g, " ").trim();
+    return bodyText.length > previewSlice.length
+      ? `${normalizedPreview}…`
+      : normalizedPreview;
   }, [bodyText]);
   return (
     <div className="tool-inline reasoning-inline">
