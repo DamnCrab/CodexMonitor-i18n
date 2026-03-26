@@ -1012,12 +1012,15 @@ pub(crate) async fn spawn_workspace_session<E: EventSink>(
                     // Check for background thread callback
                     let mut sent_to_background = false;
                     if let Some(ref tid) = thread_id {
-                        let mut callbacks = session_clone.background_thread_callbacks.lock().await;
-                        if let Some(tx) = callbacks.get(tid).cloned() {
+                        let callback = {
+                            let callbacks = session_clone.background_thread_callbacks.lock().await;
+                            callbacks.get(tid).cloned()
+                        };
+                        if let Some(tx) = callback {
                             if tx.send(value.clone()).is_ok() {
                                 sent_to_background = true;
                             } else {
-                                callbacks.remove(tid);
+                                session_clone.background_thread_callbacks.lock().await.remove(tid);
                             }
                         }
                     }
@@ -1059,12 +1062,15 @@ pub(crate) async fn spawn_workspace_session<E: EventSink>(
                 // Check for background thread callback
                 let mut sent_to_background = false;
                 if let Some(ref tid) = thread_id {
-                    let mut callbacks = session_clone.background_thread_callbacks.lock().await;
-                    if let Some(tx) = callbacks.get(tid).cloned() {
+                    let callback = {
+                        let callbacks = session_clone.background_thread_callbacks.lock().await;
+                        callbacks.get(tid).cloned()
+                    };
+                    if let Some(tx) = callback {
                         if tx.send(value.clone()).is_ok() {
                             sent_to_background = true;
                         } else {
-                            callbacks.remove(tid);
+                            session_clone.background_thread_callbacks.lock().await.remove(tid);
                         }
                     }
                 }

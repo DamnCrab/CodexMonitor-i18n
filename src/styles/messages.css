@@ -29,7 +29,7 @@
 
 .messages-inner > * {
   content-visibility: auto;
-  contain-intrinsic-size: 120px;
+  contain-intrinsic-size: auto 120px;
 }
 
 .messages-empty {
@@ -877,8 +877,6 @@
   overflow-y: auto;
   overflow-x: hidden;
   gap: 2px;
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 18px);
-  mask-image: linear-gradient(180deg, transparent 0%, #000 18px);
 }
 
 .tool-inline-terminal-line {

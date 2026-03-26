@@ -305,6 +305,14 @@ fn build_combined_diff(repo: &Repository, diff: &git2::Diff) -> String {
     combined_diff
 }
 
+/// Truncates an owned UTF-8 string without splitting a multi-byte codepoint.
+/// Because the input is always a valid Rust `String`, there is guaranteed to be
+/// a character boundary at byte 0, so walking backward to the nearest boundary
+/// remains safe even when the requested cutoff lands in the middle of a codepoint.
+/// In practice the backward walk is bounded to at most 3 bytes because UTF-8
+/// codepoints in a Rust string are at most 4 bytes wide.
+/// This keeps oversized aggregated diff payloads valid for JSON serialization
+/// while still enforcing a strict memory cap for workspace diff responses.
 fn truncate_string_to_boundary(value: &mut String, max_bytes: usize) {
     if value.len() <= max_bytes {
         return;

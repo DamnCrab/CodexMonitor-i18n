@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
 import * as Sentry from "@sentry/react";
+import { useTranslation } from "react-i18next";
 import type { DebugEntry, WorkspaceInfo } from "../../../types";
 import {
   addClone as addCloneService,
@@ -21,6 +22,7 @@ export function useWorktreeOps({
   setWorkspaces,
   setActiveWorkspaceId,
 }: UseWorktreeOpsOptions) {
+  const { t } = useTranslation();
   const [deletingWorktreeIds, setDeletingWorktreeIds] = useState<Set<string>>(
     () => new Set(),
   );
@@ -93,7 +95,7 @@ export function useWorktreeOps({
       }
       const trimmedFolder = copiesFolder.trim();
       if (!trimmedFolder) {
-        throw new Error("Copies folder is required.");
+        throw new Error(t("clonePrompt.copiesFolderRequired"));
       }
       onDebug?.({
         id: `${Date.now()}-client-add-clone`,
@@ -128,7 +130,7 @@ export function useWorktreeOps({
         throw error;
       }
     },
-    [onDebug, setActiveWorkspaceId, setWorkspaces],
+    [onDebug, setActiveWorkspaceId, setWorkspaces, t],
   );
 
   const removeWorktree = useCallback(

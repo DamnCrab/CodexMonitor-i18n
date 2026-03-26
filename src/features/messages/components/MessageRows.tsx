@@ -38,6 +38,8 @@ import {
 import { Markdown } from "./Markdown";
 import { isStandaloneMarkdownTable } from "./Markdown";
 
+const COLLAPSED_REASONING_PREVIEW_MAX_CHARS = 320;
+
 type MarkdownFileLinkProps = {
   showMessageFilePath?: boolean;
   workspacePath?: string | null;
@@ -559,11 +561,14 @@ export const ReasoningRow = memo(function ReasoningRow({
     if (!bodyText) {
       return "";
     }
-    const previewSlice = bodyText.slice(0, 320);
-    const normalizedPreview = previewSlice.replace(/\s+/g, " ").trim();
-    return bodyText.length > previewSlice.length
-      ? `${normalizedPreview}…`
-      : normalizedPreview;
+    const previewSeed = bodyText.slice(0, COLLAPSED_REASONING_PREVIEW_MAX_CHARS * 2);
+    const normalizedPreview = previewSeed.replace(/\s+/g, " ").trim();
+    if (normalizedPreview.length > COLLAPSED_REASONING_PREVIEW_MAX_CHARS) {
+      return `${normalizedPreview
+        .slice(0, COLLAPSED_REASONING_PREVIEW_MAX_CHARS)
+        .trimEnd()}…`;
+    }
+    return bodyText.length > previewSeed.length ? `${normalizedPreview}…` : normalizedPreview;
   }, [bodyText]);
   return (
     <div className="tool-inline reasoning-inline">
