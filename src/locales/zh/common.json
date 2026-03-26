@@ -1062,7 +1062,7 @@
     "submit": "提交"
   },
   "threadTranscript": {
-    "inputAnswered": "输入已回答："
+    "inputAnswered": "已回答的输入："
   },
   "mobileSetupWizard": {
     "ariaLabel": "移动端服务器设置",
@@ -1088,7 +1088,7 @@
     "useSuggested": "使用建议位置",
     "create": "创建",
     "copyNameRequired": "必须填写副本名称。",
-    "copiesFolderRequired": "必须填写副本文件夹。"
+    "copiesFolderRequired": "必须填写副本目录。"
   },
   "worktreePrompt": {
     "ariaLabel": "新建 worktree 代理",
@@ -1137,7 +1137,7 @@
     "ariaLabel": "切换分支",
     "noBranchesFound": "未找到分支",
     "current": "当前",
-    "worktree": "worktree"
+    "worktree": "工作树"
   },
   "markdown": {
     "code": "代码",
@@ -1234,8 +1234,8 @@
     "noCommentBody": "该评论没有正文。"
   },
   "renameWorktree": {
-    "branchExistsRenamed": "分支已存在，已重命名为“{{name}}”。",
-    "renamed": "worktree 已重命名。",
+    "branchExistsRenamed": "分支已存在。已重命名为“{{name}}”。",
+    "renamed": "工作树已重命名。",
     "upstreamUpdated": "上游分支已更新。"
   }
 }

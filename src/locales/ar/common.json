@@ -1,17 +1,17 @@
 {
   "language": {
     "label": "اللغة",
-    "en": "الإنجليزية",
-    "zh": "الصينية",
+    "en": "English",
+    "zh": "中文",
     "ar": "العربية",
-    "de": "الألمانية",
-    "es": "الإسبانية",
-    "fr": "الفرنسية",
-    "hi": "الهندية",
-    "ja": "اليابانية",
-    "ko": "الكورية",
-    "pt": "البرتغالية",
-    "ru": "الروسية",
+    "de": "Deutsch",
+    "es": "Español",
+    "fr": "Français",
+    "hi": "हिन्दी",
+    "ja": "日本語",
+    "ko": "한국어",
+    "pt": "Português",
+    "ru": "Русский",
     "systemDefault": "اتباع النظام"
   },
   "layout": {
@@ -1062,7 +1062,7 @@
     "submit": "Submit"
   },
   "threadTranscript": {
-    "inputAnswered": "Input answered:"
+    "inputAnswered": "تمت الإجابة على الإدخال:"
   },
   "mobileSetupWizard": {
     "ariaLabel": "إعداد خادم الهاتف",
@@ -1087,8 +1087,8 @@
     "copy": "نسخ",
     "useSuggested": "استخدام المقترح",
     "create": "إنشاء",
-    "copyNameRequired": "Copy name is required.",
-    "copiesFolderRequired": "Copies folder is required."
+    "copyNameRequired": "اسم النسخة مطلوب.",
+    "copiesFolderRequired": "مجلد النسخ مطلوب."
   },
   "worktreePrompt": {
     "ariaLabel": "New worktree agent",
@@ -1134,16 +1134,16 @@
     "initFailed": "Failed to initialize Git repository."
   },
   "branchSwitcherPrompt": {
-    "ariaLabel": "Switch branch",
-    "noBranchesFound": "No branches found",
-    "current": "current",
-    "worktree": "worktree"
+    "ariaLabel": "تبديل الفرع",
+    "noBranchesFound": "لم يتم العثور على فروع",
+    "current": "الحالي",
+    "worktree": "شجرة العمل"
   },
   "markdown": {
-    "code": "Code",
-    "copy": "Copy",
-    "copied": "Copied",
-    "codeBlockAriaLabel": "Copy code block"
+    "code": "الشفرة",
+    "copy": "نسخ",
+    "copied": "تم النسخ",
+    "codeBlockAriaLabel": "نسخ كتلة الشفرة"
   },
   "reviewInline": {
     "baseBranchTitle": "Review against a base branch",
@@ -1234,8 +1234,8 @@
     "noCommentBody": "No comment body."
   },
   "renameWorktree": {
-    "branchExistsRenamed": "Branch already exists. Renamed to \"{{name}}\".",
-    "renamed": "Worktree renamed.",
-    "upstreamUpdated": "Upstream branch updated."
+    "branchExistsRenamed": "الفرع موجود بالفعل. تمت إعادة تسميته إلى \"{{name}}\".",
+    "renamed": "تمت إعادة تسمية شجرة العمل.",
+    "upstreamUpdated": "تم تحديث الفرع المرجعي."
   }
 }

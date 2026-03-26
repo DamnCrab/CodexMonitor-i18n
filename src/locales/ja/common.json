@@ -1062,7 +1062,7 @@
     "submit": "Submit"
   },
   "threadTranscript": {
-    "inputAnswered": "Input answered:"
+    "inputAnswered": "回答済みの入力:"
   },
   "mobileSetupWizard": {
     "ariaLabel": "モバイルサーバー設定",
@@ -1087,8 +1087,8 @@
     "copy": "コピー",
     "useSuggested": "候補を使う",
     "create": "作成",
-    "copyNameRequired": "Copy name is required.",
-    "copiesFolderRequired": "Copies folder is required."
+    "copyNameRequired": "コピー名は必須です。",
+    "copiesFolderRequired": "コピー用フォルダーは必須です。"
   },
   "worktreePrompt": {
     "ariaLabel": "New worktree agent",
@@ -1134,16 +1134,16 @@
     "initFailed": "Failed to initialize Git repository."
   },
   "branchSwitcherPrompt": {
-    "ariaLabel": "Switch branch",
-    "noBranchesFound": "No branches found",
-    "current": "current",
-    "worktree": "worktree"
+    "ariaLabel": "ブランチを切り替え",
+    "noBranchesFound": "ブランチが見つかりません",
+    "current": "現在",
+    "worktree": "ワークツリー"
   },
   "markdown": {
-    "code": "Code",
-    "copy": "Copy",
-    "copied": "Copied",
-    "codeBlockAriaLabel": "Copy code block"
+    "code": "コード",
+    "copy": "コピー",
+    "copied": "コピーしました",
+    "codeBlockAriaLabel": "コードブロックをコピー"
   },
   "reviewInline": {
     "baseBranchTitle": "Review against a base branch",
@@ -1234,8 +1234,8 @@
     "noCommentBody": "No comment body."
   },
   "renameWorktree": {
-    "branchExistsRenamed": "Branch already exists. Renamed to \"{{name}}\".",
-    "renamed": "Worktree renamed.",
-    "upstreamUpdated": "Upstream branch updated."
+    "branchExistsRenamed": "ブランチは既に存在します。\"{{name}}\" に名前を変更しました。",
+    "renamed": "ワークツリー名を変更しました。",
+    "upstreamUpdated": "upstream ブランチを更新しました。"
   }
 }

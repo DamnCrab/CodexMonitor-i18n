@@ -3,6 +3,7 @@ import i18n, { SUPPORTED_LANGUAGES } from "@/i18n";
 import { localeMessages } from "@/locales";
 
 const en = localeMessages.en;
+const nativeLanguageLabels = localeMessages.en.language as Record<string, string>;
 const localeEntries = Object.entries(localeMessages) as Array<
   [keyof typeof localeMessages, (typeof localeMessages)[keyof typeof localeMessages]]
 >;
@@ -95,6 +96,19 @@ describe("i18n translation files", () => {
       ).toBeTruthy();
     }
   });
+
+  it.each(localeEntries)(
+    "uses native self-names for language selector options in %s",
+    (code, locale) => {
+      const languageSection = locale.language as Record<string, string>;
+      for (const languageCode of SUPPORTED_LANGUAGES) {
+        expect(
+          languageSection[languageCode],
+          `${code} should use the native self-name for language.${languageCode}`,
+        ).toBe(nativeLanguageLabels[languageCode]);
+      }
+    },
+  );
 
   it.each(SUPPORTED_LANGUAGES)('registers a "common" bundle for %s', (code) => {
     expect(i18n.hasResourceBundle(code, "common")).toBe(true);

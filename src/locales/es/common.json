@@ -1,7 +1,7 @@
 {
   "language": {
     "label": "Idioma",
-    "en": "Inglés",
+    "en": "English",
     "zh": "中文",
     "ar": "العربية",
     "de": "Deutsch",
@@ -873,7 +873,7 @@
       "searchOrCreateBranch": "Buscar o crear rama",
       "searchBranches": "Buscar ramas",
       "refreshCurrentThreadFromServer": "Actualizar el hilo actual desde el servidor",
-      "terminal": "Terminal",
+      "terminal": "Consola",
       "createBranch": "Crear rama «{{name}}»",
       "runLaunchScript": "Ejecutar script de inicio",
       "setLaunchScript": "Configurar script de inicio",
@@ -1062,7 +1062,7 @@
     "submit": "Submit"
   },
   "threadTranscript": {
-    "inputAnswered": "Input answered:"
+    "inputAnswered": "Entrada respondida:"
   },
   "mobileSetupWizard": {
     "ariaLabel": "Configuración del servidor móvil",
@@ -1087,8 +1087,8 @@
     "copy": "Copiar",
     "useSuggested": "Usar sugerido",
     "create": "Crear",
-    "copyNameRequired": "Copy name is required.",
-    "copiesFolderRequired": "Copies folder is required."
+    "copyNameRequired": "Se requiere un nombre para la copia.",
+    "copiesFolderRequired": "Se requiere una carpeta de copias."
   },
   "worktreePrompt": {
     "ariaLabel": "New worktree agent",
@@ -1134,16 +1134,16 @@
     "initFailed": "Failed to initialize Git repository."
   },
   "branchSwitcherPrompt": {
-    "ariaLabel": "Switch branch",
-    "noBranchesFound": "No branches found",
-    "current": "current",
-    "worktree": "worktree"
+    "ariaLabel": "Cambiar rama",
+    "noBranchesFound": "No se encontraron ramas",
+    "current": "actual",
+    "worktree": "árbol de trabajo"
   },
   "markdown": {
-    "code": "Code",
-    "copy": "Copy",
-    "copied": "Copied",
-    "codeBlockAriaLabel": "Copy code block"
+    "code": "Código",
+    "copy": "Copiar",
+    "copied": "Copiado",
+    "codeBlockAriaLabel": "Copiar bloque de código"
   },
   "reviewInline": {
     "baseBranchTitle": "Review against a base branch",
@@ -1234,8 +1234,8 @@
     "noCommentBody": "No comment body."
   },
   "renameWorktree": {
-    "branchExistsRenamed": "Branch already exists. Renamed to \"{{name}}\".",
-    "renamed": "Worktree renamed.",
-    "upstreamUpdated": "Upstream branch updated."
+    "branchExistsRenamed": "La rama ya existe. Se renombró a \"{{name}}\".",
+    "renamed": "Se renombró el árbol de trabajo.",
+    "upstreamUpdated": "Se actualizó la rama upstream."
   }
 }

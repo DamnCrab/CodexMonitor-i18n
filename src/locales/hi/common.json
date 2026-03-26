@@ -1,7 +1,7 @@
 {
   "language": {
     "label": "भाषा",
-    "en": "अंग्रेज़ी",
+    "en": "English",
     "zh": "中文",
     "ar": "العربية",
     "de": "Deutsch",
@@ -1062,7 +1062,7 @@
     "submit": "Submit"
   },
   "threadTranscript": {
-    "inputAnswered": "Input answered:"
+    "inputAnswered": "उत्तर दिया गया इनपुट:"
   },
   "mobileSetupWizard": {
     "ariaLabel": "मोबाइल सर्वर सेटअप",
@@ -1087,8 +1087,8 @@
     "copy": "कॉपी करें",
     "useSuggested": "सुझाव उपयोग करें",
     "create": "बनाएँ",
-    "copyNameRequired": "Copy name is required.",
-    "copiesFolderRequired": "Copies folder is required."
+    "copyNameRequired": "कॉपी का नाम आवश्यक है।",
+    "copiesFolderRequired": "कॉपी फ़ोल्डर आवश्यक है।"
   },
   "worktreePrompt": {
     "ariaLabel": "New worktree agent",
@@ -1134,16 +1134,16 @@
     "initFailed": "Failed to initialize Git repository."
   },
   "branchSwitcherPrompt": {
-    "ariaLabel": "Switch branch",
-    "noBranchesFound": "No branches found",
-    "current": "current",
-    "worktree": "worktree"
+    "ariaLabel": "ब्रांच बदलें",
+    "noBranchesFound": "कोई ब्रांच नहीं मिली",
+    "current": "वर्तमान",
+    "worktree": "वर्कट्री"
   },
   "markdown": {
-    "code": "Code",
-    "copy": "Copy",
-    "copied": "Copied",
-    "codeBlockAriaLabel": "Copy code block"
+    "code": "कोड",
+    "copy": "कॉपी करें",
+    "copied": "कॉपी किया गया",
+    "codeBlockAriaLabel": "कोड ब्लॉक कॉपी करें"
   },
   "reviewInline": {
     "baseBranchTitle": "Review against a base branch",
@@ -1234,8 +1234,8 @@
     "noCommentBody": "No comment body."
   },
   "renameWorktree": {
-    "branchExistsRenamed": "Branch already exists. Renamed to \"{{name}}\".",
-    "renamed": "Worktree renamed.",
-    "upstreamUpdated": "Upstream branch updated."
+    "branchExistsRenamed": "ब्रांच पहले से मौजूद है। नाम बदलकर \"{{name}}\" कर दिया गया।",
+    "renamed": "वर्कट्री का नाम बदल दिया गया।",
+    "upstreamUpdated": "अपस्ट्रीम ब्रांच अपडेट कर दी गई।"
   }
 }

@@ -556,6 +556,22 @@ describe("SettingsView Display", () => {
     });
   });
 
+  it("keeps language option names as native self-names even in Arabic UI", async () => {
+    const onUpdateAppSettings = vi.fn().mockResolvedValue(undefined);
+    renderDisplaySection({ onUpdateAppSettings });
+    await i18n.changeLanguage("ar");
+
+    const select = screen.getByLabelText("اللغة");
+    within(select).getByRole("option", { name: "English" });
+    within(select).getByRole("option", { name: "Deutsch" });
+    within(select).getByRole("option", { name: "Español" });
+    within(select).getByRole("option", { name: "العربية" });
+
+    expect(
+      within(select).queryByRole("option", { name: "الإنجليزية" }),
+    ).not.toBeTruthy();
+  });
+
   it("toggles remaining limits display", async () => {
     const onUpdateAppSettings = vi.fn().mockResolvedValue(undefined);
     renderDisplaySection({ onUpdateAppSettings });

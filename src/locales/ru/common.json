@@ -1062,7 +1062,7 @@
     "submit": "Submit"
   },
   "threadTranscript": {
-    "inputAnswered": "Input answered:"
+    "inputAnswered": "Ввод с ответом:"
   },
   "mobileSetupWizard": {
     "ariaLabel": "Настройка мобильного сервера",
@@ -1087,8 +1087,8 @@
     "copy": "Копировать",
     "useSuggested": "Использовать рекомендованное",
     "create": "Создать",
-    "copyNameRequired": "Copy name is required.",
-    "copiesFolderRequired": "Copies folder is required."
+    "copyNameRequired": "Нужно указать имя копии.",
+    "copiesFolderRequired": "Нужно указать папку для копий."
   },
   "worktreePrompt": {
     "ariaLabel": "New worktree agent",
@@ -1134,16 +1134,16 @@
     "initFailed": "Failed to initialize Git repository."
   },
   "branchSwitcherPrompt": {
-    "ariaLabel": "Switch branch",
-    "noBranchesFound": "No branches found",
-    "current": "current",
-    "worktree": "worktree"
+    "ariaLabel": "Переключить ветку",
+    "noBranchesFound": "Ветки не найдены",
+    "current": "текущая",
+    "worktree": "рабочее дерево"
   },
   "markdown": {
-    "code": "Code",
-    "copy": "Copy",
-    "copied": "Copied",
-    "codeBlockAriaLabel": "Copy code block"
+    "code": "Код",
+    "copy": "Копировать",
+    "copied": "Скопировано",
+    "codeBlockAriaLabel": "Скопировать блок кода"
   },
   "reviewInline": {
     "baseBranchTitle": "Review against a base branch",
@@ -1234,8 +1234,8 @@
     "noCommentBody": "No comment body."
   },
   "renameWorktree": {
-    "branchExistsRenamed": "Branch already exists. Renamed to \"{{name}}\".",
-    "renamed": "Worktree renamed.",
-    "upstreamUpdated": "Upstream branch updated."
+    "branchExistsRenamed": "Ветка уже существует. Переименовано в \"{{name}}\".",
+    "renamed": "Рабочее дерево переименовано.",
+    "upstreamUpdated": "Вышестоящая ветка обновлена."
   }
 }

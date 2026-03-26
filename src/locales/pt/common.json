@@ -1,12 +1,12 @@
 {
   "language": {
     "label": "Idioma",
-    "en": "Inglês",
+    "en": "English",
     "zh": "中文",
     "ar": "العربية",
-    "de": "Alemão",
-    "es": "Espanhol",
-    "fr": "Francês",
+    "de": "Deutsch",
+    "es": "Español",
+    "fr": "Français",
     "hi": "हिन्दी",
     "ja": "日本語",
     "ko": "한국어",
@@ -873,7 +873,7 @@
       "searchOrCreateBranch": "Pesquisar ou criar branch",
       "searchBranches": "Pesquisar branches",
       "refreshCurrentThreadFromServer": "Atualizar o thread atual do servidor",
-      "terminal": "Terminal",
+      "terminal": "Console",
       "createBranch": "Criar branch “{{name}}”",
       "runLaunchScript": "Executar script de inicialização",
       "setLaunchScript": "Definir script de inicialização",
@@ -1062,7 +1062,7 @@
     "submit": "Submit"
   },
   "threadTranscript": {
-    "inputAnswered": "Input answered:"
+    "inputAnswered": "Entrada respondida:"
   },
   "mobileSetupWizard": {
     "ariaLabel": "Configuração do servidor móvel",
@@ -1087,8 +1087,8 @@
     "copy": "Copiar",
     "useSuggested": "Usar sugestão",
     "create": "Criar",
-    "copyNameRequired": "Copy name is required.",
-    "copiesFolderRequired": "Copies folder is required."
+    "copyNameRequired": "O nome da cópia é obrigatório.",
+    "copiesFolderRequired": "A pasta de cópias é obrigatória."
   },
   "worktreePrompt": {
     "ariaLabel": "New worktree agent",
@@ -1134,16 +1134,16 @@
     "initFailed": "Failed to initialize Git repository."
   },
   "branchSwitcherPrompt": {
-    "ariaLabel": "Switch branch",
-    "noBranchesFound": "No branches found",
-    "current": "current",
-    "worktree": "worktree"
+    "ariaLabel": "Trocar branch",
+    "noBranchesFound": "Nenhuma branch encontrada",
+    "current": "atual",
+    "worktree": "árvore de trabalho"
   },
   "markdown": {
-    "code": "Code",
-    "copy": "Copy",
-    "copied": "Copied",
-    "codeBlockAriaLabel": "Copy code block"
+    "code": "Código",
+    "copy": "Copiar",
+    "copied": "Copiado",
+    "codeBlockAriaLabel": "Copiar bloco de código"
   },
   "reviewInline": {
     "baseBranchTitle": "Review against a base branch",
@@ -1234,8 +1234,8 @@
     "noCommentBody": "No comment body."
   },
   "renameWorktree": {
-    "branchExistsRenamed": "Branch already exists. Renamed to \"{{name}}\".",
-    "renamed": "Worktree renamed.",
-    "upstreamUpdated": "Upstream branch updated."
+    "branchExistsRenamed": "A branch já existe. Renomeada para \"{{name}}\".",
+    "renamed": "O worktree foi renomeado.",
+    "upstreamUpdated": "A branch upstream foi atualizada."
   }
 }

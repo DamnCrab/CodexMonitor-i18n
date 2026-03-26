@@ -1,17 +1,17 @@
 {
   "language": {
     "label": "언어",
-    "en": "영어",
-    "zh": "중국어",
-    "ar": "아랍어",
-    "de": "독일어",
-    "es": "스페인어",
-    "fr": "프랑스어",
-    "hi": "힌디어",
-    "ja": "일본어",
+    "en": "English",
+    "zh": "中文",
+    "ar": "العربية",
+    "de": "Deutsch",
+    "es": "Español",
+    "fr": "Français",
+    "hi": "हिन्दी",
+    "ja": "日本語",
     "ko": "한국어",
-    "pt": "포르투갈어",
-    "ru": "러시아어",
+    "pt": "Português",
+    "ru": "Русский",
     "systemDefault": "시스템 설정 따르기"
   },
   "layout": {
@@ -1062,7 +1062,7 @@
     "submit": "Submit"
   },
   "threadTranscript": {
-    "inputAnswered": "Input answered:"
+    "inputAnswered": "응답한 입력:"
   },
   "mobileSetupWizard": {
     "ariaLabel": "모바일 서버 설정",
@@ -1087,8 +1087,8 @@
     "copy": "복사",
     "useSuggested": "추천값 사용",
     "create": "생성",
-    "copyNameRequired": "Copy name is required.",
-    "copiesFolderRequired": "Copies folder is required."
+    "copyNameRequired": "복사본 이름은 필수입니다.",
+    "copiesFolderRequired": "복사본 폴더는 필수입니다."
   },
   "worktreePrompt": {
     "ariaLabel": "New worktree agent",
@@ -1134,16 +1134,16 @@
     "initFailed": "Failed to initialize Git repository."
   },
   "branchSwitcherPrompt": {
-    "ariaLabel": "Switch branch",
-    "noBranchesFound": "No branches found",
-    "current": "current",
-    "worktree": "worktree"
+    "ariaLabel": "브랜치 전환",
+    "noBranchesFound": "브랜치를 찾을 수 없습니다",
+    "current": "현재",
+    "worktree": "워크트리"
   },
   "markdown": {
-    "code": "Code",
-    "copy": "Copy",
-    "copied": "Copied",
-    "codeBlockAriaLabel": "Copy code block"
+    "code": "코드",
+    "copy": "복사",
+    "copied": "복사됨",
+    "codeBlockAriaLabel": "코드 블록 복사"
   },
   "reviewInline": {
     "baseBranchTitle": "Review against a base branch",
@@ -1234,8 +1234,8 @@
     "noCommentBody": "No comment body."
   },
   "renameWorktree": {
-    "branchExistsRenamed": "Branch already exists. Renamed to \"{{name}}\".",
-    "renamed": "Worktree renamed.",
-    "upstreamUpdated": "Upstream branch updated."
+    "branchExistsRenamed": "브랜치가 이미 존재합니다. 이름을 \"{{name}}\"(으)로 변경했습니다.",
+    "renamed": "워크트리 이름을 변경했습니다.",
+    "upstreamUpdated": "업스트림 브랜치를 업데이트했습니다."
   }
 }

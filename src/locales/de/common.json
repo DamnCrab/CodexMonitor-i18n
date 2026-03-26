@@ -873,7 +873,7 @@
       "searchOrCreateBranch": "Branch suchen oder erstellen",
       "searchBranches": "Branches suchen",
       "refreshCurrentThreadFromServer": "Aktuellen Thread vom Server aktualisieren",
-      "terminal": "Terminal",
+      "terminal": "Konsole",
       "createBranch": "Branch „{{name}}“ erstellen",
       "runLaunchScript": "Startskript ausführen",
       "setLaunchScript": "Startskript festlegen",
@@ -1062,7 +1062,7 @@
     "submit": "Submit"
   },
   "threadTranscript": {
-    "inputAnswered": "Input answered:"
+    "inputAnswered": "Beantwortete Eingabe:"
   },
   "mobileSetupWizard": {
     "ariaLabel": "Mobiler Server-Setup",
@@ -1087,8 +1087,8 @@
     "copy": "Kopieren",
     "useSuggested": "Vorschlag verwenden",
     "create": "Erstellen",
-    "copyNameRequired": "Copy name is required.",
-    "copiesFolderRequired": "Copies folder is required."
+    "copyNameRequired": "Name der Kopie ist erforderlich.",
+    "copiesFolderRequired": "Ordner für Kopien ist erforderlich."
   },
   "worktreePrompt": {
     "ariaLabel": "New worktree agent",
@@ -1134,16 +1134,16 @@
     "initFailed": "Failed to initialize Git repository."
   },
   "branchSwitcherPrompt": {
-    "ariaLabel": "Switch branch",
-    "noBranchesFound": "No branches found",
-    "current": "current",
-    "worktree": "worktree"
+    "ariaLabel": "Branch wechseln",
+    "noBranchesFound": "Keine Branches gefunden",
+    "current": "aktuell",
+    "worktree": "Arbeitsbaum"
   },
   "markdown": {
-    "code": "Code",
-    "copy": "Copy",
-    "copied": "Copied",
-    "codeBlockAriaLabel": "Copy code block"
+    "code": "Quellcode",
+    "copy": "Kopieren",
+    "copied": "Kopiert",
+    "codeBlockAriaLabel": "Codeblock kopieren"
   },
   "reviewInline": {
     "baseBranchTitle": "Review against a base branch",
@@ -1234,8 +1234,8 @@
     "noCommentBody": "No comment body."
   },
   "renameWorktree": {
-    "branchExistsRenamed": "Branch already exists. Renamed to \"{{name}}\".",
-    "renamed": "Worktree renamed.",
-    "upstreamUpdated": "Upstream branch updated."
+    "branchExistsRenamed": "Branch existiert bereits. Umbenannt in \"{{name}}\".",
+    "renamed": "Worktree wurde umbenannt.",
+    "upstreamUpdated": "Upstream-Branch wurde aktualisiert."
   }
 }
