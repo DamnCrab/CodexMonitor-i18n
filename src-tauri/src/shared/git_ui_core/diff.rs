@@ -23,6 +23,8 @@ const INDEX_SKIP_WORKTREE_FLAG: u16 = 0x4000;
 const MAX_IMAGE_BYTES: usize = 10 * 1024 * 1024;
 const MAX_TEXT_DIFF_BYTES: usize = 2 * 1024 * 1024;
 const MAX_RENDERABLE_TEXT_DIFF_BYTES: u64 = 256 * 1024;
+const MAX_COMBINED_DIFF_BYTES: usize = 512 * 1024;
+const TRUNCATED_DIFF_NOTICE: &str = "\n\n[Diff truncated: too large to keep full workspace diff in memory]";
 
 fn encode_image_base64(data: &[u8]) -> Option<String> {
     if data.len() > MAX_IMAGE_BYTES {
@@ -294,8 +296,24 @@ fn build_combined_diff(repo: &Repository, diff: &git2::Diff) -> String {
         }
         combined_diff.push_str(&format!("=== {} ===\n", path.display()));
         combined_diff.push_str(&content);
+        if combined_diff.len() > MAX_COMBINED_DIFF_BYTES {
+            truncate_string_to_boundary(&mut combined_diff, MAX_COMBINED_DIFF_BYTES);
+            combined_diff.push_str(TRUNCATED_DIFF_NOTICE);
+            break;
+        }
     }
     combined_diff
+}
+
+fn truncate_string_to_boundary(value: &mut String, max_bytes: usize) {
+    if value.len() <= max_bytes {
+        return;
+    }
+    let mut truncate_at = max_bytes;
+    while truncate_at > 0 && !value.is_char_boundary(truncate_at) {
+        truncate_at -= 1;
+    }
+    value.truncate(truncate_at);
 }
 
 pub(super) fn collect_workspace_diff(repo_root: &Path) -> Result<String, String> {

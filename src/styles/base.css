@@ -306,4 +306,22 @@ button.window-caption-control:focus-visible,
     animation-duration: var(--ds-spinner-dur) !important;
     animation-iteration-count: infinite !important;
   }
+
+  .main-topbar,
+  .composer,
+  .tabbar,
+  .sidebar,
+  .ds-modal-backdrop,
+  .mobile-setup-wizard-overlay .ds-modal-backdrop,
+  .diff-inline-header {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .main-header-icon svg,
+  .message-copy-icon svg,
+  .compact-view-toggle .main-header-action-icon,
+  .main-header-action .main-header-icon {
+    filter: none !important;
+  }
 }
