@@ -1004,6 +1004,62 @@
     "recentCommits": "Recent commits",
     "noOpenIssues": "No open issues.",
     "noOpenPullRequests": "No open pull requests.",
-    "draft": "Draft"
+    "draft": "Draft",
+    "editStatuses": {
+      "added": "Added",
+      "deleted": "Deleted",
+      "modified": "Modified",
+      "renamed": "Renamed"
+    }
+  },
+  "messages": {
+    "working": "Working…",
+    "newMessageFetchIn": "New message will be fetched in {{count}} seconds",
+    "doneIn": "Done in {{duration}}",
+    "review": {
+      "started": "Review started",
+      "completed": "Review completed",
+      "badge": "Review"
+    },
+    "diffStatus": {
+      "added": "Added",
+      "removed": "Removed",
+      "modified": "Modified",
+      "renamed": "Renamed"
+    },
+    "userInput": {
+      "toggleDetails": "Toggle answered input details",
+      "answeredLabel": "answered",
+      "moreCount": "+{{count}} more"
+    },
+    "tool": {
+      "toggleDetails": "Toggle tool details",
+      "fileEdited": "file edited",
+      "filesEdited": "files edited",
+      "changes": "changes",
+      "cwdPrefix": "cwd",
+      "exporting": "Exporting...",
+      "exportMd": "Export .md",
+      "planExportFailed": "Plan export failed",
+      "unableToExportPlan": "Unable to export plan."
+    },
+    "explore": {
+      "exploring": "Exploring",
+      "explored": "Explored"
+    }
+  },
+  "requestUserInput": {
+    "groupLabel": "User input requested",
+    "title": "Input requested",
+    "queuePosition": "Request {{current}} of {{total}}",
+    "typeAnswerOptional": "Type your answer (optional)",
+    "addNotesOptional": "Add notes (optional)",
+    "noQuestionsProvided": "No questions provided.",
+    "noAnswerProvided": "No answer provided",
+    "question": "Question {{count}}",
+    "submit": "Submit"
+  },
+  "threadTranscript": {
+    "inputAnswered": "Input answered:"
   }
 }

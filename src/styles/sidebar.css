@@ -45,7 +45,8 @@
   align-items: center;
   justify-content: center;
   background: rgba(10, 12, 16, 0.4);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(6px);
+  contain: paint;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease;

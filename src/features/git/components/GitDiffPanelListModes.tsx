@@ -10,6 +10,24 @@ import type { PerFileDiffGroup } from "../utils/perFileThreadDiffs";
 import { GitLogEntryRow } from "./GitDiffPanelShared";
 import { splitPath } from "./GitDiffPanel.utils";
 
+function localizeEditStatus(
+  t: ReturnType<typeof useTranslation>["t"],
+  status: string,
+) {
+  switch ((status ?? "").trim().toUpperCase()) {
+    case "A":
+      return t("gitPanel.editStatuses.added");
+    case "D":
+      return t("gitPanel.editStatuses.deleted");
+    case "R":
+      return t("gitPanel.editStatuses.renamed");
+    case "M":
+      return t("gitPanel.editStatuses.modified");
+    default:
+      return status;
+  }
+}
+
 type GitPerFileModeContentProps = {
   groups: PerFileDiffGroup[];
   selectedPath: string | null;
@@ -102,7 +120,7 @@ export function GitPerFileModeContent({
                       onClick={() => onSelectFile?.(edit.id)}
                     >
                       <span className="per-file-edit-status" data-status={edit.status}>
-                        {edit.status}
+                        {localizeEditStatus(t, edit.status)}
                       </span>
                       <span className="per-file-edit-label">{edit.label}</span>
                       <span className="per-file-edit-stats">
