@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { listWorkspaces } from "../../../services/tauri";
 import type { AppSettings } from "../../../types";
 import { isMobilePlatform } from "../../../utils/platformPaths";
@@ -22,18 +23,18 @@ function isRemoteServerConfigured(settings: AppSettings): boolean {
   return Boolean(settings.remoteBackendToken?.trim()) && Boolean(settings.remoteBackendHost.trim());
 }
 
-function defaultMobileSetupMessage(): string {
-  return "Enter your desktop Tailscale host and token, then run Connect & test.";
-}
-
-function markActiveRemoteBackendConnected(settings: AppSettings, connectedAtMs: number): AppSettings {
+function markActiveRemoteBackendConnected(
+  settings: AppSettings,
+  connectedAtMs: number,
+  fallbackName: string,
+): AppSettings {
   const existingBackends: AppSettings["remoteBackends"] =
     settings.remoteBackends.length > 0
       ? [...settings.remoteBackends]
       : [
           {
             id: settings.activeRemoteBackendId ?? "remote-default",
-            name: "Primary remote",
+            name: fallbackName,
             provider: "tcp" as const,
             host: settings.remoteBackendHost,
             token: settings.remoteBackendToken,
@@ -66,6 +67,7 @@ export function useMobileServerSetup({
   queueSaveSettings,
   refreshWorkspaces,
 }: UseMobileServerSetupParams): UseMobileServerSetupResult {
+  const { t } = useTranslation();
   const isMobileRuntime = useMemo(() => isMobilePlatform(), []);
 
   const [remoteHostDraft, setRemoteHostDraft] = useState(appSettings.remoteBackendHost);
@@ -104,23 +106,23 @@ export function useMobileServerSetup({
         setMobileServerReady(true);
         setStatusError(false);
         if (options?.announceSuccess) {
-          const count = entries.length;
-          const workspaceWord = count === 1 ? "workspace" : "workspaces";
-          setStatusMessage(`Connected. ${count} ${workspaceWord} available from your desktop backend.`);
+          setStatusMessage(
+            t("mobileSetupWizard.connected", { count: entries.length }),
+          );
         } else {
           setStatusMessage(null);
         }
         return true;
       } catch (error) {
         const message =
-          error instanceof Error ? error.message : "Unable to reach remote backend.";
+          error instanceof Error ? error.message : t("mobileSetupWizard.unableToReachRemote");
         setMobileServerReady(false);
         setStatusError(true);
         setStatusMessage(message);
         return false;
       }
     },
-    [isMobileRuntime, refreshWorkspaces],
+    [isMobileRuntime, refreshWorkspaces, t],
   );
 
   const onConnectTest = useCallback(() => {
@@ -135,7 +137,7 @@ export function useMobileServerSetup({
       if (!nextHost || !nextToken) {
         setMobileServerReady(false);
         setStatusError(true);
-        setStatusMessage(defaultMobileSetupMessage());
+        setStatusMessage(t("mobileSetupWizard.defaultMessage"));
         return;
       }
 
@@ -153,11 +155,17 @@ export function useMobileServerSetup({
         });
         const connected = await runConnectivityCheck({ announceSuccess: true });
         if (connected) {
-          await queueSaveSettings(markActiveRemoteBackendConnected(saved, Date.now()));
+          await queueSaveSettings(
+            markActiveRemoteBackendConnected(
+              saved,
+              Date.now(),
+              t("settingsServer.primaryRemote"),
+            ),
+          );
         }
       } catch (error) {
         const message =
-          error instanceof Error ? error.message : "Unable to save remote backend settings.";
+          error instanceof Error ? error.message : t("mobileSetupWizard.unableToSaveSettings");
         setMobileServerReady(false);
         setStatusError(true);
         setStatusMessage(message);
@@ -173,6 +181,7 @@ export function useMobileServerSetup({
     remoteHostDraft,
     remoteTokenDraft,
     runConnectivityCheck,
+    t,
   ]);
 
   useEffect(() => {
@@ -183,7 +192,7 @@ export function useMobileServerSetup({
       setMobileServerReady(false);
       setChecking(false);
       setStatusError(true);
-      setStatusMessage(defaultMobileSetupMessage());
+      setStatusMessage(t("mobileSetupWizard.defaultMessage"));
       return;
     }
 
@@ -193,7 +202,7 @@ export function useMobileServerSetup({
     void (async () => {
       const ok = await runConnectivityCheck();
       if (active && !ok) {
-        setStatusMessage((previous) => previous ?? "Unable to connect to remote backend.");
+        setStatusMessage((previous) => previous ?? t("mobileSetupWizard.unableToConnect"));
       }
       if (active) {
         setChecking(false);
@@ -209,6 +218,7 @@ export function useMobileServerSetup({
     busy,
     isMobileRuntime,
     runConnectivityCheck,
+    t,
   ]);
 
   const handleMobileConnectSuccess = useCallback(async () => {

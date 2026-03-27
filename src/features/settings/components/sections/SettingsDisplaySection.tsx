@@ -1,7 +1,7 @@
 import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
 import { useTranslation } from "react-i18next";
 import type { AppSettings } from "@/types";
-import { SUPPORTED_LANGUAGES } from "@/i18n";
+import { applyLanguageFromSettings, SUPPORTED_LANGUAGES } from "@/i18n";
 import {
   CODE_FONT_SIZE_MAX,
   CODE_FONT_SIZE_MIN,
@@ -71,7 +71,7 @@ export function SettingsDisplaySection({
   onTestNotificationSound,
   onTestSystemNotification,
 }: SettingsDisplaySectionProps) {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const scrollbackUnlimited = appSettings.chatHistoryScrollbackItems === null;
   const [scrollbackDraft, setScrollbackDraft] = useState(() => {
     const value = appSettings.chatHistoryScrollbackItems;
@@ -180,11 +180,7 @@ export function SettingsDisplaySection({
           value={appSettings.language ?? ""}
           onChange={(event) => {
             const nextLang = event.target.value || null;
-            if (nextLang) {
-              void i18n.changeLanguage(nextLang);
-            } else {
-              void i18n.changeLanguage(undefined);
-            }
+            applyLanguageFromSettings(nextLang);
             void onUpdateAppSettings({
               ...appSettings,
               language: nextLang,

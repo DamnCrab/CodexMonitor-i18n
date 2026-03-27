@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { ModalShell } from "../../design-system/components/modal/ModalShell";
 import { validateBranchName } from "../utils/branchValidation";
 
@@ -33,6 +34,7 @@ export function InitGitRepoPrompt({
   onCancel,
   onConfirm,
 }: InitGitRepoPromptProps) {
+  const { t } = useTranslation();
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
@@ -43,10 +45,10 @@ export function InitGitRepoPrompt({
   const validationError = useMemo(() => {
     const trimmed = branch.trim();
     if (!trimmed) {
-      return "Branch name is required.";
+      return t("initGitRepoPrompt.branchRequired");
     }
     return validateBranchName(branch);
-  }, [branch]);
+  }, [branch, t]);
 
   const remoteValidationError = useMemo(() => {
     if (!createRemote) {
@@ -54,41 +56,41 @@ export function InitGitRepoPrompt({
     }
     const trimmed = repoName.trim();
     if (!trimmed) {
-      return "Repository name is required.";
+      return t("initGitRepoPrompt.repositoryRequired");
     }
     if (/\s/.test(trimmed)) {
-      return "Repository name cannot contain spaces.";
+      return t("initGitRepoPrompt.repositoryNoSpaces");
     }
     return null;
-  }, [createRemote, repoName]);
+  }, [createRemote, repoName, t]);
 
   const combinedValidationError = validationError || remoteValidationError;
   const canSubmit = !isBusy && !combinedValidationError;
 
   return (
-    <ModalShell
-      className="git-init-modal"
-      ariaLabel="Initialize Git"
+      <ModalShell
+        className="git-init-modal"
+        ariaLabel={t("initGitRepoPrompt.ariaLabel")}
       onBackdropClick={() => {
         if (!isBusy) {
           onCancel();
         }
       }}
     >
-      <div className="ds-modal-title git-init-modal-title">Initialize Git</div>
+      <div className="ds-modal-title git-init-modal-title">{t("gitPanel.initializeGit")}</div>
       <div className="ds-modal-subtitle git-init-modal-subtitle">
-        Create a new repository under "{workspaceName}" and make an initial commit.
+        {t("initGitRepoPrompt.subtitle", { workspaceName })}
       </div>
 
       <label className="ds-modal-label git-init-modal-label" htmlFor="git-init-branch">
-        Initial branch
+        {t("initGitRepoPrompt.initialBranch")}
       </label>
       <input
         id="git-init-branch"
         ref={inputRef}
         className="ds-modal-input git-init-modal-input"
         value={branch}
-        placeholder="main"
+        placeholder={t("initGitRepoPrompt.mainPlaceholder")}
         disabled={isBusy}
         onChange={(event) => onBranchChange(event.target.value)}
         onKeyDown={(event) => {
@@ -117,20 +119,21 @@ export function InitGitRepoPrompt({
           onChange={(event) => onCreateRemoteChange(event.target.checked)}
         />
         <span className="git-init-modal-checkbox-text">
-          Create GitHub repository and set up <code>origin</code>
+          {t("initGitRepoPrompt.createGithubPrefix")} <code>origin</code>{" "}
+          {t("initGitRepoPrompt.createGithubSuffix")}
         </span>
       </label>
 
       {createRemote && (
         <div className="git-init-modal-remote">
           <label className="ds-modal-label git-init-modal-label" htmlFor="git-init-repo-name">
-            GitHub repo
+            {t("initGitRepoPrompt.githubRepo")}
           </label>
           <input
             id="git-init-repo-name"
             className="ds-modal-input git-init-modal-input"
             value={repoName}
-            placeholder="owner/repo or repo"
+            placeholder={t("initGitRepoPrompt.repoPlaceholder")}
             disabled={isBusy}
             onChange={(event) => onRepoNameChange(event.target.value)}
             onKeyDown={(event) => {
@@ -158,7 +161,7 @@ export function InitGitRepoPrompt({
               disabled={isBusy}
               onChange={(event) => onPrivateChange(event.target.checked)}
             />
-            <span className="git-init-modal-checkbox-text">Private repo</span>
+            <span className="git-init-modal-checkbox-text">{t("initGitRepoPrompt.privateRepo")}</span>
           </label>
         </div>
       )}
@@ -176,7 +179,7 @@ export function InitGitRepoPrompt({
           onClick={onCancel}
           disabled={isBusy}
         >
-          Cancel
+          {t("server.cancel")}
         </button>
         <button
           type="button"
@@ -184,7 +187,7 @@ export function InitGitRepoPrompt({
           onClick={onConfirm}
           disabled={!canSubmit}
         >
-          {isBusy ? "Initializing..." : "Initialize"}
+          {isBusy ? t("gitPanel.initializing") : t("gitPanel.initializeGit")}
         </button>
       </div>
     </ModalShell>

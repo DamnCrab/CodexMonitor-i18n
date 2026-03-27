@@ -410,6 +410,39 @@ fn should_broadcast_global_workspace_notification(
         && request_workspace.is_none()
 }
 
+fn drop_thread_tracking(
+    thread_id: &str,
+    thread_workspace: &mut HashMap<String, String>,
+    hidden_thread_ids: &mut HashSet<String>,
+    background_thread_callbacks: &mut HashMap<String, mpsc::UnboundedSender<Value>>,
+) {
+    thread_workspace.remove(thread_id);
+    hidden_thread_ids.remove(thread_id);
+    background_thread_callbacks.remove(thread_id);
+}
+
+fn drop_workspace_thread_tracking(
+    workspace_id: &str,
+    thread_workspace: &mut HashMap<String, String>,
+    hidden_thread_ids: &mut HashSet<String>,
+    background_thread_callbacks: &mut HashMap<String, mpsc::UnboundedSender<Value>>,
+) {
+    let stale_thread_ids: Vec<String> = thread_workspace
+        .iter()
+        .filter_map(|(thread_id, mapped_workspace_id)| {
+            (mapped_workspace_id == workspace_id).then(|| thread_id.clone())
+        })
+        .collect();
+    for thread_id in stale_thread_ids {
+        drop_thread_tracking(
+            thread_id.as_str(),
+            thread_workspace,
+            hidden_thread_ids,
+            background_thread_callbacks,
+        );
+    }
+}
+
 #[derive(Clone)]
 pub(crate) struct RequestContext {
     workspace_id: String,
@@ -475,6 +508,15 @@ impl WorkspaceSession {
     pub(crate) async fn unregister_workspace(&self, workspace_id: &str) {
         self.workspace_ids.lock().await.remove(workspace_id);
         self.workspace_roots.lock().await.remove(workspace_id);
+        let mut thread_workspace = self.thread_workspace.lock().await;
+        let mut hidden_thread_ids = self.hidden_thread_ids.lock().await;
+        let mut background_thread_callbacks = self.background_thread_callbacks.lock().await;
+        drop_workspace_thread_tracking(
+            workspace_id,
+            &mut thread_workspace,
+            &mut hidden_thread_ids,
+            &mut background_thread_callbacks,
+        );
     }
 
     pub(crate) async fn workspace_ids_snapshot(&self) -> Vec<String> {
@@ -948,8 +990,16 @@ pub(crate) async fn spawn_workspace_session<E: EventSink>(
 
             if method_name == Some("thread/archived") {
                 if let Some(ref tid) = thread_id {
-                    session_clone.thread_workspace.lock().await.remove(tid);
-                    session_clone.hidden_thread_ids.lock().await.remove(tid);
+                    let mut thread_workspace = session_clone.thread_workspace.lock().await;
+                    let mut hidden_thread_ids = session_clone.hidden_thread_ids.lock().await;
+                    let mut background_thread_callbacks =
+                        session_clone.background_thread_callbacks.lock().await;
+                    drop_thread_tracking(
+                        tid,
+                        &mut thread_workspace,
+                        &mut hidden_thread_ids,
+                        &mut background_thread_callbacks,
+                    );
                 }
             }
 
@@ -962,10 +1012,16 @@ pub(crate) async fn spawn_workspace_session<E: EventSink>(
                     // Check for background thread callback
                     let mut sent_to_background = false;
                     if let Some(ref tid) = thread_id {
-                        let callbacks = session_clone.background_thread_callbacks.lock().await;
-                        if let Some(tx) = callbacks.get(tid) {
-                            let _ = tx.send(value.clone());
-                            sent_to_background = true;
+                        let callback = {
+                            let callbacks = session_clone.background_thread_callbacks.lock().await;
+                            callbacks.get(tid).cloned()
+                        };
+                        if let Some(tx) = callback {
+                            if tx.send(value.clone()).is_ok() {
+                                sent_to_background = true;
+                            } else {
+                                session_clone.background_thread_callbacks.lock().await.remove(tid);
+                            }
                         }
                     }
                     // Don't emit to frontend if this is a background thread event
@@ -1006,10 +1062,16 @@ pub(crate) async fn spawn_workspace_session<E: EventSink>(
                 // Check for background thread callback
                 let mut sent_to_background = false;
                 if let Some(ref tid) = thread_id {
-                    let callbacks = session_clone.background_thread_callbacks.lock().await;
-                    if let Some(tx) = callbacks.get(tid) {
-                        let _ = tx.send(value.clone());
-                        sent_to_background = true;
+                    let callback = {
+                        let callbacks = session_clone.background_thread_callbacks.lock().await;
+                        callbacks.get(tid).cloned()
+                    };
+                    if let Some(tx) = callback {
+                        if tx.send(value.clone()).is_ok() {
+                            sent_to_background = true;
+                        } else {
+                            session_clone.background_thread_callbacks.lock().await.remove(tid);
+                        }
                     }
                 }
                 // Don't emit to frontend if this is a background thread event
@@ -1105,13 +1167,15 @@ pub(crate) async fn spawn_workspace_session<E: EventSink>(
 #[cfg(test)]
 mod tests {
     use super::{
-        build_initialize_params, extract_related_thread_ids, extract_thread_entries_from_thread_list_result,
-        extract_thread_id, normalize_root_path, resolve_workspace_for_cwd,
+        build_initialize_params, drop_thread_tracking, drop_workspace_thread_tracking,
+        extract_related_thread_ids, extract_thread_entries_from_thread_list_result, extract_thread_id,
+        normalize_root_path, resolve_workspace_for_cwd,
         should_suppress_hidden_thread_event, source_subagent_kind,
         thread_started_is_memory_consolidation,
     };
-    use std::collections::HashMap;
+    use std::collections::{HashMap, HashSet};
     use serde_json::json;
+    use tokio::sync::mpsc;
 
     #[test]
     fn extract_thread_id_reads_camel_case() {
@@ -1384,5 +1448,55 @@ mod tests {
             Some("codex/backgroundThread"),
             false
         ));
+    }
+
+    #[test]
+    fn drop_thread_tracking_cleans_all_per_thread_state() {
+        let (tx, _rx) = mpsc::unbounded_channel();
+        let mut thread_workspace = HashMap::from([("thread-1".to_string(), "ws-1".to_string())]);
+        let mut hidden_thread_ids = HashSet::from(["thread-1".to_string()]);
+        let mut background_thread_callbacks = HashMap::from([("thread-1".to_string(), tx)]);
+
+        drop_thread_tracking(
+            "thread-1",
+            &mut thread_workspace,
+            &mut hidden_thread_ids,
+            &mut background_thread_callbacks,
+        );
+
+        assert!(thread_workspace.is_empty());
+        assert!(hidden_thread_ids.is_empty());
+        assert!(background_thread_callbacks.is_empty());
+    }
+
+    #[test]
+    fn drop_workspace_thread_tracking_only_cleans_matching_workspace_entries() {
+        let (stale_tx, _stale_rx) = mpsc::unbounded_channel();
+        let (active_tx, _active_rx) = mpsc::unbounded_channel();
+        let mut thread_workspace = HashMap::from([
+            ("thread-stale".to_string(), "ws-1".to_string()),
+            ("thread-active".to_string(), "ws-2".to_string()),
+        ]);
+        let mut hidden_thread_ids =
+            HashSet::from(["thread-stale".to_string(), "thread-active".to_string()]);
+        let mut background_thread_callbacks = HashMap::from([
+            ("thread-stale".to_string(), stale_tx),
+            ("thread-active".to_string(), active_tx),
+        ]);
+
+        drop_workspace_thread_tracking(
+            "ws-1",
+            &mut thread_workspace,
+            &mut hidden_thread_ids,
+            &mut background_thread_callbacks,
+        );
+
+        assert_eq!(
+            thread_workspace,
+            HashMap::from([("thread-active".to_string(), "ws-2".to_string())])
+        );
+        assert_eq!(hidden_thread_ids, HashSet::from(["thread-active".to_string()]));
+        assert_eq!(background_thread_callbacks.len(), 1);
+        assert!(background_thread_callbacks.contains_key("thread-active"));
     }
 }

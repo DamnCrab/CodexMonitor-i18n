@@ -51,6 +51,19 @@ fn collect_workspace_diff_falls_back_to_workdir() {
 }
 
 #[test]
+fn collect_workspace_diff_truncates_oversized_workspace_payloads() {
+    let (root, _repo) = create_temp_repo();
+    for index in 0..256 {
+        let file_path = root.join(format!("large-{index}.txt"));
+        fs::write(&file_path, "x".repeat(4096)).expect("write oversized diff input");
+    }
+
+    let diff_output = diff::collect_workspace_diff(&root).expect("collect diff");
+    assert!(diff_output.contains("[Diff truncated: too large to keep full workspace diff in memory]"));
+    assert!(diff_output.len() < 530_000);
+}
+
+#[test]
 fn action_paths_for_file_expands_renames() {
     let (root, repo) = create_temp_repo();
     fs::write(root.join("a.txt"), "hello\n").expect("write file");

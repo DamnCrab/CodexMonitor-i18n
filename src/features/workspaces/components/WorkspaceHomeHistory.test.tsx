@@ -17,7 +17,7 @@ describe("WorkspaceHomeHistory", () => {
       await i18n.changeLanguage("zh");
     });
 
-    render(
+    const { container } = render(
       <WorkspaceHomeHistory
         runs={[]}
         recentThreadInstances={[]}
@@ -40,7 +40,7 @@ describe("WorkspaceHomeHistory", () => {
       await i18n.changeLanguage("zh");
     });
 
-    render(
+    const { container } = render(
       <WorkspaceHomeHistory
         runs={[
           {
@@ -74,7 +74,10 @@ describe("WorkspaceHomeHistory", () => {
       />,
     );
 
-    expect(screen.getByText(/本地 · 1 个实例 · 失败/)).toBeTruthy();
+    const meta = container.querySelector(".workspace-home-run-meta");
+    expect(meta?.textContent?.replace(/\s+/g, " ").trim()).toBe(
+      `${i18n.t("workspaceHome.localMode")} · 1 ${i18n.t("workspaceHome.instanceSingular")} · ${i18n.t("workspaceHome.failed")}`,
+    );
     expect(screen.getByText("运行中")).toBeTruthy();
   });
 });

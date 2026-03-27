@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import type { WorkspaceInfo } from "../../../types";
 
 type RenamePromptState = {
@@ -36,6 +37,7 @@ export function useRenameWorktreePrompt({
   renameWorktreeUpstream,
   onRenameSuccess,
 }: UseRenameWorktreePromptOptions) {
+  const { t } = useTranslation();
   const [renamePrompt, setRenamePrompt] = useState<RenamePromptState | null>(
     null,
   );
@@ -137,7 +139,7 @@ export function useRenameWorktreePrompt({
         prev
           ? {
               ...prev,
-              error: "Branch name is required.",
+              error: t("initGitRepoPrompt.branchRequired"),
               isSubmitting: false,
             }
           : prev,
@@ -162,9 +164,9 @@ export function useRenameWorktreePrompt({
         });
       }
       if (actualName !== trimmed) {
-        setNoticeMessage(`Branch already exists. Renamed to "${actualName}".`);
+        setNoticeMessage(t("renameWorktree.branchExistsRenamed", { name: actualName }));
       } else {
-        setNoticeMessage("Worktree renamed.");
+        setNoticeMessage(t("renameWorktree.renamed"));
       }
       setRenamePrompt(null);
     } catch (error) {
@@ -178,7 +180,7 @@ export function useRenameWorktreePrompt({
           : prev,
       );
     }
-  }, [onRenameSuccess, renamePrompt, renameWorktree, setNoticeMessage]);
+  }, [onRenameSuccess, renamePrompt, renameWorktree, setNoticeMessage, t]);
 
   const confirmUpstream = useCallback(async () => {
     if (!upstreamPrompt || upstreamPrompt.isSubmitting) {
@@ -194,7 +196,7 @@ export function useRenameWorktreePrompt({
         upstreamPrompt.newBranch,
       );
       setUpstreamPrompt(null);
-      setNoticeMessage("Upstream branch updated.");
+      setNoticeMessage(t("renameWorktree.upstreamUpdated"));
     } catch (error) {
       setUpstreamPrompt((prev) =>
         prev
@@ -206,7 +208,7 @@ export function useRenameWorktreePrompt({
           : prev,
       );
     }
-  }, [renameWorktreeUpstream, setNoticeMessage, upstreamPrompt]);
+  }, [renameWorktreeUpstream, setNoticeMessage, t, upstreamPrompt]);
 
   return {
     renamePrompt,
