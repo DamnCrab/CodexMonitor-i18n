@@ -19,6 +19,7 @@ export const SUPPORTED_LANGUAGES = [
 ] as const;
 
 export type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number];
+export const I18NEXT_LANGUAGE_STORAGE_KEY = "i18nextLng";
 
 void i18n
   .use(LanguageDetector)
@@ -45,10 +46,20 @@ void i18n
     },
     detection: {
       order: ["localStorage", "navigator"],
-      lookupLocalStorage: "i18nextLng",
+      lookupLocalStorage: I18NEXT_LANGUAGE_STORAGE_KEY,
       caches: ["localStorage"],
     },
   });
+
+export async function resetLanguageToSystemDefault(): Promise<void> {
+  try {
+    globalThis.localStorage?.removeItem(I18NEXT_LANGUAGE_STORAGE_KEY);
+  } catch {
+    // Ignore storage access failures and still fall back to detector logic.
+  }
+
+  await i18n.changeLanguage();
+}
 
 /**
  * Apply a persisted language override from AppSettings.
@@ -57,6 +68,7 @@ void i18n
  */
 export function applyLanguageFromSettings(lang: string | null): void {
   if (!lang) {
+    void resetLanguageToSystemDefault();
     return;
   }
   const supported = SUPPORTED_LANGUAGES.includes(lang as SupportedLanguage);
