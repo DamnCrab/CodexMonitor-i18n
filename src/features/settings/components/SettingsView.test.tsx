@@ -11,7 +11,7 @@ import {
 import i18n from "i18next";
 import type { ComponentProps } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { SUPPORTED_LANGUAGES } from "@/i18n";
+import { applyLanguageFromSettings, SUPPORTED_LANGUAGES } from "@/i18n";
 import type { AppSettings, WorkspaceInfo } from "@/types";
 import {
   connectWorkspace,
@@ -70,6 +70,7 @@ getAgentsSettingsMock.mockResolvedValue({
 });
 
 afterEach(() => {
+  window.localStorage.clear();
   void i18n.changeLanguage("en");
 });
 
@@ -553,6 +554,36 @@ describe("SettingsView Display", () => {
       expect(onUpdateAppSettings).toHaveBeenCalledWith(
         expect.objectContaining({ language: "ja" }),
       );
+    });
+  });
+
+  it("clears the cached language when switching back to system default", async () => {
+    const onUpdateAppSettings = vi.fn().mockResolvedValue(undefined);
+    window.localStorage.setItem("i18nextLng", "ja");
+    renderDisplaySection({
+      appSettings: {
+        language: "ja",
+      },
+      onUpdateAppSettings,
+    });
+
+    fireEvent.change(screen.getByLabelText("Language"), { target: { value: "" } });
+
+    await waitFor(() => {
+      expect(onUpdateAppSettings).toHaveBeenCalledWith(
+        expect.objectContaining({ language: null }),
+      );
+      expect(window.localStorage.getItem("i18nextLng")).toBeNull();
+    });
+  });
+
+  it("clears stale cached language when settings already use system default", async () => {
+    window.localStorage.setItem("i18nextLng", "ja");
+
+    applyLanguageFromSettings(null);
+
+    await waitFor(() => {
+      expect(window.localStorage.getItem("i18nextLng")).toBeNull();
     });
   });
 
