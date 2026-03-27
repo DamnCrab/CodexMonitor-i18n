@@ -55,12 +55,22 @@ describe("message rows i18n", () => {
       </>,
     );
 
-    expect(screen.getByText("0:04 完成")).toBeTruthy();
-    expect(screen.getByText("12 秒后将拉取新消息")).toBeTruthy();
-    expect(screen.getByText("审查已开始")).toBeTruthy();
-    expect(screen.getByText("审查")).toBeTruthy();
-    expect(screen.getByText("已修改")).toBeTruthy();
-    expect(screen.getByText(/需要输入: 未提供答案/)).toBeTruthy();
-    expect(screen.getByText("探索中")).toBeTruthy();
+    expect(
+      screen.getByText(i18n.t("messages.doneIn", { duration: "0:04" })),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(i18n.t("messages.newMessageFetchIn", { count: 12 })),
+    ).toBeTruthy();
+    expect(screen.getByText(i18n.t("messages.review.started"))).toBeTruthy();
+    expect(screen.getByText(i18n.t("messages.review.badge"))).toBeTruthy();
+    expect(screen.getByText(i18n.t("messages.diffStatus.modified"))).toBeTruthy();
+    expect(
+      screen.getByText(
+        (_, element) =>
+          element?.textContent ===
+          `${i18n.t("requestUserInput.title")}: ${i18n.t("requestUserInput.noAnswerProvided")}`,
+      ),
+    ).toBeTruthy();
+    expect(screen.getByText(i18n.t("messages.explore.exploring"))).toBeTruthy();
   });
 });

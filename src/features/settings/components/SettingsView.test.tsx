@@ -11,7 +11,10 @@ import {
 import i18n from "i18next";
 import type { ComponentProps } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { SUPPORTED_LANGUAGES } from "@/i18n";
+import {
+  I18NEXT_LANGUAGE_STORAGE_KEY,
+  SUPPORTED_LANGUAGES,
+} from "@/i18n";
 import type { AppSettings, WorkspaceInfo } from "@/types";
 import {
   connectWorkspace,
@@ -570,6 +573,25 @@ describe("SettingsView Display", () => {
     expect(
       within(select).queryByRole("option", { name: "الإنجليزية" }),
     ).not.toBeTruthy();
+  });
+
+  it("clears the cached language when switching back to system default", async () => {
+    const onUpdateAppSettings = vi.fn().mockResolvedValue(undefined);
+    localStorage.setItem(I18NEXT_LANGUAGE_STORAGE_KEY, "ja");
+    await i18n.changeLanguage("ja");
+    renderDisplaySection({
+      onUpdateAppSettings,
+      appSettings: { language: "ja" },
+    });
+
+    fireEvent.change(screen.getByLabelText("言語"), { target: { value: "" } });
+
+    await waitFor(() => {
+      expect(localStorage.getItem(I18NEXT_LANGUAGE_STORAGE_KEY)).toBeNull();
+      expect(onUpdateAppSettings).toHaveBeenCalledWith(
+        expect.objectContaining({ language: null }),
+      );
+    });
   });
 
   it("toggles remaining limits display", async () => {

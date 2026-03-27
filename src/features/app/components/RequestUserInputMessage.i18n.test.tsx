@@ -54,13 +54,23 @@ describe("RequestUserInputMessage i18n", () => {
       />,
     );
 
-    expect(screen.getByRole("group", { name: "请求用户输入" })).toBeTruthy();
-    expect(screen.getByText("需要输入")).toBeTruthy();
-    expect(screen.getByText("请求 1 / 2")).toBeTruthy();
-    expect(screen.getByPlaceholderText("添加备注（可选）")).toBeTruthy();
+    expect(
+      screen.getByRole("group", { name: i18n.t("requestUserInput.groupLabel") }),
+    ).toBeTruthy();
+    expect(screen.getByText(i18n.t("requestUserInput.title"))).toBeTruthy();
+    expect(
+      screen.getByText(
+        i18n.t("requestUserInput.queuePosition", { current: 1, total: 2 }),
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByPlaceholderText(i18n.t("requestUserInput.addNotesOptional")),
+    ).toBeTruthy();
 
     fireEvent.click(screen.getByText("蓝绿发布"));
-    fireEvent.click(screen.getByRole("button", { name: "提交" }));
+    fireEvent.click(
+      screen.getByRole("button", { name: i18n.t("requestUserInput.submit") }),
+    );
 
     expect(onSubmit).toHaveBeenCalledWith(
       expect.objectContaining({ request_id: 1 }),
