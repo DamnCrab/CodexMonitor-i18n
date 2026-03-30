@@ -1,4 +1,5 @@
 import type { ConversationItem } from "../types";
+import i18n from "@/i18n";
 
 function formatMessage(item: Extract<ConversationItem, { kind: "message" }>) {
   const roleLabel = item.role === "user" ? "User" : "Assistant";
@@ -18,12 +19,15 @@ function formatReasoning(item: Extract<ConversationItem, { kind: "reasoning" }>)
 
 function formatUserInput(item: Extract<ConversationItem, { kind: "userInput" }>) {
   const lines = item.questions.map((entry, index) => {
-    const title = entry.question || entry.header || `Question ${index + 1}`;
+    const title =
+      entry.question || entry.header || i18n.t("requestUserInput.question", { count: index + 1 });
     const answers =
-      entry.answers.length > 0 ? entry.answers.join(" | ") : "No answer provided";
+      entry.answers.length > 0
+        ? entry.answers.join(" | ")
+        : i18n.t("requestUserInput.noAnswerProvided");
     return `- ${title}: ${answers}`;
   });
-  return ["Input answered:", ...lines].join("\n");
+  return [i18n.t("threadTranscript.inputAnswered"), ...lines].join("\n");
 }
 
 function formatTool(item: Extract<ConversationItem, { kind: "tool" }>) {
@@ -59,7 +63,11 @@ function formatReview(item: Extract<ConversationItem, { kind: "review" }>) {
 }
 
 function formatExplore(item: Extract<ConversationItem, { kind: "explore" }>) {
-  const title = item.status === "exploring" ? "Exploring" : "Explored";
+  const title = i18n.t(
+    item.status === "exploring"
+      ? "messages.explore.exploring"
+      : "messages.explore.explored",
+  );
   const lines = item.entries.map((entry) => {
     const prefix = entry.kind[0].toUpperCase() + entry.kind.slice(1);
     return `- ${prefix} ${entry.label}${entry.detail ? ` (${entry.detail})` : ""}`;

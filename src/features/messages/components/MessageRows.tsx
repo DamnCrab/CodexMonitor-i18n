@@ -1,6 +1,7 @@
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { MouseEvent } from "react";
 import { createPortal } from "react-dom";
+import { useTranslation } from "react-i18next";
 import Brain from "lucide-react/dist/esm/icons/brain";
 import Check from "lucide-react/dist/esm/icons/check";
 import Copy from "lucide-react/dist/esm/icons/copy";
@@ -36,6 +37,8 @@ import {
 } from "../utils/messageRenderUtils";
 import { Markdown } from "./Markdown";
 import { isStandaloneMarkdownTable } from "./Markdown";
+
+const COLLAPSED_REASONING_PREVIEW_MAX_CHARS = 320;
 
 type MarkdownFileLinkProps = {
   showMessageFilePath?: boolean;
@@ -88,7 +91,6 @@ type ToolRowProps = MarkdownFileLinkProps & {
   item: Extract<ConversationItem, { kind: "tool" }>;
   isExpanded: boolean;
   onToggle: (id: string) => void;
-  onRequestAutoScroll?: () => void;
 };
 
 type ExploreRowProps = {
@@ -298,6 +300,38 @@ function buildPlanExportFileName(itemId: string) {
   return normalized.startsWith("plan-") ? `${normalized}.md` : `plan-${normalized}.md`;
 }
 
+function localizeDiffStatus(
+  t: ReturnType<typeof useTranslation>["t"],
+  status?: string,
+) {
+  const normalized = (status ?? "").trim().toLowerCase();
+  switch (normalized) {
+    case "a":
+    case "add":
+    case "added":
+    case "create":
+      return t("messages.diffStatus.added");
+    case "d":
+    case "delete":
+    case "deleted":
+    case "remove":
+    case "removed":
+      return t("messages.diffStatus.removed");
+    case "r":
+    case "rename":
+    case "renamed":
+      return t("messages.diffStatus.renamed");
+    case "m":
+    case "modify":
+    case "modified":
+    case "change":
+    case "changed":
+      return t("messages.diffStatus.modified");
+    default:
+      return status ?? "";
+  }
+}
+
 export const WorkingIndicator = memo(function WorkingIndicator({
   isThinking,
   processingStartedAt = null,
@@ -307,6 +341,7 @@ export const WorkingIndicator = memo(function WorkingIndicator({
   showPollingFetchStatus = false,
   pollingIntervalMs = 12000,
 }: WorkingIndicatorProps) {
+  const { t } = useTranslation();
   const [elapsedMs, setElapsedMs] = useState(0);
   const [pollCountdownSeconds, setPollCountdownSeconds] = useState(() =>
     Math.max(1, Math.ceil(pollingIntervalMs / 1000)),
@@ -348,7 +383,7 @@ export const WorkingIndicator = memo(function WorkingIndicator({
           <div className="working-timer">
             <span className="working-timer-clock">{formatDurationMs(elapsedMs)}</span>
           </div>
-          <span className="working-text">{reasoningLabel || "Working…"}</span>
+          <span className="working-text">{reasoningLabel || t("messages.working")}</span>
         </div>
       )}
       {!isThinking && lastDurationMs !== null && hasItems && (
@@ -356,8 +391,10 @@ export const WorkingIndicator = memo(function WorkingIndicator({
           <span className="turn-complete-line" aria-hidden />
           <span className="turn-complete-label">
             {showPollingFetchStatus
-              ? `New message will be fetched in ${pollCountdownSeconds} seconds`
-              : `Done in ${formatDurationMs(lastDurationMs)}`}
+              ? t("messages.newMessageFetchIn", { count: pollCountdownSeconds })
+              : t("messages.doneIn", {
+                  duration: formatDurationMs(lastDurationMs),
+                })}
           </span>
           <span className="turn-complete-line" aria-hidden />
         </div>
@@ -520,6 +557,19 @@ export const ReasoningRow = memo(function ReasoningRow({
 }: ReasoningRowProps) {
   const { summaryTitle, bodyText, hasBody } = parsed;
   const reasoningTone: StatusTone = hasBody ? "completed" : "processing";
+  const collapsedPreview = useMemo(() => {
+    if (!bodyText) {
+      return "";
+    }
+    const previewSeed = bodyText.slice(0, COLLAPSED_REASONING_PREVIEW_MAX_CHARS * 2);
+    const normalizedPreview = previewSeed.replace(/\s+/g, " ").trim();
+    if (normalizedPreview.length > COLLAPSED_REASONING_PREVIEW_MAX_CHARS) {
+      return `${normalizedPreview
+        .slice(0, COLLAPSED_REASONING_PREVIEW_MAX_CHARS)
+        .trimEnd()}…`;
+    }
+    return bodyText.length > previewSeed.length ? `${normalizedPreview}…` : normalizedPreview;
+  }, [bodyText]);
   return (
     <div className="tool-inline reasoning-inline">
       <button
@@ -543,18 +593,21 @@ export const ReasoningRow = memo(function ReasoningRow({
           />
           <span className="tool-inline-value">{summaryTitle}</span>
         </button>
-        {hasBody && (
+        {hasBody && isExpanded && (
           <Markdown
             value={bodyText}
-            className={`reasoning-inline-detail markdown ${
-              isExpanded ? "" : "tool-inline-clamp"
-            }`}
+            className="reasoning-inline-detail markdown"
             showFilePath={showMessageFilePath}
             workspacePath={workspacePath}
             onOpenFileLink={onOpenFileLink}
             onOpenFileLinkMenu={onOpenFileLinkMenu}
             onOpenThreadLink={onOpenThreadLink}
           />
+        )}
+        {hasBody && !isExpanded && (
+          <div className="reasoning-inline-preview tool-inline-clamp">
+            {collapsedPreview}
+          </div>
         )}
       </div>
     </div>
@@ -569,7 +622,12 @@ export const ReviewRow = memo(function ReviewRow({
   onOpenFileLinkMenu,
   onOpenThreadLink,
 }: ReviewRowProps) {
-  const title = item.state === "started" ? "Review started" : "Review completed";
+  const { t } = useTranslation();
+  const title = t(
+    item.state === "started"
+      ? "messages.review.started"
+      : "messages.review.completed",
+  );
   return (
     <div className="item-card review">
       <div className="review-header">
@@ -577,7 +635,7 @@ export const ReviewRow = memo(function ReviewRow({
         <span
           className={`review-badge ${item.state === "started" ? "active" : "done"}`}
         >
-          Review
+          {t("messages.review.badge")}
         </span>
       </div>
       {item.text && (
@@ -596,11 +654,14 @@ export const ReviewRow = memo(function ReviewRow({
 });
 
 export const DiffRow = memo(function DiffRow({ item }: DiffRowProps) {
+  const { t } = useTranslation();
   return (
     <div className="item-card diff">
       <div className="diff-header">
         <span className="diff-title">{item.title}</span>
-        {item.status && <span className="item-status">{item.status}</span>}
+        {item.status && (
+          <span className="item-status">{localizeDiffStatus(t, item.status)}</span>
+        )}
       </div>
       <div className="diff-viewer-output">
         <PierreDiffBlock diff={item.diff} displayPath={item.title} />
@@ -614,10 +675,12 @@ export const UserInputRow = memo(function UserInputRow({
   isExpanded,
   onToggle,
 }: UserInputRowProps) {
+  const { t } = useTranslation();
   const first = item.questions[0];
   const previewQuestion =
-    first?.question?.trim() || first?.header?.trim() || "Input requested";
-  const firstAnswer = first?.answers[0]?.trim() || "No answer provided";
+    first?.question?.trim() || first?.header?.trim() || t("requestUserInput.title");
+  const firstAnswer =
+    first?.answers[0]?.trim() || t("requestUserInput.noAnswerProvided");
   const previewAnswer =
     first && first.answers.length > 1
       ? `${firstAnswer} +${first.answers.length - 1}`
@@ -631,7 +694,7 @@ export const UserInputRow = memo(function UserInputRow({
         className="tool-inline-bar-toggle"
         onClick={() => onToggle(item.id)}
         aria-expanded={isExpanded}
-        aria-label="Toggle answered input details"
+        aria-label={t("messages.userInput.toggleDetails")}
       />
       <div className="tool-inline-content">
         <button
@@ -641,16 +704,23 @@ export const UserInputRow = memo(function UserInputRow({
           aria-expanded={isExpanded}
         >
           <Check className="tool-inline-icon completed" size={14} aria-hidden />
-          <span className="tool-inline-label">answered:</span>
+          <span className="tool-inline-label">
+            {t("messages.userInput.answeredLabel")}:
+          </span>
           <span className="tool-inline-value user-input-inline-preview">
             {previewQuestion}: {previewAnswer}
-            {extraQuestions > 0 ? ` +${extraQuestions} more` : ""}
+            {extraQuestions > 0
+              ? ` ${t("messages.userInput.moreCount", { count: extraQuestions })}`
+              : ""}
           </span>
         </button>
         {isExpanded && (
           <div className="user-input-inline-details">
             {item.questions.map((question, index) => {
-              const title = question.question || question.header || `Question ${index + 1}`;
+              const title =
+                question.question
+                || question.header
+                || t("requestUserInput.question", { count: index + 1 });
               return (
                 <div
                   key={`${question.id}-${index}`}
@@ -670,7 +740,7 @@ export const UserInputRow = memo(function UserInputRow({
                     </div>
                   ) : (
                     <div className="user-input-inline-empty-answer">
-                      No answer provided.
+                      {t("requestUserInput.noAnswerProvided")}
                     </div>
                   )}
                 </div>
@@ -692,8 +762,8 @@ export const ToolRow = memo(function ToolRow({
   onOpenFileLink,
   onOpenFileLinkMenu,
   onOpenThreadLink,
-  onRequestAutoScroll,
 }: ToolRowProps) {
+  const { t } = useTranslation();
   const isFileChange = item.toolType === "fileChange";
   const isCommand = item.toolType === "commandExecution";
   const isPlan = item.toolType === "plan";
@@ -709,8 +779,8 @@ export const ToolRow = memo(function ToolRow({
   const ToolIcon = toolIconForSummary(item, summary);
   const summaryLabel = isFileChange
     ? changeNames.length > 1
-      ? "files edited"
-      : "file edited"
+      ? t("messages.tool.filesEdited")
+      : t("messages.tool.fileEdited")
     : isCommand
       ? ""
       : summary.label;
@@ -718,42 +788,17 @@ export const ToolRow = memo(function ToolRow({
   const summaryValue = isFileChange
     ? changeNames.length > 1
       ? `${changeNames[0]} +${changeNames.length - 1}`
-      : changeNames[0] || "changes"
+      : changeNames[0] || t("messages.tool.changes")
     : summary.value;
   const shouldFadeCommand =
     isCommand && !isExpanded && (summaryValue?.length ?? 0) > 80;
   const showToolOutput = isExpanded && (!isFileChange || !hasChanges);
-  const normalizedStatus = (item.status ?? "").toLowerCase();
-  const isCommandRunning = isCommand && /in[_\s-]*progress|running|started/.test(normalizedStatus);
-  const commandDurationMs =
-    typeof item.durationMs === "number" ? item.durationMs : null;
-  const isLongRunning = commandDurationMs !== null && commandDurationMs >= 1200;
-  const [showLiveOutput, setShowLiveOutput] = useState(false);
   const [isExportingPlan, setIsExportingPlan] = useState(false);
-
-  useEffect(() => {
-    if (!isCommandRunning) {
-      setShowLiveOutput(false);
-      return;
-    }
-    const timeoutId = window.setTimeout(() => {
-      setShowLiveOutput(true);
-    }, 600);
-    return () => {
-      window.clearTimeout(timeoutId);
-    };
-  }, [isCommandRunning]);
 
   const showCommandOutput =
     isCommand &&
     summary.output &&
-    (isExpanded || (isCommandRunning && showLiveOutput) || isLongRunning);
-
-  useEffect(() => {
-    if (showCommandOutput && isCommandRunning && showLiveOutput) {
-      onRequestAutoScroll?.();
-    }
-  }, [isCommandRunning, onRequestAutoScroll, showCommandOutput, showLiveOutput]);
+    isExpanded;
 
   const handlePlanExport = useCallback(
     async (event: MouseEvent<HTMLButtonElement>) => {
@@ -767,16 +812,19 @@ export const ToolRow = memo(function ToolRow({
       try {
         await exportMarkdownFile(output, buildPlanExportFileName(item.id));
       } catch (error) {
-        const message = error instanceof Error ? error.message : "Unable to export plan.";
+        const message =
+          error instanceof Error
+            ? error.message
+            : t("messages.tool.unableToExportPlan");
         pushErrorToast({
-          title: "Plan export failed",
+          title: t("messages.tool.planExportFailed"),
           message,
         });
       } finally {
         setIsExportingPlan(false);
       }
     },
-    [item.id, summary.output],
+    [item.id, summary.output, t],
   );
 
   return (
@@ -786,7 +834,7 @@ export const ToolRow = memo(function ToolRow({
         className="tool-inline-bar-toggle"
         onClick={() => onToggle(item.id)}
         aria-expanded={isExpanded}
-        aria-label="Toggle tool details"
+        aria-label={t("messages.tool.toggleDetails")}
       />
       <div className="tool-inline-content">
         <button
@@ -827,7 +875,7 @@ export const ToolRow = memo(function ToolRow({
         )}
         {isExpanded && isCommand && item.detail && (
           <div className="tool-inline-detail tool-inline-muted">
-            cwd: {item.detail}
+            {t("messages.tool.cwdPrefix")}: {item.detail}
           </div>
         )}
         {isExpanded && isFileChange && hasChanges && (
@@ -888,7 +936,9 @@ export const ToolRow = memo(function ToolRow({
               onClick={handlePlanExport}
               disabled={isExportingPlan}
             >
-              {isExportingPlan ? "Exporting..." : "Export .md"}
+              {isExportingPlan
+                ? t("messages.tool.exporting")
+                : t("messages.tool.exportMd")}
             </button>
           </div>
         )}
@@ -898,7 +948,12 @@ export const ToolRow = memo(function ToolRow({
 });
 
 export const ExploreRow = memo(function ExploreRow({ item }: ExploreRowProps) {
-  const title = item.status === "exploring" ? "Exploring" : "Explored";
+  const { t } = useTranslation();
+  const title = t(
+    item.status === "exploring"
+      ? "messages.explore.exploring"
+      : "messages.explore.explored",
+  );
   return (
     <div className="tool-inline explore-inline">
       <div className="tool-inline-bar-toggle" aria-hidden />

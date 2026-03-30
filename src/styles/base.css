@@ -31,6 +31,53 @@
 }
 
 html,
+body,
+#root,
+.app,
+.app * {
+  scrollbar-width: thin;
+  scrollbar-color: var(--cm-scrollbar-thumb) var(--cm-scrollbar-track);
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+#root::-webkit-scrollbar,
+.app::-webkit-scrollbar,
+.app *::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track,
+#root::-webkit-scrollbar-track,
+.app::-webkit-scrollbar-track,
+.app *::-webkit-scrollbar-track {
+  background: var(--cm-scrollbar-track);
+  border-radius: 999px;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+#root::-webkit-scrollbar-thumb,
+.app::-webkit-scrollbar-thumb,
+.app *::-webkit-scrollbar-thumb {
+  background: var(--cm-scrollbar-thumb);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover,
+#root::-webkit-scrollbar-thumb:hover,
+.app::-webkit-scrollbar-thumb:hover,
+.app *::-webkit-scrollbar-thumb:hover {
+  background: var(--cm-scrollbar-thumb-hover);
+  background-clip: padding-box;
+}
+
+html,
 body {
   margin: 0;
   background: transparent;
@@ -80,6 +127,9 @@ body {
   --cm-border-contrast: color-mix(in srgb, var(--border-subtle) 100%, transparent);
   --cm-border-accent: color-mix(in srgb, var(--border-accent) 36%, transparent);
   --cm-border-accent-strong: color-mix(in srgb, var(--border-accent) 46%, transparent);
+  --cm-scrollbar-thumb: color-mix(in srgb, var(--text-muted) 44%, transparent);
+  --cm-scrollbar-thumb-hover: color-mix(in srgb, var(--text-strong) 32%, transparent);
+  --cm-scrollbar-track: color-mix(in srgb, var(--surface-card) 22%, transparent);
   transition: grid-template-columns 220ms ease;
   font-family: var(--ui-font-family);
 }
@@ -278,5 +328,23 @@ button.window-caption-control:focus-visible,
   .home-usage-refresh-icon.spinning {
     animation-duration: var(--ds-spinner-dur) !important;
     animation-iteration-count: infinite !important;
+  }
+
+  .main-topbar,
+  .composer,
+  .tabbar,
+  .sidebar,
+  .ds-modal-backdrop,
+  .mobile-setup-wizard-overlay .ds-modal-backdrop,
+  .diff-inline-header {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .main-header-icon svg,
+  .message-copy-icon svg,
+  .compact-view-toggle .main-header-action-icon,
+  .main-header-action .main-header-icon {
+    filter: none !important;
   }
 }

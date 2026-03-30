@@ -1,4 +1,5 @@
 import type { MouseEvent as ReactMouseEvent } from "react";
+import { useTranslation } from "react-i18next";
 import {
   MagicSparkleIcon,
   MagicSparkleLoaderIcon,
@@ -129,16 +130,17 @@ export function GitDiffModeContent({
   onShowFileMenu,
   onDiffListClick,
 }: GitDiffModeContentProps) {
+  const { t } = useTranslation();
   const normalizedGitRoot = normalizeRootPath(gitRoot);
   const missingRepo = isMissingRepo(error);
   const gitRootNotFound = isGitRootNotFound(error);
   const showInitGitRepo = Boolean(onInitGitRepo) && missingRepo && !gitRootNotFound;
   const gitRootTitle = gitRootNotFound
-    ? "Git root folder not found."
+    ? t("gitPanel.gitRootFolderNotFound")
     : missingRepo
-      ? "This workspace isn't a Git repository yet."
-      : "Choose a repo for this workspace.";
-  const generateCommitMessageTooltip = "Generate commit message";
+      ? t("gitPanel.workspaceNotGitRepository")
+      : t("gitPanel.chooseRepoForWorkspace");
+  const generateCommitMessageTooltip = t("gitPanel.generateCommitMessage");
   const showWorktreeApplyInUnstaged = showApplyWorktree && unstagedFiles.length > 0;
   const showWorktreeApplyInStaged =
     showApplyWorktree && unstagedFiles.length === 0 && stagedFiles.length > 0;
@@ -158,7 +160,7 @@ export function GitDiffModeContent({
                 }}
                 disabled={initGitRepoLoading || gitRootScanLoading}
               >
-                {initGitRepoLoading ? "Initializing..." : "Initialize Git"}
+                {initGitRepoLoading ? t("gitPanel.initializing") : t("gitPanel.initializeGit")}
               </button>
             </div>
           )}
@@ -169,10 +171,10 @@ export function GitDiffModeContent({
               onClick={onScanGitRoots}
               disabled={!onScanGitRoots || gitRootScanLoading || initGitRepoLoading}
             >
-              Scan workspace
+              {t("gitPanel.scanWorkspace")}
             </button>
             <label className="git-root-depth">
-              <span>Depth</span>
+              <span>{t("gitPanel.depth")}</span>
               <select
                 className="git-root-select"
                 value={gitRootScanDepth}
@@ -200,7 +202,7 @@ export function GitDiffModeContent({
                 }}
                 disabled={gitRootScanLoading || initGitRepoLoading}
               >
-                Pick folder
+                {t("gitPanel.pickFolder")}
               </button>
             )}
             {hasGitRoot && onClearGitRoot && (
@@ -210,18 +212,18 @@ export function GitDiffModeContent({
                 onClick={onClearGitRoot}
                 disabled={gitRootScanLoading || initGitRepoLoading}
               >
-                Use workspace root
+                {t("gitPanel.useWorkspaceRoot")}
               </button>
             )}
           </div>
           {gitRootScanLoading && (
-            <div className="diff-empty">Scanning for repositories...</div>
+            <div className="diff-empty">{t("gitPanel.scanningRepositories")}</div>
           )}
           {!gitRootScanLoading &&
             !gitRootScanError &&
             gitRootScanHasScanned &&
-            gitRootCandidates.length === 0 && (
-              <div className="diff-empty">No repositories found.</div>
+             gitRootCandidates.length === 0 && (
+              <div className="diff-empty">{t("gitPanel.noRepositoriesFound")}</div>
             )}
           {gitRootCandidates.length > 0 && (
             <div className="git-root-list">
@@ -236,7 +238,7 @@ export function GitDiffModeContent({
                     onClick={() => onSelectGitRoot?.(path)}
                   >
                     <span className="git-root-path">{path}</span>
-                    {isActive && <span className="git-root-tag">Active</span>}
+                    {isActive && <span className="git-root-tag">{t("gitPanel.active")}</span>}
                   </button>
                 );
               })}
@@ -247,9 +249,9 @@ export function GitDiffModeContent({
       {showGenerateCommitMessage && (
         <div className="commit-message-section">
           <div className="commit-message-input-wrapper">
-            <textarea
-              className="commit-message-input"
-              placeholder="Commit message..."
+              <textarea
+                className="commit-message-input"
+                placeholder={t("gitPanel.commitMessagePlaceholder")}
               value={commitMessage}
               onChange={(event) => onCommitMessageChange?.(event.target.value)}
               disabled={commitMessageLoading}

@@ -811,8 +811,9 @@ describe("Messages", () => {
     );
 
     expect(container.querySelector(".reasoning-inline")).toBeTruthy();
-    const reasoningDetail = container.querySelector(".reasoning-inline-detail");
-    expect(reasoningDetail?.textContent ?? "").toContain("Looking for entry points");
+    const reasoningPreview = container.querySelector(".reasoning-inline-preview");
+    expect(reasoningPreview?.textContent ?? "").toContain("Looking for entry points");
+    expect(container.querySelector(".reasoning-inline-detail")).toBeNull();
     const workingText = container.querySelector(".working-text");
     expect(workingText?.textContent ?? "").toContain("Scanning repository");
   });
@@ -841,9 +842,10 @@ describe("Messages", () => {
 
     const workingText = container.querySelector(".working-text");
     expect(workingText?.textContent ?? "").toContain("Plan from content");
-    const reasoningDetail = container.querySelector(".reasoning-inline-detail");
-    expect(reasoningDetail?.textContent ?? "").toContain("More detail here");
-    expect(reasoningDetail?.textContent ?? "").not.toContain("Plan from content");
+    const reasoningPreview = container.querySelector(".reasoning-inline-preview");
+    expect(reasoningPreview?.textContent ?? "").toContain("More detail here");
+    expect(reasoningPreview?.textContent ?? "").not.toContain("Plan from content");
+    expect(container.querySelector(".reasoning-inline-detail")).toBeNull();
   });
 
   it("does not show a stale reasoning label from a previous turn", () => {
@@ -1174,7 +1176,9 @@ describe("Messages", () => {
       expect(container.querySelectorAll(".explore-inline").length).toBe(2);
     });
     const exploreBlocks = Array.from(container.querySelectorAll(".explore-inline"));
-    const reasoningDetail = container.querySelector(".reasoning-inline-detail");
+    const reasoningDetail =
+      container.querySelector(".reasoning-inline-preview")
+      ?? container.querySelector(".reasoning-inline-detail");
     expect(exploreBlocks.length).toBe(2);
     expect(reasoningDetail).toBeTruthy();
     const [firstExploreBlock, secondExploreBlock] = exploreBlocks;
@@ -1186,6 +1190,39 @@ describe("Messages", () => {
       Node.DOCUMENT_POSITION_FOLLOWING;
     expect(firstBeforeReasoning).toBeTruthy();
     expect(reasoningBeforeSecond).toBeTruthy();
+  });
+
+  it("keeps command execution output collapsed until the tool row is expanded", () => {
+    const items: ConversationItem[] = [
+      {
+        id: "tool-command-output",
+        kind: "tool",
+        toolType: "commandExecution",
+        title: "Command: npm run test",
+        detail: "/repo",
+        status: "running",
+        output: "line one\nline two\nline three",
+        durationMs: 10_000,
+      },
+    ];
+
+    render(
+      <Messages
+        items={items}
+        threadId="thread-1"
+        workspaceId="ws-1"
+        isThinking={false}
+        openTargets={[]}
+        selectedOpenAppId=""
+      />,
+    );
+
+    expect(screen.queryByText("line one")).toBeNull();
+
+    fireEvent.click(screen.getByRole("button", { name: "Toggle tool details" }));
+
+    expect(screen.getByText("line one")).toBeTruthy();
+    expect(screen.getByText("line three")).toBeTruthy();
   });
 
   it("does not merge across message boundaries and does not drop messages", async () => {

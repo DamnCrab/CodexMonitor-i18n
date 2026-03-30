@@ -5,6 +5,7 @@ import type {
   RequestUserInputRequest,
   RequestUserInputResponse,
 } from "@/types";
+import i18n from "@/i18n";
 import { respondToUserInputRequest } from "@services/tauri";
 import type { ThreadAction } from "./useThreadsReducer";
 
@@ -58,7 +59,7 @@ function buildUserInputConversationItem(
     entries.push({
       id: "user-input",
       header: "",
-      question: "Input requested",
+      question: i18n.t("requestUserInput.title"),
       answers: [],
     });
   }

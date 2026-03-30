@@ -106,7 +106,6 @@ export const Messages = memo(function Messages({
     bottomRef,
     containerRef,
     updateAutoScroll,
-    requestAutoScroll,
     expandedItems,
     toggleExpanded,
     collapsedToolGroups,
@@ -221,7 +220,6 @@ export const Messages = memo(function Messages({
           onOpenFileLink={openFileLink}
           onOpenFileLinkMenu={showFileLinkMenu}
           onOpenThreadLink={handleOpenThreadLink}
-          onRequestAutoScroll={requestAutoScroll}
         />
       );
     }
