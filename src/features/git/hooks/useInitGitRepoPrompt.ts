@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import type { WorkspaceInfo } from "../../../types";
 import { validateBranchName } from "../utils/branchValidation";
 import type { InitGitRepoOutcome } from "./useGitActions";
@@ -33,6 +34,7 @@ export function useInitGitRepoPrompt({
   refreshGitRemote: () => void;
   isBusy: boolean;
 }) {
+  const { t } = useTranslation();
   const [initGitRepoPrompt, setInitGitRepoPrompt] =
     useState<InitGitRepoPromptState | null>(null);
 
@@ -133,7 +135,7 @@ export function useInitGitRepoPrompt({
     const trimmedBranch = prompt.branch.trim();
     const validationError =
       trimmedBranch.length === 0
-        ? "Branch name is required."
+        ? t("initGitRepoPrompt.branchRequired")
         : validateBranchName(prompt.branch);
     if (validationError) {
       setInitGitRepoPrompt((prev) =>
@@ -146,13 +148,13 @@ export function useInitGitRepoPrompt({
     if (prompt.createRemote) {
       if (!trimmedRepo) {
         setInitGitRepoPrompt((prev) =>
-          prev ? { ...prev, error: "Repository name is required." } : prev,
+          prev ? { ...prev, error: t("initGitRepoPrompt.repositoryRequired") } : prev,
         );
         return;
       }
       if (/\s/.test(trimmedRepo)) {
         setInitGitRepoPrompt((prev) =>
-          prev ? { ...prev, error: "Repository name cannot contain spaces." } : prev,
+          prev ? { ...prev, error: t("initGitRepoPrompt.repositoryNoSpaces") } : prev,
         );
         return;
       }
@@ -173,7 +175,7 @@ export function useInitGitRepoPrompt({
 
     if (initOutcome !== "initialized") {
       setInitGitRepoPrompt((prev) =>
-        prev ? { ...prev, error: prev.error ?? "Failed to initialize Git repository." } : prev,
+        prev ? { ...prev, error: prev.error ?? t("initGitRepoPrompt.initFailed") } : prev,
       );
       return;
     }
@@ -198,6 +200,7 @@ export function useInitGitRepoPrompt({
     initGitRepoPrompt,
     isBusy,
     refreshGitRemote,
+    t,
   ]);
 
   return {

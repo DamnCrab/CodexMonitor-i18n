@@ -11,7 +11,10 @@ import {
 import i18n from "i18next";
 import type { ComponentProps } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { SUPPORTED_LANGUAGES } from "@/i18n";
+import {
+  I18NEXT_LANGUAGE_STORAGE_KEY,
+  SUPPORTED_LANGUAGES,
+} from "@/i18n";
 import type { AppSettings, WorkspaceInfo } from "@/types";
 import {
   connectWorkspace,
@@ -235,7 +238,9 @@ const renderDisplaySection = (
   };
 
   render(<SettingsView {...props} />);
-  fireEvent.click(screen.getByRole("button", { name: "Display & Sound" }));
+  fireEvent.click(
+    screen.getByRole("button", { name: i18n.t("settings.display.title") }),
+  );
 
   return { onUpdateAppSettings, onToggleTransparency };
 };
@@ -552,6 +557,42 @@ describe("SettingsView Display", () => {
     await waitFor(() => {
       expect(onUpdateAppSettings).toHaveBeenCalledWith(
         expect.objectContaining({ language: "ja" }),
+      );
+    });
+  });
+
+  it("keeps language option names as native self-names even in Arabic UI", async () => {
+    const onUpdateAppSettings = vi.fn().mockResolvedValue(undefined);
+    renderDisplaySection({ onUpdateAppSettings });
+    await i18n.changeLanguage("ar");
+
+    const select = screen.getByLabelText("اللغة");
+    within(select).getByRole("option", { name: "English" });
+    within(select).getByRole("option", { name: "Deutsch" });
+    within(select).getByRole("option", { name: "Español" });
+    within(select).getByRole("option", { name: "العربية" });
+
+    expect(
+      within(select).queryByRole("option", { name: "الإنجليزية" }),
+    ).not.toBeTruthy();
+  });
+
+  it("clears the cached language when switching back to system default", async () => {
+    const onUpdateAppSettings = vi.fn().mockResolvedValue(undefined);
+    localStorage.setItem(I18NEXT_LANGUAGE_STORAGE_KEY, "ja");
+    await i18n.changeLanguage("ja");
+    renderDisplaySection({
+      onUpdateAppSettings,
+      appSettings: { language: "ja" },
+    });
+
+    fireEvent.change(screen.getByLabelText("言語"), { target: { value: "" } });
+
+    await waitFor(() => {
+      expect(localStorage.getItem(I18NEXT_LANGUAGE_STORAGE_KEY)).not.toBe("ja");
+      expect(i18n.language).not.toBe("ja");
+      expect(onUpdateAppSettings).toHaveBeenCalledWith(
+        expect.objectContaining({ language: null }),
       );
     });
   });
