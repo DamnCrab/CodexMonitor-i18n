@@ -2,6 +2,12 @@ name: Release
 
 on:
   workflow_dispatch:
+    inputs:
+      publish_release:
+        description: Create the GitHub release and updater metadata
+        required: true
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -44,7 +50,21 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Disable updater artifacts for packaging-only runs
+        if: ${{ !inputs.publish_release }}
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("src-tauri/tauri.conf.json")
+          data = json.loads(path.read_text())
+          data.setdefault("bundle", {})["createUpdaterArtifacts"] = False
+          path.write_text(json.dumps(data, indent=2) + "\n")
+          PY
+
       - name: Import signing certificate
+        if: ${{ inputs.publish_release }}
         env:
           APPLE_CERTIFICATE_P12: ${{ secrets.APPLE_CERTIFICATE_P12 }}
           APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
@@ -64,6 +84,7 @@ jobs:
           security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "" "$KEYCHAIN"
 
       - name: Configure notarytool credentials
+        if: ${{ inputs.publish_release }}
         env:
           APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
           APPLE_API_ISSUER_ID: ${{ secrets.APPLE_API_ISSUER_ID }}
@@ -78,6 +99,7 @@ jobs:
             --key "private_keys/AuthKey.p8"
 
       - name: Write Tauri signing key
+        if: ${{ inputs.publish_release }}
         run: |
           set -euo pipefail
           mkdir -p "$HOME/.tauri"
@@ -86,8 +108,10 @@ jobs:
       - name: Build app bundle
         run: |
           set -euo pipefail
-          export TAURI_SIGNING_PRIVATE_KEY
-          TAURI_SIGNING_PRIVATE_KEY="$(cat "$HOME/.tauri/codexmonitor.key")"
+          if [ "${{ inputs.publish_release }}" = "true" ]; then
+            export TAURI_SIGNING_PRIVATE_KEY
+            TAURI_SIGNING_PRIVATE_KEY="$(cat "$HOME/.tauri/codexmonitor.key")"
+          fi
           npm run tauri -- build --bundles app
 
       - name: Build daemon binaries
@@ -97,12 +121,14 @@ jobs:
           cargo build --release --bin codex_monitor_daemon --bin codex_monitor_daemonctl
 
       - name: Bundle OpenSSL and re-sign
+        if: ${{ inputs.publish_release }}
         run: |
           set -euo pipefail
           CODESIGN_IDENTITY="$CODESIGN_IDENTITY" \
             scripts/macos-fix-openssl.sh
 
       - name: Notarize and staple
+        if: ${{ inputs.publish_release }}
         run: |
           set -euo pipefail
           ditto -c -k --keepParent \
@@ -142,19 +168,21 @@ jobs:
             -ov -format UDZO \
             release-artifacts/CodexMonitor_${VERSION}_aarch64.dmg
 
-          COPYFILE_DISABLE=1 tar -czf \
-            "src-tauri/target/release/bundle/macos/Codex Monitor.app.tar.gz" \
-            -C src-tauri/target/release/bundle/macos "Codex Monitor.app"
+          if [ "${{ inputs.publish_release }}" = "true" ]; then
+            COPYFILE_DISABLE=1 tar -czf \
+              "src-tauri/target/release/bundle/macos/Codex Monitor.app.tar.gz" \
+              -C src-tauri/target/release/bundle/macos "Codex Monitor.app"
 
-          npm run tauri signer sign -- \
-            -f "$HOME/.tauri/codexmonitor.key" \
-            -p "$TAURI_SIGNING_PRIVATE_KEY_PASSWORD" \
-            "src-tauri/target/release/bundle/macos/Codex Monitor.app.tar.gz"
+            npm run tauri signer sign -- \
+              -f "$HOME/.tauri/codexmonitor.key" \
+              -p "$TAURI_SIGNING_PRIVATE_KEY_PASSWORD" \
+              "src-tauri/target/release/bundle/macos/Codex Monitor.app.tar.gz"
 
-          cp "src-tauri/target/release/bundle/macos/Codex Monitor.app.tar.gz" \
-            release-artifacts/CodexMonitor.app.tar.gz
-          cp "src-tauri/target/release/bundle/macos/Codex Monitor.app.tar.gz.sig" \
-            release-artifacts/CodexMonitor.app.tar.gz.sig
+            cp "src-tauri/target/release/bundle/macos/Codex Monitor.app.tar.gz" \
+              release-artifacts/CodexMonitor.app.tar.gz
+            cp "src-tauri/target/release/bundle/macos/Codex Monitor.app.tar.gz.sig" \
+              release-artifacts/CodexMonitor.app.tar.gz.sig
+          fi
 
       - name: Upload macOS artifacts
         uses: actions/upload-artifact@v4
@@ -206,7 +234,21 @@ jobs:
       - name: install frontend dependencies
         run: npm ci
 
+      - name: Disable updater artifacts for packaging-only runs
+        if: ${{ !inputs.publish_release }}
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("src-tauri/tauri.conf.json")
+          data = json.loads(path.read_text())
+          data.setdefault("bundle", {})["createUpdaterArtifacts"] = False
+          path.write_text(json.dumps(data, indent=2) + "\n")
+          PY
+
       - name: Write Tauri signing key
+        if: ${{ inputs.publish_release }}
         run: |
           set -euo pipefail
           mkdir -p "$HOME/.tauri"
@@ -215,8 +257,10 @@ jobs:
       - name: build AppImage and RPM
         run: |
           set -euo pipefail
-          export TAURI_SIGNING_PRIVATE_KEY
-          TAURI_SIGNING_PRIVATE_KEY="$(cat "$HOME/.tauri/codexmonitor.key")"
+          if [ "${{ inputs.publish_release }}" = "true" ]; then
+            export TAURI_SIGNING_PRIVATE_KEY
+            TAURI_SIGNING_PRIVATE_KEY="$(cat "$HOME/.tauri/codexmonitor.key")"
+          fi
           npm run tauri -- build --bundles appimage,rpm
 
       - name: Validate Linux bundle outputs
@@ -275,7 +319,24 @@ jobs:
       - name: install frontend dependencies
         run: npm ci
 
+      - name: Disable updater artifacts for packaging-only runs
+        if: ${{ !inputs.publish_release }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          for relative_path in ("src-tauri/tauri.conf.json", "src-tauri/tauri.windows.conf.json"):
+              path = Path(relative_path)
+              data = json.loads(path.read_text())
+              data.setdefault("bundle", {})["createUpdaterArtifacts"] = False
+              path.write_text(json.dumps(data, indent=2) + "\n")
+          PY
+
       - name: Write Tauri signing key
+        if: ${{ inputs.publish_release }}
         shell: bash
         run: |
           set -euo pipefail
@@ -295,8 +356,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          export TAURI_SIGNING_PRIVATE_KEY
-          TAURI_SIGNING_PRIVATE_KEY="$(cat "$HOME/.tauri/codexmonitor.key")"
+          if [ "${{ inputs.publish_release }}" = "true" ]; then
+            export TAURI_SIGNING_PRIVATE_KEY
+            TAURI_SIGNING_PRIVATE_KEY="$(cat "$HOME/.tauri/codexmonitor.key")"
+          fi
           npm run tauri:build:win
 
       - name: Upload Windows artifacts
@@ -308,6 +371,7 @@ jobs:
             src-tauri/target/release/bundle/msi/*.msi*
 
   release:
+    if: ${{ inputs.publish_release }}
     runs-on: ubuntu-latest
     environment: release
     needs:
