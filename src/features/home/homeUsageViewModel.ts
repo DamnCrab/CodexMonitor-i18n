@@ -229,7 +229,7 @@ export function buildHomeUsageViewModel({
     },
   ] satisfies HomeStatCard[];
 
-  const usagePercentLabels = getUsageLabels(accountRateLimits, usageShowRemaining);
+  const usagePercentLabels = getUsageLabels(accountRateLimits, usageShowRemaining, t);
   const planLabel = formatPlanType(accountRateLimits?.planType ?? accountInfo?.planType);
   const creditsBalance = formatCreditsBalance(accountRateLimits?.credits?.balance, locale);
   const accountCards: HomeStatCard[] = [];

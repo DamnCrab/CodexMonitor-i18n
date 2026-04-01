@@ -1128,9 +1128,13 @@ describe("Messages", () => {
       />,
     );
 
+    const expandButton = await screen.findByRole("button", {
+      name: /expand tool calls/i,
+    });
+    fireEvent.click(expandButton);
+
     await waitFor(() => {
-      const exploreBlocks = container.querySelectorAll(".explore-inline");
-      expect(exploreBlocks.length).toBe(2);
+      expect(container.querySelectorAll(".explore-inline").length).toBe(2);
     });
     const exploreItems = container.querySelectorAll(".explore-inline-item");
     expect(exploreItems.length).toBe(2);
@@ -1169,6 +1173,11 @@ describe("Messages", () => {
         selectedOpenAppId=""
       />,
     );
+
+    const expandButton = await screen.findByRole("button", {
+      name: /expand tool calls/i,
+    });
+    fireEvent.click(expandButton);
 
     await waitFor(() => {
       expect(container.querySelectorAll(".explore-inline").length).toBe(2);

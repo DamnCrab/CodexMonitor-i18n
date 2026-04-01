@@ -720,6 +720,7 @@
     "usage": "Usage",
     "session": "Session",
     "weekly": "Weekly",
+    "availableCredits": "Available credits: {{value}}",
     "worktrees": "Worktrees",
     "showAgents": "Show agents",
     "hideAgents": "Hide agents",
@@ -918,6 +919,46 @@
       "tabs": "Terminal tabs",
       "newTerminal": "New terminal",
       "closeTerminal": "Close {{title}}"
+    },
+    "composerFollowUp": {
+      "title": "Follow-up behavior",
+      "unavailableCopy": "Default: {{queueLabel}} ({{steerLabel}} unavailable). Both Enter and {{shortcut}} will {{queueVerb}} this message.",
+      "defaultCopy": "Default: {{behavior}}. Press {{shortcut}} to {{action}} this message.",
+      "steerVerb": "steer",
+      "queueVerb": "queue"
+    },
+    "composerQueue": {
+      "title": "Queued",
+      "image": "Image",
+      "images": "Images",
+      "imageCount": " · {{count}} image",
+      "menu": "Queue item menu",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "messages": {
+      "oneToolCall": "1 tool call",
+      "toolCallCount": "{{count}} tool calls",
+      "oneMessage": "1 message",
+      "messageCount": "{{count}} messages",
+      "expandToolCalls": "Expand tool calls",
+      "collapseToolCalls": "Collapse tool calls",
+      "sendPromptToAgent": "Send a prompt to the agent.",
+      "sendPromptToStartAgent": "Send a prompt to start a new agent.",
+      "loading": "Loading...",
+      "openImage": "Open image {{index}}",
+      "closeImagePreview": "Close image preview",
+      "toggleReasoningDetails": "Toggle reasoning details",
+      "toggleAnsweredInputDetails": "Toggle answered input details",
+      "answered": "answered:",
+      "more": "more",
+      "questionNumber": "Question {{index}}",
+      "toggleToolDetails": "Toggle tool details",
+      "cwd": "cwd",
+      "exporting": "Exporting...",
+      "exportMarkdown": "Export .md",
+      "exploring": "Exploring",
+      "explored": "Explored"
     }
   },
   "gitPanel": {

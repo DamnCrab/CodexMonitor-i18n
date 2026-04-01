@@ -54,6 +54,7 @@ export function useMessagesViewState({
   const autoScrollRef = useRef(true);
   const copyTimeoutRef = useRef<number | null>(null);
   const manuallyToggledExpandedRef = useRef<Set<string>>(new Set());
+  const initializedToolGroupsRef = useRef<Set<string>>(new Set());
 
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
   const [collapsedToolGroups, setCollapsedToolGroups] = useState<Set<string>>(
@@ -246,6 +247,28 @@ export function useMessagesViewState({
   }, [visibleItems]);
 
   const groupedItems = useMemo(() => buildToolGroups(visibleItems), [visibleItems]);
+
+  useEffect(() => {
+    const nextCollapsedIds: string[] = [];
+    groupedItems.forEach((entry) => {
+      if (entry.kind !== "toolGroup") {
+        return;
+      }
+      if (initializedToolGroupsRef.current.has(entry.group.id)) {
+        return;
+      }
+      initializedToolGroupsRef.current.add(entry.group.id);
+      nextCollapsedIds.push(entry.group.id);
+    });
+    if (nextCollapsedIds.length === 0) {
+      return;
+    }
+    setCollapsedToolGroups((prev) => {
+      const next = new Set(prev);
+      nextCollapsedIds.forEach((id) => next.add(id));
+      return next;
+    });
+  }, [groupedItems]);
 
   const planFollowup = useMemo(() => {
     if (!onPlanAccept || !onPlanSubmitChanges) {

@@ -196,6 +196,14 @@ function SidebarWorkspaceEntry({
     !activeThreadId;
   const draftStatusClass =
     startingDraftThreadWorkspaceId === workspace.id ? "processing" : "ready";
+  const latestThreadTime = threads[0] ? getThreadTime(threads[0]) : null;
+  const conversationSummary =
+    displayThreadRootCount === 1
+      ? t("sidebar.oneConversation")
+      : t("sidebar.conversationCount", { count: displayThreadRootCount });
+  const updatedSummary = latestThreadTime
+    ? t("sidebar.updatedTime", { time: latestThreadTime })
+    : null;
 
   return (
     <WorkspaceCard
@@ -203,9 +211,7 @@ function SidebarWorkspaceEntry({
       workspaceName={renderHighlightedName(workspace.name)}
       summary={
         displayThreadRootCount > 0
-          ? `${displayThreadRootCount} conversation${
-              displayThreadRootCount === 1 ? "" : "s"
-            }${threads[0] ? ` 路 Updated ${getThreadTime(threads[0])}` : ""}`
+          ? [conversationSummary, updatedSummary].filter(Boolean).join(" · ")
           : t("sidebar.noThreadsYet")
       }
       isActive={workspace.id === activeWorkspaceId}
