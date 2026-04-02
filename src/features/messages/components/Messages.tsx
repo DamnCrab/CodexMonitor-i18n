@@ -330,7 +330,6 @@ export const Messages = memo(function Messages({
       className={`messages messages-full${isThinking ? " is-thinking" : ""}`}
       ref={containerRef}
       onWheelCapture={handleUserScrollIntent}
-      onPointerDownCapture={handleUserScrollIntent}
       onTouchStartCapture={handleUserScrollIntent}
       onScroll={updateAutoScroll}
     >

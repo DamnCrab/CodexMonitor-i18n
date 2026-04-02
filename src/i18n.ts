@@ -19,6 +19,7 @@ export const SUPPORTED_LANGUAGES = [
 ] as const;
 
 export type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number];
+const LANGUAGE_STORAGE_KEY = "i18nextLng";
 
 void i18n
   .use(LanguageDetector)
@@ -45,7 +46,7 @@ void i18n
     },
     detection: {
       order: ["localStorage", "navigator"],
-      lookupLocalStorage: "i18nextLng",
+      lookupLocalStorage: LANGUAGE_STORAGE_KEY,
       caches: ["localStorage"],
     },
   });
@@ -63,6 +64,18 @@ export function applyLanguageFromSettings(lang: string | null): void {
   if (supported && i18n.language !== lang) {
     void i18n.changeLanguage(lang);
   }
+}
+
+export function resetLanguageToSystem(): void {
+  try {
+    window.localStorage.removeItem(LANGUAGE_STORAGE_KEY);
+  } catch {
+    // Ignore storage access failures and fall back to i18next detection.
+  }
+
+  const detected = i18n.services.languageDetector?.detect();
+  const nextLanguage = Array.isArray(detected) ? detected[0] : detected;
+  void i18n.changeLanguage(nextLanguage || undefined);
 }
 
 export default i18n;
