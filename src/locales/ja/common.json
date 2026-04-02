@@ -221,7 +221,18 @@
       "latestVersion": "最新バージョンを使用しています。",
       "downloadAndInstall": "ダウンロードしてインストール",
       "checking": "確認中...",
-      "checkForUpdates": "更新を確認"
+      "checkForUpdates": "更新を確認",
+      "whatsNew": "更新内容",
+      "postUpdateLoadingNotes": "更新が完了しました。リリースノートを読み込み中です...",
+      "postUpdateWhatIsNew": "更新が完了しました。主な変更点はこちらです。",
+      "postUpdateFallback": "v{{version}} に更新されましたが、リリースノートを読み込めませんでした。",
+      "viewOnGitHub": "GitHub で見る",
+      "later": "後で",
+      "retry": "再試行",
+      "updateFailedShort": "更新に失敗しました。",
+      "checkingForUpdates": "更新を確認しています...",
+      "versionAvailableShort": "新しいバージョンがあります。",
+      "downloadedBytes": "{{value}} をダウンロード済み"
     },
     "projects": {
       "title": "プロジェクト",
@@ -243,7 +254,11 @@
       "moveProjectUp": "プロジェクトを上へ移動",
       "moveProjectDown": "プロジェクトを下へ移動",
       "deleteProject": "プロジェクトを削除",
-      "noProjectsYet": "まだプロジェクトはありません。"
+      "noProjectsYet": "まだプロジェクトはありません。",
+      "ungrouped": "未分類",
+      "groupNameRequired": "グループ名は必須です。",
+      "groupNameReserved": "「{{name}}」は予約済みです。",
+      "groupNameExists": "グループ名はすでに存在します。"
     },
     "git": {
       "title": "Git",
@@ -294,7 +309,12 @@
       "autoWrapCodeLikeSubtitle": "貼り付け時に長い単一行のコード断片を囲みます。",
       "listsTitle": "リスト",
       "continueLists": "Shift+Enter でリストを継続",
-      "continueListsSubtitle": "行に内容がある場合、番号付きリストと箇条書きを継続します。"
+      "continueListsSubtitle": "行に内容がある場合、番号付きリストと箇条書きを継続します。",
+      "presets": {
+        "default": "デフォルト（補助なし）",
+        "helpful": "便利",
+        "smart": "スマート"
+      }
     },
     "environments": {
       "title": "環境",
@@ -371,7 +391,54 @@
       "downloadError": "ダウンロードエラー。",
       "downloadModel": "モデルをダウンロード",
       "cancelDownload": "ダウンロードをキャンセル",
-      "removeModel": "モデルを削除"
+      "removeModel": "モデルを削除",
+      "models": {
+        "tiny": {
+          "label": "Tiny",
+          "note": "最速ですが精度は低めです。"
+        },
+        "base": {
+          "label": "Base",
+          "note": "標準的なバランス設定です。"
+        },
+        "small": {
+          "label": "Small",
+          "note": "精度が向上します。"
+        },
+        "medium": {
+          "label": "Medium",
+          "note": "高い精度です。"
+        },
+        "largeV3": {
+          "label": "Large V3",
+          "note": "最高精度ですがダウンロードは大きめです。"
+        }
+      },
+      "processing": "処理中...",
+      "languages": {
+        "en": "英語",
+        "es": "スペイン語",
+        "fr": "フランス語",
+        "de": "ドイツ語",
+        "it": "イタリア語",
+        "pt": "ポルトガル語",
+        "nl": "オランダ語",
+        "sv": "スウェーデン語",
+        "no": "ノルウェー語",
+        "da": "デンマーク語",
+        "fi": "フィンランド語",
+        "pl": "ポーランド語",
+        "tr": "トルコ語",
+        "ru": "ロシア語",
+        "uk": "ウクライナ語",
+        "ja": "日本語",
+        "ko": "韓国語",
+        "zh": "中国語"
+      },
+      "keys": {
+        "shift": "Shift",
+        "control": "Control"
+      }
     },
     "features": {
       "title": "機能",
@@ -418,7 +485,7 @@
         "remote_models": "AppReady の前にリモートモデルを更新する。",
         "powershell_utf8": "PowerShell で UTF-8 出力を強制する。",
         "enable_request_compression": "codex-backend に送信するストリーミングリクエスト本文を圧縮する。",
-        "apps": "ChatGPT Apps 連携を有効にする。",
+        "apps": "接続済みの ChatGPT App を \"$\" で利用します。/apps コマンドでアプリをインストールできます。有効化したら Codex を再起動してください。",
         "apps_mcp_gateway": "Apps MCP 呼び出しを設定済みゲートウェイ経由でルーティングする。",
         "skill_mcp_dependency_install": "不足している MCP 依存関係の確認とインストールを許可する。",
         "skill_env_var_dependency_prompt": "不足している skill 環境変数依存関係の入力を促す。",
@@ -666,6 +733,19 @@
       "deleteRemoteQuestion": "Delete remote?",
       "removeRemoteMessage": "Remove {{name}} from saved remotes? This only removes the profile from this device.",
       "deleteRemote": "Delete remote"
+    },
+    "mobileSetup": {
+      "kicker": "モバイル設定が必要です",
+      "title": "デスクトップのバックエンドに接続",
+      "subtitle": "アプリを使う前にこの設定を完了してください。デスクトップ版 CodexMonitor のサーバー設定と同じ接続情報を使ってください。",
+      "closeLabel": "モバイル設定を閉じる",
+      "host": "Tailscale ホスト",
+      "hint": "デスクトップのサーバー設定にある Tailscale ホストを使い、デスクトップのデーモンを起動したままにしてください。",
+      "defaultMessage": "デスクトップの Tailscale ホストとトークンを入力してから「接続してテスト」を実行してください。",
+      "connected": "接続されました。デスクトップのバックエンドから {{count}} 件のワークスペースを利用できます。",
+      "unreachable": "リモートバックエンドに接続できません。",
+      "saveFailed": "リモートバックエンド設定を保存できません。",
+      "connectFailed": "リモートバックエンドへの接続に失敗しました。"
     }
   },
   "tabBar": {
@@ -881,7 +961,16 @@
       "newLaunchScript": "新しい起動スクリプト",
       "optionalLabel": "任意のラベル",
       "saving": "保存中...",
-      "new": "新規"
+      "new": "新規",
+      "worktreeInfo": "Worktree 情報",
+      "name": "名前",
+      "updateUpstreamPrompt": "upstream ブランチを {{branch}} に更新しますか？",
+      "updateUpstream": "upstream を更新",
+      "worktree": "Worktree",
+      "terminalRepoRoot": "ターミナル（リポジトリルート）",
+      "copyCommand": "コマンドをコピー",
+      "openWorktreeInTerminal": "この worktree をターミナルで開きます。",
+      "reveal": "表示"
     },
     "toasts": {
       "dismiss": "閉じる",
@@ -912,7 +1001,17 @@
     },
     "composerBar": {
       "contextFreeEmpty": "空きコンテキスト --",
-      "contextFreePercent": "空きコンテキスト {{value}}%"
+      "contextFreePercent": "空きコンテキスト {{value}}%",
+      "plan": "計画",
+      "planMode": "計画モード",
+      "collaborationMode": "コラボレーションモード",
+      "model": "モデル",
+      "noModels": "モデルなし",
+      "fastModeEnabled": "高速モードが有効です",
+      "thinkingMode": "思考モード",
+      "default": "デフォルト",
+      "codexArgsProfile": "Codex 引数プロファイル",
+      "agentAccess": "エージェント権限"
     },
     "terminal": {
       "resizePanel": "ターミナルパネルのサイズを変更",
@@ -958,7 +1057,29 @@
       "exporting": "エクスポート中...",
       "exportMarkdown": ".md をエクスポート",
       "exploring": "探索中",
-      "explored": "探索済み"
+      "explored": "探索済み",
+      "working": "処理中…",
+      "nextMessageFetchIn": "{{seconds}} 秒後に新しいメッセージを取得します",
+      "doneIn": "{{duration}} で完了",
+      "imageNumber": "画像 {{index}}",
+      "quoteMessage": "メッセージを引用",
+      "copyMessage": "メッセージをコピー",
+      "noAnswerProvided": "回答がありません",
+      "inputAnswered": "入力への回答:"
+    },
+    "renameThread": {
+      "title": "スレッド名を変更",
+      "currentName": "現在の名前: \"{{name}}\"",
+      "newName": "新しい名前",
+      "rename": "名前を変更"
+    },
+    "fileManager": {
+      "finder": "Finder",
+      "explorer": "エクスプローラー",
+      "generic": "ファイルマネージャー",
+      "revealIn": "{{manager}} で表示",
+      "showIn": "{{manager}} で表示",
+      "openIn": "{{manager}} で開く"
     }
   },
   "gitPanel": {
@@ -982,7 +1103,7 @@
     "stageAllChanges": "Stage all changes",
     "unstageAllChanges": "Unstage all changes",
     "discardAllChanges": "Discard all changes",
-    "githubIssues": "GitHub issues",
+    "githubIssues": "GitHub Issues",
     "githubPullRequests": "GitHub pull requests",
     "openCount": "{{count}} open",
     "unknown": "unknown",
@@ -1035,16 +1156,133 @@
     "agentEdits": "Agent edits",
     "log": "Log",
     "issues": "Issues",
-    "prs": "PRs",
+    "prs": "PR",
     "noAgentEditsYet": "No agent edits in this thread yet.",
     "oneEdit": "1 edit",
     "editCount": "{{count}} edits",
     "pullCount": "Pull {{count}} commit",
     "branch": "Branch",
     "repositoryRoot": "Repository root",
-    "recentCommits": "Recent commits",
-    "noOpenIssues": "No open issues.",
-    "noOpenPullRequests": "No open pull requests.",
-    "draft": "Draft"
+    "recentCommits": "最近のコミット",
+    "noOpenIssues": "未解決の Issue はありません。",
+    "noOpenPullRequests": "未処理の Pull Request はありません。",
+    "draft": "下書き"
+  },
+  "aboutView": {
+    "iconAlt": "Codex Monitor アイコン",
+    "title": "Codex Monitor",
+    "version": "バージョン {{version}}",
+    "versionUnknown": "バージョン —",
+    "tagline": "Codex エージェントの状況を確認します",
+    "github": "GitHub",
+    "twitter": "Twitter",
+    "footer": "Codex と Dimillian が心を込めて制作"
+  },
+  "debugPanel": {
+    "resize": "デバッグパネルのサイズを変更",
+    "title": "デバッグ",
+    "copy": "コピー",
+    "clear": "クリア",
+    "empty": "まだデバッグイベントはありません。"
+  },
+  "approvalToasts": {
+    "title": "承認が必要です",
+    "none": "なし",
+    "noExtraDetails": "追加の詳細はありません。",
+    "decline": "拒否",
+    "alwaysAllow": "常に許可",
+    "approveEnter": "承認（Enter）",
+    "allowPrefixTitle": "{{preview}} で始まるコマンドを許可"
+  },
+  "reviewPrompt": {
+    "presets": {
+      "baseBranch": {
+        "title": "ベースブランチとの差分をレビュー",
+        "subtitle": "（PR スタイル）"
+      },
+      "uncommitted": "未コミットの変更をレビュー",
+      "commit": "コミットをレビュー",
+      "custom": "カスタムレビュー指示"
+    },
+    "back": "戻る",
+    "startReview": "レビュー開始",
+    "pickBranch": "最近のローカルブランチを選択:",
+    "baseBranches": "ベースブランチ",
+    "loadingBranches": "ブランチを読み込み中...",
+    "noBranchesFound": "ブランチが見つかりません。",
+    "selectCommit": "最近のコミットを選択:",
+    "commits": "コミット",
+    "loadingCommits": "コミットを読み込み中...",
+    "noCommitsFound": "コミットが見つかりません。",
+    "instructions": "指示",
+    "placeholder": "正確性、境界ケース、不足しているテストに注目してください。",
+    "titles": {
+      "baseBranch": "ベースブランチを選択",
+      "commit": "レビューするコミットを選択",
+      "custom": "カスタムレビュー指示",
+      "preset": "レビューのプリセットを選択"
+    },
+    "close": "閉じる"
+  },
+  "worktreePrompt": {
+    "title": "新しい worktree エージェント",
+    "subtitle": "「{{workspace}}」の下に worktree を作成します。",
+    "optional": "（任意）",
+    "branchName": "ブランチ名",
+    "noMatchingBranches": "一致するブランチはありません",
+    "copyAgentsMdPrefix": "",
+    "copyAgentsMdSuffix": " を worktree にコピー",
+    "setupScript": "環境セットアップスクリプト",
+    "setupScriptHint": "プロジェクト設定（設定 → 環境）に保存され、新しい worktree の作成後に専用ターミナルで一度実行されます。"
+  },
+  "requestUserInput": {
+    "ariaLabel": "入力が必要です",
+    "title": "入力が必要です",
+    "queue": "リクエスト {{index}} / {{total}}",
+    "typeAnswerOptional": "回答を入力（任意）",
+    "addNotesOptional": "メモを追加（任意）",
+    "noQuestions": "質問はありません。",
+    "submit": "送信"
+  },
+  "planReady": {
+    "ariaLabel": "プラン準備完了",
+    "title": "プラン準備完了",
+    "description": "このプランで実装を始めるか、プランへの変更内容を入力してください。",
+    "placeholder": "プランで変更したい内容を入力してください...",
+    "sendChanges": "変更を送信",
+    "implement": "このプランを実装",
+    "notificationBody": "プランの準備ができました。返答するには CodexMonitor を開いてください。"
+  },
+  "workspaceFromUrl": {
+    "title": "URL からワークスペースを追加",
+    "remoteUrl": "リモート Git URL",
+    "remoteUrlPlaceholder": "https://github.com/org/repo.git",
+    "targetFolderName": "対象フォルダー名（任意）",
+    "targetFolderPlaceholder": "既定ではリポジトリ名を使用",
+    "destinationFolder": "保存先の親フォルダー",
+    "cloning": "クローン中...",
+    "cloneAndAdd": "クローンして追加"
+  },
+  "workspaceRunControls": {
+    "local": "ローカル",
+    "worktree": "Worktree",
+    "selectRunMode": "実行モードを選択",
+    "toggleRunModeMenu": "実行モードメニューを切り替え",
+    "selectModels": "モデルを選択",
+    "toggleModelsMenu": "モデルメニューを切り替え",
+    "connectToLoadModels": "このワークスペースを接続すると利用可能なモデルを読み込めます。"
+  },
+  "planPanel": {
+    "title": "プラン",
+    "waiting": "プランを待機中...",
+    "empty": "アクティブなプランはありません。"
+  },
+  "threadRow": {
+    "reviewing": "レビュー中",
+    "waiting": "待機中",
+    "pinned": "固定済み",
+    "hideSubagents": "サブエージェントを隠す",
+    "showSubagents": "サブエージェントを表示",
+    "now": "たった今"
   }
 }

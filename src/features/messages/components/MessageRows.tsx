@@ -219,6 +219,21 @@ const CommandOutput = memo(function CommandOutput({ output }: CommandOutputProps
     setIsPinned(distanceFromBottom <= threshold);
   }, []);
 
+  const handleWheelCapture = useCallback(
+    (event: React.WheelEvent<HTMLDivElement>) => {
+      const node = containerRef.current;
+      if (!node || node.scrollHeight <= node.clientHeight) {
+        return;
+      }
+      const atTop = node.scrollTop <= 0;
+      const atBottom = node.scrollTop + node.clientHeight >= node.scrollHeight - 1;
+      if ((event.deltaY < 0 && !atTop) || (event.deltaY > 0 && !atBottom)) {
+        event.stopPropagation();
+      }
+    },
+    [],
+  );
+
   useEffect(() => {
     const node = containerRef.current;
     if (!node || !isPinned) {
@@ -237,6 +252,7 @@ const CommandOutput = memo(function CommandOutput({ output }: CommandOutputProps
         className="tool-inline-terminal-lines"
         ref={containerRef}
         onScroll={handleScroll}
+        onWheelCapture={handleWheelCapture}
       >
         {lineWindow.lines.map((line, index) => (
           <div
@@ -310,6 +326,7 @@ export const WorkingIndicator = memo(function WorkingIndicator({
   showPollingFetchStatus = false,
   pollingIntervalMs = 12000,
 }: WorkingIndicatorProps) {
+  const { t } = useTranslation();
   const [elapsedMs, setElapsedMs] = useState(0);
   const [pollCountdownSeconds, setPollCountdownSeconds] = useState(() =>
     Math.max(1, Math.ceil(pollingIntervalMs / 1000)),
@@ -351,7 +368,9 @@ export const WorkingIndicator = memo(function WorkingIndicator({
           <div className="working-timer">
             <span className="working-timer-clock">{formatDurationMs(elapsedMs)}</span>
           </div>
-          <span className="working-text">{reasoningLabel || "Working…"}</span>
+          <span className="working-text">
+            {reasoningLabel || t("uiText.messages.working")}
+          </span>
         </div>
       )}
       {!isThinking && lastDurationMs !== null && hasItems && (
@@ -359,8 +378,12 @@ export const WorkingIndicator = memo(function WorkingIndicator({
           <span className="turn-complete-line" aria-hidden />
           <span className="turn-complete-label">
             {showPollingFetchStatus
-              ? `New message will be fetched in ${pollCountdownSeconds} seconds`
-              : `Done in ${formatDurationMs(lastDurationMs)}`}
+              ? t("uiText.messages.nextMessageFetchIn", {
+                  seconds: pollCountdownSeconds,
+                })
+              : t("uiText.messages.doneIn", {
+                  duration: formatDurationMs(lastDurationMs),
+                })}
           </span>
           <span className="turn-complete-line" aria-hidden />
         </div>
@@ -381,6 +404,7 @@ export const MessageRow = memo(function MessageRow({
   onOpenFileLinkMenu,
   onOpenThreadLink,
 }: MessageRowProps) {
+  const { t } = useTranslation();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const bubbleRef = useRef<HTMLDivElement | null>(null);
   const selectionSnapshotRef = useRef<string | null>(null);
@@ -395,10 +419,13 @@ export const MessageRow = memo(function MessageRow({
         if (!src) {
           return null;
         }
-        return { src, label: `Image ${index + 1}` };
+        return {
+          src,
+          label: t("uiText.messages.imageNumber", { index: index + 1 }),
+        };
       })
       .filter(Boolean) as MessageImage[];
-  }, [item.images]);
+  }, [item.images, t]);
   const isTableOnlyAssistantMessage =
     item.role === "assistant" &&
     hasText &&
@@ -487,8 +514,8 @@ export const MessageRow = memo(function MessageRow({
               selectionSnapshotRef.current = getSelectedMessageText();
             }}
             onClick={handleQuote}
-            aria-label="Quote message"
-            title="Quote message"
+            aria-label={t("uiText.messages.quoteMessage")}
+            title={t("uiText.messages.quoteMessage")}
           >
             <Quote size={14} aria-hidden />
           </button>
@@ -497,8 +524,8 @@ export const MessageRow = memo(function MessageRow({
           type="button"
           className={`ghost message-copy-button${isCopied ? " is-copied" : ""}`}
           onClick={() => onCopy(item)}
-          aria-label="Copy message"
-          title="Copy message"
+          aria-label={t("uiText.messages.copyMessage")}
+          title={t("uiText.messages.copyMessage")}
         >
           <span className="message-copy-icon" aria-hidden>
             <Copy className="message-copy-icon-copy" size={14} />
@@ -621,8 +648,11 @@ export const UserInputRow = memo(function UserInputRow({
   const { t } = useTranslation();
   const first = item.questions[0];
   const previewQuestion =
-    first?.question?.trim() || first?.header?.trim() || "Input requested";
-  const firstAnswer = first?.answers[0]?.trim() || "No answer provided";
+    first?.question?.trim() ||
+    first?.header?.trim() ||
+    t("requestUserInput.title");
+  const firstAnswer =
+    first?.answers[0]?.trim() || t("uiText.messages.noAnswerProvided");
   const previewAnswer =
     first && first.answers.length > 1
       ? `${firstAnswer} +${first.answers.length - 1}`
@@ -680,7 +710,7 @@ export const UserInputRow = memo(function UserInputRow({
                     </div>
                   ) : (
                     <div className="user-input-inline-empty-answer">
-                      No answer provided.
+                      {t("uiText.messages.noAnswerProvided")}
                     </div>
                   )}
                 </div>
@@ -739,6 +769,7 @@ export const ToolRow = memo(function ToolRow({
   const commandDurationMs =
     typeof item.durationMs === "number" ? item.durationMs : null;
   const isLongRunning = commandDurationMs !== null && commandDurationMs >= 1200;
+  const hasToolOutput = (summary.output ?? "").trim().length > 0;
   const [showLiveOutput, setShowLiveOutput] = useState(false);
   const [isExportingPlan, setIsExportingPlan] = useState(false);
 
@@ -757,7 +788,7 @@ export const ToolRow = memo(function ToolRow({
 
   const showCommandOutput =
     isCommand &&
-    summary.output &&
+    hasToolOutput &&
     (isExpanded || (isCommandRunning && showLiveOutput) || isLongRunning);
 
   useEffect(() => {
@@ -878,10 +909,10 @@ export const ToolRow = memo(function ToolRow({
             onOpenThreadLink={onOpenThreadLink}
           />
         )}
-        {showCommandOutput && <CommandOutput output={summary.output ?? ""} />}
-        {showToolOutput && summary.output && !isCommand && (
+        {showCommandOutput ? <CommandOutput output={summary.output ?? ""} /> : null}
+        {showToolOutput && hasToolOutput && !isCommand && (
           <Markdown
-            value={summary.output}
+            value={summary.output ?? ""}
             className="tool-inline-output markdown"
             codeBlock={item.toolType !== "plan"}
             showFilePath={showMessageFilePath}

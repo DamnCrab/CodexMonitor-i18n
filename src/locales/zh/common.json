@@ -221,7 +221,18 @@
       "latestVersion": "您已经是最新版本。",
       "downloadAndInstall": "下载并安装",
       "checking": "检查中...",
-      "checkForUpdates": "检查更新"
+      "checkForUpdates": "检查更新",
+      "whatsNew": "新内容",
+      "postUpdateLoadingNotes": "更新成功，正在加载发行说明...",
+      "postUpdateWhatIsNew": "更新成功，以下是本次更新内容：",
+      "postUpdateFallback": "已更新到 v{{version}}，但未能加载发行说明。",
+      "viewOnGitHub": "在 GitHub 上查看",
+      "later": "稍后",
+      "retry": "重试",
+      "updateFailedShort": "更新失败。",
+      "checkingForUpdates": "正在检查更新...",
+      "versionAvailableShort": "发现新版本可用。",
+      "downloadedBytes": "已下载 {{value}}"
     },
     "projects": {
       "title": "项目",
@@ -243,7 +254,11 @@
       "moveProjectUp": "上移项目",
       "moveProjectDown": "下移项目",
       "deleteProject": "删除项目",
-      "noProjectsYet": "还没有项目。"
+      "noProjectsYet": "还没有项目。",
+      "ungrouped": "未分组",
+      "groupNameRequired": "必须填写分组名称。",
+      "groupNameReserved": "“{{name}}”为保留名称。",
+      "groupNameExists": "分组名称已存在。"
     },
     "git": {
       "title": "Git",
@@ -294,7 +309,12 @@
       "autoWrapCodeLikeSubtitle": "粘贴较长的类代码单行片段时自动包裹。",
       "listsTitle": "列表",
       "continueLists": "Shift+Enter 延续列表",
-      "continueListsSubtitle": "当当前行有内容时，继续编号或项目符号列表。"
+      "continueListsSubtitle": "当当前行有内容时，继续编号或项目符号列表。",
+      "presets": {
+        "default": "默认（无辅助）",
+        "helpful": "实用",
+        "smart": "智能"
+      }
     },
     "environments": {
       "title": "环境",
@@ -371,7 +391,54 @@
       "downloadError": "下载出错。",
       "downloadModel": "下载模型",
       "cancelDownload": "取消下载",
-      "removeModel": "移除模型"
+      "removeModel": "移除模型",
+      "models": {
+        "tiny": {
+          "label": "Tiny",
+          "note": "速度最快，准确率最低。"
+        },
+        "base": {
+          "label": "Base",
+          "note": "默认均衡。"
+        },
+        "small": {
+          "label": "Small",
+          "note": "准确率更高。"
+        },
+        "medium": {
+          "label": "Medium",
+          "note": "高准确率。"
+        },
+        "largeV3": {
+          "label": "Large V3",
+          "note": "准确率最高，下载体积较大。"
+        }
+      },
+      "processing": "处理中...",
+      "languages": {
+        "en": "英语",
+        "es": "西班牙语",
+        "fr": "法语",
+        "de": "德语",
+        "it": "意大利语",
+        "pt": "葡萄牙语",
+        "nl": "荷兰语",
+        "sv": "瑞典语",
+        "no": "挪威语",
+        "da": "丹麦语",
+        "fi": "芬兰语",
+        "pl": "波兰语",
+        "tr": "土耳其语",
+        "ru": "俄语",
+        "uk": "乌克兰语",
+        "ja": "日语",
+        "ko": "韩语",
+        "zh": "中文"
+      },
+      "keys": {
+        "shift": "Shift",
+        "control": "Control"
+      }
     },
     "features": {
       "title": "功能",
@@ -418,7 +485,7 @@
         "remote_models": "在 AppReady 前刷新远程模型。",
         "powershell_utf8": "强制 PowerShell 使用 UTF-8 输出。",
         "enable_request_compression": "压缩发送到 codex-backend 的流式请求体。",
-        "apps": "启用 ChatGPT Apps 集成。",
+        "apps": "使用 \"$\" 调用已连接的 ChatGPT App。可通过 /apps 命令安装应用。启用后请重新启动 Codex。",
         "apps_mcp_gateway": "通过配置的网关路由 Apps MCP 调用。",
         "skill_mcp_dependency_install": "允许提示并安装缺失的 MCP 依赖。",
         "skill_env_var_dependency_prompt": "提示缺失的技能环境变量依赖。",
@@ -666,6 +733,19 @@
       "deleteRemoteQuestion": "删除远程配置？",
       "removeRemoteMessage": "将 {{name}} 从已保存的远程配置中移除？这只会从当前设备删除该配置。",
       "deleteRemote": "删除远程配置"
+    },
+    "mobileSetup": {
+      "kicker": "需要完成移动端设置",
+      "title": "连接到你的桌面端后端",
+      "subtitle": "在开始使用应用前请先完成此设置。请使用桌面版 CodexMonitor 服务器设置中相同的连接信息。",
+      "closeLabel": "关闭移动端设置",
+      "host": "Tailscale 主机",
+      "hint": "请使用桌面端服务器设置里的 Tailscale 主机，并保持桌面端守护进程持续运行。",
+      "defaultMessage": "请输入桌面端 Tailscale 主机和令牌，然后点击“连接并测试”。",
+      "connected": "已连接。桌面端后端提供了 {{count}} 个工作区。",
+      "unreachable": "无法连接到远程后端。",
+      "saveFailed": "无法保存远程后端设置。",
+      "connectFailed": "无法连接到远程后端。"
     }
   },
   "tabBar": {
@@ -881,7 +961,16 @@
       "newLaunchScript": "新建启动脚本",
       "optionalLabel": "可选标签",
       "saving": "保存中...",
-      "new": "新建"
+      "new": "新建",
+      "worktreeInfo": "Worktree 信息",
+      "name": "名称",
+      "updateUpstreamPrompt": "要把上游分支更新为 {{branch}} 吗？",
+      "updateUpstream": "更新上游分支",
+      "worktree": "Worktree",
+      "terminalRepoRoot": "终端（仓库根目录）",
+      "copyCommand": "复制命令",
+      "openWorktreeInTerminal": "在终端中打开这个 worktree。",
+      "reveal": "定位"
     },
     "toasts": {
       "dismiss": "关闭",
@@ -912,7 +1001,17 @@
     },
     "composerBar": {
       "contextFreeEmpty": "上下文空余 --",
-      "contextFreePercent": "上下文空余 {{value}}%"
+      "contextFreePercent": "上下文空余 {{value}}%",
+      "plan": "计划",
+      "planMode": "计划模式",
+      "collaborationMode": "协作模式",
+      "model": "模型",
+      "noModels": "无可用模型",
+      "fastModeEnabled": "已启用快速模式",
+      "thinkingMode": "思考模式",
+      "default": "默认",
+      "codexArgsProfile": "Codex 参数配置",
+      "agentAccess": "代理权限"
     },
     "terminal": {
       "resizePanel": "调整终端面板大小",
@@ -958,7 +1057,29 @@
       "exporting": "导出中...",
       "exportMarkdown": "导出 .md",
       "exploring": "探索中",
-      "explored": "已探索"
+      "explored": "已探索",
+      "working": "处理中…",
+      "nextMessageFetchIn": "{{seconds}} 秒后将拉取新消息",
+      "doneIn": "完成，用时 {{duration}}",
+      "imageNumber": "图片 {{index}}",
+      "quoteMessage": "引用消息",
+      "copyMessage": "复制消息",
+      "noAnswerProvided": "未提供回答",
+      "inputAnswered": "输入已回答："
+    },
+    "renameThread": {
+      "title": "重命名对话",
+      "currentName": "当前名称：“{{name}}”",
+      "newName": "新名称",
+      "rename": "重命名"
+    },
+    "fileManager": {
+      "finder": "Finder",
+      "explorer": "文件资源管理器",
+      "generic": "文件管理器",
+      "revealIn": "在 {{manager}} 中定位",
+      "showIn": "在 {{manager}} 中显示",
+      "openIn": "在 {{manager}} 中打开"
     }
   },
   "gitPanel": {
@@ -982,7 +1103,7 @@
     "stageAllChanges": "暂存所有更改",
     "unstageAllChanges": "取消暂存所有更改",
     "discardAllChanges": "丢弃所有更改",
-    "githubIssues": "GitHub Issues",
+    "githubIssues": "GitHub 问题",
     "githubPullRequests": "GitHub Pull Requests",
     "openCount": "{{count}} 个打开项",
     "unknown": "未知",
@@ -1034,17 +1155,134 @@
     "diff": "差异",
     "agentEdits": "代理编辑",
     "log": "日志",
-    "issues": "Issues",
-    "prs": "PRs",
+    "issues": "问题",
+    "prs": "拉取请求",
     "noAgentEditsYet": "这个线程里还没有代理编辑。",
     "oneEdit": "1 处编辑",
     "editCount": "{{count}} 处编辑",
     "pullCount": "拉取 {{count}} 个提交",
     "branch": "分支",
     "repositoryRoot": "仓库根目录",
-    "recentCommits": "Recent commits",
-    "noOpenIssues": "No open issues.",
-    "noOpenPullRequests": "No open pull requests.",
-    "draft": "Draft"
+    "recentCommits": "最近提交",
+    "noOpenIssues": "没有打开的问题。",
+    "noOpenPullRequests": "没有打开的拉取请求。",
+    "draft": "草稿"
+  },
+  "aboutView": {
+    "iconAlt": "Codex Monitor 图标",
+    "title": "Codex Monitor",
+    "version": "版本 {{version}}",
+    "versionUnknown": "版本 —",
+    "tagline": "监控你的 Codex 代理运行情况",
+    "github": "GitHub",
+    "twitter": "Twitter",
+    "footer": "由 Codex 与 Dimillian 用爱打造"
+  },
+  "debugPanel": {
+    "resize": "调整调试面板大小",
+    "title": "调试",
+    "copy": "复制",
+    "clear": "清空",
+    "empty": "还没有调试事件。"
+  },
+  "approvalToasts": {
+    "title": "需要审批",
+    "none": "无",
+    "noExtraDetails": "没有更多详情。",
+    "decline": "拒绝",
+    "alwaysAllow": "始终允许",
+    "approveEnter": "批准（Enter）",
+    "allowPrefixTitle": "允许所有以 {{preview}} 开头的命令"
+  },
+  "reviewPrompt": {
+    "presets": {
+      "baseBranch": {
+        "title": "基于目标分支进行审查",
+        "subtitle": "（PR 风格）"
+      },
+      "uncommitted": "审查未提交的改动",
+      "commit": "审查某个提交",
+      "custom": "自定义审查说明"
+    },
+    "back": "返回",
+    "startReview": "开始审查",
+    "pickBranch": "选择最近的本地分支：",
+    "baseBranches": "目标分支",
+    "loadingBranches": "正在加载分支...",
+    "noBranchesFound": "未找到分支。",
+    "selectCommit": "选择最近的提交：",
+    "commits": "提交",
+    "loadingCommits": "正在加载提交...",
+    "noCommitsFound": "未找到提交。",
+    "instructions": "说明",
+    "placeholder": "重点关注正确性、边界情况和缺失的测试。",
+    "titles": {
+      "baseBranch": "选择目标分支",
+      "commit": "选择要审查的提交",
+      "custom": "自定义审查说明",
+      "preset": "选择审查预设"
+    },
+    "close": "关闭"
+  },
+  "worktreePrompt": {
+    "title": "新建 worktree 代理",
+    "subtitle": "在“{{workspace}}”下创建一个 worktree。",
+    "optional": "（可选）",
+    "branchName": "分支名",
+    "noMatchingBranches": "没有匹配的分支",
+    "copyAgentsMdPrefix": "将",
+    "copyAgentsMdSuffix": "复制到 worktree 中",
+    "setupScript": "环境初始化脚本",
+    "setupScriptHint": "脚本保存在项目设置（设置 → 环境）中，每次创建新 worktree 后会在独立终端里执行一次。"
+  },
+  "requestUserInput": {
+    "ariaLabel": "请求用户输入",
+    "title": "需要输入",
+    "queue": "请求 {{index}} / {{total}}",
+    "typeAnswerOptional": "输入你的回答（可选）",
+    "addNotesOptional": "添加备注（可选）",
+    "noQuestions": "没有提供问题。",
+    "submit": "提交"
+  },
+  "planReady": {
+    "ariaLabel": "计划已准备好",
+    "title": "计划已准备好",
+    "description": "可以直接按这个计划开始执行，或者描述你想调整的地方。",
+    "placeholder": "描述你希望修改计划的内容...",
+    "sendChanges": "发送修改",
+    "implement": "执行这个计划",
+    "notificationBody": "计划已准备好。打开 CodexMonitor 进行响应。"
+  },
+  "workspaceFromUrl": {
+    "title": "通过 URL 添加工作区",
+    "remoteUrl": "远程 Git URL",
+    "remoteUrlPlaceholder": "https://github.com/org/repo.git",
+    "targetFolderName": "目标文件夹名（可选）",
+    "targetFolderPlaceholder": "默认使用仓库名",
+    "destinationFolder": "目标父目录",
+    "cloning": "正在克隆...",
+    "cloneAndAdd": "克隆并添加"
+  },
+  "workspaceRunControls": {
+    "local": "本地",
+    "worktree": "Worktree",
+    "selectRunMode": "选择运行模式",
+    "toggleRunModeMenu": "切换运行模式菜单",
+    "selectModels": "选择模型",
+    "toggleModelsMenu": "切换模型菜单",
+    "connectToLoadModels": "连接此工作区后可加载可用模型。"
+  },
+  "planPanel": {
+    "title": "计划",
+    "waiting": "正在等待计划...",
+    "empty": "当前没有活动计划。"
+  },
+  "threadRow": {
+    "reviewing": "审查中",
+    "waiting": "等待中",
+    "pinned": "已置顶",
+    "hideSubagents": "隐藏子代理",
+    "showSubagents": "显示子代理",
+    "now": "刚刚"
   }
 }

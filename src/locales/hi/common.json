@@ -221,7 +221,18 @@
       "latestVersion": "आप नवीनतम संस्करण पर हैं।",
       "downloadAndInstall": "डाउनलोड और इंस्टॉल करें",
       "checking": "जाँचा जा रहा है...",
-      "checkForUpdates": "अपडेट्स जाँचें"
+      "checkForUpdates": "अपडेट्स जाँचें",
+      "whatsNew": "क्या नया है",
+      "postUpdateLoadingNotes": "अपडेट सफल रहा। रिलीज़ नोट्स लोड हो रहे हैं...",
+      "postUpdateWhatIsNew": "अपडेट सफल रहा। यह नया है:",
+      "postUpdateFallback": "v{{version}} में अपडेट हो गया, लेकिन रिलीज़ नोट्स लोड नहीं हो सके।",
+      "viewOnGitHub": "GitHub पर देखें",
+      "later": "बाद में",
+      "retry": "फिर से कोशिश करें",
+      "updateFailedShort": "अपडेट विफल रहा।",
+      "checkingForUpdates": "अपडेट की जाँच हो रही है...",
+      "versionAvailableShort": "नया संस्करण उपलब्ध है।",
+      "downloadedBytes": "{{value}} डाउनलोड हो चुका है"
     },
     "projects": {
       "title": "प्रोजेक्ट्स",
@@ -243,7 +254,11 @@
       "moveProjectUp": "प्रोजेक्ट ऊपर ले जाएँ",
       "moveProjectDown": "प्रोजेक्ट नीचे ले जाएँ",
       "deleteProject": "प्रोजेक्ट हटाएँ",
-      "noProjectsYet": "अभी तक कोई प्रोजेक्ट नहीं।"
+      "noProjectsYet": "अभी तक कोई प्रोजेक्ट नहीं।",
+      "ungrouped": "बिना समूह",
+      "groupNameRequired": "समूह का नाम आवश्यक है।",
+      "groupNameReserved": "\"{{name}}\" आरक्षित है।",
+      "groupNameExists": "समूह का नाम पहले से मौजूद है।"
     },
     "git": {
       "title": "Git",
@@ -294,7 +309,12 @@
       "autoWrapCodeLikeSubtitle": "पेस्ट पर लंबी एकल-पंक्ति कोड स्निपेट्स को लपेटता है।",
       "listsTitle": "सूचियाँ",
       "continueLists": "Shift+Enter पर सूचियाँ जारी रखें",
-      "continueListsSubtitle": "जब पंक्ति में सामग्री हो, तब क्रमांकित और बुलेटेड सूचियाँ जारी रखता है।"
+      "continueListsSubtitle": "जब पंक्ति में सामग्री हो, तब क्रमांकित और बुलेटेड सूचियाँ जारी रखता है।",
+      "presets": {
+        "default": "डिफ़ॉल्ट (बिना सहायक)",
+        "helpful": "सहायक",
+        "smart": "स्मार्ट"
+      }
     },
     "environments": {
       "title": "एनवायरनमेंट्स",
@@ -371,7 +391,54 @@
       "downloadError": "डाउनलोड त्रुटि।",
       "downloadModel": "मॉडल डाउनलोड करें",
       "cancelDownload": "डाउनलोड रद्द करें",
-      "removeModel": "मॉडल हटाएँ"
+      "removeModel": "मॉडल हटाएँ",
+      "models": {
+        "tiny": {
+          "label": "Tiny",
+          "note": "सबसे तेज़, सबसे कम सटीक।"
+        },
+        "base": {
+          "label": "Base",
+          "note": "संतुलित डिफ़ॉल्ट।"
+        },
+        "small": {
+          "label": "Small",
+          "note": "बेहतर सटीकता।"
+        },
+        "medium": {
+          "label": "Medium",
+          "note": "उच्च सटीकता।"
+        },
+        "largeV3": {
+          "label": "Large V3",
+          "note": "सबसे अच्छी सटीकता, बड़ा डाउनलोड।"
+        }
+      },
+      "processing": "प्रोसेस किया जा रहा है...",
+      "languages": {
+        "en": "अंग्रेज़ी",
+        "es": "स्पेनिश",
+        "fr": "फ़्रेंच",
+        "de": "जर्मन",
+        "it": "इतालवी",
+        "pt": "पुर्तगाली",
+        "nl": "डच",
+        "sv": "स्वीडिश",
+        "no": "नॉर्वेजियन",
+        "da": "डेनिश",
+        "fi": "फ़िनिश",
+        "pl": "पोलिश",
+        "tr": "तुर्की",
+        "ru": "रूसी",
+        "uk": "यूक्रेनी",
+        "ja": "जापानी",
+        "ko": "कोरियाई",
+        "zh": "चीनी"
+      },
+      "keys": {
+        "shift": "Shift",
+        "control": "Control"
+      }
     },
     "features": {
       "title": "फ़ीचर्स",
@@ -418,7 +485,7 @@
         "remote_models": "AppReady से पहले remote models रिफ्रेश करें।",
         "powershell_utf8": "PowerShell में UTF-8 output लागू करें।",
         "enable_request_compression": "codex-backend को भेजे गए streaming request bodies संकुचित करें।",
-        "apps": "ChatGPT Apps integration सक्षम करें।",
+        "apps": "\"$\" का उपयोग करके कनेक्टेड ChatGPT ऐप चलाएँ। /apps कमांड से ऐप इंस्टॉल करें। सक्षम करने के बाद Codex को पुनः शुरू करें।",
         "apps_mcp_gateway": "Apps MCP calls को कॉन्फ़िगर किए गए gateway के माध्यम से रूट करें।",
         "skill_mcp_dependency_install": "गुम MCP dependencies के लिए प्रॉम्प्ट और इंस्टॉल की अनुमति दें।",
         "skill_env_var_dependency_prompt": "गुम skill environment variable dependencies के लिए प्रॉम्प्ट करें।",
@@ -666,6 +733,20 @@
       "deleteRemoteQuestion": "Delete remote?",
       "removeRemoteMessage": "Remove {{name}} from saved remotes? This only removes the profile from this device.",
       "deleteRemote": "Delete remote"
+    },
+    "mobileSetup": {
+      "kicker": "मोबाइल सेटअप आवश्यक है",
+      "title": "अपने डेस्कटॉप बैकएंड से कनेक्ट करें",
+      "subtitle": "ऐप इस्तेमाल करने से पहले यह सेटअप पूरा करें। अपने डेस्कटॉप CodexMonitor सर्वर सेटिंग्स में मौजूद वही कनेक्शन विवरण इस्तेमाल करें।",
+      "closeLabel": "मोबाइल सेटअप बंद करें",
+      "host": "Tailscale होस्ट",
+      "hint": "डेस्कटॉप सर्वर सेटिंग्स वाला Tailscale होस्ट इस्तेमाल करें और डेस्कटॉप डेमन चालू रखें।",
+      "defaultMessage": "अपने डेस्कटॉप का Tailscale होस्ट और टोकन दर्ज करें, फिर \"कनेक्ट और टेस्ट\" चलाएँ।",
+      "connected": "कनेक्ट हो गया। आपके डेस्कटॉप बैकएंड से {{count}} वर्कस्पेस उपलब्ध है।",
+      "connected_plural": "कनेक्ट हो गया। आपके डेस्कटॉप बैकएंड से {{count}} वर्कस्पेस उपलब्ध हैं।",
+      "unreachable": "रिमोट बैकएंड तक पहुँचा नहीं जा सका।",
+      "saveFailed": "रिमोट बैकएंड सेटिंग्स सहेजी नहीं जा सकीं।",
+      "connectFailed": "रिमोट बैकएंड से कनेक्ट नहीं हो सका।"
     }
   },
   "tabBar": {
@@ -881,7 +962,16 @@
       "newLaunchScript": "नई लॉन्च स्क्रिप्ट",
       "optionalLabel": "वैकल्पिक लेबल",
       "saving": "सहेजा जा रहा है...",
-      "new": "नया"
+      "new": "नया",
+      "worktreeInfo": "Worktree जानकारी",
+      "name": "नाम",
+      "updateUpstreamPrompt": "क्या आप upstream branch को {{branch}} पर अपडेट करना चाहते हैं?",
+      "updateUpstream": "upstream अपडेट करें",
+      "worktree": "Worktree",
+      "terminalRepoRoot": "टर्मिनल (repo root)",
+      "copyCommand": "कमांड कॉपी करें",
+      "openWorktreeInTerminal": "इस worktree को अपने टर्मिनल में खोलें।",
+      "reveal": "दिखाएँ"
     },
     "toasts": {
       "dismiss": "बंद करें",
@@ -912,7 +1002,17 @@
     },
     "composerBar": {
       "contextFreeEmpty": "मुक्त संदर्भ --",
-      "contextFreePercent": "मुक्त संदर्भ {{value}}%"
+      "contextFreePercent": "मुक्त संदर्भ {{value}}%",
+      "plan": "योजना",
+      "planMode": "योजना मोड",
+      "collaborationMode": "सहयोग मोड",
+      "model": "मॉडल",
+      "noModels": "कोई मॉडल नहीं",
+      "fastModeEnabled": "फास्ट मोड सक्षम है",
+      "thinkingMode": "थिंकिंग मोड",
+      "default": "डिफ़ॉल्ट",
+      "codexArgsProfile": "Codex args प्रोफ़ाइल",
+      "agentAccess": "एजेंट एक्सेस"
     },
     "terminal": {
       "resizePanel": "टर्मिनल पैनल का आकार बदलें",
@@ -958,7 +1058,29 @@
       "exporting": "निर्यात किया जा रहा है...",
       "exportMarkdown": ".md निर्यात करें",
       "exploring": "अन्वेषण जारी है",
-      "explored": "अन्वेषित"
+      "explored": "अन्वेषित",
+      "working": "काम जारी है…",
+      "nextMessageFetchIn": "{{seconds}} सेकंड में नया संदेश प्राप्त होगा",
+      "doneIn": "{{duration}} में पूरा हुआ",
+      "imageNumber": "चित्र {{index}}",
+      "quoteMessage": "संदेश उद्धृत करें",
+      "copyMessage": "संदेश कॉपी करें",
+      "noAnswerProvided": "कोई उत्तर नहीं दिया गया",
+      "inputAnswered": "इनपुट का उत्तर दिया गया:"
+    },
+    "renameThread": {
+      "title": "थ्रेड का नाम बदलें",
+      "currentName": "मौजूदा नाम: \"{{name}}\"",
+      "newName": "नया नाम",
+      "rename": "नाम बदलें"
+    },
+    "fileManager": {
+      "finder": "Finder",
+      "explorer": "फ़ाइल एक्सप्लोरर",
+      "generic": "फ़ाइल प्रबंधक",
+      "revealIn": "{{manager}} में दिखाएँ",
+      "showIn": "{{manager}} में दिखाएँ",
+      "openIn": "{{manager}} में खोलें"
     }
   },
   "gitPanel": {
@@ -982,7 +1104,7 @@
     "stageAllChanges": "Stage all changes",
     "unstageAllChanges": "Unstage all changes",
     "discardAllChanges": "Discard all changes",
-    "githubIssues": "GitHub issues",
+    "githubIssues": "GitHub समस्याएँ",
     "githubPullRequests": "GitHub pull requests",
     "openCount": "{{count}} open",
     "unknown": "unknown",
@@ -1034,7 +1156,7 @@
     "diff": "Diff",
     "agentEdits": "Agent edits",
     "log": "Log",
-    "issues": "Issues",
+    "issues": "समस्याएँ",
     "prs": "PRs",
     "noAgentEditsYet": "No agent edits in this thread yet.",
     "oneEdit": "1 edit",
@@ -1042,9 +1164,126 @@
     "pullCount": "Pull {{count}} commit",
     "branch": "Branch",
     "repositoryRoot": "Repository root",
-    "recentCommits": "Recent commits",
-    "noOpenIssues": "No open issues.",
-    "noOpenPullRequests": "No open pull requests.",
-    "draft": "Draft"
+    "recentCommits": "हाल के कमिट",
+    "noOpenIssues": "कोई खुली समस्या नहीं है।",
+    "noOpenPullRequests": "कोई खुला पुल अनुरोध नहीं है।",
+    "draft": "ड्राफ़्ट"
+  },
+  "aboutView": {
+    "iconAlt": "Codex Monitor आइकन",
+    "title": "Codex Monitor",
+    "version": "संस्करण {{version}}",
+    "versionUnknown": "संस्करण —",
+    "tagline": "अपने Codex एजेंट्स की स्थिति पर नज़र रखें",
+    "github": "GitHub",
+    "twitter": "Twitter",
+    "footer": "Codex और Dimillian द्वारा स्नेह से बनाया गया"
+  },
+  "debugPanel": {
+    "resize": "डिबग पैनल का आकार बदलें",
+    "title": "डिबग",
+    "copy": "कॉपी",
+    "clear": "साफ़ करें",
+    "empty": "अभी तक कोई डिबग इवेंट नहीं है।"
+  },
+  "approvalToasts": {
+    "title": "अनुमोदन आवश्यक है",
+    "none": "कोई नहीं",
+    "noExtraDetails": "कोई अतिरिक्त विवरण नहीं।",
+    "decline": "अस्वीकार",
+    "alwaysAllow": "हमेशा अनुमति दें",
+    "approveEnter": "स्वीकृत करें (Enter)",
+    "allowPrefixTitle": "{{preview}} से शुरू होने वाले कमांड की अनुमति दें"
+  },
+  "reviewPrompt": {
+    "presets": {
+      "baseBranch": {
+        "title": "बेस ब्रांच के खिलाफ समीक्षा करें",
+        "subtitle": "(PR शैली)"
+      },
+      "uncommitted": "अनकमिटेड बदलावों की समीक्षा करें",
+      "commit": "किसी commit की समीक्षा करें",
+      "custom": "कस्टम समीक्षा निर्देश"
+    },
+    "back": "वापस",
+    "startReview": "समीक्षा शुरू करें",
+    "pickBranch": "हाल की लोकल ब्रांच चुनें:",
+    "baseBranches": "बेस ब्रांचें",
+    "loadingBranches": "ब्रांचें लोड हो रही हैं...",
+    "noBranchesFound": "कोई ब्रांच नहीं मिली।",
+    "selectCommit": "हाल का commit चुनें:",
+    "commits": "Commits",
+    "loadingCommits": "commits लोड हो रहे हैं...",
+    "noCommitsFound": "कोई commit नहीं मिला।",
+    "instructions": "निर्देश",
+    "placeholder": "सहीपन, edge cases और छूटे हुए tests पर ध्यान दें।",
+    "titles": {
+      "baseBranch": "बेस ब्रांच चुनें",
+      "commit": "समीक्षा के लिए commit चुनें",
+      "custom": "कस्टम समीक्षा निर्देश",
+      "preset": "समीक्षा प्रीसेट चुनें"
+    },
+    "close": "बंद करें"
+  },
+  "worktreePrompt": {
+    "title": "नया worktree एजेंट",
+    "subtitle": "\"{{workspace}}\" के अंतर्गत worktree बनाएं।",
+    "optional": "(वैकल्पिक)",
+    "branchName": "ब्रांच नाम",
+    "noMatchingBranches": "कोई मिलती-जुलती ब्रांच नहीं",
+    "copyAgentsMdPrefix": "कॉपी करें",
+    "copyAgentsMdSuffix": "को worktree में",
+    "setupScript": "पर्यावरण सेटअप स्क्रिप्ट",
+    "setupScriptHint": "यह प्रोजेक्ट में संग्रहीत रहती है (सेटिंग्स → एनवायरनमेंट्स) और हर नए worktree के बाद एक समर्पित टर्मिनल में एक बार चलती है।"
+  },
+  "requestUserInput": {
+    "ariaLabel": "उपयोगकर्ता इनपुट आवश्यक",
+    "title": "इनपुट आवश्यक",
+    "queue": "अनुरोध {{index}} / {{total}}",
+    "typeAnswerOptional": "अपना उत्तर लिखें (वैकल्पिक)",
+    "addNotesOptional": "नोट्स जोड़ें (वैकल्पिक)",
+    "noQuestions": "कोई प्रश्न उपलब्ध नहीं है।",
+    "submit": "सबमिट"
+  },
+  "planReady": {
+    "ariaLabel": "योजना तैयार है",
+    "title": "योजना तैयार है",
+    "description": "इस योजना से काम शुरू करें, या योजना में बदलाव बताएं।",
+    "placeholder": "बताएं कि आप योजना में क्या बदलना चाहते हैं...",
+    "sendChanges": "बदलाव भेजें",
+    "implement": "इस योजना को लागू करें",
+    "notificationBody": "योजना तैयार है। उत्तर देने के लिए CodexMonitor खोलें।"
+  },
+  "workspaceFromUrl": {
+    "title": "URL से workspace जोड़ें",
+    "remoteUrl": "रिमोट Git URL",
+    "remoteUrlPlaceholder": "https://github.com/org/repo.git",
+    "targetFolderName": "लक्षित फ़ोल्डर नाम (वैकल्पिक)",
+    "targetFolderPlaceholder": "डिफ़ॉल्ट रूप से repo नाम",
+    "destinationFolder": "गंतव्य parent फ़ोल्डर",
+    "cloning": "क्लोन किया जा रहा है...",
+    "cloneAndAdd": "क्लोन करें और जोड़ें"
+  },
+  "workspaceRunControls": {
+    "local": "लोकल",
+    "worktree": "Worktree",
+    "selectRunMode": "रन मोड चुनें",
+    "toggleRunModeMenu": "रन मोड मेन्यू टॉगल करें",
+    "selectModels": "मॉडल चुनें",
+    "toggleModelsMenu": "मॉडल मेन्यू टॉगल करें",
+    "connectToLoadModels": "उपलब्ध मॉडल लोड करने के लिए इस workspace को कनेक्ट करें।"
+  },
+  "planPanel": {
+    "title": "योजना",
+    "waiting": "योजना का इंतज़ार हो रहा है...",
+    "empty": "कोई सक्रिय योजना नहीं है।"
+  },
+  "threadRow": {
+    "reviewing": "समीक्षा चल रही है",
+    "waiting": "प्रतीक्षा में",
+    "pinned": "पिन किया गया",
+    "hideSubagents": "सब-एजेंट छुपाएँ",
+    "showSubagents": "सब-एजेंट दिखाएँ",
+    "now": "अभी"
   }
 }

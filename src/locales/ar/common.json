@@ -221,7 +221,18 @@
       "latestVersion": "أنت تستخدم أحدث إصدار.",
       "downloadAndInstall": "تنزيل وتثبيت",
       "checking": "جارٍ التحقق...",
-      "checkForUpdates": "التحقق من التحديثات"
+      "checkForUpdates": "التحقق من التحديثات",
+      "whatsNew": "ما الجديد",
+      "postUpdateLoadingNotes": "تم التحديث بنجاح. جارٍ تحميل ملاحظات الإصدار...",
+      "postUpdateWhatIsNew": "تم التحديث بنجاح. إليك الجديد:",
+      "postUpdateFallback": "تم التحديث إلى v{{version}}، لكن تعذر تحميل ملاحظات الإصدار.",
+      "viewOnGitHub": "عرض على GitHub",
+      "later": "لاحقًا",
+      "retry": "إعادة المحاولة",
+      "updateFailedShort": "فشل التحديث.",
+      "checkingForUpdates": "جارٍ التحقق من التحديثات...",
+      "versionAvailableShort": "هناك إصدار جديد متاح.",
+      "downloadedBytes": "تم تنزيل {{value}}"
     },
     "projects": {
       "title": "المشاريع",
@@ -243,7 +254,11 @@
       "moveProjectUp": "نقل المشروع لأعلى",
       "moveProjectDown": "نقل المشروع لأسفل",
       "deleteProject": "حذف المشروع",
-      "noProjectsYet": "لا توجد مشاريع بعد."
+      "noProjectsYet": "لا توجد مشاريع بعد.",
+      "ungrouped": "غير مصنف",
+      "groupNameRequired": "اسم المجموعة مطلوب.",
+      "groupNameReserved": "\"{{name}}\" اسم محجوز.",
+      "groupNameExists": "اسم المجموعة موجود بالفعل."
     },
     "git": {
       "title": "Git",
@@ -294,7 +309,12 @@
       "autoWrapCodeLikeSubtitle": "يلف مقتطفات الشيفرة الطويلة ذات السطر الواحد عند اللصق.",
       "listsTitle": "القوائم",
       "continueLists": "متابعة القوائم عند Shift+Enter",
-      "continueListsSubtitle": "يتابع القوائم المرقمة والنقطية عندما يحتوي السطر على محتوى."
+      "continueListsSubtitle": "يتابع القوائم المرقمة والنقطية عندما يحتوي السطر على محتوى.",
+      "presets": {
+        "default": "افتراضي (بدون مساعدات)",
+        "helpful": "مفيد",
+        "smart": "ذكي"
+      }
     },
     "environments": {
       "title": "البيئات",
@@ -371,7 +391,54 @@
       "downloadError": "خطأ في التنزيل.",
       "downloadModel": "تنزيل النموذج",
       "cancelDownload": "إلغاء التنزيل",
-      "removeModel": "إزالة النموذج"
+      "removeModel": "إزالة النموذج",
+      "models": {
+        "tiny": {
+          "label": "Tiny",
+          "note": "الأسرع والأقل دقة."
+        },
+        "base": {
+          "label": "Base",
+          "note": "الخيار المتوازن الافتراضي."
+        },
+        "small": {
+          "label": "Small",
+          "note": "دقة أفضل."
+        },
+        "medium": {
+          "label": "Medium",
+          "note": "دقة عالية."
+        },
+        "largeV3": {
+          "label": "Large V3",
+          "note": "أفضل دقة مع تنزيل كبير."
+        }
+      },
+      "processing": "جارٍ المعالجة...",
+      "languages": {
+        "en": "الإنجليزية",
+        "es": "الإسبانية",
+        "fr": "الفرنسية",
+        "de": "الألمانية",
+        "it": "الإيطالية",
+        "pt": "البرتغالية",
+        "nl": "الهولندية",
+        "sv": "السويدية",
+        "no": "النرويجية",
+        "da": "الدنماركية",
+        "fi": "الفنلندية",
+        "pl": "البولندية",
+        "tr": "التركية",
+        "ru": "الروسية",
+        "uk": "الأوكرانية",
+        "ja": "اليابانية",
+        "ko": "الكورية",
+        "zh": "الصينية"
+      },
+      "keys": {
+        "shift": "Shift",
+        "control": "Control"
+      }
     },
     "features": {
       "title": "الميزات",
@@ -418,7 +485,7 @@
         "remote_models": "حدّث النماذج البعيدة قبل AppReady.",
         "powershell_utf8": "افرض إخراج UTF-8 في PowerShell.",
         "enable_request_compression": "اضغط أجسام طلبات البث المرسلة إلى codex-backend.",
-        "apps": "فعّل تكامل تطبيقات ChatGPT.",
+        "apps": "استخدم تطبيق ChatGPT متصلًا عبر \"$\". ثبّت التطبيقات عبر الأمر /apps. أعد تشغيل Codex بعد التمكين.",
         "apps_mcp_gateway": "وجّه استدعاءات Apps MCP عبر البوابة المكوّنة.",
         "skill_mcp_dependency_install": "اسمح بطلب وتثبيت تبعيات MCP المفقودة.",
         "skill_env_var_dependency_prompt": "اطلب تبعيات متغيرات البيئة المفقودة للمهارات.",
@@ -666,6 +733,20 @@
       "deleteRemoteQuestion": "Delete remote?",
       "removeRemoteMessage": "Remove {{name}} from saved remotes? This only removes the profile from this device.",
       "deleteRemote": "Delete remote"
+    },
+    "mobileSetup": {
+      "kicker": "إعداد الجوال مطلوب",
+      "title": "الاتصال بالواجهة الخلفية على سطح المكتب",
+      "subtitle": "أكمل هذا الإعداد قبل استخدام التطبيق. استخدم نفس بيانات الاتصال المضبوطة في إعدادات خادم CodexMonitor على سطح المكتب.",
+      "closeLabel": "إغلاق إعداد الجوال",
+      "host": "مضيف Tailscale",
+      "hint": "استخدم مضيف Tailscale من إعدادات الخادم على سطح المكتب وأبقِ الخدمة قيد التشغيل.",
+      "defaultMessage": "أدخل مضيف Tailscale والرمز المميز لسطح المكتب، ثم شغّل \"اتصال واختبار\".",
+      "connected": "تم الاتصال. يتوفر {{count}} مساحة عمل من الواجهة الخلفية على سطح المكتب.",
+      "connected_plural": "تم الاتصال. تتوفر {{count}} مساحات عمل من الواجهة الخلفية على سطح المكتب.",
+      "unreachable": "تعذر الوصول إلى الواجهة الخلفية البعيدة.",
+      "saveFailed": "تعذر حفظ إعدادات الواجهة الخلفية البعيدة.",
+      "connectFailed": "تعذر الاتصال بالواجهة الخلفية البعيدة."
     }
   },
   "tabBar": {
@@ -881,7 +962,16 @@
       "newLaunchScript": "نص إطلاق جديد",
       "optionalLabel": "تسمية اختيارية",
       "saving": "جارٍ الحفظ...",
-      "new": "جديد"
+      "new": "جديد",
+      "worktreeInfo": "معلومات worktree",
+      "name": "الاسم",
+      "updateUpstreamPrompt": "هل تريد تحديث فرع upstream إلى {{branch}}؟",
+      "updateUpstream": "تحديث upstream",
+      "worktree": "Worktree",
+      "terminalRepoRoot": "الطرفية (جذر المستودع)",
+      "copyCommand": "نسخ الأمر",
+      "openWorktreeInTerminal": "افتح هذا الـ worktree في الطرفية.",
+      "reveal": "إظهار"
     },
     "toasts": {
       "dismiss": "إغلاق",
@@ -912,7 +1002,17 @@
     },
     "composerBar": {
       "contextFreeEmpty": "سياق حر --",
-      "contextFreePercent": "سياق حر {{value}}%"
+      "contextFreePercent": "سياق حر {{value}}%",
+      "plan": "خطة",
+      "planMode": "وضع الخطة",
+      "collaborationMode": "وضع التعاون",
+      "model": "النموذج",
+      "noModels": "لا توجد نماذج",
+      "fastModeEnabled": "وضع السرعة مفعّل",
+      "thinkingMode": "وضع التفكير",
+      "default": "افتراضي",
+      "codexArgsProfile": "ملف إعدادات Codex",
+      "agentAccess": "صلاحية الوكيل"
     },
     "terminal": {
       "resizePanel": "تغيير حجم لوحة الطرفية",
@@ -958,7 +1058,29 @@
       "exporting": "جارٍ التصدير...",
       "exportMarkdown": "تصدير .md",
       "exploring": "جارٍ الاستكشاف",
-      "explored": "تم الاستكشاف"
+      "explored": "تم الاستكشاف",
+      "working": "جارٍ العمل…",
+      "nextMessageFetchIn": "سيتم جلب رسالة جديدة خلال {{seconds}} ثانية",
+      "doneIn": "اكتمل خلال {{duration}}",
+      "imageNumber": "الصورة {{index}}",
+      "quoteMessage": "اقتباس الرسالة",
+      "copyMessage": "نسخ الرسالة",
+      "noAnswerProvided": "لم يتم تقديم إجابة",
+      "inputAnswered": "تمت الإجابة على الإدخال:"
+    },
+    "renameThread": {
+      "title": "إعادة تسمية المحادثة",
+      "currentName": "الاسم الحالي: \"{{name}}\"",
+      "newName": "الاسم الجديد",
+      "rename": "إعادة التسمية"
+    },
+    "fileManager": {
+      "finder": "Finder",
+      "explorer": "مستكشف الملفات",
+      "generic": "مدير الملفات",
+      "revealIn": "إظهار في {{manager}}",
+      "showIn": "إظهار في {{manager}}",
+      "openIn": "فتح في {{manager}}"
     }
   },
   "gitPanel": {
@@ -982,7 +1104,7 @@
     "stageAllChanges": "Stage all changes",
     "unstageAllChanges": "Unstage all changes",
     "discardAllChanges": "Discard all changes",
-    "githubIssues": "GitHub issues",
+    "githubIssues": "مشكلات GitHub",
     "githubPullRequests": "GitHub pull requests",
     "openCount": "{{count}} open",
     "unknown": "unknown",
@@ -1034,17 +1156,134 @@
     "diff": "Diff",
     "agentEdits": "Agent edits",
     "log": "Log",
-    "issues": "Issues",
-    "prs": "PRs",
+    "issues": "المشكلات",
+    "prs": "طلبات السحب",
     "noAgentEditsYet": "No agent edits in this thread yet.",
     "oneEdit": "1 edit",
     "editCount": "{{count}} edits",
     "pullCount": "Pull {{count}} commit",
     "branch": "Branch",
     "repositoryRoot": "Repository root",
-    "recentCommits": "Recent commits",
-    "noOpenIssues": "No open issues.",
-    "noOpenPullRequests": "No open pull requests.",
-    "draft": "Draft"
+    "recentCommits": "أحدث الالتزامات",
+    "noOpenIssues": "لا توجد مشكلات مفتوحة.",
+    "noOpenPullRequests": "لا توجد طلبات سحب مفتوحة.",
+    "draft": "مسودة"
+  },
+  "aboutView": {
+    "iconAlt": "أيقونة Codex Monitor",
+    "title": "Codex Monitor",
+    "version": "الإصدار {{version}}",
+    "versionUnknown": "الإصدار —",
+    "tagline": "راقب حالة وكلاء Codex لديك",
+    "github": "GitHub",
+    "twitter": "Twitter",
+    "footer": "صُنع بعناية بواسطة Codex و Dimillian"
+  },
+  "debugPanel": {
+    "resize": "تغيير حجم لوحة التصحيح",
+    "title": "تصحيح",
+    "copy": "نسخ",
+    "clear": "مسح",
+    "empty": "لا توجد أحداث تصحيح بعد."
+  },
+  "approvalToasts": {
+    "title": "الموافقة مطلوبة",
+    "none": "لا شيء",
+    "noExtraDetails": "لا توجد تفاصيل إضافية.",
+    "decline": "رفض",
+    "alwaysAllow": "السماح دائمًا",
+    "approveEnter": "موافقة (Enter)",
+    "allowPrefixTitle": "السماح بالأوامر التي تبدأ بـ {{preview}}"
+  },
+  "reviewPrompt": {
+    "presets": {
+      "baseBranch": {
+        "title": "مراجعة مقابل فرع أساسي",
+        "subtitle": "(بنمط PR)"
+      },
+      "uncommitted": "مراجعة التغييرات غير المرسلة",
+      "commit": "مراجعة عملية commit",
+      "custom": "تعليمات مراجعة مخصصة"
+    },
+    "back": "رجوع",
+    "startReview": "بدء المراجعة",
+    "pickBranch": "اختر فرعًا محليًا حديثًا:",
+    "baseBranches": "الفروع الأساسية",
+    "loadingBranches": "جارٍ تحميل الفروع...",
+    "noBranchesFound": "لم يتم العثور على فروع.",
+    "selectCommit": "اختر عملية commit حديثة:",
+    "commits": "الالتزامات",
+    "loadingCommits": "جارٍ تحميل الالتزامات...",
+    "noCommitsFound": "لم يتم العثور على التزامات.",
+    "instructions": "التعليمات",
+    "placeholder": "ركّز على الصحة والحالات الطرفية والاختبارات المفقودة.",
+    "titles": {
+      "baseBranch": "اختر فرعًا أساسيًا",
+      "commit": "اختر commit للمراجعة",
+      "custom": "تعليمات مراجعة مخصصة",
+      "preset": "اختر إعداد مراجعة"
+    },
+    "close": "إغلاق"
+  },
+  "worktreePrompt": {
+    "title": "وكيل worktree جديد",
+    "subtitle": "أنشئ worktree داخل \"{{workspace}}\".",
+    "optional": "(اختياري)",
+    "branchName": "اسم الفرع",
+    "noMatchingBranches": "لا توجد فروع مطابقة",
+    "copyAgentsMdPrefix": "انسخ",
+    "copyAgentsMdSuffix": "إلى worktree",
+    "setupScript": "سكريبت إعداد البيئة",
+    "setupScriptHint": "يُحفظ على مستوى المشروع (الإعدادات ← البيئات) ويعمل مرة واحدة في طرفية مخصصة بعد إنشاء كل worktree جديد."
+  },
+  "requestUserInput": {
+    "ariaLabel": "مطلوب إدخال من المستخدم",
+    "title": "الإدخال مطلوب",
+    "queue": "الطلب {{index}} من {{total}}",
+    "typeAnswerOptional": "اكتب إجابتك (اختياري)",
+    "addNotesOptional": "أضف ملاحظات (اختياري)",
+    "noQuestions": "لم يتم توفير أسئلة.",
+    "submit": "إرسال"
+  },
+  "planReady": {
+    "ariaLabel": "الخطة جاهزة",
+    "title": "الخطة جاهزة",
+    "description": "ابدأ التنفيذ من هذه الخطة أو صف التعديلات التي تريدها.",
+    "placeholder": "صف ما تريد تغييره في الخطة...",
+    "sendChanges": "إرسال التعديلات",
+    "implement": "نفّذ هذه الخطة",
+    "notificationBody": "الخطة جاهزة. افتح CodexMonitor للرد."
+  },
+  "workspaceFromUrl": {
+    "title": "إضافة مساحة عمل من رابط",
+    "remoteUrl": "رابط Git البعيد",
+    "remoteUrlPlaceholder": "https://github.com/org/repo.git",
+    "targetFolderName": "اسم المجلد الهدف (اختياري)",
+    "targetFolderPlaceholder": "الافتراضي هو اسم المستودع",
+    "destinationFolder": "المجلد الأب الوجهة",
+    "cloning": "جارٍ الاستنساخ...",
+    "cloneAndAdd": "استنساخ وإضافة"
+  },
+  "workspaceRunControls": {
+    "local": "محلي",
+    "worktree": "Worktree",
+    "selectRunMode": "اختر وضع التشغيل",
+    "toggleRunModeMenu": "تبديل قائمة وضع التشغيل",
+    "selectModels": "اختر النماذج",
+    "toggleModelsMenu": "تبديل قائمة النماذج",
+    "connectToLoadModels": "قم بتوصيل مساحة العمل هذه لتحميل النماذج المتاحة."
+  },
+  "planPanel": {
+    "title": "الخطة",
+    "waiting": "بانتظار خطة...",
+    "empty": "لا توجد خطة نشطة."
+  },
+  "threadRow": {
+    "reviewing": "قيد المراجعة",
+    "waiting": "بانتظار",
+    "pinned": "مثبّت",
+    "hideSubagents": "إخفاء الوكلاء الفرعيين",
+    "showSubagents": "إظهار الوكلاء الفرعيين",
+    "now": "الآن"
   }
 }

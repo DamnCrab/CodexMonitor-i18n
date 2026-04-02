@@ -319,7 +319,7 @@ export const Messages = memo(function Messages({
             </div>
           </div>
         )}
-        <div ref={bottomRef} />
+        <div ref={bottomRef} className="messages-bottom-anchor" />
       </div>
     </div>
   );

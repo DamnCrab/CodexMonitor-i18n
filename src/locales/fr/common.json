@@ -221,7 +221,18 @@
       "latestVersion": "Vous utilisez la dernière version.",
       "downloadAndInstall": "Télécharger et installer",
       "checking": "Vérification...",
-      "checkForUpdates": "Rechercher des mises à jour"
+      "checkForUpdates": "Rechercher des mises à jour",
+      "whatsNew": "Nouveaut?s",
+      "postUpdateLoadingNotes": "Mise ? jour r?ussie. Chargement des notes de version...",
+      "postUpdateWhatIsNew": "Mise ? jour r?ussie. Voici les nouveaut?s :",
+      "postUpdateFallback": "Mise ? jour vers v{{version}}, mais les notes de version n'ont pas pu ?tre charg?es.",
+      "viewOnGitHub": "Voir sur GitHub",
+      "later": "Plus tard",
+      "retry": "R?essayer",
+      "updateFailedShort": "?chec de la mise ? jour.",
+      "checkingForUpdates": "Recherche des mises ? jour...",
+      "versionAvailableShort": "Une nouvelle version est disponible.",
+      "downloadedBytes": "{{value}} t?l?charg?s"
     },
     "projects": {
       "title": "Projets",
@@ -243,7 +254,11 @@
       "moveProjectUp": "Monter le projet",
       "moveProjectDown": "Descendre le projet",
       "deleteProject": "Supprimer le projet",
-      "noProjectsYet": "Aucun projet pour le moment."
+      "noProjectsYet": "Aucun projet pour le moment.",
+      "ungrouped": "Sans groupe",
+      "groupNameRequired": "Le nom du groupe est requis.",
+      "groupNameReserved": "\"{{name}}\" est r?serv?.",
+      "groupNameExists": "Ce nom de groupe existe d?j?."
     },
     "git": {
       "title": "Git",
@@ -294,7 +309,12 @@
       "autoWrapCodeLikeSubtitle": "Encadre les longs extraits de code sur une seule ligne lors du collage.",
       "listsTitle": "Listes",
       "continueLists": "Continuer les listes avec Maj+Entrée",
-      "continueListsSubtitle": "Continue les listes numérotées et à puces lorsque la ligne contient du texte."
+      "continueListsSubtitle": "Continue les listes numérotées et à puces lorsque la ligne contient du texte.",
+      "presets": {
+        "default": "Par d?faut (sans aide)",
+        "helpful": "Utile",
+        "smart": "Intelligent"
+      }
     },
     "environments": {
       "title": "Environnements",
@@ -371,7 +391,54 @@
       "downloadError": "Erreur de téléchargement.",
       "downloadModel": "Télécharger le modèle",
       "cancelDownload": "Annuler le téléchargement",
-      "removeModel": "Supprimer le modèle"
+      "removeModel": "Supprimer le modèle",
+      "models": {
+        "tiny": {
+          "label": "Tiny",
+          "note": "Le plus rapide, le moins pr?cis."
+        },
+        "base": {
+          "label": "Base",
+          "note": "?quilibre par d?faut."
+        },
+        "small": {
+          "label": "Small",
+          "note": "Meilleure pr?cision."
+        },
+        "medium": {
+          "label": "Medium",
+          "note": "Haute pr?cision."
+        },
+        "largeV3": {
+          "label": "Large V3",
+          "note": "Meilleure pr?cision, t?l?chargement lourd."
+        }
+      },
+      "processing": "Traitement...",
+      "languages": {
+        "en": "Anglais",
+        "es": "Espagnol",
+        "fr": "Français",
+        "de": "Allemand",
+        "it": "Italien",
+        "pt": "Portugais",
+        "nl": "Néerlandais",
+        "sv": "Suédois",
+        "no": "Norvégien",
+        "da": "Danois",
+        "fi": "Finnois",
+        "pl": "Polonais",
+        "tr": "Turc",
+        "ru": "Russe",
+        "uk": "Ukrainien",
+        "ja": "Japonais",
+        "ko": "Coréen",
+        "zh": "Chinois"
+      },
+      "keys": {
+        "shift": "Maj",
+        "control": "Ctrl"
+      }
     },
     "features": {
       "title": "Fonctionnalités",
@@ -418,7 +485,7 @@
         "remote_models": "Actualiser les modèles distants avant AppReady.",
         "powershell_utf8": "Forcer la sortie UTF-8 dans PowerShell.",
         "enable_request_compression": "Compresser les corps de requête en flux envoyés à codex-backend.",
-        "apps": "Activer l’intégration ChatGPT Apps.",
+        "apps": "Utilisez une application ChatGPT connect?e avec \"$\". Installez des apps via la commande /apps. Red?marrez Codex apr?s activation.",
         "apps_mcp_gateway": "Acheminer les appels Apps MCP via la passerelle configurée.",
         "skill_mcp_dependency_install": "Autoriser la demande et l’installation des dépendances MCP manquantes.",
         "skill_env_var_dependency_prompt": "Demander les dépendances de variables d’environnement de compétence manquantes.",
@@ -666,6 +733,20 @@
       "deleteRemoteQuestion": "Delete remote?",
       "removeRemoteMessage": "Remove {{name}} from saved remotes? This only removes the profile from this device.",
       "deleteRemote": "Delete remote"
+    },
+    "mobileSetup": {
+      "kicker": "Configuration mobile requise",
+      "title": "Connecter votre backend de bureau",
+      "subtitle": "Terminez cette configuration avant d'utiliser l'application. Utilisez les m?mes informations de connexion que dans les param?tres serveur de CodexMonitor sur votre bureau.",
+      "closeLabel": "Fermer la configuration mobile",
+      "host": "H?te Tailscale",
+      "hint": "Utilisez l'h?te Tailscale des param?tres serveur du bureau et gardez le daemon de bureau actif.",
+      "defaultMessage": "Saisissez l'h?te Tailscale et le jeton du bureau, puis lancez ? Connecter et tester ?.",
+      "connected": "{{count}} espace de travail disponible depuis votre backend de bureau.",
+      "connected_plural": "{{count}} espaces de travail disponibles depuis votre backend de bureau.",
+      "unreachable": "Impossible d'atteindre le backend distant.",
+      "saveFailed": "Impossible d'enregistrer les param?tres du backend distant.",
+      "connectFailed": "Impossible de se connecter au backend distant."
     }
   },
   "tabBar": {
@@ -881,7 +962,16 @@
       "newLaunchScript": "Nouveau script de lancement",
       "optionalLabel": "Libellé facultatif",
       "saving": "Enregistrement...",
-      "new": "Nouveau"
+      "new": "Nouveau",
+      "worktreeInfo": "Infos worktree",
+      "name": "Nom",
+      "updateUpstreamPrompt": "Voulez-vous mettre à jour la branche upstream vers {{branch}} ?",
+      "updateUpstream": "Mettre à jour upstream",
+      "worktree": "Worktree",
+      "terminalRepoRoot": "Terminal (racine du dépôt)",
+      "copyCommand": "Copier la commande",
+      "openWorktreeInTerminal": "Ouvrir ce worktree dans votre terminal.",
+      "reveal": "Afficher"
     },
     "toasts": {
       "dismiss": "Fermer",
@@ -912,7 +1002,17 @@
     },
     "composerBar": {
       "contextFreeEmpty": "Contexte libre --",
-      "contextFreePercent": "Contexte libre {{value}}%"
+      "contextFreePercent": "Contexte libre {{value}}%",
+      "plan": "Plan",
+      "planMode": "Mode plan",
+      "collaborationMode": "Mode de collaboration",
+      "model": "Mod?le",
+      "noModels": "Aucun mod?le",
+      "fastModeEnabled": "Mode rapide activ?",
+      "thinkingMode": "Mode r?flexion",
+      "default": "Par d?faut",
+      "codexArgsProfile": "Profil d'arguments Codex",
+      "agentAccess": "Acc?s de l'agent"
     },
     "terminal": {
       "resizePanel": "Redimensionner le panneau du terminal",
@@ -958,7 +1058,29 @@
       "exporting": "Export en cours...",
       "exportMarkdown": "Exporter .md",
       "exploring": "Exploration",
-      "explored": "Exploré"
+      "explored": "Exploré",
+      "working": "En cours?",
+      "nextMessageFetchIn": "Un nouveau message sera r?cup?r? dans {{seconds}} secondes",
+      "doneIn": "Termin? en {{duration}}",
+      "imageNumber": "Image {{index}}",
+      "quoteMessage": "Citer le message",
+      "copyMessage": "Copier le message",
+      "noAnswerProvided": "Aucune réponse fournie",
+      "inputAnswered": "Réponse saisie :"
+    },
+    "renameThread": {
+      "title": "Renommer la conversation",
+      "currentName": "Nom actuel : \"{{name}}\"",
+      "newName": "Nouveau nom",
+      "rename": "Renommer"
+    },
+    "fileManager": {
+      "finder": "Finder",
+      "explorer": "Explorateur de fichiers",
+      "generic": "Gestionnaire de fichiers",
+      "revealIn": "Afficher dans {{manager}}",
+      "showIn": "Afficher dans {{manager}}",
+      "openIn": "Ouvrir dans {{manager}}"
     }
   },
   "gitPanel": {
@@ -982,7 +1104,7 @@
     "stageAllChanges": "Stage all changes",
     "unstageAllChanges": "Unstage all changes",
     "discardAllChanges": "Discard all changes",
-    "githubIssues": "GitHub issues",
+    "githubIssues": "Issues GitHub",
     "githubPullRequests": "GitHub pull requests",
     "openCount": "{{count}} open",
     "unknown": "unknown",
@@ -1042,9 +1164,126 @@
     "pullCount": "Pull {{count}} commit",
     "branch": "Branch",
     "repositoryRoot": "Repository root",
-    "recentCommits": "Recent commits",
-    "noOpenIssues": "No open issues.",
-    "noOpenPullRequests": "No open pull requests.",
-    "draft": "Draft"
+    "recentCommits": "Commits r?cents",
+    "noOpenIssues": "Aucune issue ouverte.",
+    "noOpenPullRequests": "Aucune pull request ouverte.",
+    "draft": "Brouillon"
+  },
+  "aboutView": {
+    "iconAlt": "Icône Codex Monitor",
+    "title": "Codex Monitor",
+    "version": "Version {{version}}",
+    "versionUnknown": "Version —",
+    "tagline": "Surveille l’activité de vos agents Codex",
+    "github": "GitHub",
+    "twitter": "Twitter",
+    "footer": "Créé avec soin par Codex et Dimillian"
+  },
+  "debugPanel": {
+    "resize": "Redimensionner le panneau de débogage",
+    "title": "Débogage",
+    "copy": "Copier",
+    "clear": "Effacer",
+    "empty": "Aucun événement de débogage pour le moment."
+  },
+  "approvalToasts": {
+    "title": "Approbation requise",
+    "none": "Aucun",
+    "noExtraDetails": "Aucun détail supplémentaire.",
+    "decline": "Refuser",
+    "alwaysAllow": "Toujours autoriser",
+    "approveEnter": "Approuver (Entrée)",
+    "allowPrefixTitle": "Autoriser les commandes commençant par {{preview}}"
+  },
+  "reviewPrompt": {
+    "presets": {
+      "baseBranch": {
+        "title": "Comparer avec une branche de base",
+        "subtitle": "(style PR)"
+      },
+      "uncommitted": "Examiner les changements non validés",
+      "commit": "Examiner un commit",
+      "custom": "Instructions de revue personnalisées"
+    },
+    "back": "Retour",
+    "startReview": "Lancer la revue",
+    "pickBranch": "Choisissez une branche locale récente :",
+    "baseBranches": "Branches de base",
+    "loadingBranches": "Chargement des branches...",
+    "noBranchesFound": "Aucune branche trouvée.",
+    "selectCommit": "Sélectionnez un commit récent :",
+    "commits": "Commits",
+    "loadingCommits": "Chargement des commits...",
+    "noCommitsFound": "Aucun commit trouvé.",
+    "instructions": "Instructions",
+    "placeholder": "Concentrez-vous sur la justesse, les cas limites et les tests manquants.",
+    "titles": {
+      "baseBranch": "Sélectionner une branche de base",
+      "commit": "Sélectionner un commit à examiner",
+      "custom": "Instructions de revue personnalisées",
+      "preset": "Sélectionner un mode de revue"
+    },
+    "close": "Fermer"
+  },
+  "worktreePrompt": {
+    "title": "Nouvel agent worktree",
+    "subtitle": "Créer un worktree sous « {{workspace}} ».",
+    "optional": "(Facultatif)",
+    "branchName": "Nom de branche",
+    "noMatchingBranches": "Aucune branche correspondante",
+    "copyAgentsMdPrefix": "Copier",
+    "copyAgentsMdSuffix": "dans le worktree",
+    "setupScript": "Script de préparation de l’environnement",
+    "setupScriptHint": "Enregistré sur le projet (Paramètres → Environnements) et exécuté une fois dans un terminal dédié après chaque nouveau worktree."
+  },
+  "requestUserInput": {
+    "ariaLabel": "Entrée utilisateur demandée",
+    "title": "Entrée demandée",
+    "queue": "Demande {{index}} sur {{total}}",
+    "typeAnswerOptional": "Saisissez votre réponse (facultatif)",
+    "addNotesOptional": "Ajouter des notes (facultatif)",
+    "noQuestions": "Aucune question fournie.",
+    "submit": "Envoyer"
+  },
+  "planReady": {
+    "ariaLabel": "Plan prêt",
+    "title": "Plan prêt",
+    "description": "Commencez à partir de ce plan ou décrivez les modifications à y apporter.",
+    "placeholder": "Décrivez ce que vous voulez modifier dans le plan...",
+    "sendChanges": "Envoyer les changements",
+    "implement": "Appliquer ce plan",
+    "notificationBody": "Le plan est prêt. Ouvrez CodexMonitor pour répondre."
+  },
+  "workspaceFromUrl": {
+    "title": "Ajouter un workspace depuis une URL",
+    "remoteUrl": "URL Git distante",
+    "remoteUrlPlaceholder": "https://github.com/org/repo.git",
+    "targetFolderName": "Nom du dossier cible (facultatif)",
+    "targetFolderPlaceholder": "Par défaut : nom du dépôt",
+    "destinationFolder": "Dossier parent de destination",
+    "cloning": "Clonage...",
+    "cloneAndAdd": "Cloner et ajouter"
+  },
+  "workspaceRunControls": {
+    "local": "Local",
+    "worktree": "Worktree",
+    "selectRunMode": "Choisir le mode d’exécution",
+    "toggleRunModeMenu": "Afficher ou masquer le menu du mode d’exécution",
+    "selectModels": "Choisir les modèles",
+    "toggleModelsMenu": "Afficher ou masquer le menu des modèles",
+    "connectToLoadModels": "Connectez ce workspace pour charger les modèles disponibles."
+  },
+  "planPanel": {
+    "title": "Plan",
+    "waiting": "En attente d’un plan...",
+    "empty": "Aucun plan actif."
+  },
+  "threadRow": {
+    "reviewing": "En revue",
+    "waiting": "En attente",
+    "pinned": "Épinglé",
+    "hideSubagents": "Masquer les sous-agents",
+    "showSubagents": "Afficher les sous-agents",
+    "now": "À l’instant"
   }
 }

@@ -43,6 +43,26 @@ export function SettingsDictationSection({
 }: SettingsDictationSectionProps) {
   const { t } = useTranslation();
   const dictationProgress = dictationModelStatus?.progress ?? null;
+  const languageOptions = [
+    "en",
+    "es",
+    "fr",
+    "de",
+    "it",
+    "pt",
+    "nl",
+    "sv",
+    "no",
+    "da",
+    "fi",
+    "pl",
+    "tr",
+    "ru",
+    "uk",
+    "ja",
+    "ko",
+    "zh",
+  ] as const;
 
   return (
     <SettingsSection
@@ -122,24 +142,11 @@ export function SettingsDictationSection({
           }
         >
           <option value="">{t("settings.dictation.autoDetectOnly")}</option>
-          <option value="en">English</option>
-          <option value="es">Spanish</option>
-          <option value="fr">French</option>
-          <option value="de">German</option>
-          <option value="it">Italian</option>
-          <option value="pt">Portuguese</option>
-          <option value="nl">Dutch</option>
-          <option value="sv">Swedish</option>
-          <option value="no">Norwegian</option>
-          <option value="da">Danish</option>
-          <option value="fi">Finnish</option>
-          <option value="pl">Polish</option>
-          <option value="tr">Turkish</option>
-          <option value="ru">Russian</option>
-          <option value="uk">Ukrainian</option>
-          <option value="ja">Japanese</option>
-          <option value="ko">Korean</option>
-          <option value="zh">Chinese</option>
+          {languageOptions.map((languageCode) => (
+            <option key={languageCode} value={languageCode}>
+              {t(`settings.dictation.languages.${languageCode}`)}
+            </option>
+          ))}
         </select>
         <div className="settings-help">
           {t("settings.dictation.preferredLanguageHelp")}
@@ -162,8 +169,8 @@ export function SettingsDictationSection({
         >
           <option value="">{t("settings.dictation.off")}</option>
           <option value="alt">{optionKeyLabel}</option>
-          <option value="shift">Shift</option>
-          <option value="control">Control</option>
+          <option value="shift">{t("settings.dictation.keys.shift")}</option>
+          <option value="control">{t("settings.dictation.keys.control")}</option>
           <option value="meta">{metaKeyLabel}</option>
         </select>
         <div className="settings-help">

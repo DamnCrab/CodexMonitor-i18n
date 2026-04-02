@@ -1,18 +1,41 @@
+import type { TFunction } from "i18next";
 import type { AppSettings } from "@/types";
 import type { CodexSection, ShortcutDraftKey, ShortcutSettingKey } from "./settingsTypes";
 
-export const DICTATION_MODELS = [
-  { id: "tiny", label: "Tiny", size: "75 MB", note: "Fastest, least accurate." },
-  { id: "base", label: "Base", size: "142 MB", note: "Balanced default." },
-  { id: "small", label: "Small", size: "466 MB", note: "Better accuracy." },
-  { id: "medium", label: "Medium", size: "1.5 GB", note: "High accuracy." },
-  {
-    id: "large-v3",
-    label: "Large V3",
-    size: "3.0 GB",
-    note: "Best accuracy, heavy download.",
-  },
-];
+export function buildDictationModels(t: TFunction) {
+  return [
+    {
+      id: "tiny",
+      label: t("settings.dictation.models.tiny.label"),
+      size: "75 MB",
+      note: t("settings.dictation.models.tiny.note"),
+    },
+    {
+      id: "base",
+      label: t("settings.dictation.models.base.label"),
+      size: "142 MB",
+      note: t("settings.dictation.models.base.note"),
+    },
+    {
+      id: "small",
+      label: t("settings.dictation.models.small.label"),
+      size: "466 MB",
+      note: t("settings.dictation.models.small.note"),
+    },
+    {
+      id: "medium",
+      label: t("settings.dictation.models.medium.label"),
+      size: "1.5 GB",
+      note: t("settings.dictation.models.medium.note"),
+    },
+    {
+      id: "large-v3",
+      label: t("settings.dictation.models.largeV3.label"),
+      size: "3.0 GB",
+      note: t("settings.dictation.models.largeV3.note"),
+    },
+  ];
+}
 
 type ComposerPreset = AppSettings["composerEditorPreset"];
 
@@ -28,11 +51,15 @@ type ComposerPresetSettings = Pick<
   | "composerCodeBlockCopyUseModifier"
 >;
 
-export const COMPOSER_PRESET_LABELS: Record<ComposerPreset, string> = {
-  default: "Default (no helpers)",
-  helpful: "Helpful",
-  smart: "Smart",
-};
+export function buildComposerPresetLabels(
+  t: TFunction,
+): Record<ComposerPreset, string> {
+  return {
+    default: t("settings.composer.presets.default"),
+    helpful: t("settings.composer.presets.helpful"),
+    smart: t("settings.composer.presets.smart"),
+  };
+}
 
 export const COMPOSER_PRESET_CONFIGS: Record<
   ComposerPreset,

@@ -393,9 +393,6 @@ export function GitDiffPanel({
         selectOnlyFile(path);
       }
 
-      const fileCount = targetPaths.length;
-      const plural = fileCount > 1 ? "s" : "";
-      const countSuffix = fileCount > 1 ? ` (${fileCount})` : "";
       const normalizedRoot = resolveRootPath(gitRoot, workspacePath);
       const inferredRoot =
         !normalizedRoot && gitRootCandidates.length === 1
@@ -416,7 +413,10 @@ export function GitDiffPanel({
       if (stagedPaths.length > 0 && onUnstageFile) {
         items.push(
           await MenuItem.new({
-            text: `Unstage file${stagedPaths.length > 1 ? `s (${stagedPaths.length})` : ""}`,
+            text:
+              stagedPaths.length > 1
+                ? t("gitPanel.unstageChanges")
+                : t("gitPanel.unstageFile"),
             action: async () => {
               for (const stagedPath of stagedPaths) {
                 await onUnstageFile(stagedPath);
@@ -429,7 +429,10 @@ export function GitDiffPanel({
       if (unstagedPaths.length > 0 && onStageFile) {
         items.push(
           await MenuItem.new({
-            text: `Stage file${unstagedPaths.length > 1 ? `s (${unstagedPaths.length})` : ""}`,
+            text:
+              unstagedPaths.length > 1
+                ? t("gitPanel.stageChanges")
+                : t("gitPanel.stageFile"),
             action: async () => {
               for (const unstagedPath of unstagedPaths) {
                 await onStageFile(unstagedPath);
@@ -451,12 +454,16 @@ export function GitDiffPanel({
 
         items.push(
           await MenuItem.new({
-            text: `Show in ${fileManagerLabel}`,
+            text: t("uiText.fileManager.showIn", {
+              manager: fileManagerLabel,
+            }),
             action: async () => {
               try {
                 if (!resolvedRoot && !isAbsolutePathForPlatform(absolutePath)) {
                   pushErrorToast({
-                    title: `Couldn't show file in ${fileManagerLabel}`,
+                    title: t("uiText.sidebarMenus.couldntShowWorktreeInFileManager", {
+                      fileManager: fileManagerLabel,
+                    }),
                     message: t("gitPanel.selectGitRootFirst"),
                   });
                   return;
@@ -466,7 +473,9 @@ export function GitDiffPanel({
               } catch (menuError) {
                 const message = menuError instanceof Error ? menuError.message : String(menuError);
                 pushErrorToast({
-                  title: `Couldn't show file in ${fileManagerLabel}`,
+                  title: t("uiText.sidebarMenus.couldntShowWorktreeInFileManager", {
+                    fileManager: fileManagerLabel,
+                  }),
                   message,
                 });
                 console.warn("Failed to reveal file", {
@@ -497,7 +506,7 @@ export function GitDiffPanel({
       if (onRevertFile) {
         items.push(
           await MenuItem.new({
-            text: `Discard change${plural}${countSuffix}`,
+            text: t("gitPanel.discardChanges"),
             action: async () => {
               await discardFiles(targetPaths);
             },

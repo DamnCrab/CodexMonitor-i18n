@@ -1711,4 +1711,32 @@ describe("Messages", () => {
     ).toBeTruthy();
     expect(screen.getByText("[error] Missing config")).toBeTruthy();
   });
+
+  it("does not mount command output when a completed command row stays collapsed", () => {
+    const items: ConversationItem[] = [
+      {
+        id: "command-collapsed",
+        kind: "tool",
+        toolType: "commandExecution",
+        title: "Command: npm test",
+        detail: "/repo",
+        status: "completed",
+        output: "line 1\nline 2",
+        durationMs: 450,
+      },
+    ];
+
+    const { container } = render(
+      <Messages
+        items={items}
+        threadId="thread-1"
+        workspaceId="ws-1"
+        isThinking={false}
+        openTargets={[]}
+        selectedOpenAppId=""
+      />,
+    );
+
+    expect(container.querySelector(".tool-inline-terminal")).toBeNull();
+  });
 });

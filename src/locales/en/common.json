@@ -221,7 +221,18 @@
       "latestVersion": "You are on the latest version.",
       "downloadAndInstall": "Download & Install",
       "checking": "Checking...",
-      "checkForUpdates": "Check for updates"
+      "checkForUpdates": "Check for updates",
+      "whatsNew": "What's New",
+      "postUpdateLoadingNotes": "Updated successfully. Loading release notes...",
+      "postUpdateWhatIsNew": "Updated successfully. Here is what is new:",
+      "postUpdateFallback": "Updated to v{{version}}. Release notes could not be loaded.",
+      "viewOnGitHub": "View on GitHub",
+      "later": "Later",
+      "retry": "Retry",
+      "updateFailedShort": "Update failed.",
+      "checkingForUpdates": "Checking for updates...",
+      "versionAvailableShort": "A new version is available.",
+      "downloadedBytes": "{{value}} downloaded"
     },
     "projects": {
       "title": "Projects",
@@ -243,7 +254,11 @@
       "moveProjectUp": "Move project up",
       "moveProjectDown": "Move project down",
       "deleteProject": "Delete project",
-      "noProjectsYet": "No projects yet."
+      "noProjectsYet": "No projects yet.",
+      "ungrouped": "Ungrouped",
+      "groupNameRequired": "Group name is required.",
+      "groupNameReserved": "\"{{name}}\" is reserved.",
+      "groupNameExists": "Group name already exists."
     },
     "git": {
       "title": "Git",
@@ -294,7 +309,12 @@
       "autoWrapCodeLikeSubtitle": "Wraps long single-line code snippets on paste.",
       "listsTitle": "Lists",
       "continueLists": "Continue lists on Shift+Enter",
-      "continueListsSubtitle": "Continues numbered and bulleted lists when the line has content."
+      "continueListsSubtitle": "Continues numbered and bulleted lists when the line has content.",
+      "presets": {
+        "default": "Default (no helpers)",
+        "helpful": "Helpful",
+        "smart": "Smart"
+      }
     },
     "environments": {
       "title": "Environments",
@@ -371,7 +391,54 @@
       "downloadError": "Download error.",
       "downloadModel": "Download model",
       "cancelDownload": "Cancel download",
-      "removeModel": "Remove model"
+      "removeModel": "Remove model",
+      "models": {
+        "tiny": {
+          "label": "Tiny",
+          "note": "Fastest, least accurate."
+        },
+        "base": {
+          "label": "Base",
+          "note": "Balanced default."
+        },
+        "small": {
+          "label": "Small",
+          "note": "Better accuracy."
+        },
+        "medium": {
+          "label": "Medium",
+          "note": "High accuracy."
+        },
+        "largeV3": {
+          "label": "Large V3",
+          "note": "Best accuracy, heavy download."
+        }
+      },
+      "processing": "Processing...",
+      "languages": {
+        "en": "English",
+        "es": "Spanish",
+        "fr": "French",
+        "de": "German",
+        "it": "Italian",
+        "pt": "Portuguese",
+        "nl": "Dutch",
+        "sv": "Swedish",
+        "no": "Norwegian",
+        "da": "Danish",
+        "fi": "Finnish",
+        "pl": "Polish",
+        "tr": "Turkish",
+        "ru": "Russian",
+        "uk": "Ukrainian",
+        "ja": "Japanese",
+        "ko": "Korean",
+        "zh": "Chinese"
+      },
+      "keys": {
+        "shift": "Shift",
+        "control": "Control"
+      }
     },
     "features": {
       "title": "Features",
@@ -418,7 +485,7 @@
         "remote_models": "Refresh remote models before AppReady.",
         "powershell_utf8": "Enforce UTF-8 output in PowerShell.",
         "enable_request_compression": "Compress streaming request bodies sent to codex-backend.",
-        "apps": "Enable ChatGPT Apps integration.",
+        "apps": "Use a connected ChatGPT App using \"$\". Install Apps via /apps command. Restart Codex after enabling.",
         "apps_mcp_gateway": "Route Apps MCP calls through the configured gateway.",
         "skill_mcp_dependency_install": "Allow prompting and installing missing MCP dependencies.",
         "skill_env_var_dependency_prompt": "Prompt for missing skill environment variable dependencies.",
@@ -666,6 +733,20 @@
       "deleteRemoteQuestion": "Delete remote?",
       "removeRemoteMessage": "Remove {{name}} from saved remotes? This only removes the profile from this device.",
       "deleteRemote": "Delete remote"
+    },
+    "mobileSetup": {
+      "kicker": "Mobile Setup Required",
+      "title": "Connect to your desktop backend",
+      "subtitle": "Complete this setup before using the app. Use the same connection details configured in your desktop CodexMonitor server settings.",
+      "closeLabel": "Close mobile setup",
+      "host": "Tailscale host",
+      "hint": "Use the Tailscale host from desktop Server settings and keep the desktop daemon running.",
+      "defaultMessage": "Enter your desktop Tailscale host and token, then run Connect & test.",
+      "connected": "Connected. {{count}} workspace available from your desktop backend.",
+      "connected_plural": "Connected. {{count}} workspaces available from your desktop backend.",
+      "unreachable": "Unable to reach remote backend.",
+      "saveFailed": "Unable to save remote backend settings.",
+      "connectFailed": "Unable to connect to remote backend."
     }
   },
   "tabBar": {
@@ -881,7 +962,16 @@
       "newLaunchScript": "New launch script",
       "optionalLabel": "Optional label",
       "saving": "Saving...",
-      "new": "New"
+      "new": "New",
+      "worktreeInfo": "Worktree info",
+      "name": "Name",
+      "updateUpstreamPrompt": "Do you want to update the upstream branch to {{branch}}?",
+      "updateUpstream": "Update upstream",
+      "worktree": "Worktree",
+      "terminalRepoRoot": "Terminal (repo root)",
+      "copyCommand": "Copy command",
+      "openWorktreeInTerminal": "Open this worktree in your terminal.",
+      "reveal": "Reveal"
     },
     "toasts": {
       "dismiss": "Dismiss",
@@ -912,7 +1002,17 @@
     },
     "composerBar": {
       "contextFreeEmpty": "Context free --",
-      "contextFreePercent": "Context free {{value}}%"
+      "contextFreePercent": "Context free {{value}}%",
+      "plan": "Plan",
+      "planMode": "Plan mode",
+      "collaborationMode": "Collaboration mode",
+      "model": "Model",
+      "noModels": "No models",
+      "fastModeEnabled": "Fast mode enabled",
+      "thinkingMode": "Thinking mode",
+      "default": "Default",
+      "codexArgsProfile": "Codex args profile",
+      "agentAccess": "Agent access"
     },
     "terminal": {
       "resizePanel": "Resize terminal panel",
@@ -958,7 +1058,29 @@
       "exporting": "Exporting...",
       "exportMarkdown": "Export .md",
       "exploring": "Exploring",
-      "explored": "Explored"
+      "explored": "Explored",
+      "working": "Working?",
+      "nextMessageFetchIn": "New message will be fetched in {{seconds}} seconds",
+      "doneIn": "Done in {{duration}}",
+      "imageNumber": "Image {{index}}",
+      "quoteMessage": "Quote message",
+      "copyMessage": "Copy message",
+      "noAnswerProvided": "No answer provided",
+      "inputAnswered": "Input answered:"
+    },
+    "renameThread": {
+      "title": "Rename thread",
+      "currentName": "Current name: \"{{name}}\"",
+      "newName": "New name",
+      "rename": "Rename"
+    },
+    "fileManager": {
+      "finder": "Finder",
+      "explorer": "File Explorer",
+      "generic": "File Manager",
+      "revealIn": "Reveal in {{manager}}",
+      "showIn": "Show in {{manager}}",
+      "openIn": "Open in {{manager}}"
     }
   },
   "gitPanel": {
@@ -1046,5 +1168,122 @@
     "noOpenIssues": "No open issues.",
     "noOpenPullRequests": "No open pull requests.",
     "draft": "Draft"
+  },
+  "aboutView": {
+    "iconAlt": "Codex Monitor icon",
+    "title": "Codex Monitor",
+    "version": "Version {{version}}",
+    "versionUnknown": "Version —",
+    "tagline": "Monitor the situation of your Codex agents",
+    "github": "GitHub",
+    "twitter": "Twitter",
+    "footer": "Made with love by Codex & Dimillian"
+  },
+  "debugPanel": {
+    "resize": "Resize debug panel",
+    "title": "Debug",
+    "copy": "Copy",
+    "clear": "Clear",
+    "empty": "No debug events yet."
+  },
+  "approvalToasts": {
+    "title": "Approval needed",
+    "none": "None",
+    "noExtraDetails": "No extra details.",
+    "decline": "Decline",
+    "alwaysAllow": "Always allow",
+    "approveEnter": "Approve (Enter)",
+    "allowPrefixTitle": "Allow commands that start with {{preview}}"
+  },
+  "reviewPrompt": {
+    "presets": {
+      "baseBranch": {
+        "title": "Review against a base branch",
+        "subtitle": "(PR Style)"
+      },
+      "uncommitted": "Review uncommitted changes",
+      "commit": "Review a commit",
+      "custom": "Custom review instructions"
+    },
+    "back": "Back",
+    "startReview": "Start review",
+    "pickBranch": "Pick a recent local branch:",
+    "baseBranches": "Base branches",
+    "loadingBranches": "Loading branches...",
+    "noBranchesFound": "No branches found.",
+    "selectCommit": "Select a recent commit:",
+    "commits": "Commits",
+    "loadingCommits": "Loading commits...",
+    "noCommitsFound": "No commits found.",
+    "instructions": "Instructions",
+    "placeholder": "Focus on correctness, edge cases, and missing tests.",
+    "titles": {
+      "baseBranch": "Select a base branch",
+      "commit": "Select a commit to review",
+      "custom": "Custom review instructions",
+      "preset": "Select a review preset"
+    },
+    "close": "Close"
+  },
+  "worktreePrompt": {
+    "title": "New worktree agent",
+    "subtitle": "Create a worktree under \"{{workspace}}\".",
+    "optional": "(Optional)",
+    "branchName": "Branch name",
+    "noMatchingBranches": "No matching branches",
+    "copyAgentsMdPrefix": "Copy",
+    "copyAgentsMdSuffix": "into the worktree",
+    "setupScript": "Environment setup script",
+    "setupScriptHint": "Stored on the project (Settings → Environments) and runs once in a dedicated terminal after each new worktree is created."
+  },
+  "requestUserInput": {
+    "ariaLabel": "User input requested",
+    "title": "Input requested",
+    "queue": "Request {{index}} of {{total}}",
+    "typeAnswerOptional": "Type your answer (optional)",
+    "addNotesOptional": "Add notes (optional)",
+    "noQuestions": "No questions provided.",
+    "submit": "Submit"
+  },
+  "planReady": {
+    "ariaLabel": "Plan ready",
+    "title": "Plan ready",
+    "description": "Start building from this plan, or describe changes to the plan.",
+    "placeholder": "Describe what you want to change in the plan...",
+    "sendChanges": "Send changes",
+    "implement": "Implement this plan",
+    "notificationBody": "Plan is ready. Open CodexMonitor to respond."
+  },
+  "workspaceFromUrl": {
+    "title": "Add workspace from URL",
+    "remoteUrl": "Remote Git URL",
+    "remoteUrlPlaceholder": "https://github.com/org/repo.git",
+    "targetFolderName": "Target folder name (optional)",
+    "targetFolderPlaceholder": "Defaults to repo name",
+    "destinationFolder": "Destination parent folder",
+    "cloning": "Cloning...",
+    "cloneAndAdd": "Clone and Add"
+  },
+  "workspaceRunControls": {
+    "local": "Local",
+    "worktree": "Worktree",
+    "selectRunMode": "Select run mode",
+    "toggleRunModeMenu": "Toggle run mode menu",
+    "selectModels": "Select models",
+    "toggleModelsMenu": "Toggle models menu",
+    "connectToLoadModels": "Connect this workspace to load available models."
+  },
+  "planPanel": {
+    "title": "Plan",
+    "waiting": "Waiting on a plan...",
+    "empty": "No active plan."
+  },
+  "threadRow": {
+    "reviewing": "Reviewing",
+    "waiting": "Waiting",
+    "pinned": "Pinned",
+    "hideSubagents": "Hide sub-agents",
+    "showSubagents": "Show sub-agents",
+    "now": "Now"
   }
 }

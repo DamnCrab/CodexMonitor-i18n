@@ -221,7 +221,18 @@
       "latestVersion": "У вас установлена последняя версия.",
       "downloadAndInstall": "Скачать и установить",
       "checking": "Проверка...",
-      "checkForUpdates": "Проверить обновления"
+      "checkForUpdates": "Проверить обновления",
+      "whatsNew": "Что нового",
+      "postUpdateLoadingNotes": "Обновление прошло успешно. Загружаются примечания к выпуску...",
+      "postUpdateWhatIsNew": "Обновление прошло успешно. Вот что нового:",
+      "postUpdateFallback": "Обновлено до v{{version}}, но примечания к выпуску загрузить не удалось.",
+      "viewOnGitHub": "Открыть на GitHub",
+      "later": "Позже",
+      "retry": "Повторить",
+      "updateFailedShort": "Не удалось обновить приложение.",
+      "checkingForUpdates": "Проверка обновлений...",
+      "versionAvailableShort": "Доступна новая версия.",
+      "downloadedBytes": "Загружено {{value}}"
     },
     "projects": {
       "title": "Проекты",
@@ -243,7 +254,11 @@
       "moveProjectUp": "Переместить проект вверх",
       "moveProjectDown": "Переместить проект вниз",
       "deleteProject": "Удалить проект",
-      "noProjectsYet": "Пока нет проектов."
+      "noProjectsYet": "Пока нет проектов.",
+      "ungrouped": "Без группы",
+      "groupNameRequired": "Требуется имя группы.",
+      "groupNameReserved": "\"{{name}}\" зарезервировано.",
+      "groupNameExists": "Имя группы уже существует."
     },
     "git": {
       "title": "Git",
@@ -294,7 +309,12 @@
       "autoWrapCodeLikeSubtitle": "Оборачивает длинные однострочные фрагменты кода при вставке.",
       "listsTitle": "Списки",
       "continueLists": "Продолжать списки по Shift+Enter",
-      "continueListsSubtitle": "Продолжает нумерованные и маркированные списки, если строка содержит текст."
+      "continueListsSubtitle": "Продолжает нумерованные и маркированные списки, если строка содержит текст.",
+      "presets": {
+        "default": "По умолчанию (без помощников)",
+        "helpful": "Полезный",
+        "smart": "Умный"
+      }
     },
     "environments": {
       "title": "Окружения",
@@ -371,7 +391,54 @@
       "downloadError": "Ошибка загрузки.",
       "downloadModel": "Загрузить модель",
       "cancelDownload": "Отменить загрузку",
-      "removeModel": "Удалить модель"
+      "removeModel": "Удалить модель",
+      "models": {
+        "tiny": {
+          "label": "Tiny",
+          "note": "Самый быстрый, но наименее точный."
+        },
+        "base": {
+          "label": "Base",
+          "note": "Сбалансированный вариант по умолчанию."
+        },
+        "small": {
+          "label": "Small",
+          "note": "Лучшая точность."
+        },
+        "medium": {
+          "label": "Medium",
+          "note": "Высокая точность."
+        },
+        "largeV3": {
+          "label": "Large V3",
+          "note": "Лучшая точность, большой размер загрузки."
+        }
+      },
+      "processing": "Обработка...",
+      "languages": {
+        "en": "Английский",
+        "es": "Испанский",
+        "fr": "Французский",
+        "de": "Немецкий",
+        "it": "Итальянский",
+        "pt": "Португальский",
+        "nl": "Нидерландский",
+        "sv": "Шведский",
+        "no": "Норвежский",
+        "da": "Датский",
+        "fi": "Финский",
+        "pl": "Польский",
+        "tr": "Турецкий",
+        "ru": "Русский",
+        "uk": "Украинский",
+        "ja": "Японский",
+        "ko": "Корейский",
+        "zh": "Китайский"
+      },
+      "keys": {
+        "shift": "Shift",
+        "control": "Ctrl"
+      }
     },
     "features": {
       "title": "Функции",
@@ -418,7 +485,7 @@
         "remote_models": "Обновлять удалённые модели перед AppReady.",
         "powershell_utf8": "Принудительно использовать вывод UTF-8 в PowerShell.",
         "enable_request_compression": "Сжимать тела потоковых запросов, отправляемых в codex-backend.",
-        "apps": "Включить интеграцию приложений ChatGPT.",
+        "apps": "Используйте подключённое приложение ChatGPT через \"$\". Устанавливайте приложения командой /apps. После включения перезапустите Codex.",
         "apps_mcp_gateway": "Маршрутизировать вызовы Apps MCP через настроенный шлюз.",
         "skill_mcp_dependency_install": "Разрешить запрос и установку отсутствующих зависимостей MCP.",
         "skill_env_var_dependency_prompt": "Запрашивать отсутствующие зависимости переменных окружения для навыков.",
@@ -666,6 +733,20 @@
       "deleteRemoteQuestion": "Delete remote?",
       "removeRemoteMessage": "Remove {{name}} from saved remotes? This only removes the profile from this device.",
       "deleteRemote": "Delete remote"
+    },
+    "mobileSetup": {
+      "kicker": "Требуется мобильная настройка",
+      "title": "Подключение к десктопному бэкенду",
+      "subtitle": "Завершите эту настройку перед использованием приложения. Используйте те же параметры подключения, что указаны в настройках сервера CodexMonitor на компьютере.",
+      "closeLabel": "Закрыть мобильную настройку",
+      "host": "Хост Tailscale",
+      "hint": "Используйте хост Tailscale из серверных настроек на компьютере и держите десктопный демон запущенным.",
+      "defaultMessage": "Введите хост Tailscale и токен с компьютера, затем нажмите «Подключить и проверить».",
+      "connected": "Подключено. С десктопного бэкенда доступно {{count}} рабочее пространство.",
+      "connected_plural": "Подключено. С десктопного бэкенда доступно {{count}} рабочих пространств.",
+      "unreachable": "Не удалось связаться с удалённым бэкендом.",
+      "saveFailed": "Не удалось сохранить настройки удалённого бэкенда.",
+      "connectFailed": "Не удалось подключиться к удалённому бэкенду."
     }
   },
   "tabBar": {
@@ -881,7 +962,16 @@
       "newLaunchScript": "Новый скрипт запуска",
       "optionalLabel": "Необязательная метка",
       "saving": "Сохранение...",
-      "new": "Новый"
+      "new": "Новый",
+      "worktreeInfo": "Информация о worktree",
+      "name": "Имя",
+      "updateUpstreamPrompt": "Обновить upstream-ветку до {{branch}}?",
+      "updateUpstream": "Обновить upstream",
+      "worktree": "Worktree",
+      "terminalRepoRoot": "Терминал (корень репозитория)",
+      "copyCommand": "Копировать команду",
+      "openWorktreeInTerminal": "Откройте этот worktree в терминале.",
+      "reveal": "Показать"
     },
     "toasts": {
       "dismiss": "Закрыть",
@@ -912,7 +1002,17 @@
     },
     "composerBar": {
       "contextFreeEmpty": "Свободный контекст --",
-      "contextFreePercent": "Свободный контекст {{value}}%"
+      "contextFreePercent": "Свободный контекст {{value}}%",
+      "plan": "План",
+      "planMode": "Режим плана",
+      "collaborationMode": "Режим совместной работы",
+      "model": "Модель",
+      "noModels": "Нет моделей",
+      "fastModeEnabled": "Быстрый режим включён",
+      "thinkingMode": "Режим рассуждения",
+      "default": "По умолчанию",
+      "codexArgsProfile": "Профиль аргументов Codex",
+      "agentAccess": "Доступ агента"
     },
     "terminal": {
       "resizePanel": "Изменить размер панели терминала",
@@ -958,7 +1058,29 @@
       "exporting": "Экспорт...",
       "exportMarkdown": "Экспорт .md",
       "exploring": "Исследование",
-      "explored": "Исследовано"
+      "explored": "Исследовано",
+      "working": "Выполняется…",
+      "nextMessageFetchIn": "Новое сообщение будет получено через {{seconds}} сек.",
+      "doneIn": "Готово за {{duration}}",
+      "imageNumber": "Изображение {{index}}",
+      "quoteMessage": "Цитировать сообщение",
+      "copyMessage": "Копировать сообщение",
+      "noAnswerProvided": "Ответ не указан",
+      "inputAnswered": "Ответ на ввод:"
+    },
+    "renameThread": {
+      "title": "Переименовать диалог",
+      "currentName": "Текущее имя: \"{{name}}\"",
+      "newName": "Новое имя",
+      "rename": "Переименовать"
+    },
+    "fileManager": {
+      "finder": "Finder",
+      "explorer": "Проводник",
+      "generic": "Файловый менеджер",
+      "revealIn": "Показать в {{manager}}",
+      "showIn": "Показать в {{manager}}",
+      "openIn": "Открыть в {{manager}}"
     }
   },
   "gitPanel": {
@@ -1034,17 +1156,134 @@
     "diff": "Diff",
     "agentEdits": "Agent edits",
     "log": "Log",
-    "issues": "Issues",
-    "prs": "PRs",
+    "issues": "Задачи",
+    "prs": "PR",
     "noAgentEditsYet": "No agent edits in this thread yet.",
     "oneEdit": "1 edit",
     "editCount": "{{count}} edits",
     "pullCount": "Pull {{count}} commit",
     "branch": "Branch",
     "repositoryRoot": "Repository root",
-    "recentCommits": "Recent commits",
-    "noOpenIssues": "No open issues.",
-    "noOpenPullRequests": "No open pull requests.",
-    "draft": "Draft"
+    "recentCommits": "Недавние коммиты",
+    "noOpenIssues": "Нет открытых задач.",
+    "noOpenPullRequests": "Нет открытых pull request.",
+    "draft": "Черновик"
+  },
+  "aboutView": {
+    "iconAlt": "Значок Codex Monitor",
+    "title": "Codex Monitor",
+    "version": "Версия {{version}}",
+    "versionUnknown": "Версия —",
+    "tagline": "Следите за состоянием ваших агентов Codex",
+    "github": "GitHub",
+    "twitter": "Twitter",
+    "footer": "Сделано с заботой Codex и Dimillian"
+  },
+  "debugPanel": {
+    "resize": "Изменить размер панели отладки",
+    "title": "Отладка",
+    "copy": "Копировать",
+    "clear": "Очистить",
+    "empty": "Событий отладки пока нет."
+  },
+  "approvalToasts": {
+    "title": "Требуется подтверждение",
+    "none": "Нет",
+    "noExtraDetails": "Нет дополнительных деталей.",
+    "decline": "Отклонить",
+    "alwaysAllow": "Всегда разрешать",
+    "approveEnter": "Подтвердить (Enter)",
+    "allowPrefixTitle": "Разрешать команды, начинающиеся с {{preview}}"
+  },
+  "reviewPrompt": {
+    "presets": {
+      "baseBranch": {
+        "title": "Проверить относительно базовой ветки",
+        "subtitle": "(в стиле PR)"
+      },
+      "uncommitted": "Проверить незакоммиченные изменения",
+      "commit": "Проверить коммит",
+      "custom": "Пользовательские инструкции для ревью"
+    },
+    "back": "Назад",
+    "startReview": "Начать ревью",
+    "pickBranch": "Выберите недавнюю локальную ветку:",
+    "baseBranches": "Базовые ветки",
+    "loadingBranches": "Загрузка веток...",
+    "noBranchesFound": "Ветки не найдены.",
+    "selectCommit": "Выберите недавний коммит:",
+    "commits": "Коммиты",
+    "loadingCommits": "Загрузка коммитов...",
+    "noCommitsFound": "Коммиты не найдены.",
+    "instructions": "Инструкции",
+    "placeholder": "Сосредоточьтесь на корректности, граничных случаях и недостающих тестах.",
+    "titles": {
+      "baseBranch": "Выберите базовую ветку",
+      "commit": "Выберите коммит для ревью",
+      "custom": "Пользовательские инструкции для ревью",
+      "preset": "Выберите пресет ревью"
+    },
+    "close": "Закрыть"
+  },
+  "worktreePrompt": {
+    "title": "Новый агент worktree",
+    "subtitle": "Создать worktree внутри «{{workspace}}».",
+    "optional": "(Необязательно)",
+    "branchName": "Имя ветки",
+    "noMatchingBranches": "Подходящие ветки не найдены",
+    "copyAgentsMdPrefix": "Скопировать",
+    "copyAgentsMdSuffix": "в worktree",
+    "setupScript": "Скрипт подготовки окружения",
+    "setupScriptHint": "Хранится в проекте (Настройки → Окружения) и запускается один раз в отдельном терминале после создания каждого нового worktree."
+  },
+  "requestUserInput": {
+    "ariaLabel": "Запрошен ввод пользователя",
+    "title": "Требуется ввод",
+    "queue": "Запрос {{index}} из {{total}}",
+    "typeAnswerOptional": "Введите ответ (необязательно)",
+    "addNotesOptional": "Добавить заметки (необязательно)",
+    "noQuestions": "Вопросы не предоставлены.",
+    "submit": "Отправить"
+  },
+  "planReady": {
+    "ariaLabel": "План готов",
+    "title": "План готов",
+    "description": "Можно начать реализацию по этому плану или описать изменения к плану.",
+    "placeholder": "Опишите, что вы хотите изменить в плане...",
+    "sendChanges": "Отправить изменения",
+    "implement": "Выполнить этот план",
+    "notificationBody": "План готов. Откройте CodexMonitor, чтобы ответить."
+  },
+  "workspaceFromUrl": {
+    "title": "Добавить рабочее пространство по URL",
+    "remoteUrl": "Удалённый Git URL",
+    "remoteUrlPlaceholder": "https://github.com/org/repo.git",
+    "targetFolderName": "Имя целевой папки (необязательно)",
+    "targetFolderPlaceholder": "По умолчанию используется имя репозитория",
+    "destinationFolder": "Родительская папка назначения",
+    "cloning": "Клонирование...",
+    "cloneAndAdd": "Клонировать и добавить"
+  },
+  "workspaceRunControls": {
+    "local": "Локально",
+    "worktree": "Worktree",
+    "selectRunMode": "Выбрать режим запуска",
+    "toggleRunModeMenu": "Переключить меню режима запуска",
+    "selectModels": "Выбрать модели",
+    "toggleModelsMenu": "Переключить меню моделей",
+    "connectToLoadModels": "Подключите это рабочее пространство, чтобы загрузить доступные модели."
+  },
+  "planPanel": {
+    "title": "План",
+    "waiting": "Ожидание плана...",
+    "empty": "Нет активного плана."
+  },
+  "threadRow": {
+    "reviewing": "Идёт ревью",
+    "waiting": "Ожидание",
+    "pinned": "Закреплено",
+    "hideSubagents": "Скрыть субагентов",
+    "showSubagents": "Показать субагентов",
+    "now": "Сейчас"
   }
 }

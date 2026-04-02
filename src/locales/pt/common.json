@@ -221,7 +221,18 @@
       "latestVersion": "Você está na versão mais recente.",
       "downloadAndInstall": "Baixar e instalar",
       "checking": "Verificando...",
-      "checkForUpdates": "Verificar atualizações"
+      "checkForUpdates": "Verificar atualizações",
+      "whatsNew": "Novidades",
+      "postUpdateLoadingNotes": "Atualização concluída. Carregando notas da versão...",
+      "postUpdateWhatIsNew": "Atualização concluída. Veja o que há de novo:",
+      "postUpdateFallback": "Atualizado para v{{version}}, mas não foi possível carregar as notas da versão.",
+      "viewOnGitHub": "Ver no GitHub",
+      "later": "Mais tarde",
+      "retry": "Tentar novamente",
+      "updateFailedShort": "A atualização falhou.",
+      "checkingForUpdates": "Verificando atualizações...",
+      "versionAvailableShort": "Uma nova versão está disponível.",
+      "downloadedBytes": "{{value}} baixados"
     },
     "projects": {
       "title": "Projetos",
@@ -243,7 +254,11 @@
       "moveProjectUp": "Mover projeto para cima",
       "moveProjectDown": "Mover projeto para baixo",
       "deleteProject": "Excluir projeto",
-      "noProjectsYet": "Ainda não há projetos."
+      "noProjectsYet": "Ainda não há projetos.",
+      "ungrouped": "Sem grupo",
+      "groupNameRequired": "O nome do grupo é obrigatório.",
+      "groupNameReserved": "\"{{name}}\" é reservado.",
+      "groupNameExists": "O nome do grupo já existe."
     },
     "git": {
       "title": "Git",
@@ -262,16 +277,16 @@
       "defaultOption": "Padrão"
     },
     "composer": {
-    "title": "Editor",
+      "title": "Editor",
       "subtitle": "Controle auxiliares e comportamento de formatação dentro do editor de mensagens.",
       "followUpBehavior": "Comportamento de acompanhamento",
       "queue": "Fila",
       "steer": "Direcionar",
-      "steerUnavailableTooltip": "Direcionar n?o est? dispon?vel na configura??o atual do Codex.",
-      "followUpBehaviorHelp": "Escolha o comportamento padr?o enquanto uma execu??o estiver ativa. Pressione {{shortcut}} para enviar uma ?nica mensagem com o comportamento oposto.",
+      "steerUnavailableTooltip": "Direcionar não está disponível na configuração atual do Codex.",
+      "followUpBehaviorHelp": "Escolha o comportamento padrão enquanto uma execução estiver ativa. Pressione {{shortcut}} para enviar uma única mensagem com o comportamento oposto.",
       "followUpHint": "Mostrar dica de acompanhamento durante o processamento",
-      "followUpHintSubtitle": "Mostra acima do composer a orienta??o de atalho para fila/direcionamento.",
-      "steerUnavailableHelp": "Direcionar n?o est? dispon?vel na configura??o atual do Codex. As mensagens de acompanhamento entrar?o na fila.",
+      "followUpHintSubtitle": "Mostra acima do composer a orientação de atalho para fila/direcionamento.",
+      "steerUnavailableHelp": "Direcionar não está disponível na configuração atual do Codex. As mensagens de acompanhamento entrarão na fila.",
       "presetsTitle": "Predefinições",
       "presetsSubtitle": "Escolha um ponto de partida e ajuste os controles abaixo.",
       "preset": "Predefinição",
@@ -294,7 +309,12 @@
       "autoWrapCodeLikeSubtitle": "Envolve snippets longos de código em uma única linha ao colar.",
       "listsTitle": "Listas",
       "continueLists": "Continuar listas com Shift+Enter",
-      "continueListsSubtitle": "Continua listas numeradas e com marcadores quando a linha tem conteúdo."
+      "continueListsSubtitle": "Continua listas numeradas e com marcadores quando a linha tem conteúdo.",
+      "presets": {
+        "default": "Padrão (sem assistentes)",
+        "helpful": "Útil",
+        "smart": "Inteligente"
+      }
     },
     "environments": {
       "title": "Ambientes",
@@ -371,7 +391,54 @@
       "downloadError": "Erro de download.",
       "downloadModel": "Baixar modelo",
       "cancelDownload": "Cancelar download",
-      "removeModel": "Remover modelo"
+      "removeModel": "Remover modelo",
+      "models": {
+        "tiny": {
+          "label": "Tiny",
+          "note": "Mais rápido, menos preciso."
+        },
+        "base": {
+          "label": "Base",
+          "note": "Padrão equilibrado."
+        },
+        "small": {
+          "label": "Small",
+          "note": "Melhor precisão."
+        },
+        "medium": {
+          "label": "Medium",
+          "note": "Alta precisão."
+        },
+        "largeV3": {
+          "label": "Large V3",
+          "note": "Melhor precisão, download grande."
+        }
+      },
+      "processing": "Processando...",
+      "languages": {
+        "en": "Inglês",
+        "es": "Espanhol",
+        "fr": "Francês",
+        "de": "Alemão",
+        "it": "Italiano",
+        "pt": "Português",
+        "nl": "Holandês",
+        "sv": "Sueco",
+        "no": "Norueguês",
+        "da": "Dinamarquês",
+        "fi": "Finlandês",
+        "pl": "Polonês",
+        "tr": "Turco",
+        "ru": "Russo",
+        "uk": "Ucraniano",
+        "ja": "Japonês",
+        "ko": "Coreano",
+        "zh": "Chinês"
+      },
+      "keys": {
+        "shift": "Shift",
+        "control": "Ctrl"
+      }
     },
     "features": {
       "title": "Recursos",
@@ -418,7 +485,7 @@
         "remote_models": "Atualizar modelos remotos antes de AppReady.",
         "powershell_utf8": "Forçar saída UTF-8 no PowerShell.",
         "enable_request_compression": "Comprimir corpos de requisição em streaming enviados para codex-backend.",
-        "apps": "Ativar integração com ChatGPT Apps.",
+        "apps": "Use um app do ChatGPT conectado com \"$\". Instale apps com o comando /apps. Reinicie o Codex depois de habilitar.",
         "apps_mcp_gateway": "Encaminhar chamadas MCP de Apps pelo gateway configurado.",
         "skill_mcp_dependency_install": "Permitir solicitar e instalar dependências MCP ausentes.",
         "skill_env_var_dependency_prompt": "Solicitar dependências ausentes de variáveis de ambiente de skill.",
@@ -666,6 +733,20 @@
       "deleteRemoteQuestion": "Delete remote?",
       "removeRemoteMessage": "Remove {{name}} from saved remotes? This only removes the profile from this device.",
       "deleteRemote": "Delete remote"
+    },
+    "mobileSetup": {
+      "kicker": "Configuração móvel necessária",
+      "title": "Conectar ao backend do desktop",
+      "subtitle": "Conclua esta configuração antes de usar o app. Use os mesmos dados de conexão configurados nas definições de servidor do CodexMonitor no desktop.",
+      "closeLabel": "Fechar configuração móvel",
+      "host": "Host do Tailscale",
+      "hint": "Use o host do Tailscale das definições de servidor no desktop e mantenha o daemon do desktop em execução.",
+      "defaultMessage": "Digite o host e o token do Tailscale do desktop e depois execute \"Conectar e testar\".",
+      "connected": "Conectado. {{count}} workspace disponível no backend do desktop.",
+      "connected_plural": "Conectado. {{count}} workspaces disponíveis no backend do desktop.",
+      "unreachable": "Não foi possível alcançar o backend remoto.",
+      "saveFailed": "Não foi possível salvar as configurações do backend remoto.",
+      "connectFailed": "Não foi possível conectar ao backend remoto."
     }
   },
   "tabBar": {
@@ -881,7 +962,16 @@
       "newLaunchScript": "Novo script de inicialização",
       "optionalLabel": "Rótulo opcional",
       "saving": "Salvando...",
-      "new": "Novo"
+      "new": "Novo",
+      "worktreeInfo": "Informações do worktree",
+      "name": "Nome",
+      "updateUpstreamPrompt": "Deseja atualizar a branch upstream para {{branch}}?",
+      "updateUpstream": "Atualizar upstream",
+      "worktree": "Worktree",
+      "terminalRepoRoot": "Terminal (raiz do repositório)",
+      "copyCommand": "Copiar comando",
+      "openWorktreeInTerminal": "Abra este worktree no seu terminal.",
+      "reveal": "Mostrar"
     },
     "toasts": {
       "dismiss": "Fechar",
@@ -912,7 +1002,17 @@
     },
     "composerBar": {
       "contextFreeEmpty": "Contexto livre --",
-      "contextFreePercent": "Contexto livre {{value}}%"
+      "contextFreePercent": "Contexto livre {{value}}%",
+      "plan": "Plano",
+      "planMode": "Modo de plano",
+      "collaborationMode": "Modo de colaboração",
+      "model": "Modelo",
+      "noModels": "Sem modelos",
+      "fastModeEnabled": "Modo rápido ativado",
+      "thinkingMode": "Modo de raciocínio",
+      "default": "Padrão",
+      "codexArgsProfile": "Perfil de argumentos do Codex",
+      "agentAccess": "Acesso do agente"
     },
     "terminal": {
       "resizePanel": "Redimensionar painel do terminal",
@@ -958,7 +1058,29 @@
       "exporting": "Exportando...",
       "exportMarkdown": "Exportar .md",
       "exploring": "Explorando",
-      "explored": "Explorado"
+      "explored": "Explorado",
+      "working": "Trabalhando…",
+      "nextMessageFetchIn": "Uma nova mensagem será buscada em {{seconds}} segundos",
+      "doneIn": "Concluído em {{duration}}",
+      "imageNumber": "Imagem {{index}}",
+      "quoteMessage": "Citar mensagem",
+      "copyMessage": "Copiar mensagem",
+      "noAnswerProvided": "Nenhuma resposta fornecida",
+      "inputAnswered": "Entrada respondida:"
+    },
+    "renameThread": {
+      "title": "Renomear conversa",
+      "currentName": "Nome atual: \"{{name}}\"",
+      "newName": "Novo nome",
+      "rename": "Renomear"
+    },
+    "fileManager": {
+      "finder": "Finder",
+      "explorer": "Explorador de Arquivos",
+      "generic": "Gerenciador de arquivos",
+      "revealIn": "Mostrar em {{manager}}",
+      "showIn": "Mostrar em {{manager}}",
+      "openIn": "Abrir em {{manager}}"
     }
   },
   "gitPanel": {
@@ -982,7 +1104,7 @@
     "stageAllChanges": "Stage all changes",
     "unstageAllChanges": "Unstage all changes",
     "discardAllChanges": "Discard all changes",
-    "githubIssues": "GitHub issues",
+    "githubIssues": "Issues do GitHub",
     "githubPullRequests": "GitHub pull requests",
     "openCount": "{{count}} open",
     "unknown": "unknown",
@@ -1042,9 +1164,126 @@
     "pullCount": "Pull {{count}} commit",
     "branch": "Branch",
     "repositoryRoot": "Repository root",
-    "recentCommits": "Recent commits",
-    "noOpenIssues": "No open issues.",
-    "noOpenPullRequests": "No open pull requests.",
-    "draft": "Draft"
+    "recentCommits": "Commits recentes",
+    "noOpenIssues": "Nenhuma issue aberta.",
+    "noOpenPullRequests": "Nenhum pull request aberto.",
+    "draft": "Rascunho"
+  },
+  "aboutView": {
+    "iconAlt": "Ícone do Codex Monitor",
+    "title": "Codex Monitor",
+    "version": "Versão {{version}}",
+    "versionUnknown": "Versão —",
+    "tagline": "Monitore o estado dos seus agentes Codex",
+    "github": "GitHub",
+    "twitter": "Twitter",
+    "footer": "Feito com carinho por Codex e Dimillian"
+  },
+  "debugPanel": {
+    "resize": "Redimensionar painel de depuração",
+    "title": "Depuração",
+    "copy": "Copiar",
+    "clear": "Limpar",
+    "empty": "Ainda não há eventos de depuração."
+  },
+  "approvalToasts": {
+    "title": "Aprovação necessária",
+    "none": "Nenhum",
+    "noExtraDetails": "Sem detalhes adicionais.",
+    "decline": "Recusar",
+    "alwaysAllow": "Permitir sempre",
+    "approveEnter": "Aprovar (Enter)",
+    "allowPrefixTitle": "Permitir comandos que comecem com {{preview}}"
+  },
+  "reviewPrompt": {
+    "presets": {
+      "baseBranch": {
+        "title": "Revisar em relação a uma branch base",
+        "subtitle": "(estilo PR)"
+      },
+      "uncommitted": "Revisar alterações não commitadas",
+      "commit": "Revisar um commit",
+      "custom": "Instruções personalizadas de revisão"
+    },
+    "back": "Voltar",
+    "startReview": "Iniciar revisão",
+    "pickBranch": "Escolha uma branch local recente:",
+    "baseBranches": "Branches base",
+    "loadingBranches": "Carregando branches...",
+    "noBranchesFound": "Nenhuma branch encontrada.",
+    "selectCommit": "Selecione um commit recente:",
+    "commits": "Commits",
+    "loadingCommits": "Carregando commits...",
+    "noCommitsFound": "Nenhum commit encontrado.",
+    "instructions": "Instruções",
+    "placeholder": "Foque em correção, casos extremos e testes ausentes.",
+    "titles": {
+      "baseBranch": "Selecionar uma branch base",
+      "commit": "Selecionar um commit para revisar",
+      "custom": "Instruções personalizadas de revisão",
+      "preset": "Selecionar uma predefinição de revisão"
+    },
+    "close": "Fechar"
+  },
+  "worktreePrompt": {
+    "title": "Novo agente de worktree",
+    "subtitle": "Criar um worktree em \"{{workspace}}\".",
+    "optional": "(Opcional)",
+    "branchName": "Nome da branch",
+    "noMatchingBranches": "Nenhuma branch correspondente",
+    "copyAgentsMdPrefix": "Copiar",
+    "copyAgentsMdSuffix": "para o worktree",
+    "setupScript": "Script de preparação do ambiente",
+    "setupScriptHint": "Fica salvo no projeto (Configurações → Ambientes) e é executado uma vez em um terminal dedicado após cada novo worktree."
+  },
+  "requestUserInput": {
+    "ariaLabel": "Entrada do usuário solicitada",
+    "title": "Entrada solicitada",
+    "queue": "Solicitação {{index}} de {{total}}",
+    "typeAnswerOptional": "Digite sua resposta (opcional)",
+    "addNotesOptional": "Adicionar notas (opcional)",
+    "noQuestions": "Nenhuma pergunta fornecida.",
+    "submit": "Enviar"
+  },
+  "planReady": {
+    "ariaLabel": "Plano pronto",
+    "title": "Plano pronto",
+    "description": "Comece a implementar a partir deste plano ou descreva alterações no plano.",
+    "placeholder": "Descreva o que você quer mudar no plano...",
+    "sendChanges": "Enviar alterações",
+    "implement": "Implementar este plano",
+    "notificationBody": "O plano está pronto. Abra o CodexMonitor para responder."
+  },
+  "workspaceFromUrl": {
+    "title": "Adicionar workspace por URL",
+    "remoteUrl": "URL remota do Git",
+    "remoteUrlPlaceholder": "https://github.com/org/repo.git",
+    "targetFolderName": "Nome da pasta de destino (opcional)",
+    "targetFolderPlaceholder": "Usa o nome do repositório por padrão",
+    "destinationFolder": "Pasta pai de destino",
+    "cloning": "Clonando...",
+    "cloneAndAdd": "Clonar e adicionar"
+  },
+  "workspaceRunControls": {
+    "local": "Local",
+    "worktree": "Worktree",
+    "selectRunMode": "Selecionar modo de execução",
+    "toggleRunModeMenu": "Alternar menu do modo de execução",
+    "selectModels": "Selecionar modelos",
+    "toggleModelsMenu": "Alternar menu de modelos",
+    "connectToLoadModels": "Conecte este workspace para carregar os modelos disponíveis."
+  },
+  "planPanel": {
+    "title": "Plano",
+    "waiting": "Aguardando um plano...",
+    "empty": "Nenhum plano ativo."
+  },
+  "threadRow": {
+    "reviewing": "Revisando",
+    "waiting": "Aguardando",
+    "pinned": "Fixado",
+    "hideSubagents": "Ocultar subagentes",
+    "showSubagents": "Mostrar subagentes",
+    "now": "Agora"
   }
 }

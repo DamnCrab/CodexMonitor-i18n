@@ -35,7 +35,8 @@ const FEATURE_DESCRIPTION_FALLBACKS: Record<string, string> = {
   powershell_utf8: "Enforce UTF-8 output in PowerShell.",
   enable_request_compression:
     "Compress streaming request bodies sent to codex-backend.",
-  apps: "Enable ChatGPT Apps integration.",
+  apps:
+    "Use a connected ChatGPT App using \"$\". Install Apps via /apps command. Restart Codex after enabling.",
   apps_mcp_gateway: "Route Apps MCP calls through the configured gateway.",
   skill_mcp_dependency_install:
     "Allow prompting and installing missing MCP dependencies.",
@@ -62,15 +63,15 @@ function formatFeatureLabel(feature: CodexFeature): string {
 }
 
 function featureSubtitle(feature: CodexFeature, t: TFunction): string {
+  const fallbackDescription = FEATURE_DESCRIPTION_FALLBACKS[feature.name];
+  if (fallbackDescription) {
+    return t(`settings.features.fallbacks.${feature.name}`, fallbackDescription);
+  }
   if (feature.description?.trim()) {
     return feature.description;
   }
   if (feature.announcement?.trim()) {
     return feature.announcement;
-  }
-  const fallbackDescription = FEATURE_DESCRIPTION_FALLBACKS[feature.name];
-  if (fallbackDescription) {
-    return t(`settings.features.fallbacks.${feature.name}`, fallbackDescription);
   }
   if (feature.stage === "deprecated") {
     return t("settings.features.deprecatedFeature");
